@@ -24,31 +24,29 @@
         </div>
         <h3 style="text-align:left">Recent Orders:</h3>
         <dl class="straight">
-            <dd><label>A smart watch</label> <span class="tag">Pending</span> </dd>
-            <dd><label>A second pending delivered</label> <span class="tag">Pending</span> </dd>
-            <dd><label>A new book for you</label> <span class=tag">Delivered</span> </dd>
-            <dd><label>A fan on the go</label> <span class=tag">Delivered</span> </dd>
+            <dd><label>A smart watch</label> <span class="tag w3-green">Pending</span> </dd>
+            <dd><label>A second Item</label> <span class="tag w3-green">Pending</span> </dd>
+            <dd><label>A new book for you</label> <span class="tag w3-red">Delivered</span> </dd>
+            <dd><label>A fan on the go</label> <span class="tag w3-red">Delivered</span> </dd>
         </dl>
 
         <h3 style="text-align:left">Your delivery info:</h3>
+        <a style="text-align:right;" class="w3-button w3-round-xlarge" href="/profile/delivery-info">edit</a>
         <div class="shipping-address">
-          <dl>
-            <dt> <label>Fullname</label> </dt>
-            <dd> <input type="text" name="" value="<%= userData.user_name %>"> </dd>
-            <dt> <label>Address</label> </dt>
-            <dd> <input type="text" name="" value=""> </dd>
-            <dt> <label>City</label> </dt>
-            <dd> <input type="text" name="" value="<%= userData.user_loc %>"> </dd>
-            <dt> <label>Region</label> </dt>
-            <dd> <input type="text" name="" value=""> </dd>
-          </dl>
+          <div style="text-align:left" class="w3-container w3-border w3-round-large">
+            <label><b>Fullname:</b></label> <%= userData.user_name %> <br>
+            <label><b>Address:</b></label> <br>
+            <label><b>City:</b></label> <%= userData.user_loc %> <br>
+            <label><b>Region:</b></label>
+          </div>
         </div>
 
         <h3 style="text-align:left">Subscriptions:</h3>
-        <div class="w3-bar-block w3-border w3-container">
-          <section class="w3-bar-item"><input type="checkbox"> OneDistin daily deals (email) </section>
-          <section class="w3-bar-item"><input type="checkbox"> Forum notifications (email) </section>
-          <section class="w3-bar-item"><input type="checkbox"> Special interest (WhatsApp) </section>
+        <a style="text-align:right;" class="w3-button w3-round-xlarge" href="/profile/subscriptions">edit</a>
+        <div style="text-align:left" class="w3-container w3-border w3-round-large">
+          <section class="w3-bar-item"> OneDistin daily deals (email) </section>
+          <section class="w3-bar-item"> Forum notifications (email) </section>
+          <section class="w3-bar-item"> Special interest (WhatsApp) </section>
         </div>
 
       </div>

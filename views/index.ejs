@@ -46,11 +46,20 @@
             <a class="w3-text-indigo" href="<%- currentPost.shoppy_link %>">Costs GHS <%= currentPost.shoppy_price %> on <%= currentPost.shoppy_name %></a>
           </div><br>
           <div style="height:55px;overflow:hidden" class="buy w3-row">
-            <a onclick="document.getElementById('id01').style.display='block'" style="width:75%; padding: 3px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
-              <span class="w3-large"><b>GHS <%= currentPost.price %></b></span>
-               <br>
-              <span class="w3-medium">GET DISTIN</span>
-            </a>
+            <% if(isAuthenticated){ %>
+              <a onclick="document.getElementById('id01').style.display='block'" style="width:75%; padding: 3px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
+                <span class="w3-large"><b>GHS <%= currentPost.price %></b></span>
+                 <br>
+                <span class="w3-medium">GET DISTIN</span>
+              </a>
+            <% }else{ %>
+              <a href="/login" style="width:75%; padding: 3px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
+                <span class="w3-large"><b>GHS <%= currentPost.price %></b></span>
+                 <br>
+                <span class="w3-medium">GET DISTIN</span>
+              </a>
+            <% } %>
+
             <a style="height:100%;width:17%;padding:16px 0" class="w3-col-rest w3-right w3-black w3-button w3-circle" href="#">Share</a>
           </div>
           <div class="w3-left">
@@ -75,86 +84,78 @@
       </div>
     </div>
 
+    <% if(isAuthenticated){ %>
+      <!-- ######### THIS IS BEGINING OF THE CHECKOUT MODAL ######## -->
 
-<!-- ######### THIS IS BEGINING OF THE CHECKOUT MODAL ######## -->
+        <div id="id01" class="w3-modal">
 
-  <div id="id01" class="w3-modal">
+            <div class="w3-container">
+              <div style="padding:32px 48px" class="w3-modal-content w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
+                <span onclick="document.getElementById('id01').style.display='none'"
+                class="w3-button w3-xlarge w3-text-red w3-display-topright">&times;</span>
+                <h3 style="text-align:left">Here's what you are getting:</h3>
+                <span class="checkout-items">
+                <div style="padding-left:0;" class="checkout-item-bar w3-panel w3-row w3-border w3-round">
+                  <img style="width:15%;margin-right:10px" class="w3-left w3-col" style="margin-right:10px;" src="<%= img %>" alt="">
+                  <span style="width:75%;" class="w3-col">
+                    <h4 style="margin-bottom:0;text-align:left;"><b>A free book</b></h4>
+                    <p style="text-align:left;">GHS 50.40</p>
+                  </span>
 
-      <div class="w3-container">
-        <div style="padding:32px 48px" class="w3-modal-content w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
-          <span onclick="document.getElementById('id01').style.display='none'"
-          class="w3-button w3-display-topright">&times;</span>
-          <h3 style="text-align:left">Here's what you are getting:</h3>
-          <span class="checkout-items">
-          <div style="padding-left:0;" class="checkout-item-bar w3-panel w3-row w3-border w3-round">
-            <img style="width:15%;margin-right:10px" class="w3-left w3-col" style="margin-right:10px;" src="<%= img %>" alt="">
-            <span style="width:75%;" class="w3-col">
-              <h4 style="margin-bottom:0;text-align:left;"><b>A free book</b></h4>
-              <p style="text-align:left;">GHS 50.40</p>
-            </span>
+                </div>
+                </span>
+                <a style="width:100%;" class="add-item-bar w3-button w3-round-xlarge w3-border w3-text-teal" href="#"><h3 style="margin:0">Wanna add another?</h3></a>
+                <h3 style="text-align:left">Where should we deliver distin?</h3>
+                <div class="shipping-address">
+                  <dl>
+                    <dt> <label>Name</label> </dt>
+                    <dd> <input type="text" name="" value="<%= currentUser.display_name %>"> </dd>
+                    <dt> <label>Address</label> </dt>
+                    <dd> <input type="text" name="" value=""> </dd>
+                    <dt> <label>City</label> </dt>
+                    <dd> <input type="text" name="" value="<%= currentUser.user_loc %>"> </dd>
+                    <dt> <label>Region</label> </dt>
+                    <dd> <input type="text" name="" value=""> </dd>
+                    <dt> <label>Phone</label> </dt>
+                    <dd> <input type="text" name="" value="<%= currentUser.user_phone %>"> </dd>
+                  </dl>
+                </div>
+                <h3 style="text-align:left">Delivery fee:</h3>
+                <table>
+                  <tr>
+                    <td><input id="low" type="radio" name="fee" checked> <b>GHS 5</b> - <span class="w3-opacity">Delivery within 5 working days</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:left"><input id="high" type="radio" name="fee"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 24Hrs</span></td>
+                  </tr>
+                </table>
+                <br>
+                <a style="cursor: pointer;text-align:left" class="show-coupon"><h3>Got a coupon code? <i class="fa fa-angle-down"></i> </h3></a>
+                <input style="display:none;width:100%;height:55px" class="w3-round w3-border coupon-box" type="text" name="" value="">
 
-          </div>
-          </span>
-          <a style="width:100%;" class="add-item-bar w3-button w3-round-xlarge w3-border w3-text-teal" href="#"><h3 style="margin:0">Wanna add another?</h3></a>
-          <h3 style="text-align:left">Where should we deliver distin?</h3>
-          <div class="shipping-address">
-            <dl>
-              <dt> <label>Name</label> </dt>
-              <dd> <input type="text" name="" value="farhano123"> </dd>
-              <dt> <label>Address</label> </dt>
-              <dd> <input type="text" name="" value=""> </dd>
-              <dt> <label>City</label> </dt>
-              <dd> <input type="text" name="" value="Kumasi"> </dd>
-              <dt> <label>Region</label> </dt>
-              <dd> <input type="text" name="" value=""> </dd>
-              <dt> <label>Phone</label> </dt>
-              <dd> <input type="text" name="" value="0558359341"> </dd>
-            </dl>
-          </div>
-          <h3 style="text-align:left">Delivery fee:</h3>
-          <table>
-            <tr>
-              <td><input id="low" type="radio" name="fee" checked> <b>GHS 5</b> - <span class="w3-opacity">Delivery within 5 working days</span></td>
-            </tr>
-            <tr>
-              <td style="text-align:left"><input id="high" type="radio" name="fee"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 24Hrs</span></td>
-            </tr>
-          </table>
-          <br>
-          <a style="cursor: pointer;text-align:left" class="show-coupon"><h3>Got a coupon code? <i class="fa fa-angle-down"></i> </h3></a>
-          <input style="display:none;width:100%;height:55px" class="w3-round w3-border coupon-box" type="text" name="" value="">
+                <h3 style="text-align:left">Finally! Want this right?</h3>
+                <dl class="straight">
+                  <dd> <label>This is the title of the Item</label> <span class="price w3-text-blue">GHS 35.70</span> </dd>
+                  <dd> <label>Delivery fee</label> <span class="price w3-text-blue">GHS 10.0</span> </dd>
+                  <dd> <label>Total</label> <span class="price w3-text-blue">GHS 45.70</span> </dd>
+                </dl>
+                <form method="POST" action="https://community.ipaygh.com/gateway">
+                  <input type="hidden" name="merchant_key" value="tk_965c30c0-a0b4-11e8-af31-f23c9170642f" />
+                  <input type="hidden" name="success_url" value="http://localhost:8080/checkout" />
+                  <input type="hidden" name="cancelled_url" value="http://localhost:8080/profile" />
+                  <input type="hidden" name="deferred_url" value="http://localhost:8080" />
+                  <input type="hidden" name="invoice_id" value="0989" />
+                  <input type="hidden" name="total" value="78789" />
+                  <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Yes! Can't wait!</h3></button>
+                </form>
 
-          <h3 style="text-align:left">Finally! Want this right?</h3>
-          <table class="w3-border">
-            <tr>
-              <td>A new deal</td>
-              <td class="item-num">1</td>
-              <td class="item-price">GHS 40.20</td>
-            </tr>
-            <tr>
-              <td>Delivery</td>
-              <td></td>
-              <td class="item-delivery">GHS 5.00</td>
-            </tr>
-            <tr>
-              <td>Total</td>
-              <td></td>
-              <td class="item-total">GHS 798</td>
-            </tr>
-          </table>
-          <form method="POST" action="https://community.ipaygh.com/gateway">
-            <input type="hidden" name="merchant_key" value="tk_965c30c0-a0b4-11e8-af31-f23c9170642f" />
-            <input type="hidden" name="success_url" value="http://localhost:8080/checkout" />
-            <input type="hidden" name="cancelled_url" value="http://localhost:8080/profile" />
-            <input type="hidden" name="deferred_url" value="http://localhost:8080" />
-            <input type="hidden" name="invoice_id" value="0989" />
-            <input type="hidden" name="total" value="78789" />
-            <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Yes! Can't wait!</h3></button>
-          </form>
-
+              </div>
+            </div>
         </div>
-      </div>
-  </div>
+    <% }else{ %>
+
+    <% } %>
+
 </div>
 <script type="text/javascript">
 var slideIndex = 1;

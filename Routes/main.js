@@ -9,8 +9,6 @@ var tokenGen = require('../config/tools.js');
 var cloudinary = require('cloudinary');
 var router = express.Router();
 
-// TODO: When creating a new points account for the user no user_id is sent
-
 passport.use(new localStrategy(
   function(username,password,done){
     var query = "SELECT ID,user_pass FROM onedistin_users WHERE display_name= ?";
@@ -34,15 +32,23 @@ passport.use(new localStrategy(
 ));
 
 router.get('/', (req,res) => {
-  var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"'";
-  con.query(query, function(err,result){
-    if(err)throw err;
-    var a = cloudinary.url(result[0].img_id,{alt:"fuck you"});
-    con.query("SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime+"' ORDER BY timestamp DESC LIMIT 10", function(err,p_result){
+  if(req.isAuthenticated()){
+    var user = req.user.user_id;
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?";
+    con.query(query,[user], function(err,result){
       if(err)throw err;
-      res.render('index',{currentPost: result[0], forumPosts: p_result,img:a});
+      var a = cloudinary.url(result[0][0].img_id,{alt:"fuck you"});
+      res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],img:a});
     });
-  });
+  }else {
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime+"' ORDER BY timestamp DESC LIMIT 10";
+    con.query(query, function(err,result){
+      if(err)throw err;
+      var a = cloudinary.url(result[0][0].img_id,{alt:"fuck you"});
+      res.render('index',{currentPost: result[0][0], forumPosts: result[1],img:a});
+    });
+  }
+
 });
 
 router.get('/login', isNotLoggenIn, (req,res) => {
