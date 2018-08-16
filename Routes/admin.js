@@ -60,12 +60,14 @@ router.post('/deal', (req,res) => {
   var writeup = req.body.marketingWriteUp;
   var vidlink = req.body.VideoLink;
   var date = req.body.date.split("-").join("");
-  var comparison = '<a class="w3-text-indigo" href="'+req.body.shopLink+'">Costs GHS'+req.body.shopPrice+' on '+req.body.shopName+'</a>';
-  var query = "INSERT INTO onedistin_deals (ID,title,price,thingGet,writeup,comparison,video,timestamp)VALUES(?,?,?,?,?,?,?,?)";
+  var shoppy_name = req.body.shopName;
+  var shoppy_price = req.body.shopPrice;
+  var shoppy_link = req.body.shopLink;
+  var query = "INSERT INTO onedistin_deals (ID,title,price,thingGet,writeup,video,shoppy_name,shoppy_price,shoppy_link,timestamp)VALUES(?,?,?,?,?,?,?,?,?,?)";
   con.query("SELECT ID FROM onedistin_deals WHERE timestamp=?",[date],function(err,result){
     if(err)throw err;
     if(result.length < 1){
-      con.query(query,[null,title,price,_thingGet,writeup,comparison,vidlink,date],function(err){
+      con.query(query,[null,title,price,_thingGet,writeup,vidlink,shoppy_name,shoppy_price,shoppy_link,date],function(err){
         if(err)throw err;
         console.log('Deal Inserted!');
 

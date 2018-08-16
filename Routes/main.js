@@ -11,7 +11,6 @@ passport.use(new localStrategy(
   function(username,password,done){
     var query = "SELECT ID,user_pass FROM onedistin_users WHERE display_name= ?";
     con.query(query,[username],function(err,result){
-      console.log(result);
       if(result.length < 1){
         return done(null, false);
       }else{
@@ -32,7 +31,6 @@ passport.use(new localStrategy(
 
 router.get('/', (req,res) => {
   var query = "SELECT * FROM onedistin_deals WHERE timestamp=?";
-  console.log(currentDate);
   con.query(query,[currentDate], function(err,result){
     if(err)throw err;
     var _thingGet = result[0].thingGet;
@@ -89,6 +87,7 @@ router.get('/checkout', (req,res) => {
 });
 
 router.get('/profile', (req,res) => {
+  var user = req.user.user_id;
   res.render('profile');
 });
 
@@ -98,7 +97,6 @@ router.get('/rewards', (req,res) => {
 
 router.get('/pastdeals', (req,res) => {
   var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp <= '"+currentTime+"' ";
-  console.log(currentTime);
   con.query(query,[0],function(err,result){
     res.render('pastdeals',{pastdeals:result});
   });
