@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 var passport = require('passport');
-var bcrypt = require('bcrypt');
 
 var port = process.env.PORT || 8080;
 var app = express();
