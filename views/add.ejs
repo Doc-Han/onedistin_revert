@@ -1,0 +1,22 @@
+<% include partials/header.ejs %>
+
+    <div class="w3-row w3-margin-top">
+      <div class="w3-quarter w3-container">
+
+      </div>
+      <div class="w3-half w3-light-grey w3-mobile w3-container">
+        <p class="w3-large w3-margin-left">Spit it out now!</p>
+        <form class="w3-container w3-margin-bottom" action="/forum/add" method="POST">
+          <input class="w3-input w3-border w3-border-green w3-margin-top w3-center" placeholder="##can you please name your spit##" type="text" name="title" value="">
+          <textarea placeholder="##what is your spit all about##" class="w3-input w3-border w3-border-green w3-margin-top" style="resize:none" name="body" rows="8" cols="80"></textarea>
+          <input class="w3-input w3-button w3-green" type="submit" value="Hey! Put my spit on the floor">
+        </form>
+
+      </div>
+      <div class="w3-quarter w3-bold w3-container">
+
+      </div>
+    </div>
+
+  </body>
+</html>

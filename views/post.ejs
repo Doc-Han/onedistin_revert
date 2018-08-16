@@ -1,0 +1,88 @@
+<% include partials/header.ejs %>
+
+    <div class="w3-row w3-margin-top">
+      <div style="color:#fff" class="w3-quarter w3-container">
+        .
+      </div>
+      <div class="w3-half w3-mobile w3-container">
+
+        <ul class="w3-ul w3-container">
+          <li class="w3-bar">
+            <h1 class="w3-text-indigo">
+              <%= post.post_title%>
+            </h1>
+            <span class="w3-small w3-right"><%= post.timestamp%></span>
+            <p><%= post.post_content %></p>
+
+            <div class="w3-bar">
+              <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-heart-o"> 34 </i> </a>
+              <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-comment-o"> <%= post.post_comments %> </i> </a>
+              <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-star-o"> </i> </a>
+            </div>
+          </li>
+
+        </ul>
+
+        <% if(isAuthenticated){ %>
+          <form class="w3-container" action="/forum/comment" method="post">
+            <textarea class="w3-input w3-border" style="resize:none" placeholder="I think ...." name="comment" rows="2" cols="80"></textarea>
+            <button type="submit" style="border-radius:20px" class="w3-button w3-green w3-margin-top w3-ripple" name="postId" value="<%= post.ID %>">Send</button>
+          </form>
+        <% }else{ %>
+            <a class="w3-text-red w3-large w3-margin-left" href="/login"> <i class="fa fa-user"></i> Login to add comment</a>
+        <% } %>
+
+
+        <div class="w3-bar w3-border-bottom w3-margin-top">
+          Comments
+        </div>
+
+        <ul class="w3-ul w3-container">
+          <!--<li class="w3-bar">
+            <img class="w3-circle" src="http://via.placeholder.com/50x50" alt="">
+            <span class="w3-large w3-margin-left" >Farhan Yahya</span>
+            <span class="w3-small w3-right">Date: 24th July 2018</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+            <div class="w3-bar w3-border-bottom">
+              <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-heart-o"> 34 </i> </a>
+              <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-reply"> 134 </i> </a>
+              <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-angle-down"> </i> </a>
+            </div>
+
+                <ul class="w3-ul w3-container">
+                  <li class="w3-bar">
+                    <i class="fa fa-reply"></i>
+                    <span class="w3-large w3-margin-left" >Kwando Sekyim</span>
+                    <span class="w3-small w3-right">Date: 24th July 2018</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                    <div class="w3-bar w3-border-bottom">
+                      <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-heart-o"> 34 </i> </a>
+                    </div>
+                  </li>
+                </ul>
+            </ul>
+
+          </li>-->
+          <% comment.forEach(function(item){ %>
+            <li class="w3-bar">
+              <img class="w3-circle" src="http://via.placeholder.com/50x50" alt="">
+              <span class="w3-large w3-margin-left" ><%= item.comment_author_name %></span>
+              <span class="w3-small w3-right"><%= item.timestamp %></span>
+              <p><%= item.comment_content %></p>
+
+              <div class="w3-bar">
+                <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-heart-o"> 34 </i> </a>
+                <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-reply"></i> </a>
+              </div>
+            </li>
+          <% }); %>
+      </div>
+      <div class="w3-quarter w3-bold w3-container">
+
+      </div>
+    </div>
+
+  </body>
+</html>

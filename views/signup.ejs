@@ -1,0 +1,61 @@
+<% include partials/header.ejs %>
+<style media="screen">
+  body {
+    background: #a9a9a9;
+  }
+</style>
+    <div class="w3-row w3-margin-top">
+      <div style="color: #a9a9a9" class="w3-third w3-container">
+        .
+      </div>
+      <div class="w3-third w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
+        <h3 class="w3-xxxlarge w3-round w3-center">Sign Up</h3>
+        <form class="w3-container w3-margin-bottom" action="/signup" method="POST">
+
+          <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-round w3-border" name="username" type="text" placeholder="Username">
+            </div>
+          </div>
+          <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user-o"></i></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-round w3-border" name="fullname" type="text" placeholder="Full name">
+            </div>
+          </div>
+          <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-address-card-o"></i></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-round w3-border" name="email" type="email" placeholder="Email">
+            </div>
+          </div>
+          <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-phone"></i></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-round w3-border" name="phone" type="phone" placeholder="Phone">
+            </div>
+          </div>
+          <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-location-arrow"></i></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-round w3-border" name="location" type="location" placeholder="Location">
+            </div>
+          </div>
+          <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-lock"></i></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-round w3-border" name="password" type="password" placeholder="Password">
+            </div>
+          </div>
+          <input class="w3-right w3-round w3-button custom-bg w3-text-white w3-margin-top" type="submit" value="Get me there >>">
+        </form>
+
+      </div>
+      <div class="w3-third w3-bold w3-container">
+
+      </div>
+    </div>
+
+  </body>
+</html>

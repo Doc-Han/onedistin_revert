@@ -1,0 +1,92 @@
+<% include partials/header.ejs %>
+<style type="text/css" media="all">
+	/*@import "css/info.css";
+	@import "css/main.css";*/
+</style>
+
+<script type="text/javascript" src="/js/widgEditor.js"></script>
+
+<div class="w3-row w3-margin-top">
+  <% include partials/navs.ejs %>
+  <div style="width:60%;margin-bottom:200px" class="w3-col w3-card-4 w3-mobile w3-animate-right">
+    <form class="w3-container" action="/admin/update/<%= deal.ID %>" method="POST">
+      <div class="w3-row">
+        <div style="width:75%" class="w3-col">
+          <label class="w3-indigo w3-padding w3-margin"> Deal title</label>
+          <input class="w3-input w3-border w3-border-black" placeholder="Today's deal is ..." type="text" name="dealTitle" value="<%= deal.title %>">
+        </div>
+        <div style="width:25%" class="w3-col">
+          <label class="w3-yellow w3-padding w3-margin"> <i class="fa fa-dollar"></i> Price</label>
+          <input class="w3-input w3-border w3-border-black" placeholder="Price" type="text" name="dealPrice" value="<%= deal.price %>">
+        </div>
+      </div>
+
+
+      <label class="w3-indigo w3-padding w3-margin"> <i class="fa fa-pencil"></i> Marketing write up</label>
+      <textarea id="summernote" name="marketingWriteUp"><%= deal.writeup %></textarea>
+
+      <label class="w3-indigo w3-padding w3-margin">Things you get</label>
+			<% thingGet.forEach(function(item){ %>
+				<textarea style="resize: none" name="thingGet" placeholder="You get ..." class="thing-get w3-input w3-border w3-border-grey w3-round"><%= item %></textarea>
+			<% }); %>
+
+      <button id="thing-get-add" class="w3-right w3-black w3-padding" type="button"> <i class="fa fa-plus"></i> Add </button>
+      <button id="thing-get-reduce" class="w3-right w3-red w3-padding" type="button"> <i class="fa fa-minus"></i> Reduce </button>
+
+      <div class="w3-container">
+        <div class="w3-half">
+          <label class="w3-orange w3-padding w3-margin">Shoppy Name</label>
+          <input class="w3-input w3-border w3-border-black" type="text" placeholder="Other shop" name="shopName" value="">
+        </div>
+        <div class="w3-half">
+          <label class="w3-orange w3-padding w3-margin">Shoppy Price</label>
+          <input class="w3-input w3-border w3-border-black" type="text" placeholder="Other Price" name="shopPrice" value="">
+        </div>
+        <label class="w3-orange w3-padding w3-margin">Shoppy Link</label>
+        <input class="w3-input w3-border w3-border-black" type="url" placeholder="Link to item" name="shopLink" value="">
+      </div>
+
+      <div class="w3-center w3-margin-top">
+        <label class="w3-purple w3-padding w3-margin"> <i class="fa fa-film"></i> Video of the Day</label>
+        <input class="w3-input w3-border w3-border-black" type="url" placeholder="Video Link" name="VideoLink" value="<%= deal.video %>">
+      </div>
+
+      <label class="w3-purple w3-padding w3-margin"> Date </label>
+      <input id="date" class="w3-input w3-border w3-border-black" type="date" placeholder="Day" name="date" value="<%= deal.date %>">
+
+      <div class="w3-center">
+        <button style="margin-top:50px;margin-bottom:50px;padding:50px;font-size:24px" class="w3-button w3-blue w3-round" type="submit"> <i class="fa fa-send"></i> Update deal!</button>
+      </div>
+
+
+    </form>
+
+
+
+
+  </div>
+  <div style="width:20%" class="w3-col w3-animate-right">
+    <ul class="w3-ul w3-bar-block">
+
+			<% deals.forEach(function(item){ %>
+				<a href="/admin/edit/<%= item.ID %>"><li class="w3-bar-item w3-button"><%= item.title %>
+				<% if(item.timestamp == currentDate){ %>
+					<span class="w3-tag w3-green w3-right">on Fire</span>
+				<% }else if(item.timestamp < currentDate){ %>
+					<span class="w3-tag w3-red w3-right">Past</span>
+			  <% }else{ %>
+					<span class="w3-tag w3-yellow w3-right">Pending</span>
+				<% } %>
+			</li></a>
+			<% }); %>
+
+    </ul>
+  </div>
+
+</div>
+
+<script>
+	$(document).ready(function() {
+			$('#summernote').summernote();
+	});
+</script>
