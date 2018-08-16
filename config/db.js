@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: 'db4free.net',
-  user: 'farhano123',
-  password: 'allahuakbar1',
-  database: 'onedistin',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
 module.exports = con;

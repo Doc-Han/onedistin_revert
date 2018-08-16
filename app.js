@@ -1,11 +1,12 @@
 var express = require('express');
+require('dotenv').config();
 var con = require('./config/db.js');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 var passport = require('passport');
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT;
 var app = express();
 
 app.use(bodyParser.json());
@@ -13,10 +14,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 var options = {
-  host: 'db4free.net',
-  user: 'farhano123',
-  password: 'allahuakbar1',
-  database: 'onedistin',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 }
 
 var sessionStore = new MySQLStore(options);
