@@ -1,6 +1,5 @@
 var express = require('express');
 var con = require('./config/db.js');
-var path = require('path');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
@@ -12,14 +11,13 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static('./public'));
 var options = {
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'onedistin.db'
+  host: 'sql2.freesqldatabase.com',
+  user: 'sql2252287',
+  password: 'wW3%jI3*',
+  database: 'sql2252287',
 }
 
 var sessionStore = new MySQLStore(options);
