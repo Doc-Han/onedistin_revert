@@ -13,10 +13,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 var options = {
-  host: 'sql2.freesqldatabase.com',
-  user: 'sql2252287',
-  password: 'wW3%jI3*',
-  database: 'sql2252287',
+  host: 'db4free.net',
+  user: 'farhano123',
+  password: 'allahuakbar1',
+  database: 'onedistin',
 }
 
 var sessionStore = new MySQLStore(options);

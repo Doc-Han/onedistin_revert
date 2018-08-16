@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: 'sql2.freesqldatabase.com',
-  user: 'sql2252287',
-  password: 'wW3%jI3*',
-  database: 'sql2252287',
+  host: 'db4free.net',
+  user: 'farhano123',
+  password: 'allahuakbar1',
+  database: 'onedistin',
 });
 
 module.exports = con;
