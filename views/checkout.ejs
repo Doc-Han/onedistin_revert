@@ -17,7 +17,7 @@ x<% include partials/header.ejs %>
             <br> GHS <%= dealData.price %></p>
         </div>
         </span>
-        <a style="width:100%;" class="add-item-bar w3-button w3-round-xlarge w3-border w3-text-teal" href="#"><h3>Wanna add another?</h3></a>
+        <a style="width:100%;" class="add-item-bar w3-button w3-round-xlarge w3-border w3-text-teal" href="#"><h3 style="margin:0">Wanna add another?</h3></a>
         <h3 style="text-align:left">Where should we deliver distin?</h3>
         <div class="shipping-address">
           <dl>
@@ -71,7 +71,7 @@ x<% include partials/header.ejs %>
           <input type="hidden" name="deferred_url" value="http://localhost:8080" />
           <input type="hidden" name="invoice_id" value="<%= token %>" />
           <input type="hidden" name="total" value="<%= (dealData.price*1) + 5%>" />
-          <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3>Yes! Can't wait</h3></button>
+          <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Yes! Can't wait</h3></button>
         </form>
 
       </div>
