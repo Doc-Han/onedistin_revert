@@ -11,7 +11,7 @@ x<% include partials/header.ejs %>
       <div style="margin-bottom:150px" class="w3-half w3-center w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
         <h3 style="text-align:left"><b>Here's what you are getting</b></h3>
         <span class="checkout-items">
-        <div class="checkout-item-bar w3-panel w3-border w3-padding-16">
+        <div class="checkout-item-bar w3-panel w3-border w3-round w3-padding-16">
           <img class="w3-left" src="http://via.placeholder.com/50x50" alt="">
           <p style="margin:0;text-align:center"><%= dealData.title %>
             <br> GHS <%= dealData.price %></p>
@@ -95,7 +95,7 @@ x<% include partials/header.ejs %>
     $(".add-item-bar").click(function(){
       if(num < 3){
         num++;
-        $(".checkout-items").append('<div class="checkout-item-bar w3-animate-left w3-panel w3-border w3-padding-16"><span class="item-bar-close w3-tag w3-red w3-right">x</span><img class="w3-left" src="http://via.placeholder.com/50x50" alt=""><p style="margin:0;text-align:center"><%= dealData.title %><br> GHS <%= dealData.price %></p></div>');
+        $(".checkout-items").append('<div class="checkout-item-bar w3-animate-left w3-panel w3-border w3-round w3-padding-16"><span class="item-bar-close w3-tag w3-red w3-right">x</span><img class="w3-left" src="http://via.placeholder.com/50x50" alt=""><p style="margin:0;text-align:center"><%= dealData.title %><br> GHS <%= dealData.price %></p></div>');
         $(".item-num").text(num);
         var new_price = deal_price * num;
         $(".item-price").text("GHS "+new_price.toFixed(2));
