@@ -70,9 +70,13 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
       con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
         if(err) throw err;
         const user_id = result[0];
-        req.login(user_id,function(err){
-          res.redirect('/');
-        });
+        con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,last_activity) VALUES (?,?,?,?,?)",[null,user_id,0,0,'new user'],function(err){
+          if(err)throw err;
+          req.login(user_id,function(err){
+            res.redirect('/');
+          });
+        })
+
       });
     });
   });
@@ -100,13 +104,47 @@ router.get('/profile', isLoggedIn, (req,res) => {
 });
 
 router.get('/rewards', (req,res) => {
-  res.render('rewards');
+  var user = req.user.user_id;
+  con.query("SELECT * FROM onedistin_points WHERE user_id=?",[user],function(err,result){
+    res.render('rewards',{pointData:result[0]});
+  });
 });
 
 router.get('/pastdeals', (req,res) => {
   var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp <= '"+currentTime+"' ";
   con.query(query,[0],function(err,result){
     res.render('pastdeals',{pastdeals:result});
+  });
+});
+
+router.get('/redeem/:offer',function(req,res){
+  var offer = req.params.offer;
+  const user = req.user.user_id;
+  con.query("SELECT active_points FROM onedistin_points WHERE user_id=?",[user],function(err,result){
+    var points = result[0].active_points;
+
+    if(offer == "free-delivery"){
+      if(points > 300){
+        console.log("Free-delivery has been issued");
+      }else {
+        console.log("Insufficient points");
+      }
+    }else if(offer == "5-off"){
+      if(points > 600){
+        console.log("5%-off has been issued");
+      }else {
+        console.log("Insufficient points");
+      }
+    }else if(offer == "10-offer"){
+      if(points > 1000){
+        console.log("10%-off has been issued");
+      }else {
+        console.log("Insufficient points");
+      }
+    }else{
+      console.log("Hehe, you can't really steal from us");
+    }
+    res.send('Still in progress')
   });
 });
 

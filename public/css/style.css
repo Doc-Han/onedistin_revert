@@ -371,7 +371,7 @@ img {vertical-align: middle;}
   #header nav ul.links li.whatismeh a i {
     background-position: -289px -24px;
   }
-  #header nav ul.links>li>a span {
+  #header nav ul.links>li>a p{
     display: none;
   }
   .left-lane {

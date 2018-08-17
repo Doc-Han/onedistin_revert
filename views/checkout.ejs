@@ -9,11 +9,13 @@ x<% include partials/header.ejs %>
         .
       </div>
       <div style="margin-bottom:150px" class="w3-half w3-center w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
+        <span class="checkout-items">
         <div class="checkout-item-bar w3-panel w3-border w3-padding-16">
           <img class="w3-left" src="http://via.placeholder.com/50x50" alt="">
           <p style="margin:0;text-align:center"><%= dealData.title %>
             <br> GHS <%= dealData.price %></p>
         </div>
+        </span>
         <a class="add-item-bar w3-button w3-round-large w3-teal" href="#">Wanna add more</a>
         <p style="text-align:left">Where should we deliver the stuff?</p>
         <div class="shipping-address">
@@ -33,31 +35,33 @@ x<% include partials/header.ejs %>
         <p style="text-align:left">Delivery fee:</p>
         <table>
           <tr>
-            <td><input type="radio" name="fee" value="" checked> GHS 5 - <span class="w3-opacity">Delivery within 5 working days</span></td>
+            <td><input id="low" type="radio" name="fee" value="" checked> GHS 5 - <span class="w3-opacity">Delivery within 5 working days</span></td>
           </tr>
           <tr>
-            <td><input type="radio" name="fee" value=""> GHS 10 - <span class="w3-opacity">Delivery within 24Hrs</span></td>
+            <td><input id="high" type="radio" name="fee" value=""> GHS 10 - <span class="w3-opacity">Delivery within 24Hrs</span></td>
           </tr>
         </table>
         <br>
-        <a href="#">Got a coupon code? <i class="fa fa-angle-down"></i> </a>
+        <a style="cursor: pointer" class="show-coupon">Got a coupon code? <i class="fa fa-angle-down"></i> </a>
+        <br>
+        <input style="display:none" class="w3-round w3-border coupon-box" type="text" name="" value="">
 
         <p style="text-align:left">Summary</p>
         <table class="w3-table w3-striped w3-border">
           <tr>
             <td><%= dealData.title %></td>
-            <td>1</td>
-            <td>GHS 20</td>
+            <td class="item-num">1</td>
+            <td class="item-price">GHS <%= dealData.price %></td>
           </tr>
           <tr>
             <td>Delivery</td>
             <td></td>
-            <td>5</td>
+            <td class="item-delivery">GHS 5.00</td>
           </tr>
           <tr>
             <td>Total</td>
             <td></td>
-            <td>GHS 20</td>
+            <td class="item-total">GHS <%= (dealData.price*1) + 5%></td>
           </tr>
         </table>
 
@@ -70,7 +74,52 @@ x<% include partials/header.ejs %>
     </div>
 
 <script type="text/javascript">
+  $(document).ready(function(){
+    var num = 1;
+    var delivery = 5;
+    var deal_price = <%= dealData.price %> * 1;
+    function total(){
+      total_price = ((num*deal_price)+delivery).toFixed(2);
+      $(".item-total").text("GHS "+total_price);
+    }
+    total();
+    $(".add-item-bar").click(function(){
+      if(num < 3){
+        num++;
+        $(".checkout-items").append('<div class="checkout-item-bar w3-animate-left w3-panel w3-border w3-padding-16"><span class="item-bar-close w3-tag w3-red w3-right">x</span><img class="w3-left" src="http://via.placeholder.com/50x50" alt=""><p style="margin:0;text-align:center"><%= dealData.title %><br> GHS <%= dealData.price %></p></div>');
+        $(".item-num").text(num);
+        var new_price = deal_price * num;
+        $(".item-price").text("GHS "+new_price.toFixed(2));
+        if($("#low").prop("checked")){
+          $(".item-delivery").text("GHS 5.00");
+          delivery = 5;
+        }else{
+          $(".item-delivery").text("GHS 10.00");
+          delivery = 10;
+        }
+        total();
+      }else{
+        alert("You can order a maximum of 3!");
+      }
 
+    });
+    $("#low").click(function(){
+      $(".item-delivery").text("GHS 5.00");
+      delivery = 5;
+      total();
+    });
+    $("#high").click(function(){
+      $(".item-delivery").text("GHS 10.00");
+      delivery = 10;
+      total();
+    });
+
+    $(".show-coupon").click(function(){
+      $(".coupon-box").show();
+    });
+
+
+  });
 </script>
 
   </body>
