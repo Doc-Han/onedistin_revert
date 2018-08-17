@@ -7,6 +7,8 @@ var currentTime = require('../config/tools.js').currentTime();
 var localStrategy = require('passport-local').Strategy;
 var router = express.Router();
 
+// TODO: When creating a new points account for the user no user_id is sent
+
 passport.use(new localStrategy(
   function(username,password,done){
     var query = "SELECT ID,user_pass FROM onedistin_users WHERE display_name= ?";
@@ -70,12 +72,13 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
       con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
         if(err) throw err;
         const user_id = result[0];
-        con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,last_activity) VALUES (?,?,?,?,?)",[null,user_id,0,0,'new user'],function(err){
+        var user = user_id.user_id;
+        con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,last_activity) VALUES (?,?,?,?,?)",[null,user,0,0,'new user'],function(err){
           if(err)throw err;
           req.login(user_id,function(err){
             res.redirect('/');
           });
-        })
+        });
 
       });
     });
