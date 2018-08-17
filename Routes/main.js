@@ -138,7 +138,7 @@ router.get('/redeem/:offer',function(req,res){
       }else {
         console.log("Insufficient points");
       }
-    }else if(offer == "10-offer"){
+    }else if(offer == "10-off"){
       if(points > 1000){
         console.log("10%-off has been issued");
       }else {
