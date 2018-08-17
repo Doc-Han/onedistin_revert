@@ -9,7 +9,7 @@ x<% include partials/header.ejs %>
         .
       </div>
       <div style="padding:32px 48px;margin-bottom:150px" class="w3-half w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
-        <h3 style="text-align:left"><b>Here's what you are getting:</b></h3>
+        <h3 style="text-align:left">Here's what you are getting:</h3>
         <span class="checkout-items">
         <div style="padding:32px" class="checkout-item-bar w3-panel w3-border w3-round">
           <img class="w3-left" src="http://via.placeholder.com/50x50" alt="">
@@ -17,8 +17,8 @@ x<% include partials/header.ejs %>
             <br> GHS <%= dealData.price %></p>
         </div>
         </span>
-        <a style="width:100%;padding: 3px 0" class="add-item-bar w3-button w3-round-xlarge w3-border w3-text-teal" href="#"><h3>Wanna add more</h3></a>
-        <h3 style="text-align:left"><b>Where should we deliver distin?</b></h3>
+        <a style="width:100%;" class="add-item-bar w3-button w3-round-xlarge w3-border w3-text-teal" href="#"><h3>Wanna add more</h3></a>
+        <h3 style="text-align:left">Where should we deliver distin?</h3>
         <div class="shipping-address">
           <dl>
             <dt> <label>Name</label> </dt>
@@ -33,7 +33,7 @@ x<% include partials/header.ejs %>
             <dd> <input type="text" name="" value="<%= userData.user_phone%>"> </dd>
           </dl>
         </div>
-        <h3 style="text-align:left"><b>Delivery fee:</b></h3>
+        <h3 style="text-align:left">Delivery fee:</h3>
         <table>
           <tr>
             <td><input id="low" type="radio" name="fee" checked> <b>GHS 5</b> - <span class="w3-opacity">Delivery within 5 working days</span></td>
@@ -46,7 +46,7 @@ x<% include partials/header.ejs %>
         <a style="cursor: pointer;text-align:left" class="show-coupon"><h3>Got a coupon code? <i class="fa fa-angle-down"></i> </h3></a>
         <input style="display:none;width:100%;height:55px" class="w3-round w3-border coupon-box" type="text" name="" value="">
 
-        <h3 style="text-align:left"><b>Finally! want this right?</b></h3>
+        <h3 style="text-align:left">Finally! want this right?</h3>
         <table class="w3-table w3-striped w3-border">
           <tr>
             <td><%= dealData.title %></td>
@@ -71,7 +71,7 @@ x<% include partials/header.ejs %>
           <input type="hidden" name="deferred_url" value="http://localhost:8080" />
           <input type="hidden" name="invoice_id" value="<%= token %>" />
           <input type="hidden" name="total" value="<%= (dealData.price*1) + 5%>" />
-          <input style="margin-bottom:10px;width:100%;padding:13px 0" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" value="Yes! Can't wait" />
+          <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3>Yes! Can't wait</h3></button>
         </form>
 
       </div>
