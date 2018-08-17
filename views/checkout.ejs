@@ -9,7 +9,7 @@ x<% include partials/header.ejs %>
         .
       </div>
       <div style="margin-bottom:150px" class="w3-half w3-center w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
-        <p style="text-align:left"><b>Here's what you are getting</b></p>
+        <h3 style="text-align:left"><b>Here's what you are getting</b></h3>
         <span class="checkout-items">
         <div class="checkout-item-bar w3-panel w3-border w3-padding-16">
           <img class="w3-left" src="http://via.placeholder.com/50x50" alt="">
@@ -18,7 +18,7 @@ x<% include partials/header.ejs %>
         </div>
         </span>
         <a class="add-item-bar w3-button w3-round-large w3-teal" href="#">Wanna add more</a>
-        <p style="text-align:left">Where should we deliver the stuff?</p>
+        <h3 style="text-align:left"><b>Where should we deliver the stuff?</b></h3>
         <div class="shipping-address">
           <dl>
             <dt> <label>Name</label> </dt>
@@ -33,7 +33,7 @@ x<% include partials/header.ejs %>
             <dd> <input type="text" name="" value="<%= userData.user_phone%>"> </dd>
           </dl>
         </div>
-        <p style="text-align:left">Delivery fee:</p>
+        <h3 style="text-align:left"><b>Delivery fee:</b></h3>
         <table>
           <tr>
             <td><input id="low" type="radio" name="fee" value="" checked> GHS 5 - <span class="w3-opacity">Delivery within 5 working days</span></td>
@@ -47,7 +47,7 @@ x<% include partials/header.ejs %>
         <br>
         <input style="display:none" class="w3-round w3-border coupon-box" type="text" name="" value="">
 
-        <p style="text-align:left">Summary</p>
+        <h3 style="text-align:left"><b>Summary</b></h3>
         <table class="w3-table w3-striped w3-border">
           <tr>
             <td><%= dealData.title %></td>
