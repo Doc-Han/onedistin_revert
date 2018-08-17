@@ -8,10 +8,10 @@ x<% include partials/header.ejs %>
       <div style="color: #a9a9a9" class="w3-quarter w3-container">
         .
       </div>
-      <div style="margin-bottom:150px" class="w3-half w3-center w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
+      <div style="padding:32px;margin-bottom:150px" class="w3-half w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
         <h3 style="text-align:left"><b>Here's what you are getting</b></h3>
         <span class="checkout-items">
-        <div class="checkout-item-bar w3-panel w3-border w3-round w3-padding-16">
+        <div style="padding:32px" class="checkout-item-bar w3-panel w3-border w3-round">
           <img class="w3-left" src="http://via.placeholder.com/50x50" alt="">
           <p style="margin:0;text-align:center"><%= dealData.title %>
             <br> GHS <%= dealData.price %></p>
@@ -48,7 +48,7 @@ x<% include partials/header.ejs %>
         <input style="display:none" class="w3-round w3-border coupon-box" type="text" name="" value="">
 
         <h3 style="text-align:left"><b>Summary</b></h3>
-        <table class="w3-table w3-striped w3-border w3-round">
+        <table class="w3-table w3-striped w3-border">
           <tr>
             <td><%= dealData.title %></td>
             <td class="item-num">1</td>
@@ -95,7 +95,7 @@ x<% include partials/header.ejs %>
     $(".add-item-bar").click(function(){
       if(num < 3){
         num++;
-        $(".checkout-items").append('<div class="checkout-item-bar w3-animate-left w3-panel w3-border w3-round w3-padding-16"><span class="item-bar-close w3-tag w3-red w3-right">x</span><img class="w3-left" src="http://via.placeholder.com/50x50" alt=""><p style="margin:0;text-align:center"><%= dealData.title %><br> GHS <%= dealData.price %></p></div>');
+        $(".checkout-items").append('<div style="padding:32px" class="checkout-item-bar w3-animate-left w3-panel w3-border w3-round"><span class="item-bar-close w3-tag w3-red w3-right">x</span><img class="w3-left" src="http://via.placeholder.com/50x50" alt=""><p style="margin:0;text-align:center"><%= dealData.title %><br> GHS <%= dealData.price %></p></div>');
         $(".item-num").text(num);
         var new_price = deal_price * num;
         $(".item-price").text("GHS "+new_price.toFixed(2));
