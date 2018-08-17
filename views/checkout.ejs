@@ -9,6 +9,7 @@ x<% include partials/header.ejs %>
         .
       </div>
       <div style="margin-bottom:150px" class="w3-half w3-center w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
+        <p style="text-align:left"><b>Here's what you are getting</b></p>
         <span class="checkout-items">
         <div class="checkout-item-bar w3-panel w3-border w3-padding-16">
           <img class="w3-left" src="http://via.placeholder.com/50x50" alt="">
@@ -64,8 +65,15 @@ x<% include partials/header.ejs %>
             <td class="item-total">GHS <%= (dealData.price*1) + 5%></td>
           </tr>
         </table>
-
-        <a style="margin-bottom:10px" href="#" class="w3-button w3-blue w3-round-xlarge w3-margin-top">Checkout</a>
+        <form method="POST" action="https://community.ipaygh.com/gateway">
+          <input type="hidden" name="merchant_key" value="tk_965c30c0-a0b4-11e8-af31-f23c9170642f" />
+          <input type="hidden" name="success_url" value="http://localhost:8080/checkout" />
+          <input type="hidden" name="cancelled_url" value="http://localhost:8080/profile" />
+          <input type="hidden" name="deferred_url" value="http://localhost:8080" />
+          <input type="hidden" name="invoice_id" value="<%= token %>" />
+          <input type="hidden" name="total" value="<%= (dealData.price*1) + 5%>" />
+          <input style="margin-bottom:10px" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" value="Checkout" />
+        </form>
 
       </div>
       <div class="w3-quarter w3-bold w3-container">
@@ -81,6 +89,7 @@ x<% include partials/header.ejs %>
     function total(){
       total_price = ((num*deal_price)+delivery).toFixed(2);
       $(".item-total").text("GHS "+total_price);
+      $("input[name='total']").val(total_price);
     }
     total();
     $(".add-item-bar").click(function(){

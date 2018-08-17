@@ -5,6 +5,7 @@ var passport = require('passport');
 var currentDate = require('../config/tools.js').currentDate();
 var currentTime = require('../config/tools.js').currentTime();
 var localStrategy = require('passport-local').Strategy;
+var tokenGen = require('../config/tools.js');
 var router = express.Router();
 
 // TODO: When creating a new points account for the user no user_id is sent
@@ -30,6 +31,14 @@ passport.use(new localStrategy(
     });
   }
 ));
+
+router.get('/upload', (req,res) => {
+  res.render('upload');
+});
+router.post('/upload', (req,res) => {
+  console.log(req.files);
+  res.render('upload');
+});
 
 router.get('/', (req,res) => {
   var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"'";
@@ -86,13 +95,14 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
 });
 
 router.get('/checkout', isLoggedIn, (req,res) => {
+  var token = tokenGen.getToken();
   var user = req.user.user_id;
   var query = "SELECT * FROM onedistin_users WHERE ID = ?";
   con.query(query, [user], function(err,result){
     if(err)throw err;
     con.query("SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"'",function(err,d_result){
       if (err)throw err;
-      res.render('checkout',{userData: result[0],dealData: d_result[0]});
+      res.render('checkout',{userData: result[0],dealData: d_result[0], token: token});
     });
   });
 });

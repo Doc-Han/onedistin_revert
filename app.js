@@ -1,4 +1,5 @@
 var express = require('express');
+var fileUpload = require('express-fileupload');
 require('dotenv').config();
 var con = require('./config/db.js');
 var bodyParser = require('body-parser');
@@ -8,7 +9,7 @@ var passport = require('passport');
 
 var port = process.env.PORT;
 var app = express();
-
+app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.set('view engine', 'ejs');

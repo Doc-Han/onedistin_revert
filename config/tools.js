@@ -1,3 +1,6 @@
+const UIDGenerator = require('uid-generator');
+const uidgen = new UIDGenerator();
+
 var currentTime = function() {
   var date = new Date();
   var year = date.getFullYear();
@@ -36,9 +39,14 @@ var currentDate = function() {
   return currentDate;
 }
 
-console.log(currentTime());
+var getToken = function(){
+  var uid = uidgen.generateSync();
+  return uid;
+}
+
 
 module.exports = {
   currentDate: currentDate,
-  currentTime: currentTime
+  currentTime: currentTime,
+  getToken: getToken
 }

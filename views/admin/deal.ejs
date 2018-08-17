@@ -10,7 +10,7 @@
 <div class="w3-row w3-margin-top">
   <% include partials/navs.ejs %>
   <div style="width:60%;margin-bottom:200px" class="w3-col w3-card-4 w3-mobile w3-animate-right">
-    <form class="w3-container" action="/admin/deal" method="POST">
+    <form class="w3-container" action="/admin/deal" enctype="multipart/form-data" method="POST">
       <div class="w3-row">
         <div style="width:75%" class="w3-col">
           <label class="w3-indigo w3-padding"> Deal title</label>
