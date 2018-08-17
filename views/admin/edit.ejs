@@ -12,46 +12,41 @@
     <form class="w3-container" action="/admin/update/<%= deal.ID %>" method="POST">
       <div class="w3-row">
         <div style="width:75%" class="w3-col">
-          <label class="w3-indigo w3-padding w3-margin"> Deal title</label>
+          <label class="w3-indigo w3-padding"> Deal title</label>
           <input class="w3-input w3-border w3-border-black" placeholder="Today's deal is ..." type="text" name="dealTitle" value="<%= deal.title %>">
         </div>
         <div style="width:25%" class="w3-col">
-          <label class="w3-yellow w3-padding w3-margin"> <i class="fa fa-dollar"></i> Price</label>
+          <label class="w3-yellow w3-padding"> <i class="fa fa-dollar"></i> Price</label>
           <input class="w3-input w3-border w3-border-black" placeholder="Price" type="text" name="dealPrice" value="<%= deal.price %>">
         </div>
       </div>
 
 
-      <label class="w3-indigo w3-padding w3-margin"> <i class="fa fa-pencil"></i> Marketing write up</label>
-      <textarea id="summernote" name="marketingWriteUp"><%= deal.writeup %></textarea>
+      <label class="w3-indigo w3-padding"> <i class="fa fa-pencil"></i> Marketing write up</label>
+      <textarea class="summernote" name="marketingWriteUp"><%= deal.writeup %></textarea>
 
-      <label class="w3-indigo w3-padding w3-margin">Things you get</label>
-			<% thingGet.forEach(function(item){ %>
-				<textarea style="resize: none" name="thingGet" placeholder="You get ..." class="thing-get w3-input w3-border w3-border-grey w3-round"><%= item %></textarea>
-			<% }); %>
-
-      <button id="thing-get-add" class="w3-right w3-black w3-padding" type="button"> <i class="fa fa-plus"></i> Add </button>
-      <button id="thing-get-reduce" class="w3-right w3-red w3-padding" type="button"> <i class="fa fa-minus"></i> Reduce </button>
+      <label class="w3-indigo w3-padding">Things you get</label>
+			<textarea class="summernote" name="thingGet"><%= deal.thingGet %></textarea>
 
       <div class="w3-container">
         <div class="w3-half">
-          <label class="w3-orange w3-padding w3-margin">Shoppy Name</label>
+          <label class="w3-orange w3-padding">Shoppy Name</label>
           <input class="w3-input w3-border w3-border-black" type="text" placeholder="Other shop" name="shopName" value="<%= deal.shoppy_name%>">
         </div>
         <div class="w3-half">
-          <label class="w3-orange w3-padding w3-margin">Shoppy Price</label>
+          <label class="w3-orange w3-padding">Shoppy Price</label>
           <input class="w3-input w3-border w3-border-black" type="text" placeholder="Other Price" name="shopPrice" value="<%= deal.shoppy_price%>">
         </div>
-        <label class="w3-orange w3-padding w3-margin">Shoppy Link</label>
+        <label class="w3-orange w3-padding">Shoppy Link</label>
         <input class="w3-input w3-border w3-border-black" type="url" placeholder="Link to item" name="shopLink" value="<%= deal.shoppy_link %>">
       </div>
 
       <div class="w3-center w3-margin-top">
-        <label class="w3-purple w3-padding w3-margin"> <i class="fa fa-film"></i> Video of the Day</label>
+        <label class="w3-purple w3-padding"> <i class="fa fa-film"></i> Video of the Day</label>
         <input class="w3-input w3-border w3-border-black" type="url" placeholder="Video Link" name="VideoLink" value="<%= deal.video %>">
       </div>
 
-      <label class="w3-purple w3-padding w3-margin"> Date </label>
+      <label class="w3-purple w3-padding"> Date </label>
       <input id="date" class="w3-input w3-border w3-border-black" type="date" placeholder="Day" name="date" value="<%= deal.date %>">
 
       <div class="w3-center">
@@ -87,6 +82,6 @@
 
 <script>
 	$(document).ready(function() {
-			$('#summernote').summernote();
+			$('.summernote').summernote();
 	});
 </script>

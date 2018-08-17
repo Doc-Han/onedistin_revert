@@ -30,18 +30,14 @@ passport.use(new localStrategy(
 ));
 
 router.get('/', (req,res) => {
-  var query = "SELECT * FROM onedistin_deals WHERE timestamp=?";
-  con.query(query,[currentDate], function(err,result){
+  var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"'";
+  con.query(query, function(err,result){
+    console.log(currentDate);
     if(err)throw err;
-    var _thingGet = result[0].thingGet;
-    if(_thingGet.indexOf('-***-') != -1){
-      var thingGet = _thingGet.split('-***-');
-    }else {
-      var thingGet = [_thingGet];
-    }
-    con.query("SELECT * FROM onedistin_posts WHERE timestamp <= '"+currentTime+"' ORDER BY timestamp DESC LIMIT 10", function(err,p_result){
+    con.query("SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime+"' ORDER BY timestamp DESC LIMIT 10", function(err,p_result){
       if(err)throw err;
-      res.render('index',{currentPost: result[0],thingGet: thingGet, forumPosts: p_result});
+      console.log(currentTime);
+      res.render('index',{currentPost: result[0], forumPosts: p_result});
     });
   });
 });
@@ -50,7 +46,7 @@ router.get('/login', isNotLoggenIn, (req,res) => {
   res.render('login');
 });
 
-router.post('/login', passport.authenticate('local', {
+router.post('/login', isNotLoggenIn, passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login'
 }));
@@ -59,7 +55,7 @@ router.get('/signup', isNotLoggenIn, (req,res) => {
   res.render('signup');
 });
 
-router.post('/signup', (req,res) => {
+router.post('/signup', isNotLoggenIn, (req,res) => {
   var username = req.body.username;
   var fullname = req.body.fullname;
   var email = req.body.email;
@@ -82,13 +78,25 @@ router.post('/signup', (req,res) => {
   });
 });
 
-router.get('/checkout', (req,res) => {
-  res.render('checkout');
+router.get('/checkout', isLoggedIn, (req,res) => {
+  var user = req.user.user_id;
+  var query = "SELECT * FROM onedistin_users WHERE ID = ?";
+  con.query(query, [user], function(err,result){
+    if(err)throw err;
+    con.query("SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"'",function(err,d_result){
+      if (err)throw err;
+      res.render('checkout',{userData: result[0],dealData: d_result[0]});
+    });
+  });
 });
 
-router.get('/profile', (req,res) => {
+router.get('/profile', isLoggedIn, (req,res) => {
   var user = req.user.user_id;
-  res.render('profile');
+  var query = "SELECT * FROM onedistin_users WHERE ID = ?";
+  con.query(query, [user], function(err,result){
+    if (err)throw err;
+    res.render('profile',{userData: result[0]});
+  });
 });
 
 router.get('/rewards', (req,res) => {

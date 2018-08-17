@@ -126,7 +126,7 @@ li {
 #header nav ul.links>li {
   float: left;
   list-style-type: none;
-  margin: 0 30px;
+  max-width: 100px;
 }
 .dropdown {
     position: relative;
@@ -170,18 +170,18 @@ li {
 }
 
 #header nav ul.links>li>a i {
-    background-image: url('../img/about.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
     display: block;
     height: 48px;
-    margin: 0 auto;
+    margin: 0 20px;
     width: 48px;
 }
 #header nav ul.links>li>a span {
   color: #343434;
   font-family: 'Courgette',cursive;
+  float: left;
 }
 #header .content li>a {
   color: #000;

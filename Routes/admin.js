@@ -51,30 +51,25 @@ router.post('/deal', (req,res) => {
   var title = req.body.dealTitle;
   var price = req.body.dealPrice;
   var thingGet = req.body.thingGet;
-  if(Array.isArray(thingGet)){
-    var _thingGet = thingGet.join("-***-");
-  }else{
-    var _thingGet = thingGet;
-  }
-  console.log(_thingGet);
   var writeup = req.body.marketingWriteUp;
   var vidlink = req.body.VideoLink;
   var date = req.body.date.split("-").join("");
+  console.log(req.body.date);
   var shoppy_name = req.body.shopName;
   var shoppy_price = req.body.shopPrice;
   var shoppy_link = req.body.shopLink;
-  var query = "INSERT INTO onedistin_deals (ID,title,price,thingGet,writeup,video,shoppy_name,shoppy_price,shoppy_link,timestamp)VALUES(?,?,?,?,?,?,?,?,?,?)";
   con.query("SELECT ID FROM onedistin_deals WHERE timestamp=?",[date],function(err,result){
     if(err)throw err;
     if(result.length < 1){
-      con.query(query,[null,title,price,_thingGet,writeup,vidlink,shoppy_name,shoppy_price,shoppy_link,date],function(err){
+      var query = "INSERT INTO onedistin_deals (ID,title,price,thingGet,writeup,video,shoppy_name,shoppy_price,shoppy_link,timestamp)VALUES(?,?,?,?,?,?,?,?,?,?)";
+      con.query(query,[null,title,price,thingGet,writeup,vidlink,shoppy_name,shoppy_price,shoppy_link,date],function(err){
         if(err)throw err;
         console.log('Deal Inserted!');
 
         var author = "Distin cat";
         var body = "";
         var url = title.split(" ").join("-");
-        var postDate = currentDate + "000";
+        var postDate = date + "000000";
         var query = "INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,timestamp)VALUES(?,?,?,?,?,?)";
         con.query(query,[null,author,title,body,url,postDate], function(err){
           if(err)throw err;
@@ -99,13 +94,7 @@ router.get('/edit/:id', (req,res) =>{
     if(err) throw err;
     con.query("SELECT * FROM onedistin_deals WHERE id=?",[id],function(err,result){
       if(err)throw err;
-      var _thingGet = result[0].thingGet;
-      if(_thingGet.indexOf('-***-') != -1){
-        var thingGet = _thingGet.split('-***-');
-      }else {
-        var thingGet = [_thingGet];
-      }
-      res.render('admin/edit', {deal:result[0], thingGet:thingGet, deals:d_result, currentDate:currentDate});
+      res.render('admin/edit', {deal:result[0], deals:d_result, currentDate:currentDate});
     });
   });
 

@@ -9,34 +9,34 @@ x<% include partials/header.ejs %>
         .
       </div>
       <div style="margin-bottom:150px" class="w3-half w3-center w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
-        <div class="w3-panel w3-border w3-padding-16">
+        <div class="checkout-item-bar w3-panel w3-border w3-padding-16">
           <img class="w3-left" src="http://via.placeholder.com/50x50" alt="">
-          <p style="margin:0;text-align:center">This is the title of the deal
-            <br> GHc 50.4</p>
+          <p style="margin:0;text-align:center"><%= dealData.title %>
+            <br> GHS <%= dealData.price %></p>
         </div>
-        <a class="w3-button w3-round-large w3-teal" href="#">Wanna add more</a>
+        <a class="add-item-bar w3-button w3-round-large w3-teal" href="#">Wanna add more</a>
         <p style="text-align:left">Where should we deliver the stuff?</p>
         <div class="shipping-address">
           <dl>
             <dt> <label>Name</label> </dt>
-            <dd> <input type="text" name="" value=""> </dd>
+            <dd> <input type="text" name="" value="<%= userData.user_name %>"> </dd>
             <dt> <label>Address</label> </dt>
             <dd> <input type="text" name="" value=""> </dd>
             <dt> <label>City</label> </dt>
-            <dd> <input type="text" name="" value=""> </dd>
+            <dd> <input type="text" name="" value="<%= userData.user_loc %>"> </dd>
             <dt> <label>Region</label> </dt>
             <dd> <input type="text" name="" value=""> </dd>
             <dt> <label>Phone</label> </dt>
-            <dd> <input type="text" name="" value=""> </dd>
+            <dd> <input type="text" name="" value="<%= userData.user_phone%>"> </dd>
           </dl>
         </div>
         <p style="text-align:left">Delivery fee:</p>
         <table>
           <tr>
-            <td><input type="radio" name="fee" value=""> GHS 5 - <span class="w3-opacity">Delivery within 5 working days</span></td>
+            <td><input type="radio" name="fee" value="" checked> GHS 5 - <span class="w3-opacity">Delivery within 5 working days</span></td>
           </tr>
           <tr>
-            <td><input type="radio" name="fee" value="" checked> GHS 10 - <span class="w3-opacity">Delivery within 24Hrs</span></td>
+            <td><input type="radio" name="fee" value=""> GHS 10 - <span class="w3-opacity">Delivery within 24Hrs</span></td>
           </tr>
         </table>
         <br>
@@ -45,7 +45,7 @@ x<% include partials/header.ejs %>
         <p style="text-align:left">Summary</p>
         <table class="w3-table w3-striped w3-border">
           <tr>
-            <td>A big bag for u</td>
+            <td><%= dealData.title %></td>
             <td>1</td>
             <td>GHS 20</td>
           </tr>
@@ -68,6 +68,10 @@ x<% include partials/header.ejs %>
 
       </div>
     </div>
+
+<script type="text/javascript">
+
+</script>
 
   </body>
 </html>

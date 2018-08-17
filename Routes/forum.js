@@ -1,10 +1,11 @@
 var express = require('express');
 var con = require('../config/db.js');
+var currentTime = require('../config/tools.js').currentTime();
 
 var router = express.Router();
 
 router.get('/', (req,res) => {
-  var query = "SELECT * FROM onedistin_posts";
+  var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime+"'";
   con.query(query,function(err,result){
     if (err) throw err;
     res.render('forum', {posts: result});

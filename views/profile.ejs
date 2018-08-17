@@ -16,13 +16,13 @@
         <p style="text-align:left">Your Info:</p>
         <dl>
           <dt> <label>Username</label> </dt>
-          <dd> <input type="text" name="" value=""> </dd>
+          <dd> <input type="text" name="" value="<%= userData.display_name %>"> </dd>
           <dt> <label>Password</label> </dt>
           <dd> <input type="text" name="" value=""> </dd>
           <dt> <label>Email</label> </dt>
-          <dd> <input type="text" name="" value=""> </dd>
+          <dd> <input type="text" name="" value="<%= userData.user_email %>"> </dd>
           <dt> <label>Phone</label> </dt>
-          <dd> <input type="text" name="" value=""> </dd>
+          <dd> <input type="text" name="" value="<%= userData.user_phone %>"> </dd>
         </dl>
         <p style="text-align:left">Recent Orders:</p>
         <table class="w3-table w3-striped w3-border">
@@ -56,10 +56,12 @@
         <p style="text-align:left">Your delivery info</p>
         <div class="shipping-address">
           <dl>
+            <dt> <label>Fullname</label> </dt>
+            <dd> <input type="text" name="" value="<%= userData.user_name %>"> </dd>
             <dt> <label>Address</label> </dt>
             <dd> <input type="text" name="" value=""> </dd>
             <dt> <label>City</label> </dt>
-            <dd> <input type="text" name="" value=""> </dd>
+            <dd> <input type="text" name="" value="<%= userData.user_loc %>"> </dd>
             <dt> <label>Region</label> </dt>
             <dd> <input type="text" name="" value=""> </dd>
           </dl>

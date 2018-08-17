@@ -7,15 +7,15 @@
         <ul class="w3-ul">
           <% pastdeals.forEach(function(item){ %>
             <li class="w3-bar">
-              <img src="/img/nice1.jpg" class="w3-bar-item w3-border w3-round-xlarge" style="height:100px">
+              <a href="/forum/<%= item.post_url %>"><img src="/img/nice1.jpg" class="w3-bar-item w3-border w3-round-xlarge" style="height:100px"></a>
               <div class="w3-bar-item">
-                <span class="w3-large"><b><%= item.post_title %></b></span><br>
+                <a href="/forum/<%= item.post_url %>"><span class="w3-large"><b><%= item.post_title %></b></span></a><br>
                 <span class="w3-opacity">Posted on <%= item.timestamp %> </span><br>
                 <span class="w3-opacity">Current activity on post</span>
               </div>
               <div class="w3-bar-item w3-right">
                 <i class="fa fa-heart-o w3-xxlarge"></i> 34 <br>
-                <i class="fa fa-comment-o w3-xxlarge"></i> <%= item.post_comments %>
+                <a href="/forum/<%= item.post_url %>"><i class="fa fa-comment-o w3-xxlarge"></i> <%= item.post_comments %></a>
               </div>
             </li>
           <% }); %>
