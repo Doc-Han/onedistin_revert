@@ -178,10 +178,11 @@ li {
     margin: 0 20px;
     width: 48px;
 }
-#header nav ul.links>li>a span {
+#header nav ul.links>li>a p {
   color: #343434;
-  font-family: 'Courgette',cursive;
-  float: left;
+  font-size: 11px;
+  font-weight: bold;
+  text-align: center;
 }
 #header .content li>a {
   color: #000;
