@@ -8,28 +8,27 @@
 <!--<div style="position:absolute;top:12%;left:0;right:0;z-index:-1;opacity:0.3">
   <img style="width:100%" src="img/nice4.jpg" alt="">
 </div>-->
-    <div class="w3-row w3-center">
-      <div class="w3-col left-lane w3-center w3-mobile w3-container">
-        <div class="w3-col left-lane-mini w3-right w3-animate-left">
+    <div class="w3-row w3-center page-wrap">
+      <div class="w3-col left-lane w3-center w3-mobile">
             <section class="item-hero">
               <div id="hero-background"></div>
             </section>
           <div class="slideshow-container">
 
           <div class="mySlides fade">
-            <img src="img/nice1.jpg" style="width:300px;height:300px">
+            <img src="<%= img %>" style="width:100%;height:auto">
           </div>
 
 
           <div class="mySlides fade">
-            <img src="img/nice2.jpg" style="width:300px;height:300px">
+            <img src="img/nice2.jpg" style="width:100%;height:auto">
           </div>
 
           <div class="mySlides fade">
-            <img src="img/nice3.jpg" style="width:300px;height:300px">
+            <img src="img/nice3.jpg" style="width:100%;height:auto">
           </div>
           <div class="mySlides fade">
-            <img src="img/nice4.jpg" style="width:300px;height:300px">
+            <img src="img/nice4.jpg" style="width:100%;height:auto">
           </div>
 
 
@@ -57,16 +56,14 @@
           <div class="w3-left-align">
             <%- currentPost.thingGet %>
           </div>
-        </div>
       </div>
-      <div class="w3-col middle-lane w3-left w3-mobile w3-container w3-animate-bottom">
+      <div class="w3-col middle-lane w3-left w3-mobile w3-container">
         <span class=""><%- currentPost.writeup %></span>
       </div>
-      <div class="w3-col right-lane w3-mobile w3-container w3-animate-right">
-        <div class="w3-col right-lane-mini">
-          <iframe id="ytplayer" type="text/html" width="300" height="168"
-  src="<%= currentPost.video %>"
-  frameborder="0"></iframe>
+      <div class="w3-col right-lane w3-mobile">
+          <iframe id="ytplayer" type="text/html" width="100%" height="168"
+            src="<%= currentPost.video %>"
+            frameborder="0"></iframe>
           <ul class="w3-ul w3-margin-top">
             <% forumPosts.forEach(function(item){ %>
               <a class="w3-left w3-container" href="/forum/<%= item.post_url %>"><li class="w3-padding" >
@@ -75,7 +72,6 @@
               </li></a>
             <% }); %>
           </ul>
-        </div>
       </div>
     </div>
 <script type="text/javascript">

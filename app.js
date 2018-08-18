@@ -1,15 +1,14 @@
 var express = require('express');
-var fileUpload = require('express-fileupload');
 require('dotenv').config();
 var con = require('./config/db.js');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 var passport = require('passport');
+var cloudinary = require('cloudinary');
 
 var port = process.env.PORT;
 var app = express();
-app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.set('view engine', 'ejs');
@@ -31,6 +30,12 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+cloudinary.config({
+  cloud_name: 'farhano123',
+  api_key: 817999527351872,
+  api_secret: 'SqeZy-yPPadr3lAuxEWDiUMyPyA'
+});
 
 app.use(function(req,res,next){
   res.locals.isAuthenticated = req.isAuthenticated();

@@ -6,6 +6,7 @@ var currentDate = require('../config/tools.js').currentDate();
 var currentTime = require('../config/tools.js').currentTime();
 var localStrategy = require('passport-local').Strategy;
 var tokenGen = require('../config/tools.js');
+var cloudinary = require('cloudinary');
 var router = express.Router();
 
 // TODO: When creating a new points account for the user no user_id is sent
@@ -32,23 +33,14 @@ passport.use(new localStrategy(
   }
 ));
 
-router.get('/upload', (req,res) => {
-  res.render('upload');
-});
-router.post('/upload', (req,res) => {
-  console.log(req.files);
-  res.render('upload');
-});
-
 router.get('/', (req,res) => {
   var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"'";
   con.query(query, function(err,result){
-    console.log(currentDate);
     if(err)throw err;
+    var a = cloudinary.url(result[0].img_id,{alt:"fuck you"});
     con.query("SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime+"' ORDER BY timestamp DESC LIMIT 10", function(err,p_result){
       if(err)throw err;
-      console.log(currentTime);
-      res.render('index',{currentPost: result[0], forumPosts: p_result});
+      res.render('index',{currentPost: result[0], forumPosts: p_result,img:a});
     });
   });
 });

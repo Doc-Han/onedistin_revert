@@ -1,5 +1,6 @@
 const UIDGenerator = require('uid-generator');
 const uidgen = new UIDGenerator();
+var cloudinary = require('cloudinary');
 
 var currentTime = function() {
   var date = new Date();
@@ -44,9 +45,18 @@ var getToken = function(){
   return uid;
 }
 
+var uploadImage = function(path){
+  cloudinary.uploader.upload(path, function(img_res){
+    if(img_res > 0){
+      return img_res.public_id;
+    }
+  });
+}
+
 
 module.exports = {
   currentDate: currentDate,
   currentTime: currentTime,
-  getToken: getToken
+  getToken: getToken,
+  uploadImage: uploadImage
 }

@@ -2,6 +2,9 @@ var express = require('express');
 var con = require('../config/db.js');
 var currentDate = require('../config/tools.js').currentDate();
 var currentTime = require('../config/tools.js').currentTime();
+var multer = require('multer');
+var upload = require('../config/upload.js');
+var cloudinary = require('cloudinary');
 
 var router = express.Router();
 
@@ -47,41 +50,41 @@ router.get('/deal', (req,res) => {
   });
 });
 
-router.post('/deal', (req,res) => {
+router.post('/deal', upload.single('image'), (req,res) => {
   var title = req.body.dealTitle;
   var price = req.body.dealPrice;
   var thingGet = req.body.thingGet;
   var writeup = req.body.marketingWriteUp;
   var vidlink = req.body.VideoLink;
   var date = req.body.date.split("-").join("");
-  console.log(req.body.date);
   var shoppy_name = req.body.shopName;
   var shoppy_price = req.body.shopPrice;
   var shoppy_link = req.body.shopLink;
+
+  var author = "Distin cat";
+  var body = "";
+  var url = title.split(" ").join("-");
+  var postDate = date + "000000";
+
   con.query("SELECT ID FROM onedistin_deals WHERE timestamp=?",[date],function(err,result){
     if(err)throw err;
     if(result.length < 1){
-      var query = "INSERT INTO onedistin_deals (ID,title,price,thingGet,writeup,video,shoppy_name,shoppy_price,shoppy_link,timestamp)VALUES(?,?,?,?,?,?,?,?,?,?)";
-      con.query(query,[null,title,price,thingGet,writeup,vidlink,shoppy_name,shoppy_price,shoppy_link,date],function(err){
-        if(err)throw err;
-        console.log('Deal Inserted!');
 
-        var author = "Distin cat";
-        var body = "";
-        var url = title.split(" ").join("-");
-        var postDate = date + "000000";
-        var query = "INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,timestamp)VALUES(?,?,?,?,?,?)";
-        con.query(query,[null,author,title,body,url,postDate], function(err){
-          if(err)throw err;
-          console.log("post Inserted!");
-        });
+      cloudinary.uploader.upload(req.file.path, function(img_res){
+        console.log(img_res);
+          var img_id = img_res.public_id;
+          var query = "INSERT INTO onedistin_deals (ID,title,price,thingGet,writeup,video,shoppy_name,shoppy_price,shoppy_link,timestamp,img_id)VALUES(?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,timestamp)VALUES(?,?,?,?,?,?)";
+          con.query(query,[null,title,price,thingGet,writeup,vidlink,shoppy_name,shoppy_price,shoppy_link,date,img_id,null,author,title,body,url,postDate],function(err){
+            if(err)throw err;
+              res.send("deal Inserted");
+            });
 
       });
+
     }else{
       console.log("Deal for this day already available");
     }
   });
-  res.send("done");
 });
 
 router.get('/edit', (req,res) =>{
