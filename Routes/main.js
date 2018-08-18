@@ -108,6 +108,17 @@ router.get('/profile', isLoggedIn, (req,res) => {
   });
 });
 
+router.get('/profile/:type', (req,res) => {
+  var type = req.params.type;
+  if(type == "user-info"){
+    res.render('user-info');
+  }else if(type == "delivery-info"){
+    res.render('delivery-info');
+  }else if(type == "subscriptions"){
+    res.render('subscriptions');
+  }
+});
+
 router.get('/rewards', (req,res) => {
   var user = req.user.user_id;
   con.query("SELECT * FROM onedistin_points WHERE user_id=?",[user],function(err,result){

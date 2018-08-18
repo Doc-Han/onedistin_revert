@@ -15,38 +15,20 @@
       <div style="margin-bottom:300px" class="w3-half w3-center w3-mobile w3-container w3-animate-bottom">
         <h1 style="text-align:left"><b>Your Account</b></h1>
         <h3 style="text-align:left">Your Info:</h3>
-        <dl>
-          <dt> <label>Username</label> </dt>
-          <dd> <input type="text" name="" value="<%= userData.display_name %>"> </dd>
-          <dt> <label>Password</label> </dt>
-          <dd> <input type="text" name="" value=""> </dd>
-          <dt> <label>Email</label> </dt>
-          <dd> <input type="text" name="" value="<%= userData.user_email %>"> </dd>
-          <dt> <label>Phone</label> </dt>
-          <dd> <input type="text" name="" value="<%= userData.user_phone %>"> </dd>
-        </dl>
+        <a style="text-align:right" class="w3-button w3-round-xlarge" href="/profile/user-info">edit</a>
+        <div style="text-align:left" class="w3-container w3-border w3-round-large">
+          <label><b>Username:</b></label> <%= userData.display_name %> <br>
+          <label><b>Password:</b></label> <br>
+          <label><b>Email:</b></label> <%= userData.user_email %> <br>
+          <label><b>Phone:</b></label> <%= userData.user_phone %>
+        </div>
         <h3 style="text-align:left">Recent Orders:</h3>
-        <table class="w3-table w3-striped w3-border">
-          <tr>
-            <th colspan="2">Orders</th>
-          </tr>
-          <tr>
-            <td>A smart watch</td>
-            <td> <span class="w3-tag w3-blue">Pending</span> </td>
-          </tr>
-          <tr>
-            <td>A second pending delivered</td>
-            <td> <span class="w3-tag w3-blue">Pending</span> </td>
-          </tr>
-          <tr>
-            <td>A new book for you</td>
-            <td> <span class="w3-tag w3-red">Delivered</span> </td>
-          </tr>
-          <tr>
-            <td>A fan on the go</td>
-            <td> <span class="w3-tag w3-red">Delivered</span> </td>
-          </tr>
-        </table>
+        <dl class="straight">
+            <dd><label>A smart watch</label> <span class="tag">Pending</span> </dd>
+            <dd><label>A second pending delivered</label> <span class="tag">Pending</span> </dd>
+            <dd><label>A new book for you</label> <span class=tag">Delivered</span> </dd>
+            <dd><label>A fan on the go</label> <span class=tag">Delivered</span> </dd>
+        </dl>
 
         <h3 style="text-align:left">Your delivery info:</h3>
         <div class="shipping-address">

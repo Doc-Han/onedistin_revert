@@ -12,9 +12,30 @@ body,p,ul,li,table {
   color: #000;
   text-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
+
+dl.straight dd {
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-top: 1px solid #e0e0e0;
+    float: left;
+    font-size: 18px;
+    height: 56px;
+    line-height: 56px;
+    padding: 0 0 0 16px;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+}
+dl.straight dd .tag {
+  text-align: right;
+}
+
 dl {
   border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  border-radius: 10px;
   border-top: 0;
   overflow: hidden;
 }
@@ -196,25 +217,6 @@ li {
   width: 70%;
 }
 
-
-
-/*#header a {
-  decoration: none;
-}
-#header #logo {
-  width: 200px
-}
-
-#header div a {
-  background: var(--main-color);
-  color: #fff;
-  text-decoration: none;
-}
-#header div a:hover {
-  background: #fff;
-  color: var(--main-color);
-}*/
-
 a {
   color: #1b9fe0;
   text-decoration: none;
@@ -314,17 +316,21 @@ img {vertical-align: middle;}
 }
 
 .left-lane {
-  width: 25%;
+  width: 30%;
 }
 .middle-lane {
-  width: 50%;
+  width: 40%;
 }
 .right-lane {
-  width: 25%;
+  width: 30%;
 }
 .page-wrap {
   margin: 0 auto;
   width: 1142px;/*1024px;*/
+}
+
+.buy {
+  width: 100%;
 }
 
 /*#hero-background {
@@ -388,5 +394,16 @@ img {vertical-align: middle;}
   .page-wrap {
     margin: 0 auto;
     width: auto;
+  }
+  .slideshow-container {
+    width: 95%;
+  }
+  .left-lane img {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .buy {
+    width: 80%;
+    margin: 0 auto;
   }
 }
