@@ -7,7 +7,7 @@ var MySQLStore = require('express-mysql-session')(session);
 var passport = require('passport');
 var cloudinary = require('cloudinary');
 
-var port = process.env.PORT;
+var port = process.env.PORT || 8080;
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
