@@ -12,19 +12,13 @@ x<% include partials/header.ejs %>
         <h3 class="w3-xxxlarge w3-round w3-center">Login</h3>
         <form class="w3-container w3-margin-bottom" action="/login" method="POST">
 
-          <div class="w3-row w3-section">
-          <div class="w3-col" style="width:50px"><i style="padding-top:10px;padding-bottom:10px" class="w3-xxlarge fa fa-user"></i></div>
-            <div class="w3-rest">
-              <input class="w3-input w3-round w3-border" style="padding-top:15px;padding-bottom:15px" name="username" type="text" placeholder="Username">
-            </div>
-          </div>
-          <div class="w3-row w3-section">
-          <div class="w3-col" style="width:50px"><i style="padding-top:10px;padding-bottom:10px" class="w3-xxlarge fa fa-lock"></i></div>
-            <div class="w3-rest">
-              <input class="w3-input w3-round w3-border" style="padding-top:15px;padding-bottom:15px" name="password" type="password" placeholder="Password">
-            </div>
-          </div>
-          <input class="w3-right w3-round w3-button custom-bg w3-text-white w3-margin-top" type="submit" value="Send me back in >>">
+          <dl>
+            <dt> <label>USERNAME</label> </dt>
+            <dd> <input class="w3-input w3-round w3-border" style="padding-top:15px;padding-bottom:15px" name="username" type="text" placeholder="Username"></dd>
+            <dt> <label>PASSWORD</label> </dt>
+            <dd> <input class="w3-input w3-round w3-border" style="padding-top:15px;padding-bottom:15px" name="password" type="password" placeholder="Password"></dd>
+          </dl>
+          <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Send me in!</h3></button>
           <a class="w3-link w3-text-indigo w3 w3-margin" href="#">forgot password?</a>
         </form>
 
