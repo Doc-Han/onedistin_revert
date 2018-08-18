@@ -13,7 +13,8 @@
 
       </div>
       <div style="margin-bottom:300px" class="w3-half w3-center w3-mobile w3-container w3-animate-bottom">
-        <p style="text-align:left">Your Info:</p>
+        <h1>Your Account</h1>
+        <h3 style="text-align:left">Your Info:</h3>
         <dl>
           <dt> <label>Username</label> </dt>
           <dd> <input type="text" name="" value="<%= userData.display_name %>"> </dd>
@@ -24,7 +25,7 @@
           <dt> <label>Phone</label> </dt>
           <dd> <input type="text" name="" value="<%= userData.user_phone %>"> </dd>
         </dl>
-        <p style="text-align:left">Recent Orders:</p>
+        <h3 style="text-align:left">Recent Orders:</h3>
         <table class="w3-table w3-striped w3-border">
           <tr>
             <th colspan="2">Orders</th>
@@ -46,14 +47,8 @@
             <td> <span class="w3-tag w3-red">Delivered</span> </td>
           </tr>
         </table>
-        <p style="text-align:left">Subscriptions:</p>
-        <div class="w3-bar-block w3-border w3-container">
-          <section class="w3-bar-item"><input type="checkbox"> OneDistin daily deals (email) </section>
-          <section class="w3-bar-item"><input type="checkbox"> Forum notifications (email) </section>
-          <section class="w3-bar-item"><input type="checkbox"> Special interest (WhatsApp) </section>
-        </div>
 
-        <p style="text-align:left">Your delivery info</p>
+        <h3 style="text-align:left">Your delivery info:</h3>
         <div class="shipping-address">
           <dl>
             <dt> <label>Fullname</label> </dt>
@@ -66,6 +61,14 @@
             <dd> <input type="text" name="" value=""> </dd>
           </dl>
         </div>
+
+        <h3 style="text-align:left">Subscriptions:</h3>
+        <div class="w3-bar-block w3-border w3-container">
+          <section class="w3-bar-item"><input type="checkbox"> OneDistin daily deals (email) </section>
+          <section class="w3-bar-item"><input type="checkbox"> Forum notifications (email) </section>
+          <section class="w3-bar-item"><input type="checkbox"> Special interest (WhatsApp) </section>
+        </div>
+
       </div>
       <div class="w3-quarter w3-container">
 
