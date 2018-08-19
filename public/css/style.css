@@ -80,7 +80,7 @@ dl dd {
     margin: 0;
     width: calc(100% - 128px);
 }
-dl dd input {
+dl dd input, dl dd select {
     -webkit-appearance: none;
     border: 0;
     -webkit-box-sizing: border-box;
