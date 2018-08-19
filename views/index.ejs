@@ -44,23 +44,23 @@
 
           <div id="price-comparison">
             <a class="w3-text-indigo" href="<%- currentPost.shoppy_link %>">Costs GHS <%= currentPost.shoppy_price %> on <%= currentPost.shoppy_name %></a>
-          </div><br>
-          <div style="height:55px;overflow:hidden" class="buy w3-row">
+          </div>
+          <div style="height:59px;overflow:hidden" class="buy w3-row">
             <% if(isAuthenticated){ %>
-              <a onclick="document.getElementById('id01').style.display='block'" style="width:75%; padding: 3px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
+              <a onclick="document.getElementById('id01').style.display='block'" style="width:80%; padding: 5px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
                 <span class="w3-large"><b>GHS <%= currentPost.price %></b></span>
                  <br>
                 <span class="w3-medium">GET DISTIN</span>
               </a>
             <% }else{ %>
-              <a href="/login" style="width:75%; padding: 3px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
+              <a href="/login" style="width:80%; padding: 5px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
                 <span class="w3-large"><b>GHS <%= currentPost.price %></b></span>
                  <br>
                 <span class="w3-medium">GET DISTIN</span>
               </a>
             <% } %>
 
-            <a style="height:100%;width:17%;padding:16px 0" class="w3-col-rest w3-right w3-black w3-button w3-circle" href="#">Share</a>
+            <a style="height:100%;width:18%;padding:18px 0" class="w3-col-rest w3-right w3-black w3-button w3-circle" href="#">Share</a>
           </div>
           <h3 style="text-align:left"><%= currentPost.title %></h3>
           <div class="w3-left">
