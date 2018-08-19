@@ -78,7 +78,7 @@
             <p style="text-align:left">Our daily video</p>
           <ul class="w3-ul w3-margin-top">
             <% forumPosts.forEach(function(item){ %>
-              <a class="w3-left" href="/forum/<%= item.post_url %>"><li>
+              <a class="w3-left" href="/forum/<%= item.post_url %>"><li style="padding-left:0;padding-right:20px;width:100%">
                 <img class="w3-circle" src="http://via.placeholder.com/50x50" alt="">
                 <%= item.post_title %>
               </li></a>
