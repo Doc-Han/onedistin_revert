@@ -48,13 +48,13 @@
             </div>
           </div>
 <hr>
-          <button style="cursor:pointer" onclick="myFunction('faq1')" class="w3-padding w3-block w3-left-align w3-light-grey">How do I earn points? <span class="w3-right"> <i class="fa fa-angle-down"></i> </span> </button>
+          <span style="cursor:pointer" onclick="myFunction('faq1')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>How do I earn points? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
             <div id="faq1" class="w3-hide w3-container">
               <table class="w3-table">
                 <tr>
-                  <th>Make a Purchase</th>
-                  <th>Share today's distin</th>
-                  <th>Download App</th>
+                  <td class="w3-large">Make a Purchase</td>
+                  <td class="w3-large">Share today's distin</td>
+                  <td class="w3-large">Download App</td>
                 </tr>
                 <tr>
                   <td>Earn 100 points</td>
@@ -63,15 +63,15 @@
                 </tr>
               </table>
             </div>
-          <button style="cursor:pointer" onclick="myFunction('fag2')" class="w3-padding w3-block w3-left-align w3-light-grey">How do I use my points? <span class="w3-right"> <i class="fa fa-angle-down"></i> </span> </button>
+          <span style="cursor:pointer" onclick="myFunction('fag2')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>How do I use my points? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
             <div id="fag2" class="w3-hide w3-container">
               <p>Redeem your points for coupons and get extra discounts <br> Tap on the <b>Redeem</b> tab to get started </p>
             </div>
-          <button style="cursor:pointer" onclick="myFunction('faq3')" class="w3-padding w3-block w3-left-align w3-light-grey">How do I use my coupon? <span class="w3-right"> <i class="fa fa-angle-down"></i> </span> </button>
+          <span style="cursor:pointer" onclick="myFunction('faq3')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>How do I use my coupon? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
             <!--<div id="faq3" class="w3-hide w3-container">
               <p>Lorem ipsum...</p>
             </div>-->
-          <button style="cursor:pointer" onclick="myFunction('fag4')" class="w3-padding w3-block w3-left-align w3-light-grey">Do my points expire? <span class="w3-right"> <i class="fa fa-angle-down"></i> </span> </button>
+          <span style="cursor:pointer" onclick="myFunction('fag4')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>Do my points expire? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
             <!--<div id="fag4" class="w3-hide w3-container">
               <p>Lorem ipsum...</p>
             </div>-->
@@ -85,10 +85,10 @@
           var x = document.getElementById(id);
           if (x.className.indexOf("w3-show") == -1) {
               x.className += " w3-show";
-              x.previousElementSibling.className = x.previousElementSibling.className.replace("w3-light-grey", "w3-blue-grey");
+              //x.previousElementSibling.className = x.previousElementSibling.className.replace("w3-light-grey", "w3-blue-grey");
           } else {
               x.className = x.className.replace(" w3-show", "");
-              x.previousElementSibling.className = x.previousElementSibling.className.replace("w3-blue-grey", "w3-light-grey");
+            //  x.previousElementSibling.className = x.previousElementSibling.className.replace("w3-blue-grey", "w3-light-grey");
           }
       }
       </script>

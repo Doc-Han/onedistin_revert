@@ -18,7 +18,7 @@
         <a style="text-align:right" class="w3-button w3-round-xlarge" href="/profile/user-info">edit</a>
         <div style="text-align:left" class="w3-container w3-border w3-round-large">
           <label><b>Username:</b></label> <%= userData.display_name %> <br>
-          <label><b>Password:</b></label> <br>
+          <label><b>Password:</b></label> ●●●●●●●● <br>
           <label><b>Email:</b></label> <%= userData.user_email %> <br>
           <label><b>Phone:</b></label> <%= userData.user_phone %>
         </div>
@@ -35,9 +35,9 @@
         <div class="shipping-address">
           <div style="text-align:left" class="w3-container w3-border w3-round-large">
             <label><b>Fullname:</b></label> <%= userData.user_name %> <br>
-            <label><b>Address:</b></label> <br>
-            <label><b>City:</b></label> <%= userData.user_loc %> <br>
-            <label><b>Region:</b></label>
+            <label><b>Address:</b></label> <%= userData.user_address %><br>
+            <label><b>City:</b></label> <%= userData.user_city %><br>
+            <label><b>Region:</b></label> <%= userData.user_loc %>
           </div>
         </div>
 

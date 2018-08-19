@@ -69,12 +69,12 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
   var fullname = req.body.fullname;
   var email = req.body.email;
   var phone = req.body.phone;
-  var location = req.body.location;
+  var region = req.body.region;
   var password = req.body.password;
   bcrypt.hash(password,10,function(err,hash){
     if(err) throw err;
     var query = "INSERT INTO onedistin_users (ID, display_name,user_name,user_email,user_phone,user_loc,user_pass,user_registered)VALUES(?,?,?,?,?,?,?,?)";
-    con.query(query, [null,username,fullname,email,phone,location,hash,currentDate] ,function(err){
+    con.query(query, [null,username,fullname,email,phone,region,hash,currentDate] ,function(err){
       if(err) throw err;
       con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
         if(err) throw err;
@@ -115,14 +115,58 @@ router.get('/profile', isLoggedIn, (req,res) => {
 });
 
 router.get('/profile/:type', (req,res) => {
+  var user = req.user.user_id;
+  var query = "SELECT * FROM onedistin_users WHERE ID = ?";
+  con.query(query,[user],function(err,result){
+    if(err)throw err;
+    var type = req.params.type;
+    if(type == "user-info"){
+      res.render('user-info',{user:result[0]});
+    }else if(type == "delivery-info"){
+      res.render('delivery-info',{user:result[0]});
+    }else if(type == "subscriptions"){
+      res.render('subscriptions',{user:result[0]});
+    }
+  });
+
+});
+
+router.post('/profile/:type', (req,res) => {
+  var user = req.user.user_id;
   var type = req.params.type;
   if(type == "user-info"){
-    res.render('user-info');
+    var display_name = req.body.display_name;
+    var password = req.body.password;
+    var user_email = req.body.user_email;
+    var user_phone = req.body.user_phone;
+    if(password.trim() == ""){
+      var query = "UPDATE onedistin_users SET display_name= ?,user_email= ?, user_phone= ? WHERE ID=?";
+      con.query(query,[display_name,user_email,user_phone,user],function(err){
+        if(err)throw err;
+      });
+    }else{
+      var query = "UPDATE onedistin_users SET display_name= ?,user_email= ?, user_phone= ?,password= ? WHERE ID=?";
+      bcrypt.hash(password, 10, function(err,hash){
+        con.query(query,[display_name,user_email,user_phone,password,user],function(err){
+          if(err)throw err;
+        });
+      });
+
+    }
   }else if(type == "delivery-info"){
-    res.render('delivery-info');
+    var user_name = req.body.user_name;
+    var address = req.body.address;
+    var city = req.body.city;
+    var region = req.body.region;
+    console.log(req.body);
+    var query = "UPDATE onedistin_users SET user_name= ?, user_address= ?, user_city= ?, user_loc= ? WHERE ID= ?";
+    con.query(query,[user_name,address,city,region,user],function(err){
+      if(err)throw err;
+    });
   }else if(type == "subscriptions"){
-    res.render('subscriptions');
+    console.log(req.body);
   }
+  res.redirect('/profile');
 });
 
 router.get('/rewards', (req,res) => {

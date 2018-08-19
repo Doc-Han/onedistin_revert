@@ -109,13 +109,13 @@
                 <div class="shipping-address">
                   <dl>
                     <dt> <label>Name</label> </dt>
-                    <dd> <input type="text" name="" value="<%= currentUser.display_name %>"> </dd>
+                    <dd> <input type="text" name="" value="<%= currentUser.user_name %>"> </dd>
                     <dt> <label>Address</label> </dt>
-                    <dd> <input type="text" name="" value=""> </dd>
+                    <dd> <input type="text" name="" value="<%= currentUser.user_address%>"> </dd>
                     <dt> <label>City</label> </dt>
-                    <dd> <input type="text" name="" value="<%= currentUser.user_loc %>"> </dd>
+                    <dd> <input type="text" name="" value="<%= currentUser.user_city %>"> </dd>
                     <dt> <label>Region</label> </dt>
-                    <dd> <input type="text" name="" value=""> </dd>
+                    <dd> <input type="text" name="" value="<%= currentUser.user_loc%>"> </dd>
                     <dt> <label>Phone</label> </dt>
                     <dd> <input type="text" name="" value="<%= currentUser.user_phone %>"> </dd>
                   </dl>

@@ -51,12 +51,14 @@
 
           </ul>
         </li>
-        <li>
-          <a href="/rewards" title="rewards">
-            <i style="background-image: url('../img/reward.png')"></i>
-            <p>Rewards</p>
-          </a>
-        </li>
+        <% if(isAuthenticated){ %>
+          <li>
+            <a href="/rewards" title="rewards">
+              <i style="background-image: url('../img/reward.png')"></i>
+              <p>Rewards</p>
+            </a>
+          </li>
+        <% } %>
         <li>
           <a href="/forum" title="community">
             <i style="background-image: url('../img/community.png')"></i>
