@@ -2,6 +2,7 @@
 <style media="screen">
   body {
     /*background: #fff/*var(--main-color)*/
+    background-color: #ff5722;
     color: black;
   }
 </style>
@@ -70,7 +71,7 @@
         <span style="text-align:left"><%- currentPost.writeup %></span>
       </div>
       <div class="w3-col right-lane w3-mobile">
-          <iframe id="ytplayer" type="text/html" width="100%" height="168"
+          <iframe id="ytplayer" type="text/html" width="100%" height="300"
             src="<%= currentPost.video %>"
             frameborder="0"></iframe>
           <ul class="w3-ul w3-margin-top">
@@ -81,6 +82,7 @@
               </li></a>
             <% }); %>
           </ul>
+          <a href="/forum" style="margin-bottom:10px;width:100%;" class="w3-button w3-black w3-round-xlarge w3-margin-top" type="submit" name="button"><h5 style="margin:0">Checkout the community <i class="fa fa-angle-right"></i> </h5></a>
       </div>
     </div>
 
