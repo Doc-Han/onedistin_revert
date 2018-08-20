@@ -214,6 +214,10 @@ router.get('/redeem/:offer',function(req,res){
   });
 });
 
+router.get('/sell', (req,res) => {
+  res.render('sell');
+});
+
 router.get('/logout', isLoggedIn, (req,res) => {
   req.logout();
   req.session.destroy();

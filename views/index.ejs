@@ -123,7 +123,19 @@
                     <dt> <label>City</label> </dt>
                     <dd> <input type="text" name="" value="<%= currentUser.user_city %>"> </dd>
                     <dt> <label>Region</label> </dt>
-                    <dd> <input type="text" name="" value="<%= currentUser.user_loc%>"> </dd>
+                    <dd> <select name="region">
+                      <option value="none"><%= currentUser.user_loc %></option>
+                      <option value="Ashanti">Ashanti</option>
+                      <option value="Brong Ahafo">Brong Ahafo</option>
+                      <option value="Central">Central</option>
+                      <option value="Eastern">Eastern</option>
+                      <option value="Greater Accra">Greater Accra</option>
+                      <option value="Northern">Northern</option>
+                      <option value="Upper East">Upper East</option>
+                      <option value="Upper West">Upper West</option>
+                      <option value="Volta">Volta</option>
+                      <option value="Western">Western</option>
+                    </select> </dd>
                     <dt> <label>Phone</label> </dt>
                     <dd> <input type="text" name="" value="<%= currentUser.user_phone %>"> </dd>
                   </dl>

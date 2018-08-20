@@ -1,0 +1,55 @@
+<% include partials/header.ejs %>
+
+
+<div class="w3-row w3-center">
+  <div class="w3-quarter w3-container">
+
+  </div>
+  <div style="margin-bottom:300px" class="w3-half w3-center w3-mobile w3-container w3-animate-bottom">
+    <h3 style="text-align:left"><b>Your Info:</b></h3>
+    <h4 style="text-align:left">OFFER A DISCOUNT DEAL, GET NEW CUSTOMERS, GROW YOUR BUSINESS</h4>
+    <h5 style="text-align:left;margin-bottom:0">Do we know you?</h5>
+    <form action="user-info" method="post">
+    <dl style="margin-top:0">
+      <dt> <label>Fullname</label> </dt>
+      <dd> <input type="text" name="display_name" value=""> </dd>
+      <dt> <label>I am a/an</label> </dt>
+      <dd> <select>
+        <option>Producer</option>
+        <option>Wholesaler</option>
+        <option>Importer</option>
+      </select> </dd>
+      <dt> <label>Email</label> </dt>
+      <dd> <input type="text" name="user_email" value=""> </dd>
+      <dt> <label>Location</label> </dt>
+      <dd> <input type="text" name="user_phone" value=""> </dd>
+    </dl>
+
+    <h5 style="text-align:left;margin-bottom:0">What do you want to sell?</h5>
+    <dl style="margin-top:0">
+      <dt> <label>Product name</label> </dt>
+      <dd> <input type="text" name="display_name" value=""> </dd>
+      <dt> <label>Category</label> </dt>
+      <dd> <select>
+        <option>Banku</option>
+        <option>Akpele</option>
+        <option>Fufu</option>
+      </select> </dd>
+      <dt> <label>Brand</label> </dt>
+      <dd> <input type="text" name="user_email" value=""> </dd>
+      <dt> <label>Discount</label> </dt>
+      <dd> <select>
+        <option>50% 55% --> 95% </option>
+        <option>Akpele</option>
+        <option>Fufu</option>
+      </select> </dd>
+      <dt> <label>Deal price</label> </dt>
+      <dd> <input type="text" name="user_email" value=""> </dd>
+      <dt> <label>Product description</label> </dt>
+      <dd> <input type="text" name="user_email" value=""> </dd>
+    </dl>
+    <a style="width:100%;" class="add-item-bar w3-button w3-round-xlarge w3-border w3-text-blue" href="#"><h3 style="margin:0">Wanna add another?</h3></a>
+    <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Done! Submit</h3></button>
+    </form>
+  </div>
+</div>

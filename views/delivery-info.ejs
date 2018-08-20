@@ -17,7 +17,19 @@
         <dt> <label>City</label> </dt>
         <dd> <input type="text" name="city" value="<%= user.user_city %>"> </dd>
         <dt> <label>Region</label> </dt>
-        <dd> <input type="text" name="region" value="<%= user.user_loc%>"> </dd>
+        <dd> <select name="region">
+          <option value="none"><%= user.user_loc %></option>
+          <option value="Ashanti">Ashanti</option>
+          <option value="Brong Ahafo">Brong Ahafo</option>
+          <option value="Central">Central</option>
+          <option value="Eastern">Eastern</option>
+          <option value="Greater Accra">Greater Accra</option>
+          <option value="Northern">Northern</option>
+          <option value="Upper East">Upper East</option>
+          <option value="Upper West">Upper West</option>
+          <option value="Volta">Volta</option>
+          <option value="Western">Western</option>
+        </select> </dd>
       </dl>
     </div>
     <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">DassAll! Save it!</h3></button>
