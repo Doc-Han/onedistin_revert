@@ -1,11 +1,11 @@
 <% include partials/header.ejs %>
 <style media="screen">
-  body {
-    /*background: #fff/*var(--main-color)*/
-    background-color: #ffdddd;
-    color: black;
-  }
+
 </style>
+<script type="text/javascript">
+var html = document.getElementsByTagName('html')[0];
+html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
+</script>
 <!--<div style="position:absolute;top:12%;left:0;right:0;z-index:-1;opacity:0.3">
   <img style="width:100%" src="img/nice4.jpg" alt="">
 </div>-->
@@ -43,24 +43,24 @@
           </div>
 
           <div style="margin-bottom:8px" id="price-comparison">
-            <a class="w3-text-indigo" href="<%- currentPost.shoppy_link %>">Costs GHS <%= currentPost.shoppy_price %> on <%= currentPost.shoppy_name %></a>
+            <a class="w3-text-indigo" href="<%- currentPost.shoppy_link %>"><%= currentPost.shoppy_txt %></a>
           </div>
           <div style="height:59px;overflow:hidden" class="buy w3-row">
             <% if(isAuthenticated){ %>
               <a onclick="document.getElementById('id01').style.display='block'" style="width:78%; padding: 5px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
-                <span class="w3-large"><b>GHS <%= currentPost.price %></b></span>
+                <span class="custom-txt-color w3-large"><b>GHS <%= currentPost.price %></b></span>
                  <br>
-                <span class="w3-medium">GET DISTIN</span>
+                <span class="custom-txt-color w3-medium">GET DISTIN</span>
               </a>
             <% }else{ %>
               <a href="/login" style="width:78%; padding: 5px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
-                <span class="w3-large"><b>GHS <%= currentPost.price %></b></span>
+                <span class="custom-txt-color w3-large"><b>GHS <%= currentPost.price %></b></span>
                  <br>
-                <span class="w3-medium">GET DISTIN</span>
+                <span class="custom-txt-color w3-medium">GET DISTIN</span>
               </a>
             <% } %>
 
-            <a style="height:100%;width:18%;padding:18px 0" class="w3-col-rest w3-right w3-black w3-button w3-circle" href="#">Share</a>
+            <a style="background-color: #000;height:100%;width:18%;padding:18px 0" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Share</a>
           </div>
           <h3 style="text-align:left"><%= currentPost.title %></h3>
           <div class="w3-left">
@@ -83,7 +83,7 @@
               </li></a>
             <% }); %>
           </ul>
-          <a href="/forum"><button style="margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-black w3-margin-top" type="submit" name="button"><h5 style="margin:0">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
+          <a href="/forum"><button style="margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-black w3-margin-top" type="submit" name="button"><h5 class="custom-txt-color" style="margin:0">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
       </div>
     </div>
 

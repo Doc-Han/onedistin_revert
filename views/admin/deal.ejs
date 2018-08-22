@@ -12,16 +12,12 @@
   <div style="width:60%;margin-bottom:200px" class="w3-col w3-card-4 w3-mobile w3-animate-right">
     <form class="w3-container" action="/admin/deal" enctype="multipart/form-data" method="POST">
 			<input type="file" name="image" accept="image/*" multiple>
-      <div class="w3-row">
-        <div style="width:75%" class="w3-col">
-          <label class="w3-indigo w3-padding"> Deal title</label>
-          <input class="w3-input w3-border w3-border-black" placeholder="Today's deal is ..." type="text" name="dealTitle" value="">
-        </div>
-        <div style="width:25%" class="w3-col">
-          <label class="w3-yellow w3-padding"> <i class="fa fa-dollar"></i> Price</label>
-          <input class="w3-input w3-border w3-border-black" placeholder="Price" type="text" name="dealPrice" value="">
-        </div>
-      </div>
+			<dl>
+				<dt> <label>Deal title</label> </dt>
+				<dd><input placeholder="Today's deal is ..." type="text" name="dealTitle" value=""></dd>
+				<dt> <label>Price</label> </dt>
+				<dd><input placeholder="Price" type="text" name="dealPrice" value=""></dd>
+			</dl>
 
 
       <label class="w3-indigo w3-padding"> <i class="fa fa-pencil"></i> Marketing write up</label>
@@ -30,26 +26,24 @@
       <label class="w3-indigo w3-padding">Things you get</label>
       <textarea class="summernote" name="thingGet"></textarea>
 
-      <div class="w3-container">
-        <div class="w3-half">
-          <label class="w3-orange w3-padding">Shoppy Name</label>
-          <input class="w3-input w3-border w3-border-black" type="text" placeholder="Other shop" name="shopName" value="">
-        </div>
-        <div class="w3-half">
-          <label class="w3-orange w3-padding">Shoppy Price</label>
-          <input class="w3-input w3-border w3-border-black" type="text" placeholder="Other Price" name="shopPrice" value="">
-        </div>
-        <label class="w3-orange w3-padding">Shoppy Link</label>
-        <input class="w3-input w3-border w3-border-black" type="url" placeholder="Link to item" name="shopLink" value="">
-      </div>
+				<dl>
+					<dt> <label>Shoppy name</label> </dt>
+					<dd><input type="text" placeholder="Link to item" name="shoppy_txt" value=""></dd>
+					<dt> <label>Shoppy link</label> </dt>
+					<dd><input type="url" placeholder="Link to item" name="shopLink" value=""></dd>
+				</dl>
 
-      <div class="w3-center w3-margin-top">
-        <label class="w3-purple w3-padding"> <i class="fa fa-film"></i> Video of the Day</label>
-        <input class="w3-input w3-border w3-border-black" type="url" placeholder="Video Link" name="VideoLink" value="">
-      </div>
+			<dl>
+				<dt> <label>Video of the day</label> </dt>
+				<dd><input type="url" placeholder="Video Link" name="VideoLink" value=""></dd>
+			</dl>
 
-      <label class="w3-purple w3-padding"> Date </label>
-      <input id="date" class="w3-input w3-border w3-border-black" type="date" placeholder="Day" name="date" value="">
+			<dl>
+				<dt> <label>Date</label> </dt>
+				<dd><input id="date" type="date" placeholder="Day" name="date" value=""></dd>
+				<dt> <label>BG color</label> </dt>
+				<dd><input type="color" name="bg_color" value=""></dd>
+			</dl>
 
       <div class="w3-center">
         <button style="margin-top:50px;margin-bottom:50px;padding:50px;font-size:24px" class="w3-button w3-blue w3-round" type="submit"> <i class="fa fa-send"></i> Add deal!</button>

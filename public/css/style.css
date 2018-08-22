@@ -1,11 +1,12 @@
 :root {
-  --main-color: #73a500;
+  --custom-color: #fff;
 }
 
 body {
   font-family: 'Montserrat',sans-serif;
   font-size: 1em;
   -webkit-font-smoothing: antialiased;
+  background-color: var(--custom-color);
 }
 
 body,p,ul,li,table {
@@ -246,8 +247,11 @@ a:visited {
     text-transform: uppercase;
 }
 
-.custom-bg {
-  background-color: var(--main-color);
+.custom-bg-color {
+  background-color: var(--custom-color);
+}
+.custom-txt-color {
+  color: var(--custom-color);
 }
 
 

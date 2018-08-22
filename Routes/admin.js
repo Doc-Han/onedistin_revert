@@ -57,9 +57,9 @@ router.post('/deal', upload.single('image'), (req,res) => {
   var writeup = req.body.marketingWriteUp;
   var vidlink = req.body.VideoLink;
   var date = req.body.date.split("-").join("");
-  var shoppy_name = req.body.shopName;
-  var shoppy_price = req.body.shopPrice;
+  var shoppy_txt = req.body.shoppy_txt;
   var shoppy_link = req.body.shopLink;
+  var bg_color = req.body.bg_color;
 
   var author = "Distin cat";
   var body = "";
@@ -73,8 +73,8 @@ router.post('/deal', upload.single('image'), (req,res) => {
       cloudinary.uploader.upload(req.file.path, function(img_res){
         console.log(img_res);
           var img_id = img_res.public_id;
-          var query = "INSERT INTO onedistin_deals (ID,title,price,thingGet,writeup,video,shoppy_name,shoppy_price,shoppy_link,timestamp,img_id)VALUES(?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,timestamp)VALUES(?,?,?,?,?,?)";
-          con.query(query,[null,title,price,thingGet,writeup,vidlink,shoppy_name,shoppy_price,shoppy_link,date,img_id,null,author,title,body,url,postDate],function(err){
+          var query = "INSERT INTO onedistin_deals (ID,title,price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color)VALUES(?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,timestamp)VALUES(?,?,?,?,?,?)";
+          con.query(query,[null,title,price,thingGet,writeup,vidlink,shoppy_name,shoppy_txt,date,img_id,bg_color,null,author,title,body,url,postDate],function(err){
             if(err)throw err;
               res.send("deal Inserted");
             });

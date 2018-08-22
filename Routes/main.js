@@ -37,14 +37,15 @@ router.get('/', (req,res) => {
     var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?";
     con.query(query,[user], function(err,result){
       if(err)throw err;
-      var a = cloudinary.url(result[0][0].img_id,{alt:"fuck you"});
+      var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
+      console.log("her lsdfklsfjsld f "+a);
       res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],img:a});
     });
   }else {
     var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime+"' ORDER BY timestamp DESC LIMIT 10";
     con.query(query, function(err,result){
       if(err)throw err;
-      var a = cloudinary.url(result[0][0].img_id,{alt:"fuck you"});
+      var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
       res.render('index',{currentPost: result[0][0], forumPosts: result[1],img:a});
     });
   }
