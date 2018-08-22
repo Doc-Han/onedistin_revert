@@ -74,7 +74,7 @@ router.post('/deal', upload.single('image'), (req,res) => {
         console.log(img_res);
           var img_id = img_res.public_id;
           var query = "INSERT INTO onedistin_deals (ID,title,price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color)VALUES(?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,timestamp)VALUES(?,?,?,?,?,?)";
-          con.query(query,[null,title,price,thingGet,writeup,vidlink,shoppy_name,shoppy_txt,date,img_id,bg_color,null,author,title,body,url,postDate],function(err){
+          con.query(query,[null,title,price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,img_id,bg_color,null,author,title,body,url,postDate],function(err){
             if(err)throw err;
               res.send("deal Inserted");
             });
