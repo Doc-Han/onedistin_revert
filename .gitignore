@@ -3,3 +3,5 @@
 *.env
 upload.ejs
 todo.txt
+.gitignore
+/config/time.js

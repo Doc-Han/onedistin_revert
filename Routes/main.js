@@ -114,7 +114,7 @@ router.get('/profile', isLoggedIn, (req,res) => {
   });
 });
 
-router.get('/profile/:type', (req,res) => {
+router.get('/profile/:type', (req,res,next) => {
   var user = req.user.user_id;
   var query = "SELECT * FROM onedistin_users WHERE ID = ?";
   con.query(query,[user],function(err,result){
@@ -126,6 +126,8 @@ router.get('/profile/:type', (req,res) => {
       res.render('delivery-info',{user:result[0]});
     }else if(type == "subscriptions"){
       res.render('subscriptions',{user:result[0]});
+    }else {
+      next();
     }
   });
 

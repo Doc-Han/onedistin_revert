@@ -103,6 +103,10 @@ router.get('/edit/:id', (req,res) =>{
 
 });
 
+router.get('/story', (req,res) => {
+  res.render('admin/story');
+});
+
 router.get('/logout', (req,res) => {
   req.session.destroy();
   res.redirect('/admin');
