@@ -47,13 +47,13 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
           </div>
           <div style="height:59px;overflow:hidden" class="buy w3-row">
             <% if(isAuthenticated){ %>
-              <a onclick="document.getElementById('id01').style.display='block'" style="width:78%; padding: 5px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
+              <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
                 <span class="custom-txt-color w3-large"><b>GHS <%= currentPost.price %></b></span>
                  <br>
                 <span class="custom-txt-color w3-medium">GET DISTIN</span>
               </a>
             <% }else{ %>
-              <a href="/login" style="width:78%; padding: 5px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
+              <a href="/login" style="width:78%;height: 59px; padding: 5px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
                 <span class="custom-txt-color w3-large"><b>GHS <%= currentPost.price %></b></span>
                  <br>
                 <span class="custom-txt-color w3-medium">GET DISTIN</span>
@@ -178,6 +178,18 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
 
 </div>
 <script type="text/javascript">
+
+// This is the code to redirect checkout to another link on mobile view!
+function checkout_btn_press() {
+  if (screen.width <= 699) {
+  document.location = "/checkout";
+  }else{
+    document.getElementById('id01').style.display='block';
+  }
+}
+
+
+// This is the code for the image slider
 var slideIndex = 1;
 showSlides(slideIndex);
 
