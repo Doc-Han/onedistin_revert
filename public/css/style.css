@@ -265,6 +265,15 @@ img {vertical-align: middle;}
   margin: auto;
 }
 
+.thing-get ul {
+  padding: 0;
+  width: 100%;
+}
+
+.thing-get ul li {
+  word-break: break-all;
+}
+
 
 
 

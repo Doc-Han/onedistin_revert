@@ -9,8 +9,8 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
 <!--<div style="position:absolute;top:12%;left:0;right:0;z-index:-1;opacity:0.3">
   <img style="width:100%" src="img/nice4.jpg" alt="">
 </div>-->
-    <div class="w3-row w3-center page-wrap">
-      <div class="w3-col left-lane w3-center w3-mobile">
+    <div class="w3-row page-wrap">
+      <div class="w3-col left-lane w3-left w3-mobile">
             <section class="item-hero">
               <div id="hero-background"></div>
             </section>
@@ -63,7 +63,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
             <a style="background-color: #000000;height:100%;width:18%;padding:18px 0" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Share</a>
           </div>
           <h3 style="text-align:left"><%= currentPost.title %></h3>
-          <div class="w3-left">
+          <div style="overflow: wrap" class="w3-left thing-get">
             <%- currentPost.thingGet %>
           </div>
       </div>
@@ -72,7 +72,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
       </div>
       <div class="w3-col right-lane w3-mobile">
           <iframe id="ytplayer" type="text/html" width="100%" height="300"
-            src="https://www.youtube.com/embed/<%= currentPost.video %>" 
+            src="https://www.youtube.com/embed/<%= currentPost.video %>"
             frameborder="0"></iframe>
             <p style="margin:0 auto;text-align:left">Our daily video</p>
           <ul class="w3-ul w3-margin-top">
