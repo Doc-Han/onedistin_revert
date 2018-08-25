@@ -53,10 +53,18 @@ var uploadImage = function(path){
   });
 }
 
+var dateToEdit = function(date){
+  var y = date[0]+date[1]+date[2]+date[3];
+  var m = date[4]+date[5];
+  var d = date[6]+date[7];
+  return rev = y+"-"+m+"-"+d;
+}
+
 
 module.exports = {
   currentDate: currentDate,
   currentTime: currentTime,
   getToken: getToken,
-  uploadImage: uploadImage
+  uploadImage: uploadImage,
+  dateToEdit: dateToEdit
 }

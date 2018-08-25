@@ -1,5 +1,8 @@
 <% include partials/header.ejs %>
-
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
     <div class="w3-row w3-margin-top">
       <div style="color:#fff" class="w3-quarter w3-container">
         .
@@ -12,7 +15,7 @@
               <%= post.post_title%>
             </h1>
             <span class="w3-small w3-right"><%= post.timestamp%></span>
-            <p><%= post.post_content %></p>
+            <span class="post_content"><%- post.post_content %></span>
 
             <div class="w3-bar">
               <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-heart-o"> 34 </i> </a>
@@ -25,8 +28,8 @@
 
         <% if(isAuthenticated){ %>
           <form class="w3-container" action="/forum/comment" method="post">
-            <textarea class="w3-input w3-border" style="resize:none" placeholder="I think ...." name="comment" rows="2" cols="80"></textarea>
-            <button type="submit" style="border-radius:20px" class="w3-button w3-green w3-margin-top w3-ripple" name="postId" value="<%= post.ID %>">Send</button>
+            <textarea class="w3-border w3-input" style="resize: none" placeholder="I think ...." name="comment" rows="2" cols="80"></textarea>
+            <button type="submit" style="border-radius:20px" class="w3-button w3-teal w3-margin-top w3-ripple" name="postId" value="<%= post.ID %>">Send</button>
           </form>
         <% }else{ %>
             <a class="w3-text-red w3-large w3-margin-left" href="/login"> <i class="fa fa-user"></i> Login to add comment</a>
@@ -84,5 +87,10 @@
       </div>
     </div>
 
+    <script>
+      $(document).ready(function() {
+          $('.summernote').summernote();
+      });
+    </script>
   </body>
 </html>

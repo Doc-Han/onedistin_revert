@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Courgette|Montserrat|Kirang+Haerang" rel="stylesheet">
+
   </head>
   <body style="position:relative">
     <header id="header">
@@ -23,7 +24,7 @@
             <p>What is OneDistin</p>
           </a>
           <ul style="overflow:hidden" class="content w3-round-xlarge">
-            <li>Our Story</li>
+            <a href="/our-story"><li>Our Story</li></a>
             <li>Customer Support</li>
           </ul>
         </li>
@@ -40,11 +41,11 @@
           </a>
           <ul style="overflow:hidden" class="content w3-round-xlarge">
             <% if(isAuthenticated){ %>
-              <li><a href="/profile">profile</a></li>
-              <li><a href="/logout">logout</a></li>
+              <a href="/profile"><li>profile</li></a>
+              <a href="/logout"><li>logout</li></a>
             <% }else{ %>
-              <li> <a href="/login">login</a></li>
-              <li><a href="/signup">signUp</a></li>
+              <a href="/login"><li>login</li></a>
+              <a href="/signup"><li>signUp</li></a>
             <% } %>
 
 

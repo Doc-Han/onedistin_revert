@@ -1,7 +1,4 @@
 <% include partials/header.ejs %>
-<style media="screen">
-
-</style>
 <script type="text/javascript">
 var html = document.getElementsByTagName('html')[0];
 html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
@@ -10,7 +7,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
   <img style="width:100%" src="img/nice4.jpg" alt="">
 </div>-->
     <div class="w3-row page-wrap">
-      <div class="w3-col left-lane w3-left w3-mobile">
+      <div class="w3-col left-lane">
             <section class="item-hero">
               <div id="hero-background"></div>
             </section>
@@ -43,27 +40,27 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
           </div>
 
           <div style="margin-bottom:8px" id="price-comparison">
-            <a class="w3-text-indigo" href="<%- currentPost.shoppy_link %>"><%= currentPost.shoppy_txt %></a>
+            <a class="w3-text-indigo w3-text-black" href="<%- currentPost.shoppy_link %>"><%= currentPost.shoppy_txt %></a>
           </div>
           <div style="height:59px;overflow:hidden" class="buy w3-row">
             <% if(isAuthenticated){ %>
-              <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
-                <span class="custom-txt-color w3-large"><b>GHS <%= currentPost.price %></b></span>
+              <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
+                <span style="text-align:center" class="custom-txt-color w3-large"><b><%= currentPost.price %></b></span>
                  <br>
                 <span class="custom-txt-color w3-medium">GET DISTIN</span>
               </a>
             <% }else{ %>
-              <a href="/login" style="width:78%;height: 59px; padding: 5px 60px" class="w3-col w3-button w3-black w3-round-xxlarge">
-                <span class="custom-txt-color w3-large"><b>GHS <%= currentPost.price %></b></span>
+              <a href="/login" style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
+                <span style="text-align:center" class="custom-txt-color w3-large"><b>GHS <%= currentPost.price %></b></span>
                  <br>
                 <span class="custom-txt-color w3-medium">GET DISTIN</span>
               </a>
             <% } %>
 
-            <a style="background-color: #000000;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Share</a>
+            <a style="background-color: #424242;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Share</a>
           </div>
           <h3 style="text-align:left"><%= currentPost.title %></h3>
-          <div style="overflow: wrap" class="w3-left thing-get">
+          <div class="w3-left thing-get">
             <%- currentPost.thingGet %>
           </div>
       </div>
@@ -75,15 +72,15 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
             src="https://www.youtube.com/embed/<%= currentPost.video %>"
             frameborder="0"></iframe>
             <p style="margin:0 auto;text-align:left">Our daily video</p>
-          <ul class="w3-ul w3-margin-top">
+          <ul style="width:100%" class="w3-ul w3-margin-top">
             <% forumPosts.forEach(function(item){ %>
-              <a class="w3-left" href="/forum/<%= item.post_url %>"><li style="padding-left:0;padding-right:20px;width:100%">
+              <a class="w3-left" style="width:100%" href="/forum/<%= item.post_url %>"><li style="padding-left:0;width:inherit">
                 <img class="w3-circle" src="http://via.placeholder.com/50x50" alt="">
                 <%= item.post_title %>
               </li></a>
             <% }); %>
           </ul>
-          <a href="/forum"><button style="margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-black w3-margin-top" type="submit" name="button"><h5 class="custom-txt-color" style="margin:0">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
+          <a href="/forum"><button style="background-color: #424242;margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-margin-top" type="submit" name="button"><h5 class="custom-txt-color" style="margin:0">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
       </div>
     </div>
 
@@ -103,14 +100,17 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
                 class="w3-button w3-xlarge w3-text-red w3-display-topright">&times;</span>
                 <h3 style="text-align:left">Here's what you are getting:</h3>
                 <span class="checkout-items">
-                <div style="padding-left:0;" class="checkout-item-bar w3-panel w3-row w3-border w3-round">
+                  <span class="single-item">
+                <div style="padding:0;" class="checkout-item-bar w3-panel w3-row w3-border w3-round">
+                  <!--<span class="w3-button reduce-item w3-right w3-red w3-xlarge w3-text-white">&times;</span>-->
                   <img style="width:15%;margin-right:10px" class="w3-left w3-col" style="margin-right:10px;" src="<%= img %>" alt="">
                   <span style="width:75%;" class="w3-col">
-                    <h4 style="margin-bottom:0;text-align:left;"><b>A free book</b></h4>
-                    <p style="text-align:left;">GHS 50.40</p>
+                    <h4 style="margin-bottom:0;text-align:left;"><b><%= currentPost.title %></b></h4>
+                    <p style="text-align:left;"><%= currentPost.price %></p>
                   </span>
 
                 </div>
+                </span>
                 </span>
                 <a style="width:100%;" class="add-item-bar w3-button w3-round-xlarge w3-border w3-text-teal" href="#"><h3 style="margin:0">Wanna add another?</h3></a>
                 <h3 style="text-align:left">Where should we deliver distin?</h3>
@@ -124,7 +124,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
                     <dd> <input type="text" name="" value="<%= currentUser.user_city %>"> </dd>
                     <dt> <label>Region</label> </dt>
                     <dd> <select name="region">
-                      <option value="none"><%= currentUser.user_loc %></option>
+                      <option value="<%= currentUser.user_loc %>"><%= currentUser.user_loc %></option>
                       <option value="Ashanti">Ashanti</option>
                       <option value="Brong Ahafo">Brong Ahafo</option>
                       <option value="Central">Central</option>
@@ -151,12 +151,12 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
                 </table>
                 <br>
                 <a style="cursor: pointer;text-align:left" class="show-coupon"><h3>Got a coupon code? <i class="fa fa-angle-down"></i> </h3></a>
-                <input style="display:none;width:100%;height:55px" class="w3-round w3-border coupon-box" type="text" name="" value="">
+                <input style="display:none;width:100%;height:55px" class="w3-round w3-border coupon-box" type="text" name="" placeholder="Enter your coupon">
 
                 <h3 style="text-align:left">Finally! Want this right?</h3>
                 <dl class="straight">
-                  <dd> <label>This is the title of the Item</label> <span class="price w3-text-blue">GHS 35.70</span> </dd>
-                  <dd> <label>Delivery fee</label> <span class="price w3-text-blue">GHS 10.0</span> </dd>
+                  <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price w3-text-blue"><%= currentPost.price %></span> </dd>
+                  <dd> <label>Delivery fee</label> <span class="delivery-fee price w3-text-blue">GHS 5.0</span> </dd>
                   <dd> <label>Total</label> <span class="price w3-text-blue">GHS 45.70</span> </dd>
                 </dl>
                 <form method="POST" action="https://community.ipaygh.com/gateway">
@@ -177,8 +177,8 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
     <% } %>
 
 </div>
+<script src="/js/checkout.js"></script>
 <script type="text/javascript">
-
 // This is the code to redirect checkout to another link on mobile view!
 function checkout_btn_press() {
   if (screen.width <= 699) {
@@ -216,7 +216,6 @@ for (i = 0; i < dots.length; i++) {
 slides[slideIndex-1].style.display = "block";
 dots[slideIndex-1].className += " active";
 }
-</script>
 </script>
   </body>
 </html>

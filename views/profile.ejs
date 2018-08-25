@@ -14,8 +14,9 @@
       </div>
       <div style="margin-bottom:300px" class="w3-half w3-center w3-mobile w3-container w3-animate-bottom">
         <h1 style="text-align:left"><b>Your Account</b></h1>
-        <h3 style="text-align:left">Your Info:</h3>
-        <a style="text-align:right" class="w3-button w3-round-xlarge" href="/profile/user-info">edit</a>
+        <h3 style="margin-bottom: 0;float:left">Your Info:</h3>
+        <a style="float:right" class="w3-button w3-round-xlarge" href="/profile/user-info">edit</a>
+        <div class="clearfix"></div>
         <div style="text-align:left" class="w3-container w3-border w3-round-large">
           <label><b>Username:</b></label> <%= userData.display_name %> <br>
           <label><b>Password:</b></label> ●●●●●●●● <br>
@@ -29,9 +30,10 @@
             <dd><label>A new book for you</label> <span class="tag w3-red">Delivered</span> </dd>
             <dd><label>A fan on the go</label> <span class="tag w3-red">Delivered</span> </dd>
         </dl>
-
-        <h3 style="text-align:left">Your delivery info:</h3>
-        <a style="text-align:right;" class="w3-button w3-round-xlarge" href="/profile/delivery-info">edit</a>
+        <br>
+        <h3 style="margin-bottom: 0;float:left">Your delivery info:</h3>
+        <a style="float:right;" class="w3-button w3-round-xlarge" href="/profile/delivery-info">edit</a>
+        <div class="clearfix"></div>
         <div class="shipping-address">
           <div style="text-align:left" class="w3-container w3-border w3-round-large">
             <label><b>Fullname:</b></label> <%= userData.user_name %> <br>
@@ -40,13 +42,22 @@
             <label><b>Region:</b></label> <%= userData.user_loc %>
           </div>
         </div>
-
-        <h3 style="text-align:left">Subscriptions:</h3>
-        <a style="text-align:right;" class="w3-button w3-round-xlarge" href="/profile/subscriptions">edit</a>
+        <br>
+        <h3 style="margin-bottom: 0;float:left">Subscriptions:</h3>
+        <a style="float:right;" class="w3-button w3-round-xlarge" href="/profile/subscriptions">edit</a>
+        <div class="clearfix"></div>
         <div style="text-align:left" class="w3-container w3-border w3-round-large">
-          <section class="w3-bar-item"> OneDistin daily deals (email) </section>
-          <section class="w3-bar-item"> Forum notifications (email) </section>
-          <section class="w3-bar-item"> Special interest (WhatsApp) </section>
+        <% var subs = userData.subscriptions; %>
+        <% if(subs[0] == 1){ %>
+            <section class="w3-bar-item"> OneDistin daily deals (email) </section>
+        <% } %>
+        <% if(subs[1] == 1){ %>
+            <section class="w3-bar-item"> Forum notifications (email) </section>
+        <% } %>
+        <% if(subs[2] == 1){ %>
+            <section class="w3-bar-item"> Special interest (WhatsApp) </section>
+        <% } %>
+
         </div>
 
       </div>

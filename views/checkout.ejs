@@ -8,29 +8,47 @@
       <div style="color: #a9a9a9" class="w3-quarter w3-container">
         .
       </div>
-      <div style="padding:32px 48px;margin-bottom:150px" class="w3-half w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
+      <div style="padding:32px 48px" class="w3-center w3-half w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
         <h3 style="text-align:left">Here's what you are getting:</h3>
         <span class="checkout-items">
-        <div style="padding:32px" class="checkout-item-bar w3-panel w3-border w3-round">
-          <img class="w3-left" style="margin-right:10px" src="http://via.placeholder.com/50x50" alt="">
-            <h4 style="margin-bottom:0;text-align:left;"><b><%= dealData.title %></b></h4>
-            <p style="text-align:left;margin-left:60px">GHS <%= dealData.price %></p>
+          <span class="single-item">
+        <div style="padding:0;" class="checkout-item-bar w3-panel w3-row w3-border w3-round">
+          <!--<span class="w3-button reduce-item w3-right w3-red w3-xlarge w3-text-white">&times;</span>-->
+          <img style="width:15%;margin-right:10px" class="w3-left w3-col" style="margin-right:10px;" src="<%= img %>" alt="">
+          <span style="width:75%;" class="w3-col">
+            <h4 style="margin-bottom:0;text-align:left;"><b><%= currentPost.title %></b></h4>
+            <p style="text-align:left;"><%= currentPost.price %></p>
+          </span>
+
         </div>
+        </span>
         </span>
         <a style="width:100%;" class="add-item-bar w3-button w3-round-xlarge w3-border w3-text-teal" href="#"><h3 style="margin:0">Wanna add another?</h3></a>
         <h3 style="text-align:left">Where should we deliver distin?</h3>
         <div class="shipping-address">
           <dl>
             <dt> <label>Name</label> </dt>
-            <dd> <input type="text" name="" value="<%= userData.user_name %>"> </dd>
+            <dd> <input type="text" name="" value="<%= currentUser.user_name %>"> </dd>
             <dt> <label>Address</label> </dt>
-            <dd> <input type="text" name="" value=""> </dd>
+            <dd> <input type="text" name="" value="<%= currentUser.user_address%>"> </dd>
             <dt> <label>City</label> </dt>
-            <dd> <input type="text" name="" value="<%= userData.user_loc %>"> </dd>
+            <dd> <input type="text" name="" value="<%= currentUser.user_city %>"> </dd>
             <dt> <label>Region</label> </dt>
-            <dd> <input type="text" name="" value=""> </dd>
+            <dd> <select name="region">
+              <option value="<%= currentUser.user_loc %>"><%= currentUser.user_loc %></option>
+              <option value="Ashanti">Ashanti</option>
+              <option value="Brong Ahafo">Brong Ahafo</option>
+              <option value="Central">Central</option>
+              <option value="Eastern">Eastern</option>
+              <option value="Greater Accra">Greater Accra</option>
+              <option value="Northern">Northern</option>
+              <option value="Upper East">Upper East</option>
+              <option value="Upper West">Upper West</option>
+              <option value="Volta">Volta</option>
+              <option value="Western">Western</option>
+            </select> </dd>
             <dt> <label>Phone</label> </dt>
-            <dd> <input type="text" name="" value="<%= userData.user_phone%>"> </dd>
+            <dd> <input type="text" name="" value="<%= currentUser.user_phone %>"> </dd>
           </dl>
         </div>
         <h3 style="text-align:left">Delivery fee:</h3>
@@ -39,38 +57,26 @@
             <td><input id="low" type="radio" name="fee" checked> <b>GHS 5</b> - <span class="w3-opacity">Delivery within 5 working days</span></td>
           </tr>
           <tr>
-            <td><input id="high" type="radio" name="fee"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 24Hrs</span></td>
+            <td style="text-align:left"><input id="high" type="radio" name="fee"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 24Hrs</span></td>
           </tr>
         </table>
         <br>
         <a style="cursor: pointer;text-align:left" class="show-coupon"><h3>Got a coupon code? <i class="fa fa-angle-down"></i> </h3></a>
-        <input style="display:none;width:100%;height:55px" class="w3-round w3-border coupon-box" type="text" name="" value="">
+        <input style="display:none;width:100%;height:55px" class="w3-round w3-border coupon-box" type="text" name="" placeholder="Enter your coupon">
 
         <h3 style="text-align:left">Finally! Want this right?</h3>
-        <table class="w3-table w3-striped w3-border">
-          <tr>
-            <td><%= dealData.title %></td>
-            <td class="item-num">1</td>
-            <td class="item-price">GHS <%= dealData.price %></td>
-          </tr>
-          <tr>
-            <td>Delivery</td>
-            <td></td>
-            <td class="item-delivery">GHS 5.00</td>
-          </tr>
-          <tr>
-            <td>Total</td>
-            <td></td>
-            <td class="item-total">GHS <%= (dealData.price*1) + 5%></td>
-          </tr>
-        </table>
+        <dl class="straight">
+          <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price w3-text-blue"><%= currentPost.price %></span> </dd>
+          <dd> <label>Delivery fee</label> <span class="delivery-fee price w3-text-blue">GHS 5.0</span> </dd>
+          <dd> <label>Total</label> <span class="price w3-text-blue">GHS 45.70</span> </dd>
+        </dl>
         <form method="POST" action="https://community.ipaygh.com/gateway">
           <input type="hidden" name="merchant_key" value="tk_965c30c0-a0b4-11e8-af31-f23c9170642f" />
           <input type="hidden" name="success_url" value="http://localhost:8080/checkout" />
           <input type="hidden" name="cancelled_url" value="http://localhost:8080/profile" />
           <input type="hidden" name="deferred_url" value="http://localhost:8080" />
-          <input type="hidden" name="invoice_id" value="<%= token %>" />
-          <input type="hidden" name="total" value="<%= (dealData.price*1) + 5%>" />
+          <input type="hidden" name="invoice_id" value="0989" />
+          <input type="hidden" name="total" value="78789" />
           <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Yes! Can't wait!</h3></button>
         </form>
 
@@ -80,54 +86,8 @@
       </div>
     </div>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    var num = 1;
-    var delivery = 5;
-    var deal_price = <%= dealData.price %> * 1;
-    function total(){
-      total_price = ((num*deal_price)+delivery).toFixed(2);
-      $(".item-total").text("GHS "+total_price);
-      $("input[name='total']").val(total_price);
-    }
-    total();
-    $(".add-item-bar").click(function(){
-      if(num < 3){
-        num++;
-        $(".checkout-items").append('<div style="padding:32px" class="checkout-item-bar w3-animate-left w3-panel w3-border w3-round"><span class="item-bar-close w3-tag w3-red w3-right">x</span><img class="w3-left" src="http://via.placeholder.com/50x50" alt=""><p style="margin:0;text-align:center"><%= dealData.title %><br> GHS <%= dealData.price %></p></div>');
-        $(".item-num").text(num);
-        var new_price = deal_price * num;
-        $(".item-price").text("GHS "+new_price.toFixed(2));
-        if($("#low").prop("checked")){
-          $(".item-delivery").text("GHS 5.00");
-          delivery = 5;
-        }else{
-          $(".item-delivery").text("GHS 10.00");
-          delivery = 10;
-        }
-        total();
-      }else{
-        alert("You can order a maximum of 3!");
-      }
+<script src="/js/checkout.js">
 
-    });
-    $("#low").click(function(){
-      $(".item-delivery").text("GHS 5.00");
-      delivery = 5;
-      total();
-    });
-    $("#high").click(function(){
-      $(".item-delivery").text("GHS 10.00");
-      delivery = 10;
-      total();
-    });
-
-    $(".show-coupon").click(function(){
-      $(".coupon-box").show();
-    });
-
-
-  });
 </script>
 
   </body>

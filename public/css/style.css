@@ -1,5 +1,6 @@
 :root {
   --custom-color: #fff;
+  --txt-color: #000;
 }
 
 body {
@@ -253,6 +254,9 @@ a:visited {
 .custom-txt-color {
   color: var(--custom-color);
 }
+.txt-color {
+  color: red;
+}
 
 
 .mySlides {display: none}
@@ -272,6 +276,7 @@ img {vertical-align: middle;}
 
 .thing-get ul li {
   word-break: break-all;
+  list-style-position: inside;
 }
 
 
@@ -343,6 +348,9 @@ img {vertical-align: middle;}
 .middle-lane {
   width: 40%;
 }
+/*.page-wrap h1,p,h2,h3,h4,h5,h6,li {
+  color: var(--txt-color);
+}*/
 .right-lane {
   width: 30%;
 }
@@ -402,7 +410,9 @@ img {vertical-align: middle;}
     display: none;
   }
   .left-lane {
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
+    float: none;
   }
   .middle-lane {
     width: 100%;
@@ -427,5 +437,8 @@ img {vertical-align: middle;}
   .buy {
     width: 80%;
     margin: 0 auto;
+  }
+  .post_content img {
+    width: 100%!important;
   }
 }

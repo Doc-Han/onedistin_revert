@@ -2,6 +2,7 @@ var express = require('express');
 var con = require('../config/db.js');
 var currentDate = require('../config/tools.js').currentDate();
 var currentTime = require('../config/tools.js').currentTime();
+var tools = require('../config/tools.js');
 var multer = require('multer');
 var upload = require('../config/upload.js');
 var cloudinary = require('cloudinary');
@@ -61,7 +62,7 @@ router.post('/deal', upload.single('image'), (req,res) => {
   var shoppy_link = req.body.shopLink;
   var bg_color = req.body.bg_color;
 
-  var author = "Distin cat";
+  var author = "onedistin";
   var body = "";
   var url = title.split(" ").join("-");
   var postDate = date + "000000";
@@ -91,16 +92,32 @@ router.get('/edit', (req,res) =>{
   res.send('page cannot be found!');
 });
 
+router.post('/edit', (req,res) =>{
+  var referer = req.headers.referer;
+  var id = req.body.id;
+  var title = req.body.dealTitle;
+  var price = req.body.dealPrice;
+  var thingGet = req.body.thingGet;
+  var writeup = req.body.marketingWriteUp;
+  var vidlink = req.body.VideoLink;
+  var date = req.body.date.split("-").join("");
+  var shoppy_txt = req.body.shoppy_txt;
+  var shoppy_link = req.body.shopLink;
+  var bg_color = req.body.bg_color;
+  var query = "UPDATE onedistin_deals SET title= ?,price= ?,thingGet= ?,writeup= ?,video= ?,shoppy_txt= ?,shoppy_link= ?,timestamp= ?,bg_color= ? WHERE ID= ?";
+  con.query(query,[title,price,thingGet,writeup,vidlink, shoppy_txt, shoppy_link, date, bg_color, id], function(err){
+    if(err)throw err;
+    res.redirect(referer);
+  });
+});
+
 router.get('/edit/:id', (req,res) =>{
   var id = req.params.id;
-  con.query("SELECT ID,title,timestamp FROM onedistin_deals ORDER BY timestamp DESC", function(err,d_result){
+  var query = "SELECT ID,title,timestamp FROM onedistin_deals ORDER BY timestamp DESC;SELECT * FROM onedistin_deals WHERE id=?";
+  con.query(query,[id], function(err,result){
     if(err) throw err;
-    con.query("SELECT * FROM onedistin_deals WHERE id=?",[id],function(err,result){
-      if(err)throw err;
-      res.render('admin/edit', {deal:result[0], deals:d_result, currentDate:currentDate});
-    });
+      res.render('admin/edit', {deal:result[1][0],dealDate: tools.dateToEdit(result[1][0].timestamp), deals:result[0], currentDate: currentDate});
   });
-
 });
 
 router.get('/story', (req,res) => {

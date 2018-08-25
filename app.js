@@ -11,7 +11,7 @@ var cloudinary = require('cloudinary');
 var port = process.env.PORT || 8080;
 var app = express();
 
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.set('view engine', 'ejs');

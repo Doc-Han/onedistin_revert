@@ -2,8 +2,8 @@ var express = require('express');
 var con = require('../config/db.js');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
-var currentDate = require('../config/tools.js').currentDate();
-var currentTime = require('../config/tools.js').currentTime();
+var currentDate = require('../config/tools.js');
+var currentTime = require('../config/tools.js');
 var localStrategy = require('passport-local').Strategy;
 var tokenGen = require('../config/tools.js');
 var cloudinary = require('cloudinary');
@@ -34,7 +34,7 @@ passport.use(new localStrategy(
 router.get('/', (req,res) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
-    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?";
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?";
     con.query(query,[user], function(err,result){
       if(err)throw err;
       var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
@@ -42,7 +42,7 @@ router.get('/', (req,res) => {
       res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],img:a});
     });
   }else {
-    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime+"' ORDER BY timestamp DESC LIMIT 10";
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10";
     con.query(query, function(err,result){
       if(err)throw err;
       var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
@@ -74,8 +74,8 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
   var password = req.body.password;
   bcrypt.hash(password,10,function(err,hash){
     if(err) throw err;
-    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,user_email,user_phone,user_loc,user_pass,user_registered)VALUES(?,?,?,?,?,?,?,?)";
-    con.query(query, [null,username,fullname,email,phone,region,hash,currentDate] ,function(err){
+    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered)VALUES(?,?,?,?,?,?,?,?,?)";
+    con.query(query, [null,username,fullname,email,phone,region,'100',hash,currentDate.currentDate()] ,function(err){
       if(err) throw err;
       con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
         if(err) throw err;
@@ -94,15 +94,12 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
 });
 
 router.get('/checkout', isLoggedIn, (req,res) => {
-  var token = tokenGen.getToken();
   var user = req.user.user_id;
-  var query = "SELECT * FROM onedistin_users WHERE ID = ?";
+  var query = "SELECT * FROM onedistin_users WHERE ID = ?;SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'";
   con.query(query, [user], function(err,result){
     if(err)throw err;
-    con.query("SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate+"'",function(err,d_result){
-      if (err)throw err;
-      res.render('checkout',{userData: result[0],dealData: d_result[0], token: token});
-    });
+    var a = cloudinary.url(result[1][0].img_id, {effect: 'sharpen'});
+      res.render('checkout',{currentUser: result[0][0],currentPost: result[1][0],img: a});
   });
 });
 
@@ -161,13 +158,34 @@ router.post('/profile/:type', (req,res) => {
     var address = req.body.address;
     var city = req.body.city;
     var region = req.body.region;
-    console.log(req.body);
     var query = "UPDATE onedistin_users SET user_name= ?, user_address= ?, user_city= ?, user_loc= ? WHERE ID= ?";
     con.query(query,[user_name,address,city,region,user],function(err){
       if(err)throw err;
     });
   }else if(type == "subscriptions"){
-    console.log(req.body);
+    var one = req.body.one;
+    var two = req.body.two;
+    var three = req.body.three;
+    var code = "";
+    if(one == 'on'){
+      code += '1';
+    }else {
+      code += '0';
+    }
+    if(two == 'on'){
+      code += '1';
+    }else {
+      code += '0';
+    }
+    if(three == 'on'){
+      code += '1';
+    }else {
+      code += '0';
+    }
+    var query = "UPDATE onedistin_users SET subscriptions= ? WHERE ID = ?";
+    con.query(query,[code,user], function(err){
+      if(err)throw err;
+    });
   }
   res.redirect('/profile');
 });
@@ -180,7 +198,7 @@ router.get('/rewards', (req,res) => {
 });
 
 router.get('/pastdeals', (req,res) => {
-  var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp <= '"+currentTime+"' ";
+  var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp <= '"+currentTime.currentTime()+"' ";
   con.query(query,[0],function(err,result){
     res.render('pastdeals',{pastdeals:result});
   });
@@ -219,6 +237,10 @@ router.get('/redeem/:offer',function(req,res){
 
 router.get('/sell', (req,res) => {
   res.render('sell');
+});
+
+router.get('/our-story', (req,res) => {
+  res.render('story');
 });
 
 router.get('/logout', isLoggedIn, (req,res) => {
