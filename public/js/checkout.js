@@ -4,7 +4,7 @@ $(document).ready(function(){
 
   }
   $(".add-item-bar").click(function(){
-    if(num < 3){
+    if(num <= 2){
       num++;
       var item = $(".checkout-items .single-item:first-child");
       var loc = $(".checkout-items");
@@ -13,8 +13,9 @@ $(document).ready(function(){
       var proto = item.html();
       loc.append(proto);
       itempricing.after("<dd>"+pricingproto+"</dd>");
-    }else{
-      alert('You can only buy a maximum of three');
+      if(num==3){
+        $(".add-item-bar").hide();
+      }
     }
 
   });

@@ -156,7 +156,13 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
                 <h3 style="text-align:left">Finally! Want this right?</h3>
                 <dl class="straight">
                   <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price w3-text-blue"><%= currentPost.price %></span> </dd>
-                  <dd> <label>Delivery fee</label> <span class="delivery-fee price w3-text-blue">GHS 5.0</span> </dd>
+                  <dd> <label>Delivery fee</label>
+                    <% if(offers.offer_one == 1){ %>
+                      <span class="w3-tag w3-green price">free delivery</span>
+                    <% }else{ %>
+                      <span class="delivery-fee price w3-text-blue">GHS 5.0</span>
+                    <% } %>
+                  </dd>
                   <dd> <label>Total</label> <span class="price w3-text-blue">GHS 45.70</span> </dd>
                 </dl>
                 <form method="POST" action="https://community.ipaygh.com/gateway">

@@ -34,12 +34,12 @@ passport.use(new localStrategy(
 router.get('/', (req,res) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
-    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?";
-    con.query(query,[user], function(err,result){
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?";
+    con.query(query,[user,user], function(err,result){
       if(err)throw err;
       var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
-      console.log("her lsdfklsfjsld f "+a);
-      res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],img:a});
+      console.log(result);
+      res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],img:a});
     });
   }else {
     var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10";
@@ -74,8 +74,8 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
   var password = req.body.password;
   bcrypt.hash(password,10,function(err,hash){
     if(err) throw err;
-    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered)VALUES(?,?,?,?,?,?,?,?,?)";
-    con.query(query, [null,username,fullname,email,phone,region,'100',hash,currentDate.currentDate()] ,function(err){
+    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered,redeemed)VALUES(?,?,?,?,?,?,?,?,?,?)";
+    con.query(query, [null,username,fullname,email,phone,region,'100',hash,currentDate.currentDate(),'000'] ,function(err){
       if(err) throw err;
       con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
         if(err) throw err;
@@ -204,7 +204,7 @@ router.get('/pastdeals', (req,res) => {
   });
 });
 
-router.get('/redeem/:offer',function(req,res){
+router.get('/redeem/:offer',function(req,res, next){
   var offer = req.params.offer;
   const user = req.user.user_id;
   con.query("SELECT active_points FROM onedistin_points WHERE user_id=?",[user],function(err,result){
@@ -212,26 +212,28 @@ router.get('/redeem/:offer',function(req,res){
 
     if(offer == "free-delivery"){
       if(points > 300){
-        console.log("Free-delivery has been issued");
+        con.query("UPDATE onedistin_points SET last_activity='Purchase a free delivery(300pts)', offer_one=1, active_points=(active_points)-300 WHERE user_id=?",[user],function(err){
+          if(err)throw err;
+          res.send('Your free delivery has been activated');
+        });
       }else {
-        console.log("Insufficient points");
+        res.render('slow-down');
       }
     }else if(offer == "5-off"){
       if(points > 600){
         console.log("5%-off has been issued");
       }else {
-        console.log("Insufficient points");
+        res.render('slow-down');
       }
     }else if(offer == "10-off"){
       if(points > 1000){
         console.log("10%-off has been issued");
       }else {
-        console.log("Insufficient points");
+        res.render('slow-down');
       }
     }else{
-      console.log("Hehe, you can't really steal from us");
+      next();
     }
-    res.send('Still in progress')
   });
 });
 
