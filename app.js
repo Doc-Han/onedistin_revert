@@ -23,10 +23,11 @@ var options = {
   database: process.env.DB_NAME,
 }
 
+
 var sessionStore = new MySQLStore(options);
 
 app.use(session({
-  secret: 'onedistin-session',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: sessionStore
@@ -35,9 +36,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 cloudinary.config({
-  cloud_name: 'farhano123',
-  api_key: 817999527351872,
-  api_secret: 'SqeZy-yPPadr3lAuxEWDiUMyPyA'
+  cloud_name: process.env.CLOUDINARY_USERNAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 app.use(function(req,res,next){
