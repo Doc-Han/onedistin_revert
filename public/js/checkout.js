@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var num = 1;
-  var total = 50.00;
+  var total = $("[class='acpoit']").val() * 1;
   var sum;
   var del = 0;
   function show(){

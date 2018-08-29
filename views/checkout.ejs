@@ -68,15 +68,15 @@
         <dl class="straight">
           <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price w3-text-blue"><%= currentPost.price %></span> </dd>
           <dd> <label>Delivery fee</label> <span class="delivery-fee price w3-text-blue">GHS 5.0</span> </dd>
-          <dd> <label>Total</label> <span class="price w3-text-blue">GHS 45.70</span> </dd>
+          <dd> <label>Total</label> <span class="total_price price w3-text-blue">GHS 45.70</span> </dd>
         </dl>
         <form method="POST" action="https://community.ipaygh.com/gateway">
           <input type="hidden" name="merchant_key" value="tk_965c30c0-a0b4-11e8-af31-f23c9170642f" />
-          <input type="hidden" name="success_url" value="http://localhost:8080/checkout" />
-          <input type="hidden" name="cancelled_url" value="http://localhost:8080/profile" />
-          <input type="hidden" name="deferred_url" value="http://localhost:8080" />
-          <input type="hidden" name="invoice_id" value="0989" />
-          <input type="hidden" name="total" value="78789" />
+          <input type="hidden" name="success_url" value="https://onedistin.herokuapp.com/p_s" />
+          <input type="hidden" name="cancelled_url" value="https://onedistin.herokuapp.com/p_c" />
+          <input type="hidden" name="deferred_url" value="https://onedistin.herokuapp.com/d_p" />
+          <input type="hidden" name="invoice_id" value="<= token %>" />
+          <input type="hidden" name="total" value="" />
           <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Yes! Can't wait!</h3></button>
         </form>
 

@@ -99,7 +99,7 @@ router.get('/checkout', isLoggedIn, (req,res) => {
   con.query(query, [user], function(err,result){
     if(err)throw err;
     var a = cloudinary.url(result[1][0].img_id, {effect: 'sharpen'});
-      res.render('checkout',{currentUser: result[0][0],currentPost: result[1][0],img: a});
+      res.render('checkout',{currentUser: result[0][0],currentPost: result[1][0],img: a, token: tokenGen.getToken()});
   });
 });
 

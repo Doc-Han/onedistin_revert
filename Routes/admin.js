@@ -54,6 +54,7 @@ router.get('/deal', (req,res) => {
 router.post('/deal', upload.single('image'), (req,res) => {
   var title = req.body.dealTitle;
   var price = req.body.dealPrice;
+  var ac_price = req.body.ac_price;
   var thingGet = req.body.thingGet;
   var writeup = req.body.marketingWriteUp;
   var vidlink = req.body.VideoLink;
@@ -74,8 +75,8 @@ router.post('/deal', upload.single('image'), (req,res) => {
       cloudinary.uploader.upload(req.file.path, function(img_res){
         console.log(img_res);
           var img_id = img_res.public_id;
-          var query = "INSERT INTO onedistin_deals (ID,title,price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color)VALUES(?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,timestamp)VALUES(?,?,?,?,?,?)";
-          con.query(query,[null,title,price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,img_id,bg_color,null,author,title,body,url,postDate],function(err){
+          var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color)VALUES(?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,timestamp)VALUES(?,?,?,?,?,?)";
+          con.query(query,[null,title,price,ac_price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,img_id,bg_color,null,author,title,body,url,postDate],function(err){
             if(err)throw err;
               res.send("deal Inserted");
             });
@@ -97,6 +98,7 @@ router.post('/edit', (req,res) =>{
   var id = req.body.id;
   var title = req.body.dealTitle;
   var price = req.body.dealPrice;
+  var ac_price = req.body.ac_price;
   var thingGet = req.body.thingGet;
   var writeup = req.body.marketingWriteUp;
   var vidlink = req.body.VideoLink;
@@ -104,8 +106,8 @@ router.post('/edit', (req,res) =>{
   var shoppy_txt = req.body.shoppy_txt;
   var shoppy_link = req.body.shopLink;
   var bg_color = req.body.bg_color;
-  var query = "UPDATE onedistin_deals SET title= ?,price= ?,thingGet= ?,writeup= ?,video= ?,shoppy_txt= ?,shoppy_link= ?,timestamp= ?,bg_color= ? WHERE ID= ?";
-  con.query(query,[title,price,thingGet,writeup,vidlink, shoppy_txt, shoppy_link, date, bg_color, id], function(err){
+  var query = "UPDATE onedistin_deals SET title= ?,price= ?,ac_price=?,thingGet= ?,writeup= ?,video= ?,shoppy_txt= ?,shoppy_link= ?,timestamp= ?,bg_color= ? WHERE ID= ?";
+  con.query(query,[title,price,ac_price,thingGet,writeup,vidlink, shoppy_txt, shoppy_link, date, bg_color, id], function(err){
     if(err)throw err;
     res.redirect(referer);
   });
