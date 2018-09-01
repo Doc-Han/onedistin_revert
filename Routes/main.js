@@ -211,7 +211,7 @@ router.get('/redeem/:offer',function(req,res, next){
     var points = result[0].active_points;
 
     if(offer == "free-delivery"){
-      if(points > 300){
+      if(points >= 300){
         con.query("UPDATE onedistin_points SET last_activity='Purchase a free delivery(300pts)', offer_one=1, active_points=(active_points)-300 WHERE user_id=?",[user],function(err){
           if(err)throw err;
           res.send('Your free delivery has been activated');
@@ -220,14 +220,20 @@ router.get('/redeem/:offer',function(req,res, next){
         res.render('slow-down');
       }
     }else if(offer == "5-off"){
-      if(points > 600){
-        console.log("5%-off has been issued");
+      if(points >= 600){
+        con.query("UPDATE onedistin_points SET last_activity='Purchase a 5% off(600pts)', offer_two=1, active_points=(active_points)-600 WHERE user_id=?",[user],function(err){
+          if(err)throw err;
+          res.send('Your 5% off on deal has been activated');
+        });
       }else {
         res.render('slow-down');
       }
     }else if(offer == "10-off"){
-      if(points > 1000){
-        console.log("10%-off has been issued");
+      if(points >= 1000){
+        con.query("UPDATE onedistin_points SET last_activity='Purchase a 10% off(1000pts)', offer_three=1, active_points=(active_points)-1000 WHERE user_id=?",[user],function(err){
+          if(err)throw err;
+          res.send('Your 10% off on deal has been activated');
+        });
       }else {
         res.render('slow-down');
       }
