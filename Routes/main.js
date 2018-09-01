@@ -38,10 +38,10 @@ router.get('/', (req,res) => {
     con.query(query,[user,user], function(err,result){
       if(err)throw err;
       var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
-      console.log(result);
       res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],img:a, token: tokenGen.getToken()});
     });
   }else {
+    console.log(currentDate.currentDate());
     var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10";
     con.query(query, function(err,result){
       if(err)throw err;
