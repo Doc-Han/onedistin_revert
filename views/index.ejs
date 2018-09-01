@@ -3,7 +3,10 @@
 var html = document.getElementsByTagName('html')[0];
 html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
 </script>
-<input class="acpoit" type="hidden" value="<%= currentPost.ac_price %>" />
+<% if(isAuthenticated){ %>
+  <input class="acpoit" type="hidden" value="<%= offers.offer_one+offers.offer_two+offers.offer_three%>-<%= currentPost.ac_price %>" />
+<% } %>
+
 <!--<div style="position:absolute;top:12%;left:0;right:0;z-index:-1;opacity:0.3">
   <img style="width:100%" src="img/nice4.jpg" alt="">
 </div>-->
@@ -168,7 +171,14 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
                       <span class="delivery-fee price w3-text-blue">GHS 5.0</span>
                     <% } %>
                   </dd>
-                  <dd> <label>Total</label> <span class="total_price price w3-text-blue">GHS 45.70</span> </dd>
+                  <dd> <label>Total</label> <span class="price w3-text-blue">
+                    <% if(offers.offer_three == 1){ %>
+                      <span class="w3-tag w3-green">10% off</span>
+                    <% } %>
+                    <% if(offers.offer_two == 1){ %>
+                      <span class="w3-tag w3-green">5% off</span>
+                    <% } %>
+                    <span class="total_price">GHS 45.70</span></span> </dd>
                 </dl>
                 <form method="POST" action="https://community.ipaygh.com/gateway">
                   <input type="hidden" name="merchant_key" value="tk_965c30c0-a0b4-11e8-af31-f23c9170642f" />

@@ -1,29 +1,70 @@
 $(document).ready(function(){
-  var num = 1;
-  var total = $("[class='acpoit']").val() * 1;
-  var sum;
+var n = 1;
+  var hv = $("[class='acpoit']").val();
+  var hvsplt = hv.split("-");
+  var low_del = 5;
+  var high_del = 10;
+  var offrs = hvsplt[0];
+  var offr_on = offrs[0];
+  var offr_tw = offrs[1];
+  var offr_tr = offrs[2];
+  var ttl = hvsplt[1];
+  var sm;
   var del = 0;
   function show(){
-    if(del == 0){
-      sum = (total * num) + 5;
-    }else if(del == 1){
-      sum = (total * num) + 10;
+
+    if(del == 0 && offr_on == 0){
+      sm = (ttl * n);
+      if(offr_tw == 1){
+        sm = sm - (0.05*sm);
+      }
+      if(offr_tr == 1){
+        sm = sm - (0.1*sm);
+      }
+      sm = sm + low_del;
+    }else if(del == 0 && offr_on != 0){
+      sm = (ttl * n);
+      if(offr_tw == 1){
+        sm = sm - (0.05*sm);
+      }
+      if(offr_tr == 1){
+        sm = sm - (0.1*sm);
+      }
+    }else if(del == 1 && offr_on == 0){
+      sm = (ttl * n);
+      if(offr_tw == 1){
+        sm = sm - (0.05*sm);
+      }
+      if(offr_tr == 1){
+        sm = sm - (0.1*sm);
+      }
+      sm = sm +high_del;
+    }else if(del == 1 && offr_on != 0){
+      sm = (ttl * n);
+      if(offr_tw == 1){
+        sm = sm - (0.05*sm);
+      }
+      if(offr_tr == 1){
+        sm = sm - (0.1*sm);
+      }
     }
-    $('.total_price').text("GHS "+sum.toFixed(2));
-    $("[name='total']").val(sum.toFixed(2));
+
+
+    $('.total_price').text("GHS "+sm.toFixed(2));
+    $("[name='total']").val(sm.toFixed(2));
   }
   $(".add-item-bar").click(function(){
-    if(num <= 2){
-      num++;
+    if(n <= 2){
+      n++;
       var item = $(".checkout-items .single-item:first-child");
       var loc = $(".checkout-items");
-      var itempricing = $(".item-pricing");
-      var pricingproto = itempricing.html();
-      var proto = item.html();
-      loc.append(proto);
-      itempricing.after("<dd>"+pricingproto+"</dd>");
+      var ip = $(".item-pricing");
+      var pp = ip.html();
+      var prt = item.html();
+      loc.append(prt);
+      ip.after("<dd>"+pp+"</dd>");
       show();
-      if(num==3){
+      if(n==3){
         $(".add-item-bar").hide();
       }
     }
