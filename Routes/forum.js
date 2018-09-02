@@ -21,15 +21,7 @@ router.post('/add', (req,res) => {
   var body = req.body.body;
   var url = title.split(" ").join("-");
 
-  var date = new Date();
-  var year = date.getFullYear();
-  var _month = parseInt(date.getMonth())+1;
-  var month = "0"+_month;
-  var day = date.getDate();
-  var hour = date.getHours();
-  var minute = date.getMinutes();
-  var second = date.getSeconds();
-  var currentDate = year+month+day+hour+minute+second;
+  var currentDate = currentTime.currentTime();
 
   var author = req.user.user_id;
   var query = "INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_comments,timestamp)VALUES(?,?,?,?,?,?,?)";
