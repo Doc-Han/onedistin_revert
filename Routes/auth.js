@@ -6,10 +6,11 @@ var router = express.Router();
 passport.use(new facebookStrategy({
     clientID: process.env.FB_CLIENT_ID,
     clientSecret: process.env.FB_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/auth/facebook/callback',
-    profileFields:['id','displayName','emails']
+    callbackURL: 'https://onedistin.herokuapp.com/auth/facebook/callback',
+    profileFields:['id','displayName','emails','gender']
   },
   function(accessToken, refreshToken, profile, done) {
+    console.log(profile);
     var fb_user = {
       email: profile.emails[0].value,
       user_name: profile.displayName
@@ -28,7 +29,7 @@ passport.use(new facebookStrategy({
 
 router.get('/facebook', passport.authenticate('facebook', {scope:'email'}));
 
-router.get('facebook/callback', passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/login'}));
+router.get('/facebook/callback', passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/login'}));
 
 /*passport.serializeUser(function(user, done) {
 	console.log(user);
