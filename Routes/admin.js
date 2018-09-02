@@ -40,7 +40,11 @@ router.post('/', (req,res) => {
 });
 
 router.get('/dashboard', isNotLoggenIn, (req,res) => {
-  res.render('admin/home');
+  var query = "SELECT ID FROM onedistin_users";
+  con.query(query, function(err,result){
+    if(err)throw err;
+    res.render('admin/home', {users: result.length});
+  });
 });
 
 router.get('/deal', (req,res) => {
@@ -86,6 +90,41 @@ router.post('/deal', upload.single('image'), (req,res) => {
     }else{
       console.log("Deal for this day already available");
     }
+  });
+});
+
+router.get('/users', (req,res) => {
+  var query = "SELECT * FROM onedistin_users";
+  con.query(query, function(err, result){
+    if(err)throw err;
+    var query = req.query;
+    var all=[]
+    if(query.fullname == 'on'){
+      all.push("user_name");
+    }
+    if(query.username == 'on'){
+      all.push("display_name");
+    }
+    if(query.gender == 'on'){
+      all.push("gender");
+    }
+    if(query.email == 'on'){
+      all.push("user_email");
+    }
+    if(query.phone == 'on'){
+      all.push("user_phone");
+    }
+    if(query.address == 'on'){
+      all.push("user_address");
+    }
+    if(query.city == 'on'){
+      all.push("city");
+    }
+    if(query.region == 'on'){
+      all.push("user_loc");
+    }
+    console.log(all);
+    res.render('admin/users', {users:result, options: all});
   });
 });
 
