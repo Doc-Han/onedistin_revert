@@ -8,7 +8,6 @@ var passport = require('passport');
 var logger = require('morgan');
 var cloudinary = require('cloudinary');
 
-console.log(require('./config/tools.js').currentTime());
 
 var port = process.env.PORT || 8080;
 var app = express();
