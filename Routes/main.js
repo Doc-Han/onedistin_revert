@@ -74,7 +74,7 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
   var password = req.body.password;
   bcrypt.hash(password,10,function(err,hash){
     if(err) throw err;
-    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered,redeemed)VALUES(?,?,?,?,?,?,?,?,?,?)";
+    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered)VALUES(?,?,?,?,?,?,?,?,?)";
     con.query(query, [null,username,fullname,email,phone,region,'100',hash,currentDate.currentDate(),'000'] ,function(err){
       if(err) throw err;
       con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
@@ -201,6 +201,18 @@ router.get('/pastdeals', (req,res) => {
   var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp <= '"+currentTime.currentTime()+"' ";
   con.query(query,[0],function(err,result){
     res.render('pastdeals',{pastdeals:result});
+  });
+});
+
+router.get('/pastdeal/:id', (req,res) => {
+  var id = req.params.id;
+  var query = "SELECT * FROM onedistin_deals WHERE ID='"+id+"';SELECT post_title,post_url FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10";
+  con.query(query, function(err,result){
+    if(err)throw err;
+    var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
+    console.log(id);
+    console.log(result);
+    res.render('past-deal',{currentPost: result[0][0], forumPosts: result[1],img:a});
   });
 });
 
