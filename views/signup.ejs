@@ -20,10 +20,10 @@
             <dt> <label>FULLNAME</label> </dt>
             <dd> <input name="fullname" type="text" placeholder="Full name"></dd>
             <dt> <label>GENDER</label> </dt>
-            <dd> <select>
+            <dd> <select name="gender">
               <option value=""></option>
-              <option>Male</option>
-              <option>Female</option>
+              <option value="0">Male</option>
+              <option value="1">Female</option>
             </select> </dd>
             <dt> <label>EMAIL</label> </dt>
             <dd> <input name="email" type="email" placeholder="Email"></dd>
@@ -46,6 +46,7 @@
             <dt> <label>PASSWORD</label> </dt>
             <dd> <input name="password" type="password" placeholder="Password"></dd>
           </dl>
+          <p>Making progress means you comply with all our terms and policies.</p>
           <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">I'm ready! Open the gate!</h3></button>
           <h3>Already have an account? <a href="/login">Login</a> </h3>
         </form>
