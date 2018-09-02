@@ -68,14 +68,15 @@ router.get('/signup', isNotLoggenIn, (req,res) => {
 router.post('/signup', isNotLoggenIn, (req,res) => {
   var username = req.body.username;
   var fullname = req.body.fullname;
+  var gender = req.body.gender;
   var email = req.body.email;
   var phone = req.body.phone;
   var region = req.body.region;
   var password = req.body.password;
   bcrypt.hash(password,10,function(err,hash){
     if(err) throw err;
-    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered)VALUES(?,?,?,?,?,?,?,?,?)";
-    con.query(query, [null,username,fullname,email,phone,region,'100',hash,currentDate.currentDate(),'000'] ,function(err){
+    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,gender,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered)VALUES(?,?,?,?,?,?,?,?,?,?)";
+    con.query(query, [null,username,fullname,gender,email,phone,region,'100',hash,currentDate.currentDate(),'000'] ,function(err){
       if(err) throw err;
       con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
         if(err) throw err;
