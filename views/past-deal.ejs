@@ -1,0 +1,117 @@
+<% include partials/header.ejs %>
+<script type="text/javascript">
+var html = document.getElementsByTagName('html')[0];
+html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
+</script>
+
+<!--<div style="position:absolute;top:12%;left:0;right:0;z-index:-1;opacity:0.3">
+  <img style="width:100%" src="img/nice4.jpg" alt="">
+</div>-->
+    <div class="w3-row page-wrap">
+      <div class="w3-col left-lane">
+            <section class="item-hero">
+              <div id="hero-background"></div>
+            </section>
+          <div class="slideshow-container">
+
+          <div class="mySlides fade">
+            <img src="<%= img %>" style="width:100%;height:300px">
+          </div>
+
+
+          <div class="mySlides fade">
+            <img src="img/nice2.jpg" style="width:100%;height:300px">
+          </div>
+
+          <div class="mySlides fade">
+            <img src="img/nice3.jpg" style="width:100%;height:300px">
+          </div>
+          <div class="mySlides fade">
+            <img src="img/nice4.jpg" style="width:100%;height:300px">
+          </div>
+
+
+          </div>
+
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+          </div>
+
+          <div style="margin-bottom:8px" id="price-comparison">
+            <a class="w3-text-indigo w3-text-black" href="<%- currentPost.shoppy_link %>"><%= currentPost.shoppy_txt %></a>
+          </div>
+          <div style="height:59px;overflow:hidden" class="buy w3-row">
+
+              <a style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
+                <span style="text-align:center" class="custom-txt-color w3-large"><b><%= currentPost.price %></b></span>
+                 <br>
+                <span class="custom-txt-color w3-medium">I'M SORRY</span>
+              </a>
+
+            <a style="background-color: #424242;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Share</a>
+          </div>
+          <h3 style="text-align:left"><%= currentPost.title %></h3>
+          <div class="w3-left thing-get">
+            <%- currentPost.thingGet %>
+          </div>
+      </div>
+      <div class="w3-col middle-lane w3-left w3-mobile w3-container">
+        <span style="text-align:left"><%- currentPost.writeup %></span>
+      </div>
+      <div class="w3-col right-lane w3-mobile">
+          <iframe id="ytplayer" type="text/html" width="100%" height="300"
+            src="https://www.youtube.com/embed/<%= currentPost.video %>"
+            frameborder="0"></iframe>
+            <p style="margin:0 auto;text-align:left">Our daily video</p>
+          <ul style="width:100%" class="w3-ul w3-margin-top">
+            <% forumPosts.forEach(function(item){ %>
+              <a class="w3-left" style="width:100%" href="/forum/<%= item.post_url %>"><li style="padding-left:0;width:inherit">
+                <img class="w3-circle" src="http://via.placeholder.com/50x50" alt="">
+                <%= item.post_title %>
+              </li></a>
+            <% }); %>
+          </ul>
+          <a href="/forum"><button style="background-color: #424242;margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-margin-top" type="submit" name="button"><h5 class="custom-txt-color" style="margin:0">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
+      </div>
+    </div>
+
+    <div class="w3-padding w3-red">
+      This is the footer <br>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+
+</div>
+<script type="text/javascript">
+// This is the code for the image slider
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+var i;
+var slides = document.getElementsByClassName("mySlides");
+var dots = document.getElementsByClassName("dot");
+if (n > slides.length) {slideIndex = 1}
+if (n < 1) {slideIndex = slides.length}
+for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+}
+for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+}
+slides[slideIndex-1].style.display = "block";
+dots[slideIndex-1].className += " active";
+}
+</script>
+  </body>
+</html>
