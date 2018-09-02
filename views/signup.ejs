@@ -10,7 +10,9 @@
       </div>
       <div class="w3-third w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
         <h3 class="w3-xxxlarge w3-round w3-center">Sign Up</h3>
-        <form class="w3-container w3-margin-bottom" action="/signup" method="POST">
+        <form onsubmit="validate_signup()" class="w3-container w3-margin-bottom" action="/signup" method="POST">
+
+          <span class="errs"></span>
 
           <dl>
             <dt> <label>USERNAME</label> </dt>
@@ -19,7 +21,7 @@
             <dd> <input name="fullname" type="text" placeholder="Full name"></dd>
             <dt> <label>GENDER</label> </dt>
             <dd> <select>
-              <option></option>
+              <option value=""></option>
               <option>Male</option>
               <option>Female</option>
             </select> </dd>
@@ -29,7 +31,7 @@
             <dd> <input name="phone" type="phone" placeholder="Phone"></dd>
             <dt> <label>REGION</label> </dt>
             <dd> <select name="region">
-              <option value="none"></option>
+              <option value=""></option>
               <option value="Ashanti">Ashanti</option>
               <option value="Brong Ahafo">Brong Ahafo</option>
               <option value="Central">Central</option>
@@ -54,5 +56,7 @@
       </div>
     </div>
 
+
+    <script src="/js/validation.js"></script>
   </body>
 </html>
