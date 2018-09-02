@@ -8,6 +8,8 @@ var passport = require('passport');
 var logger = require('morgan');
 var cloudinary = require('cloudinary');
 
+console.log(require('./config/tools.js').currentTime());
+
 var port = process.env.PORT || 8080;
 var app = express();
 
@@ -30,7 +32,10 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: sessionStore
+  store: sessionStore,
+  cookie: {
+    maxAge: Date.now()+(7889400000),
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -57,6 +62,7 @@ app.use('/', require('./Routes/main.js'));
 app.use('/', require('./Routes/ipay.js'));
 app.use('/forum', require('./Routes/forum.js'));
 app.use('/admin', require('./Routes/admin.js'));
+app.use('/ajax', require('./Routes/ajax.js'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
