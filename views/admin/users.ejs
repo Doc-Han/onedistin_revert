@@ -1,0 +1,62 @@
+<% include partials/header.ejs %>
+
+<div class="w3-row w3-margin-top">
+  <% include partials/navs.ejs %>
+  <div style="width:60%" class="w3-padding w3-col w3-card-4 w3-mobile">
+      <form class="w3-margin" action="users" method="GET">
+        <input name="fullname" type="checkbox"> Fullname
+        <input name="username" type="checkbox"> Username
+        <input name="gender" type="checkbox"> Gender
+        <input name="email" type="checkbox"> Email
+        <input name="phone" type="checkbox"> Phone
+        <input name="address" type="checkbox"> Address
+        <input name="city" type="checkbox"> City
+        <input name="region" type="checkbox"> Region
+        <button type="submit" class="w3-button w3-teal w3-round-xlarge">Refresh</button>
+      </form>
+    <table class="w3-table-all w3-margin-top w3-bordered">
+      <tr>
+        <% if(options.length < 1){ %>
+          <% options = ['user_name','user_email']; %>
+        <% } %>
+
+        <% options.forEach(function(i){ %>
+          <th>
+            <% if(i == "user_name"){ %>
+              Fullname
+            <% }else if(i == "display_name"){ %>
+              Username
+            <% }else if(i == "gender"){ %>
+              Gender
+            <% }else if(i == "user_email"){ %>
+              Email
+            <% }else if(i == "user_phone"){ %>
+              Phone
+            <% }else if(i == "user_address"){ %>
+              Address
+            <% }else if(i == "city"){ %>
+              City
+            <% }else if(i == "user_loc"){ %>
+              Region
+            <% } %>
+          </th>
+        <% }); %>
+        <th></th>
+      </tr>
+      <% users.forEach(function(item){ %>
+        <tr>
+          <% options.forEach(function(i){ %>
+            <td><%= item[i] %></td>
+          <% }); %>
+          <td> <a class="w3-padding w3-round-xlarge w3-teal" href="#">view</a> </td>
+        </tr>
+      <% }); %>
+
+    </table>
+
+  </div>
+  <div style="width:20%" class="w3-col ">
+
+  </div>
+
+</div>
