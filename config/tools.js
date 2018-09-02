@@ -7,8 +7,8 @@ var currentTime = function() {
   var year = date.getFullYear();
   var _month = parseInt(date.getMonth())+1;
   var month = "0"+_month;
-  var day = date.getDate().toString();
-  if (day.length < 2){
+  var day = date.getDate()+"";
+  if (day.length == 1){
     day = "0"+day;
   }
   var hour = date.getHours().toString();
