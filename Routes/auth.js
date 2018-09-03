@@ -1,45 +1,60 @@
 var express = require('express');
 var passport = require('passport');
 var facebookStrategy = require('passport-facebook').Strategy;
+var con = require('../config/db.js');
+var currentDate = require('../config/tools.js');
 var router = express.Router();
 
 passport.use(new facebookStrategy({
     clientID: process.env.FB_CLIENT_ID,
     clientSecret: process.env.FB_CLIENT_SECRET,
-    callbackURL: 'https://onedistin.herokuapp.com/auth/facebook/callback',
-    profileFields:['id','displayName','emails','gender']
+    callbackURL: 'http://localhost:8080/auth/facebook/callback',
+    profileFields:['id','displayName','emails','gender','hometown','location']
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log(profile);
+    //console.log(profile);
+    var data = profile._json;
     var fb_user = {
       email: profile.emails[0].value,
-      user_name: profile.displayName
+      user_name: data.name,
+      gender: data.gender,
+      user_city: data.location.name.split(",")[0]
     }
-    var query = "SELECT * FROM onedistin_users WHERE user_email=?";
-    con.query(query,[fb_user.email], function(err,result){
+    var query = "SELECT * FROM onedistin_users WHERE user_email='"+fb_user.email+"'";
+    con.query(query, function(err,result){
       if(err)throw err;
-      if(result > 0){
-        console.log("user already exists");
+      console.log(result);
+      if(result.length > 0){
+        done(null, false);
       }else{
-        console.log("user is new here");
+        var query = "INSERT INTO onedistin_users (ID,user_name,gender,user_email,user_city,user_registered)VALUES(?,?,?,?,?,?)";
+        con.query(query,[null,fb_user.user_name,fb_user.gender,fb_user.email,fb_user.user_city,currentDate.currentDate()], function(err){
+          if(err)throw err;
+          con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
+            if(err) throw err;
+            const user_id = result[0];
+            var user = user_id.user_id;
+            con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,last_activity) VALUES (?,?,?,?,?)",[null,user,0,0,'new user'],function(err){
+              if(err)throw err;
+              done(null,user_id);
+            });
+
+          });
+        });
       }
     });
 
   }));
 
-router.get('/facebook', passport.authenticate('facebook', {scope:'email'}));
+router.get('/facebook', passport.authenticate('facebook', {scope:['email','user_gender','user_hometown','user_location']}));
 
-router.get('/facebook/callback', passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/login'}));
+router.get('/facebook/callback', passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/signup'}));
 
-/*passport.serializeUser(function(user, done) {
-	console.log(user);
-	done(null, user._id);
+passport.serializeUser(function(user_id,done){
+  return done(null, user_id);
 });
-
-passport.deserializeUser(function(id, done) {
-	user.findById(id, function(err, user) {
-		done(err, user);
-	});
-});*/
+passport.deserializeUser(function(user_id,done){
+  return done(null, user_id);
+});
 
 module.exports = router;
