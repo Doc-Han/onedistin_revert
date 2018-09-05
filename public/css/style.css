@@ -1,5 +1,6 @@
 :root {
   --custom-color: #fff;
+  --footer-color: #fff;
   --txt-color: #000;
 }
 
@@ -251,6 +252,10 @@ a:visited {
 .custom-bg-color {
   background-color: var(--custom-color);
 }
+.custom-footer-color {
+  background-color: var(--footer-color);
+  color: #fff;
+}
 .custom-txt-color {
   color: var(--custom-color);
 }
@@ -356,6 +361,10 @@ img {vertical-align: middle;}
 }
 .page-wrap {
   margin: 0 auto;
+  width: 1142px;/*1024px;*/
+}
+.footer-page-wrap {
+  padding: 0 auto;
   width: 1142px;/*1024px;*/
 }
 
