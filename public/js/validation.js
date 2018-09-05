@@ -40,7 +40,8 @@ $(document).ready(function(){
 
 function validate_signup(){
   if($("input").val() == "" || $("select").val() == ""){
-    alert("empty!");
+    //alert("empty!");
+    return false;
   }else{
     alert("filled!");
   }
