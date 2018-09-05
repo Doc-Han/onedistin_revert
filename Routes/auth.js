@@ -3,6 +3,7 @@ var passport = require('passport');
 var facebookStrategy = require('passport-facebook').Strategy;
 var con = require('../config/db.js');
 var currentDate = require('../config/tools.js');
+var nodemailer = require('../config/nodemailer.js');
 var router = express.Router();
 
 passport.use(new facebookStrategy({
@@ -18,7 +19,7 @@ passport.use(new facebookStrategy({
       email: profile.emails[0].value,
       user_name: data.name,
       gender: data.gender,
-      user_city: data.location.name.split(",")[0]
+      user_city: data.location.name.split(",")[0],
     }
     var query = "SELECT * FROM onedistin_users WHERE user_email='"+fb_user.email+"'";
     con.query(query, function(err,result){
@@ -36,6 +37,7 @@ passport.use(new facebookStrategy({
             var user = user_id.user_id;
             con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,last_activity) VALUES (?,?,?,?,?)",[null,user,0,0,'new user'],function(err){
               if(err)throw err;
+              nodemailer.throwMail(fb_user.email,"Welcome to Onedistin","<p>Thank you for creating an account with Onedistin</p><br><p>Visit our site daily to uncover the mystery of cheap items. See ya</p><br><br><p>Your Login info</p><br><p>Email: "+fb_user.email+"</p><br><p>Username: "+fb_user.user_name+"</p><br><p>Password: <a href='onedistin.herokuapp.com/profile/user-info'>Set it up</a></p>");
               done(null,user_id);
             });
 

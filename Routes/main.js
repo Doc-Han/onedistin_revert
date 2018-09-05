@@ -7,6 +7,7 @@ var currentTime = require('../config/tools.js');
 var localStrategy = require('passport-local').Strategy;
 var tokenGen = require('../config/tools.js');
 var cloudinary = require('cloudinary');
+var nodemailer = require('../config/nodemailer.js');
 var router = express.Router();
 
 passport.use(new localStrategy(
@@ -84,6 +85,7 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
         var user = user_id.user_id;
         con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,last_activity) VALUES (?,?,?,?,?)",[null,user,0,0,'new user'],function(err){
           if(err)throw err;
+          nodemailer.throwMail(email,"Welcome to Onedistin","<p>Thank you for creating an account with Onedistin</p><br><p>Visit our site daily to uncover the mystery of cheap items. See ya</p><br><br><p>Your Login info</p><br><p>Email: "+email+"</p><br><p>Username: "+username+"</p><br><p>Password: "+password+"</p>");
           req.login(user_id,function(err){
             res.redirect('/');
           });
