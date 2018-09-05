@@ -1,7 +1,7 @@
 <% include partials/header.ejs %>
 <script type="text/javascript">
 var html = document.getElementsByTagName('html')[0];
-html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
+html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;--footer-color: <%= currentPost.footer_color %>";
 </script>
 <% if(isAuthenticated){ %>
   <input class="acpoit" type="hidden" value="<%= offers.offer_one+offers.offer_two+offers.offer_three%>-<%= currentPost.ac_price %>" />
@@ -88,9 +88,27 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
       </div>
     </div>
 
-    <div style="background-color:#424242; color:#fff;font-weight:bold;padding:50px;font-size:20px">
-      &copy; Onedistin 2018. All rights reserved
+    <div style="width:100%" class="custom-footer-color">
+      <div class="w3-row page-wrap">
+        <div class="w3-col left-lane">
+          <h5>Don't miss out</h5>
+          <i style="background-color:#3B5998;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle fa-facebook"></i> Like us on Facebook <br>
+          <i style="background-color:#2f87d2;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle fa-twitter"></i> Follow us on Twitter <br>
+          <i style="background-color:#500f36;margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle fa-instagram"></i> Follow us on Instagram
+        </div>
+        <div class="w3-col middle-lane">
+          <h5>Earn reward points</h5>
+          Introduce a friend
+          <input class="w3-input w3-border w3-round" name="" value="">
+        </div>
+        <div class="w3-col right-lane">
+          <h5>Survey not yet available</h5>
+        </div>
+      </div>
     </div>
+
+
+
 
     <% if(isAuthenticated){ %>
       <!-- ######### THIS IS BEGINING OF THE CHECKOUT MODAL ######## -->
