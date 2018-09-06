@@ -11,7 +11,7 @@ var transporter = nodemailer.createTransport({
 
 var throwMail = function(to,subject,html){
   const mailOptions = {
-  from: 'The Developer of Onedistin', // sender address
+  from: process.env.NODEMAILER_EMAIL, // sender address
   to: to, // list of receivers
   subject: subject, // Subject line
   html: html// plain text body
