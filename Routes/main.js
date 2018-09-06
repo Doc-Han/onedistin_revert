@@ -7,7 +7,7 @@ var currentTime = require('../config/tools.js');
 var localStrategy = require('passport-local').Strategy;
 var tokenGen = require('../config/tools.js');
 var cloudinary = require('cloudinary');
-var nodemailer = require('../config/nodemailer.js');
+var mailer = require('../config/nodemailer.js');
 var router = express.Router();
 
 passport.use(new localStrategy(
@@ -32,22 +32,33 @@ passport.use(new localStrategy(
   }
 ));
 
+router.get('/email', (req,res) =>{
+  res.render('email');
+});
+
 router.get('/', (req,res) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
     var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?";
     con.query(query,[user,user], function(err,result){
       if(err)throw err;
-      var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
-      res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],img:a, token: tokenGen.getToken()});
+      if(result[0].length > 0 && result[1].length && result[2].length > 0 && result[3].length > 0){
+        var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
+        res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],img:a, token: tokenGen.getToken()});
+      }else{
+        res.render('error');
+      }
     });
   }else {
-    console.log(currentDate.currentDate());
     var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10";
     con.query(query, function(err,result){
       if(err)throw err;
-      var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
-      res.render('index',{currentPost: result[0][0], forumPosts: result[1],img:a});
+      if(result[0].length > 0 && result[1].length > 0){
+        var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
+        res.render('index',{currentPost: result[0][0], forumPosts: result[1],img:a});
+      }else{
+        res.render('error');
+      }
     });
   }
 
@@ -85,7 +96,7 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
         var user = user_id.user_id;
         con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,last_activity) VALUES (?,?,?,?,?)",[null,user,0,0,'new user'],function(err){
           if(err)throw err;
-          nodemailer.throwMail(email,"Welcome to Onedistin","<p>Thank you for creating an account with Onedistin</p><br><p>Visit our site daily to uncover the mystery of cheap items. See ya</p><br><br><p>Your Login info</p><br><p>Email: "+email+"</p><br><p>Username: "+username+"</p><br><p>Password: "+password+"</p>");
+          mailer.throwMail(email,"Welcome to Onedistin","<p>Thank you for creating an account with Onedistin</p><br><p>Visit our site daily to uncover the mystery of cheap items. See ya</p><br><br><p>Your Login info</p><br><p>Email: "+email+"</p><br><p>Username: "+username+"</p><br><p>Password: "+password+"</p>");
           req.login(user_id,function(err){
             res.redirect('/');
           });
