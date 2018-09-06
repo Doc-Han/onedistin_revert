@@ -100,7 +100,6 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
           fs.readFile('../config/email.html', function(err, data) {
             mailer.throwMail(email,'Welcome to Onedistin',data);
           });
-
           req.login(user_id,function(err){
             res.redirect('/');
           });
