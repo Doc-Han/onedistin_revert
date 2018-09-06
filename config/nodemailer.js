@@ -9,7 +9,7 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-function throwMail(to,subject,html){
+var throwMail = function(to,subject,html){
   const mailOptions = {
   from: 'The Developer of Onedistin', // sender address
   to: to, // list of receivers
@@ -26,4 +26,6 @@ function throwMail(to,subject,html){
   });
 }
 
-module.exports = throwMail;
+module.exports = {
+  throwMail: throwMail
+}
