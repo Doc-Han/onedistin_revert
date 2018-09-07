@@ -9,7 +9,7 @@ var router = express.Router();
 passport.use(new facebookStrategy({
     clientID: process.env.FB_CLIENT_ID,
     clientSecret: process.env.FB_CLIENT_SECRET,
-    callbackURL: 'http://localhost:8080/auth/facebook/callback',
+    callbackURL: 'https://onedistin.herokuapp.com/auth/facebook/callback',
     profileFields:['id','displayName','emails','gender','hometown','location']
   },
   function(accessToken, refreshToken, profile, done) {
