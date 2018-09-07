@@ -36,7 +36,7 @@ router.get('/email', (req,res) =>{
   res.render('email');
 });
 
-router.get('/', (req,res) => {
+router.get('/', (req,res,next) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
     var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?";
@@ -46,7 +46,7 @@ router.get('/', (req,res) => {
         var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
         res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],img:a, token: tokenGen.getToken()});
       }else{
-        res.render('error');
+        next();
       }
     });
   }else {
@@ -57,7 +57,7 @@ router.get('/', (req,res) => {
         var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
         res.render('index',{currentPost: result[0][0], forumPosts: result[1],img:a});
       }else{
-        res.render('error');
+        next();
       }
     });
   }
