@@ -18,7 +18,13 @@
             <span class="post_content"><%- post.post_content %></span>
 
             <div class="w3-bar">
-              <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-heart-o"> 34 </i> </a>
+              <span class="w3-bar-item w3-button post_like" href="#" ref-data="<%= post.ID %>">
+              <% if(like == "0"){ %>
+                <i class="fa fa-heart-o"> <%= post.post_likes %> </i>
+              <% }else{ %>
+                <i class="fa fa-heart"> <%= post.post_likes %> </i>
+              <% } %>
+            </span>
               <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-comment-o"> <%= post.post_comments %> </i> </a>
               <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-star-o"> </i> </a>
             </div>
@@ -92,5 +98,6 @@
           $('.summernote').summernote();
       });
     </script>
+    <script src="/js/post_like.js"></script>
   </body>
 </html>
