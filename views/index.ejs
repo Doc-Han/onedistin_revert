@@ -46,7 +46,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;--footer-color
           <div style="margin-bottom:8px" id="price-comparison">
             <a class="w3-text-indigo w3-text-black" href="<%- currentPost.shoppy_link %>"><%= currentPost.shoppy_txt %></a>
           </div>
-          <div style="height:59px;overflow:hidden" class="buy w3-row">
+          <div style="height:59px;" class="buy w3-row">
             <% if(isAuthenticated){ %>
               <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
                 <span style="text-align:center" class="custom-txt-color w3-large"><b><%= currentPost.price %></b></span>
@@ -61,7 +61,13 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;--footer-color
               </a>
             <% } %>
 
-            <a style="background-color: #424242;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Share</a>
+            <span id="share_btn" style="cursor:pointer;position:relative;background-color: #424242;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Share
+            <div id="share_btns" style="cursor:pointer;position:absolute;left:50px;top:-120%;color:#fff;display:none;padding:16px;height:auto">
+              <i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i>
+              <i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i>
+              <i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i>
+            </div>
+          </span>
           </div>
           <h3 style="text-align:left"><%= currentPost.title %></h3>
           <div class="w3-left thing-get">
@@ -88,24 +94,9 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;--footer-color
       </div>
     </div>
 
-    <div style="width:100%" class="custom-footer-color">
-      <div class="w3-row page-wrap">
-        <div class="w3-col left-lane">
-          <h5>Don't miss out</h5>
-          <i style="background-color:#3B5998;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle fa-facebook"></i> Like us on Facebook <br>
-          <i style="background-color:#2f87d2;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle fa-twitter"></i> Follow us on Twitter <br>
-          <i style="background-color:#500f36;margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle fa-instagram"></i> Follow us on Instagram
-        </div>
-        <div class="w3-col middle-lane">
-          <h5>Earn reward points</h5>
-          Introduce a friend
-          <input class="w3-input w3-border w3-round" name="" value="">
-        </div>
-        <div class="w3-col right-lane">
-          <h5>Survey not yet available</h5>
-        </div>
-      </div>
-    </div>
+    <% include partials/footer.ejs %>
+
+
 
 
 
@@ -199,9 +190,9 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;--footer-color
                 </dl>
                 <form method="POST" action="https://community.ipaygh.com/gateway">
                   <input type="hidden" name="merchant_key" value="tk_965c30c0-a0b4-11e8-af31-f23c9170642f" />
-                  <input type="hidden" name="success_url" value="https://onedistin.herokuapp.com/p_s" />
-                  <input type="hidden" name="cancelled_url" value="https://onedistin.herokuapp.com/p_c" />
-                  <input type="hidden" name="deferred_url" value="https://onedistin.herokuapp.com/d_p" />
+                  <input type="hidden" name="success_url" value="http://localhost:8080/p_s" />
+                  <input type="hidden" name="cancelled_url" value="http://localhost:8080/p_c" />
+                  <input type="hidden" name="deferred_url" value="http://localhost:8080/d_p" />
                   <input type="hidden" name="invoice_id" value="<%= token %>" />
                   <input type="hidden" name="total" value="" />
                   <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Yes! Can't wait!</h3></button>
@@ -217,6 +208,14 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;--footer-color
 </div>
 <script src="/js/checkout.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+  $("#share_btn").hover(function(){
+    $("#share_btns").stop().show(400);
+  });
+  $("#share_btn").mouseleave(function(){
+    $("#share_btns").stop().hide(400);
+  });
+});
 // This is the code to redirect checkout to another link on mobile view!
 function checkout_btn_press() {
   if (screen.width <= 699) {
