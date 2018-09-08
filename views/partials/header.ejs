@@ -62,11 +62,15 @@
           </ul>
         </li>
         <% if(isAuthenticated){ %>
-          <li>
+          <li class="main">
             <a href="/rewards" title="rewards">
               <i style="background-image: url('../img/reward.png')"></i>
               <p>rewards</p>
             </a>
+            <ul style="overflow:hidden" class="content w3-round-xlarge">
+              <a href="/introduce"><li>Introduce a Friend</li></a>
+              <a href="/rewards"><li>rewards</li></a>
+            </ul>
           </li>
         <% } %>
         <li>
