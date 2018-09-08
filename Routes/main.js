@@ -211,6 +211,10 @@ router.get('/rewards', (req,res) => {
   });
 });
 
+router.get('/introduce', (req,res) => {
+  res.render('introduce');
+});
+
 router.get('/pastdeals', (req,res) => {
   var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp <= '"+currentTime.currentTime()+"' ";
   con.query(query,[0],function(err,result){
