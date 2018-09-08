@@ -42,23 +42,23 @@ router.get('/', (req,res,next) => {
     var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?";
     con.query(query,[user,user], function(err,result){
       if(err)throw err;
-      //if(result[0].length > 0 && result[1].length && result[2].length > 0 && result[3].length > 0){
+      if(result[0].length > 0 && result[1].length && result[2].length > 0 && result[3].length > 0){
         var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
         res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],img:a, token: tokenGen.getToken()});
-      /*}else{
+      }else{
         next();
-      }*/
+      }
     });
   }else {
     var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10";
     con.query(query, function(err,result){
       if(err)throw err;
-      //if(result[0].length > 0 && result[1].length > 0){
+      if(result[0].length > 0 && result[1].length > 0){
         var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
         res.render('index',{currentPost: result[0][0], forumPosts: result[1],img:a});
-      /*}else{
+      }else{
         next();
-      }*/
+      }
     });
   }
 

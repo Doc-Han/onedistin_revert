@@ -21,10 +21,10 @@ passport.use(new facebookStrategy({
       gender: data.gender,
       user_city: data.location.name.split(",")[0],
     }
+    console.log(fb_user);
     var query = "SELECT * FROM onedistin_users WHERE user_email='"+fb_user.email+"'";
     con.query(query, function(err,result){
       if(err)throw err;
-      console.log(result);
       if(result.length > 0){
         done(null, false);
       }else{
