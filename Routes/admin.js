@@ -55,7 +55,7 @@ router.get('/deal', (req,res) => {
   });
 });
 
-router.post('/deal', upload.single('image'), (req,res) => {
+router.post('/deal', upload.array('image'), (req,res) => {
   var title = req.body.dealTitle;
   var price = req.body.dealPrice;
   var ac_price = req.body.ac_price;
@@ -76,17 +76,24 @@ router.post('/deal', upload.single('image'), (req,res) => {
   con.query("SELECT ID FROM onedistin_deals WHERE timestamp=?",[date],function(err,result){
     if(err)throw err;
     if(result.length < 1){
+      var images = "";
+      req.files.forEach(function(item,index){
+        cloudinary.uploader.upload(item.path, function(img_res){
+          console.log(img_res);
+            var img_id = img_res.public_id;
+            images += img_id+"-***-";
+            if(index == req.files.length -1){
+              var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,footer_color)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp)VALUES(?,?,?,?,?,?,?,?)";
+              con.query(query,[null,title,price,ac_price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,images,bg_color,footer_color,null,author,title,body,url,0,0,postDate],function(err){
+                if(err)throw err;
+                  res.send("deal Inserted");
+                });
+            }
 
-      cloudinary.uploader.upload(req.file.path, function(img_res){
-        console.log(img_res);
-          var img_id = img_res.public_id;
-          var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,footer_color)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp)VALUES(?,?,?,?,?,?,?,?)";
-          con.query(query,[null,title,price,ac_price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,img_id,bg_color,footer_color,null,author,title,body,url,0,0,postDate],function(err){
-            if(err)throw err;
-              res.send("deal Inserted");
-            });
-
+        });
       });
+
+
 
     }else{
       console.log("Deal for this day already available");
