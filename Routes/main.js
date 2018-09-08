@@ -94,7 +94,7 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
         if(err) throw err;
         const user_id = result[0];
         var user = user_id.user_id;
-        con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,last_activity) VALUES (?,?,?,?,?)",[null,user,0,0,'new user'],function(err){
+        con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,offer_one,offer_two,offer_three,last_activity) VALUES (?,?,?,?,?,?,?,?)",[null,user,0,0,1,0,0,'new user'],function(err){
           if(err)throw err;
           //mailer.throwMail(email,"Welcome to Onedistin","<p>Thank you for creating an account with Onedistin</p><p>Visit our site daily to uncover the mystery of cheap items. See ya</p><br><p>Your Login info</p><p>Email: "+email+"</p><p>Username: "+username+"</p><p>Password: "+password+"</p>");
           req.login(user_id,function(err){
@@ -213,6 +213,10 @@ router.get('/rewards', (req,res) => {
 
 router.get('/introduce', (req,res) => {
   res.render('introduce');
+});
+
+router.get('/facebookinfo', (req,res) => {
+  res.render('facebook_next');
 });
 
 router.get('/pastdeals', (req,res) => {
