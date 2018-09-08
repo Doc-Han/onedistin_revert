@@ -5,10 +5,26 @@ var currentTime = require('../config/tools.js');
 var router = express.Router();
 
 router.get('/', (req,res) => {
+  var user = req.user.user_id;
+  var count = 0;
   var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"'";
   con.query(query,function(err,result){
     if (err) throw err;
-    res.render('forum', {posts: result});
+    result.forEach(function(item,index){
+      con.query("SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[user,item.ID], function(err,l_result){
+        //console.log(l_result);
+        if(l_result.length > 0){
+          item.liked = "1";
+        }else{
+          item.liked = "0";
+        }
+        //console.log(result);
+        if(index == result.length -1){
+          res.render('forum', {posts: result})
+        }
+      });
+    });
+    ;
   });
 });
 
@@ -24,8 +40,8 @@ router.post('/add', (req,res) => {
   var currentDate = currentTime.currentTime();
 
   var author = req.user.user_id;
-  var query = "INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_comments,timestamp)VALUES(?,?,?,?,?,?,?)";
-  con.query(query,[null,author,title,body,url,0,currentDate], function(err){
+  var query = "INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp)VALUES(?,?,?,?,?,?,?,?)";
+  con.query(query,[null,author,title,body,url,0,0,currentDate], function(err){
     if(err)throw err;
     console.log("post Inserted!");
     res.redirect('/forum');
@@ -54,13 +70,19 @@ router.post('/comment', (req,res) => {
 
 router.get('/:title', (req,res) => {
   var url = req.params.title;
+  var user = req.user.user_id;
   var query = "SELECT * FROM onedistin_posts WHERE post_url= ?";
   con.query(query,[url],function(err,p_result){
     if (err)throw err;
     const postId = p_result[0].ID;
-    con.query("SELECT * FROM onedistin_comments WHERE comment_post_ID=?",[postId],function(err,c_result){
+    con.query("SELECT * FROM onedistin_comments WHERE comment_post_ID=?;SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[postId,user,postId],function(err,c_result){
       if(err)throw err;
-      res.render('post', {post: p_result[0], comment: c_result});
+      if(c_result[1].length > 0){
+        var like = "1";
+      }else{
+        var like = "0";
+      }
+      res.render('post', {post: p_result[0], comment: c_result[0],like: like});
     });
 
   });
