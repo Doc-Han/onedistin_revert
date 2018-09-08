@@ -222,10 +222,11 @@ router.get('/facebookinfo', (req,res) => {
 router.post('/facebookinfo', (req,res) => {
   var user = req.user.user_id;
   var display_name = req.body.username;
+  var region = req.body.region;
   var password = req.body.password;
-  var query = "UPDATE onedistin_users SET display_name=?, password=? WHERE ID=?";
+  var query = "UPDATE onedistin_users SET display_name=?, user_loc=?, password=? WHERE ID=?";
   bcrypt.hash(password, 10, function(err,hash){
-    con.query(query, [display_name, password, user], function(err,result){
+    con.query(query, [display_name, region, password, user], function(err,result){
       if(err)throw err;
       res.redirect('/');
     });
