@@ -31,9 +31,6 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
           <% }); %>
           </div>
 
-          <div style="margin-bottom:8px" id="price-comparison">
-            <a class="w3-text-indigo w3-text-black" href="<%- currentPost.shoppy_link %>"><%= currentPost.shoppy_txt %></a>
-          </div>
           <div style="height:59px;" class="buy w3-row">
               <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
                 <span style="text-align:center" class="custom-txt-color w3-large"><b>Too Late</b></span>
@@ -43,7 +40,10 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
 
             <span id="share_btn" style="cursor:pointer;position:relative;background-color: #424242;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Oops</span>
           </div>
-          <h3 style="text-align:left"><%= currentPost.title %></h3>
+          <div style="margin-bottom:8px" id="price-comparison">
+            <a class="w3-text-indigo w3-text-black" href="<%- currentPost.shoppy_link %>">
+            WE'RE NOT SELLING THIS ANYMORE BUT YOU CAN BUY IT ON JUMIA</a>
+          </div>
           <div class="w3-left thing-get">
             <%- currentPost.thingGet %>
           </div>

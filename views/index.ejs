@@ -54,9 +54,9 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
 
             <span id="share_btn" style="cursor:pointer;position:relative;background-color: #424242;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Share
             <div id="share_btns" style="cursor:pointer;position:absolute;left:50px;top:-120%;color:#fff;display:none;padding:16px;height:auto">
-              <i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i>
-              <i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i>
-              <i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fonedistin.herokuapp.com%2F&amp;src=sdkpreparse"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i></a>
+              <a href="https://twitter.com/intent/tweet?text= <%= currentPost.share_txt %>"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>
+              <a href="whatsapp://send?text=<%= currentPost.share_txt %>" data-action="share/whatsapp/share"><i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i></a>
             </div>
           </span>
           </div>
@@ -76,8 +76,12 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
           <ul style="width:100%" class="w3-ul w3-margin-top">
             <% forumPosts.forEach(function(item){ %>
               <a class="w3-left" style="width:100%" href="/forum/<%= item.post_url %>"><li style="padding-left:0;width:inherit">
-                <img class="w3-circle" src="http://via.placeholder.com/50x50" alt="">
-                <%= item.post_title %>
+                <img class="w3-circle w3-left" src="http://via.placeholder.com/40x40" alt="">
+                  <%= item.post_title %>
+                  <i class="fa fa-heart"> <%= item.post_likes %> </i>
+                  <i class="fa fa-comment"> <%= item.post_comments %> </i>
+
+
               </li></a>
             <% }); %>
           </ul>

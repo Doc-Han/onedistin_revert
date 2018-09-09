@@ -397,6 +397,9 @@ img {vertical-align: middle;}
   text-align:center;
   line-height:50px*/
 }
+#share_btns a {
+  color: #fff;
+}
 .share_btn.facebook {
   background-color:#3B5998;
 }

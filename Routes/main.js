@@ -39,7 +39,7 @@ router.get('/email', (req,res) =>{
 router.get('/', (req,res,next) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
-    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?";
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?";
     con.query(query,[user,user], function(err,result){
       if(err)throw err;
       if(result[0].length > 0 && result[2].length > 0 && result[3].length > 0){
@@ -328,6 +328,10 @@ router.get('/sell', (req,res) => {
 
 router.get('/our-story', (req,res) => {
   res.render('story');
+});
+
+router.get('/support', (req,res) => {
+  res.render('support');
 });
 
 router.get('/logout', isLoggedIn, (req,res) => {
