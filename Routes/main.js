@@ -68,7 +68,12 @@ router.get('/', (req,res,next) => {
         var img_ids = combined_img_string.split("-***-");
         var images = [];
         img_ids.forEach(function(item,index){
-          var a = cloudinary.url(item, {effect: 'sharpen'});
+          if(index == 0){
+            var a = cloudinary.url(item,{effect: "colorize:70", color: result[0][0].bg_color});
+          }else{
+            var a = cloudinary.url(item,{effect: "sharpen"});
+          }
+
           images.push(a);
           if(index == img_ids.length -1){
             res.render('index',{currentPost: result[0][0], forumPosts: result[1],img:images});

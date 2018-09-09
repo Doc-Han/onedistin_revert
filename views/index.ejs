@@ -14,13 +14,15 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
       <div class="w3-col left-lane">
 
             <section class="item-hero">
-              <div style="background: url('')" id="hero-background"></div>
+              <div style="background: url('<%= img[0] %>')" id="hero-background"></div>
             </section>
           <div class="slideshow-container">
-            <% img.forEach(function(item){ %>
-              <div class="mySlides fade">
-                <img src="<%= item %>" style="width:100%;height:300px">
-              </div>
+            <% img.forEach(function(item,index){ %>
+              <% if(index > 0){ %>
+                <div class="mySlides fade">
+                  <img src="<%= item %>" style="width:100%;height:300px">
+                </div>
+              <% } %>
             <% }); %>
           </div>
 
