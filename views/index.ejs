@@ -1,7 +1,7 @@
 <% include partials/header.ejs %>
 <script type="text/javascript">
 var html = document.getElementsByTagName('html')[0];
-html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;--footer-color: <%= currentPost.footer_color %>";
+html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
 </script>
 <% if(isAuthenticated){ %>
   <input class="acpoit" type="hidden" value="<%= offers.offer_one+offers.offer_two+offers.offer_three%>-<%= currentPost.ac_price %>" />
@@ -22,7 +22,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;--footer-color
               </div>
             <% }); %>
           </div>
-          
+
           <div style="text-align:center">
           <% img.forEach(function(item,index){ %>
             <span class="dot" onclick="currentSlide(<%= index+1 %>)"></span>
