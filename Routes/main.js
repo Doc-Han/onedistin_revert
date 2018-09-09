@@ -269,10 +269,17 @@ router.get('/pastdeal/:id', (req,res) => {
   var query = "SELECT * FROM onedistin_deals WHERE ID='"+id+"';SELECT post_title,post_url FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10";
   con.query(query, function(err,result){
     if(err)throw err;
-    var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
-    console.log(id);
-    console.log(result);
-    res.render('past-deal',{currentPost: result[0][0], forumPosts: result[1],img:a});
+    var combined_img_string = result[0][0].img_id;
+    var img_ids = combined_img_string.split("-***-");
+    var images = [];
+    img_ids.forEach(function(item,index){
+      var a = cloudinary.url(item, {effect: 'sharpen'});
+      images.push(a);
+      if(index == img_ids.length -1){
+        res.render('past-deal',{currentPost: result[0][0], forumPosts: result[1],img:images});
+      }
+    });
+
   });
 });
 

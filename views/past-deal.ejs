@@ -1,7 +1,7 @@
 <% include partials/header.ejs %>
 <script type="text/javascript">
 var html = document.getElementsByTagName('html')[0];
-html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
+html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
 </script>
 
 <!--<div style="position:absolute;top:12%;left:0;right:0;z-index:-1;opacity:0.3">
@@ -9,49 +9,39 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
 </div>-->
     <div class="w3-row page-wrap">
       <div class="w3-col left-lane">
+
             <section class="item-hero">
-              <div id="hero-background"></div>
+              <div style="background: url('<%= img[0] %>')" id="hero-background"></div>
             </section>
           <div class="slideshow-container">
-
-          <div class="mySlides fade">
-            <img src="<%= img %>" style="width:100%;height:300px">
-          </div>
-
-
-          <div class="mySlides fade">
-            <img src="img/nice2.jpg" style="width:100%;height:300px">
-          </div>
-
-          <div class="mySlides fade">
-            <img src="img/nice3.jpg" style="width:100%;height:300px">
-          </div>
-          <div class="mySlides fade">
-            <img src="img/nice4.jpg" style="width:100%;height:300px">
-          </div>
-
-
+            <% img.forEach(function(item,index){ %>
+              <% if(index > 0){ %>
+                <div class="mySlides fade">
+                  <img src="<%= item %>" style="width:100%;height:300px">
+                </div>
+              <% } %>
+            <% }); %>
           </div>
 
           <div style="text-align:center">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
+          <% img.forEach(function(item,index){ %>
+            <% if(index > 0){ %>
+            <span class="dot" onclick="currentSlide(<%= index+1 %>)"></span>
+            <% } %>
+          <% }); %>
           </div>
 
           <div style="margin-bottom:8px" id="price-comparison">
             <a class="w3-text-indigo w3-text-black" href="<%- currentPost.shoppy_link %>"><%= currentPost.shoppy_txt %></a>
           </div>
-          <div style="height:59px;overflow:hidden" class="buy w3-row">
-
-              <a style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
-                <span style="text-align:center" class="custom-txt-color w3-large"><b><%= currentPost.price %></b></span>
+          <div style="height:59px;" class="buy w3-row">
+              <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
+                <span style="text-align:center" class="custom-txt-color w3-large"><b>Too Late</b></span>
                  <br>
-                <span class="custom-txt-color w3-medium">I'M SORRY</span>
+                <span class="custom-txt-color w3-medium">IT'S OVER</span>
               </a>
 
-            <a style="background-color: #424242;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Share</a>
+            <span id="share_btn" style="cursor:pointer;position:relative;background-color: #424242;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Oops</span>
           </div>
           <h3 style="text-align:left"><%= currentPost.title %></h3>
           <div class="w3-left thing-get">
@@ -78,13 +68,10 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>";
       </div>
     </div>
 
-    <div class="w3-padding w3-red">
-      This is the footer <br>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </div>
+    <% include partials/footer.ejs %>
 
-</div>
 <script type="text/javascript">
+
 // This is the code for the image slider
 var slideIndex = 1;
 showSlides(slideIndex);
