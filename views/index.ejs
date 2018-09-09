@@ -12,12 +12,12 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
 </div>-->
     <div class="w3-row page-wrap">
       <div class="w3-col left-lane">
-        <% img.forEach(function(item){ %>
+
             <section class="item-hero">
-              <div style="background: url('<%= item %>')" id="hero-background"></div>
+              <div style="background: url('')" id="hero-background"></div>
             </section>
           <div class="slideshow-container">
-
+            <% img.forEach(function(item){ %>
               <div class="mySlides fade">
                 <img src="<%= item %>" style="width:100%;height:300px">
               </div>
