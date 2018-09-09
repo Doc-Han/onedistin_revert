@@ -64,8 +64,16 @@ router.get('/', (req,res,next) => {
     con.query(query, function(err,result){
       if(err)throw err;
       if(result[0].length > 0){
-        var a = cloudinary.url(result[0][0].img_id, {effect: 'sharpen'});
-        res.render('index',{currentPost: result[0][0], forumPosts: result[1],img:a});
+        var combined_img_string = result[0][0].img_id;
+        var img_ids = combined_img_string.split("-***-");
+        var images = [];
+        img_ids.forEach(function(item,index){
+          var a = cloudinary.url(item, {effect: 'sharpen'});
+          images.push(a);
+          if(index == img_ids.length -1){
+            res.render('index',{currentPost: result[0][0], forumPosts: result[1],img:images});
+          }
+        });
       }else{
         next();
       }

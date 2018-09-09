@@ -374,20 +374,20 @@ img {vertical-align: middle;}
   width: 100%;
 }
 
-/*#hero-background {
-  background-image: url('../img/nice1.jpg');
-}
 
+.item-hero {
+  background: blue;
+}
 #hero-background {
     position: absolute;
     background-size: 1042px 1042px;
     background-repeat: no-repeat;
-    width: 1042px;
-    height: 1042px;
+    width: 900px;
+    height: 900px;
     top: -371px;
     left: -371px;
     z-index: -100;
-}*/
+}
 
 .share_btn {
   /*margin-bottom:5px;
