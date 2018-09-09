@@ -77,6 +77,22 @@ var n = 1;
     show();
   }
 
+  $("[name='region']").change(function(){
+    if($("[name='region']").val() == "Greater Accra"){
+      $("#del_table01").hide();
+      $("#del_table02").show();
+      del = 0;
+      $(".delivery-fee").text("GHS 5.00");
+      show();
+    }else{
+      $("#del_table01").show();
+      $("#del_table02").hide();
+      del = 1;
+      $(".delivery-fee").text("GHS 10.00");
+      show();
+    }
+  });
+
   $("#low").click(function(){
     del = 0;
     $(".delivery-fee").text("GHS 5.00");
