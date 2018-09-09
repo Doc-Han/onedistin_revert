@@ -71,6 +71,11 @@ var n = 1;
 
   });
 
+  if($("#low").length < 1){
+    del = 1;
+    $(".delivery-fee").text("GHS 10.00");
+    show();
+  }
 
   $("#low").click(function(){
     del = 0;
