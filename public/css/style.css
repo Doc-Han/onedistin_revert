@@ -185,6 +185,16 @@ li {
   display: none;
   border: 2px solid #000;
 }
+#header .content::after {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    margin-left: -50%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #000 transparent transparent transparent;
+}
 #header .content li {
     color: black;
     width: 100%;

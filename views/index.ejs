@@ -110,11 +110,26 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                   <span class="single-item">
                 <div style="padding:0;" class="checkout-item-bar w3-panel w3-row w3-border w3-round">
                   <!--<span class="w3-button reduce-item w3-right w3-red w3-xlarge w3-text-white">&times;</span>-->
-                  <img style="width:15%;margin-right:10px" class="w3-left w3-col" style="margin-right:10px;" src="<%= img %>" alt="">
-                  <span style="width:75%;" class="w3-col">
+                  <img style="width:15%;margin-right:10px" class="w3-left w3-col" style="margin-right:10px;" src="<%= img[1] %>" alt="">
+                  <div style="width:75%;" class="w3-col">
                     <h4 style="margin-bottom:0;text-align:left;"><b><%= currentPost.title %></b></h4>
                     <p style="text-align:left;"><%= currentPost.price %></p>
-                  </span>
+                  </div>
+
+                  <% currentPost.categories.forEach(function(item){ %>
+                    <div style="width:100%;border-top:1px solid #cccccc;" class="w3-col w3-padding">
+                      <span class="w3-left w3-xlarge"><%= item[0] %></span>
+                      <select class="w3-right w3-xlarge" name="category">
+                          <% item.forEach(function(i,index){ %>
+                            <% if(index > 0 && index < item.length-1){ %>
+                              <option value=""><%= i %></option>
+                            <% }%>
+
+                          <% }); %>
+                      </select>
+                    </div>
+                  <% }); %>
+
 
                 </div>
                 </span>
@@ -216,10 +231,10 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                     <span class="total_price">GHS 45.70</span></span> </dd>
                 </dl>
                 <form method="POST" action="https://community.ipaygh.com/gateway">
-                  <input type="hidden" name="merchant_key" value="tk_965c30c0-a0b4-11e8-af31-f23c9170642f" />
-                  <input type="hidden" name="success_url" value="http://localhost:8080/p_s" />
-                  <input type="hidden" name="cancelled_url" value="http://localhost:8080/p_c" />
-                  <input type="hidden" name="deferred_url" value="http://localhost:8080/d_p" />
+                  <input type="hidden" name="merchant_key" value="965c2850-a0b4-11e8-af31-f23c9170642f" />
+                  <input type="hidden" name="success_url" value="https://onedistin.herokuapp.com/p_s" />
+                  <input type="hidden" name="cancelled_url" value="https://onedistin.herokuapp.com/p_c" />
+                  <input type="hidden" name="deferred_url" value="https://onedistin.herokuapp.com/d_p" />
                   <input type="hidden" name="invoice_id" value="<%= token %>" />
                   <input type="hidden" name="total" value="" />
                   <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Yes! Can't wait!</h3></button>

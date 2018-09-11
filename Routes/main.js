@@ -50,6 +50,12 @@ router.get('/', (req,res,next) => {
           var a = cloudinary.url(item, {effect: 'sharpen'});
           images.push(a);
           if(index == img_ids.length -1){
+            var one = [];
+            var len = result[0][0].categories.split("-***-");
+            for(i=0;i<len.length-1;i++){
+              one[i] = len[i].split(",");
+            }
+            result[0][0].categories = one;
             res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],img:images, token: tokenGen.getToken()});
           }
         });

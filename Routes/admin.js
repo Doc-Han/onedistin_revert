@@ -67,6 +67,7 @@ router.post('/deal', upload.array('image'), (req,res) => {
   var shoppy_link = req.body.shopLink;
   var bg_color = req.body.bg_color;
   var share_txt = req.body.share_txt;
+  var cat = req.body.categories.trim();
 
   var author = "onedistin";
   var body = "";
@@ -84,8 +85,8 @@ router.post('/deal', upload.array('image'), (req,res) => {
           }
             if(index == req.files.length -1){
               var s_images = images.join("-***-");
-              var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,share_txt)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp)VALUES(?,?,?,?,?,?,?,?)";
-              con.query(query,[null,title,price,ac_price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,s_images,bg_color,share_txt,null,author,title,body,url,0,0,postDate],function(err){
+              var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,share_txt,categories)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp)VALUES(?,?,?,?,?,?,?,?)";
+              con.query(query,[null,title,price,ac_price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,s_images,bg_color,share_txt,cat,null,author,title,body,url,0,0,postDate],function(err){
                 if(err)throw err;
                   res.send("deal Inserted");
                 });

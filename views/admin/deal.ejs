@@ -18,6 +18,22 @@
 				<dd><input placeholder="Price" type="text" name="ac_price" value=""></dd>
 			</dl>
 
+      <input type="hidden" name="categories" value="">
+
+      <div class="w3-row w3-margin-bottom">
+        <div class="w3-half">
+          <span class="w3-row">
+            <input class="cat w3-input w3-threequarter w3-border" type="text" name="" value="">
+            <button class="cat-add w3-button w3-quarter w3-teal" type="button" name="button">Add</button>
+          </span>
+
+          <ul class="cat-list w3-row w3-ul w3-blue">
+
+          </ul>
+        </div>
+        <button class="add-cat-op w3-black w3-button" type="button" name="button"> <i class="fa fa-plus"></i> </button>
+      </div>
+
 
       <label class="w3-indigo w3-padding"> <i class="fa fa-pencil"></i> Marketing write up</label>
       <textarea class="summernote" name="marketingWriteUp"></textarea>
@@ -26,7 +42,7 @@
       <textarea class="summernote" name="thingGet"></textarea>
 
       <label class="w3-indigo w3-padding">Share text</label>
-      <textarea name="share_txt"></textarea>
+      <textarea class="w3-input w3-border w3-round w3-margin-bottom" name="share_txt"></textarea>
 
 				<dl>
 					<dt> <label>Shoppy text</label> </dt>
@@ -80,5 +96,35 @@
   <script>
     $(document).ready(function() {
         $('.summernote').summernote();
+        $('.cat-add').click(function(){
+          var val = $('.cat').val();
+          $('.cat-list:first').append('<li>'+val+'</li>');
+          $('.cat').val("");
+          $('.cat-list>li:first-child').addClass("w3-red");
+          getCat();
+        });
+        $('.add-cat-op').click(function(){
+          $('.cat-list').before('<ul class="cat-list w3-row w3-ul w3-blue"></ul>');
+        });
+        $('.cat-listli').click(function(){
+          alert('yay');
+        });
     });
+
+    function getCat(){
+      var len = $('.cat-list').length;
+      var cat = "";
+      for(i=0;i<len;i++){
+        var od = "";
+        var list = $('.cat-list:eq('+i+')>li').length;
+        for(n=0;n<list;n++){
+          var a = $('.cat-list:eq('+i+')>li:eq('+n+')').text();
+          od += a+",";
+        }
+        cat += od+"-***-";
+        alert(cat)
+      }
+      $("[name='categories']").val(cat);
+    }
+
   </script>
