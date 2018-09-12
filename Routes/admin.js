@@ -87,12 +87,7 @@ router.post('/deal', upload.array('image'), (req,res) => {
       var images = [];
       req.files.forEach(function(item,index){
         cloudinary.uploader.upload(item.path, function(img_res){
-          var img_id = await img_res.public_id;
-          images.push(img_id);
-          /*if(img_res.url){
-            var a
             images.push(img_res.public_id);
-          }*/
             if(index == req.files.length -1){
               var s_images = images.join("-***-");
               var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,share_txt,categories)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp)VALUES(?,?,?,?,?,?,?,?);INSERT INTO onedistin_survey (ID,dealTime,question,ans_one,ans_two,ans_three,ans_four,ans_five,ans_six)VALUES(?,?,?,?,?,?,?,?,?)";
