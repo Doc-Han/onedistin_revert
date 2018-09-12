@@ -50,6 +50,7 @@ router.get('/', (req,res,next) => {
           if(index == 0){
             var a = cloudinary.url(item,{transformation:[
               {effect: "colorize:80", color: result[0][0].bg_color},
+              {width: 900, height: 900, crop: "scale"}
             ]});
           }else{
             var a = cloudinary.url(item,{effect: "sharpen"});
@@ -83,6 +84,7 @@ router.get('/', (req,res,next) => {
           if(index == 0){
             var a = cloudinary.url(item,{transformation:[
               {effect: "colorize:80", color: result[0][0].bg_color},
+              {width: 900, height: 900, crop: "scale"}
             ]});
           }else{
             var a = cloudinary.url(item,{effect: "sharpen"});
