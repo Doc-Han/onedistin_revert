@@ -395,9 +395,10 @@ img {vertical-align: middle;}
     background-repeat: no-repeat;
     width: 900px;
     height: 900px;
-    top: -371px;
-    left: -371px;
+    top: -300px;
+    left: -200px;
     z-index: -100;
+    background-position: center;
 }
 
 .share_btn {

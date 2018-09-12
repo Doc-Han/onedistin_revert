@@ -47,7 +47,15 @@ router.get('/', (req,res,next) => {
         var img_ids = combined_img_string.split("-***-");
         var images = [];
         img_ids.forEach(function(item,index){
-          var a = cloudinary.url(item, {effect: 'sharpen'});
+          if(index == 0){
+            var a = cloudinary.url(item,{transformation:[
+              {effect: "art:quartz", color: result[0][0].bg_color},
+              {effect: "colorize:80", color: result[0][0].bg_color},
+              {effect: "blur:100"}
+            ]});
+          }else{
+            var a = cloudinary.url(item,{effect: "sharpen"});
+          }
           images.push(a);
           if(index == img_ids.length -1){
             var one = [];
@@ -66,7 +74,7 @@ router.get('/', (req,res,next) => {
       }
     });
   }else {
-    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10";
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"' ";
     con.query(query, function(err,result){
       if(err)throw err;
       if(result[0].length > 0){
@@ -75,14 +83,17 @@ router.get('/', (req,res,next) => {
         var images = [];
         img_ids.forEach(function(item,index){
           if(index == 0){
-            var a = cloudinary.url(item,{effect: "colorize:70", color: result[0][0].bg_color});
+            var a = cloudinary.url(item,{transformation:[
+              {effect: "colorize:80", color: result[0][0].bg_color},
+              {effect: "gradient_fade:symmetric_pad", x: "0.5"}
+            ]});
           }else{
             var a = cloudinary.url(item,{effect: "sharpen"});
           }
 
           images.push(a);
           if(index == img_ids.length -1){
-            res.render('index',{currentPost: result[0][0], forumPosts: result[1],img:images});
+            res.render('index',{currentPost: result[0][0], forumPosts: result[1],survey: result[2][0],img:images});
           }
         });
       }else{
