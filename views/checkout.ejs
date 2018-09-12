@@ -15,10 +15,25 @@
         <div style="padding:0;" class="checkout-item-bar w3-panel w3-row w3-border w3-round">
           <!--<span class="w3-button reduce-item w3-right w3-red w3-xlarge w3-text-white">&times;</span>-->
           <img style="width:15%;margin-right:10px" class="w3-left w3-col" style="margin-right:10px;" src="<%= img %>" alt="">
-          <span style="width:75%;" class="w3-col">
+          <div style="width:75%;" class="w3-col">
             <h4 style="margin-bottom:0;text-align:left;"><b><%= currentPost.title %></b></h4>
             <p style="text-align:left;"><%= currentPost.price %></p>
-          </span>
+          </div>
+
+          <% currentPost.categories.forEach(function(item){ %>
+            <div style="width:100%;border-top:1px solid #cccccc;" class="w3-col w3-padding">
+              <span class="w3-left w3-xlarge"><%= item[0] %></span>
+              <select class="w3-right w3-xlarge" name="category">
+                  <% item.forEach(function(i,index){ %>
+                    <% if(index > 0 && index < item.length-1){ %>
+                      <option value=""><%= i %></option>
+                    <% }%>
+
+                  <% }); %>
+              </select>
+            </div>
+          <% }); %>
+
 
         </div>
         </span>
@@ -51,15 +66,51 @@
             <dd> <input type="text" name="" value="<%= currentUser.user_phone %>"> </dd>
           </dl>
         </div>
-        <h3 style="text-align:left">Delivery fee:</h3>
-        <table>
-          <tr>
-            <td><input id="low" type="radio" name="fee" checked> <b>GHS 5</b> - <span class="w3-opacity">Delivery within 5 working days</span></td>
-          </tr>
-          <tr>
-            <td style="text-align:left"><input id="high" type="radio" name="fee"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 24Hrs</span></td>
-          </tr>
-        </table>
+        <% if(offers.offer_one == 1){ %>
+          <p>Your delivery is free</p>
+        <% }else{ %>
+          <h3 style="text-align:left">Delivery fee:</h3>
+          <% if(currentUser.user_loc !== "Greater Accra"){ %>
+            <table id="del_table01">
+              <tr>
+                <td style="text-align:left"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 5 working days</span></td>
+              </tr>
+              <tr>
+                <td><p style="text-align:left" class="w3-text-red">delivery will be made to your nearest VIP station.</p></td>
+              </tr>
+            </table>
+
+
+            <table id="del_table02" style="display:none">
+              <tr>
+                <td><input id="low" type="radio" name="fee" checked> <b>GHS 5</b> - <span class="w3-opacity">Delivery within 5 working days</span></td>
+              </tr>
+              <tr>
+                <td style="text-align:left"><input id="high" type="radio" name="fee"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 24Hrs</span></td>
+              </tr>
+            </table>
+          <% }else{ %>
+            <table id="del_table01" style="display:none">
+              <tr>
+                <td style="text-align:left"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 5 working days</span></td>
+              </tr>
+              <tr>
+                <td><p style="text-align:left" class="w3-text-red">delivery will be made to your nearest VIP station.</p></td>
+              </tr>
+            </table>
+
+
+            <table id="del_table02">
+              <tr>
+                <td><input id="low" type="radio" name="fee" checked> <b>GHS 5</b> - <span class="w3-opacity">Delivery within 5 working days</span></td>
+              </tr>
+              <tr>
+                <td style="text-align:left"><input id="high" type="radio" name="fee"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 24Hrs</span></td>
+              </tr>
+            </table>
+          <% } %>
+
+        <% } %>
         <br>
         <a style="cursor: pointer;text-align:left" class="show-coupon"><h3>Got a coupon code? <i class="fa fa-angle-down"></i> </h3></a>
         <input style="display:none;width:100%;height:55px" class="w3-round w3-border coupon-box" type="text" name="" placeholder="Enter your coupon">
@@ -67,15 +118,28 @@
         <h3 style="text-align:left">Finally! Want this right?</h3>
         <dl class="straight">
           <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price w3-text-blue"><%= currentPost.price %></span> </dd>
-          <dd> <label>Delivery fee</label> <span class="delivery-fee price w3-text-blue">GHS 5.0</span> </dd>
-          <dd> <label>Total</label> <span class="total_price price w3-text-blue">GHS 45.70</span> </dd>
+          <dd> <label>Delivery fee</label>
+            <% if(offers.offer_one == 1){ %>
+              <span class="w3-tag w3-green price">free delivery</span>
+            <% }else{ %>
+              <span class="delivery-fee price w3-text-blue">GHS 5.0</span>
+            <% } %>
+          </dd>
+          <dd> <label>Total</label> <span class="price w3-text-blue">
+            <% if(offers.offer_three == 1){ %>
+              <span class="w3-tag w3-green">10% off</span>
+            <% } %>
+            <% if(offers.offer_two == 1){ %>
+              <span class="w3-tag w3-green">5% off</span>
+            <% } %>
+            <span class="total_price">GHS 45.70</span></span> </dd>
         </dl>
         <form method="POST" action="https://community.ipaygh.com/gateway">
-          <input type="hidden" name="merchant_key" value="tk_965c30c0-a0b4-11e8-af31-f23c9170642f" />
+          <input type="hidden" name="merchant_key" value="965c2850-a0b4-11e8-af31-f23c9170642f" />
           <input type="hidden" name="success_url" value="https://onedistin.herokuapp.com/p_s" />
           <input type="hidden" name="cancelled_url" value="https://onedistin.herokuapp.com/p_c" />
           <input type="hidden" name="deferred_url" value="https://onedistin.herokuapp.com/d_p" />
-          <input type="hidden" name="invoice_id" value="<= token %>" />
+          <input type="hidden" name="invoice_id" value="<%= token %>" />
           <input type="hidden" name="total" value="" />
           <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Yes! Can't wait!</h3></button>
         </form>

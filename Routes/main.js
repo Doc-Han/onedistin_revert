@@ -49,9 +49,7 @@ router.get('/', (req,res,next) => {
         img_ids.forEach(function(item,index){
           if(index == 0){
             var a = cloudinary.url(item,{transformation:[
-              {effect: "art:quartz", color: result[0][0].bg_color},
               {effect: "colorize:80", color: result[0][0].bg_color},
-              {effect: "blur:100"}
             ]});
           }else{
             var a = cloudinary.url(item,{effect: "sharpen"});
@@ -85,7 +83,6 @@ router.get('/', (req,res,next) => {
           if(index == 0){
             var a = cloudinary.url(item,{transformation:[
               {effect: "colorize:80", color: result[0][0].bg_color},
-              {effect: "gradient_fade:symmetric_pad", x: "0.5"}
             ]});
           }else{
             var a = cloudinary.url(item,{effect: "sharpen"});
@@ -149,11 +146,21 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
 
 router.get('/checkout', isLoggedIn, (req,res) => {
   var user = req.user.user_id;
-  var query = "SELECT * FROM onedistin_users WHERE ID = ?;SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'";
-  con.query(query, [user], function(err,result){
+  var query = "SELECT * FROM onedistin_users WHERE ID = ?;SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?";
+  con.query(query, [user,user], function(err,result){
     if(err)throw err;
-    var a = cloudinary.url(result[1][0].img_id, {effect: 'sharpen'});
-      res.render('checkout',{currentUser: result[0][0],currentPost: result[1][0],img: a, token: tokenGen.getToken()});
+    var combined_img_string = result[1][0].img_id;
+    var img_ids = combined_img_string.split("-***-");
+    var a = cloudinary.url(img_ids[1], {effect: 'sharpen'});
+
+    var one = [];
+    var len = result[1][0].categories.split("-***-");
+    for(i=0;i<len.length-1;i++){
+      one[i] = len[i].split(",");
+    }
+    result[1][0].categories = one;
+
+      res.render('checkout',{currentUser: result[0][0],currentPost: result[1][0],offers: result[2][0],img: a, token: tokenGen.getToken()});
   });
 });
 
