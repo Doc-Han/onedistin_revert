@@ -59,11 +59,26 @@
       </div>
     </div>
     <div class="w3-col w3-padding right-lane">
-      <h5>What is the best pomade in Ghana?</h5>
-      <input class="w3-margin-bottom w3-xxlarge" type="radio" name="ans" value=""> Nivea <br>
-      <input class="w3-margin-bottom w3-xxlarge" type="radio" name="ans" value=""> Bella <br>
-      <input class="w3-margin-bottom w3-xxlarge" type="radio" name="ans" value=""> Cocoa Butter <br>
-      <input class="w3-margin-bottom w3-xxlarge" type="radio" name="ans" value=""> Vaseline <br>
+      <h5><%= survey.question %></h5>
+      <% if(survey.ans_one){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="one"> <%= survey.ans_one %> <br>
+      <% } %>
+      <% if(survey.ans_two){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="two"> <%= survey.ans_two %> <br>
+      <% } %>
+      <% if(survey.ans_three){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="three"> <%= survey.ans_three %> <br>
+      <% } %>
+      <% if(survey.ans_four){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="four"> <%= survey.ans_four %> <br>
+      <% } %>
+      <% if(survey.ans_five){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="five"> <%= survey.ans_five %> <br>
+      <% } %>
+      <% if(survey.ans_six){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="six"> <%= survey.ans_six %> <br>
+      <% } %>
+
     </div>
   </div>
 </div>

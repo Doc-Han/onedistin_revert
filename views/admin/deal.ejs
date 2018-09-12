@@ -19,19 +19,32 @@
 			</dl>
 
       <input type="hidden" name="categories" value="">
+      <input type="hidden" name="survey" value="">
 
       <div class="w3-row w3-margin-bottom">
+
         <div class="w3-half">
           <span class="w3-row">
-            <input class="cat w3-input w3-threequarter w3-border" type="text" name="" value="">
+            <input class="cat w3-input w3-grey w3-rest w3-border" type="text" name="" value="">
+            <button style="display:none" class="add-cat-op w3-quarter w3-black w3-button" type="button" name="button"> <i class="fa fa-plus"></i> </button>
             <button class="cat-add w3-button w3-quarter w3-teal" type="button" name="button">Add</button>
           </span>
 
-          <ul class="cat-list w3-row w3-ul w3-blue">
+          <ul class="cat-list w3-row w3-ul w3-white">
 
           </ul>
         </div>
-        <button class="add-cat-op w3-black w3-button" type="button" name="button"> <i class="fa fa-plus"></i> </button>
+
+        <div class="w3-half">
+          <span class="w3-row">
+            <input class="suv w3-input w3-grey w3-threequarter w3-border" type="text" name="" value="">
+            <button class="suv-add w3-button w3-quarter w3-teal" type="button" name="button">Add</button>
+          </span>
+
+          <ul class="suv-list w3-row w3-ul w3-white">
+
+          </ul>
+        </div>
       </div>
 
 
@@ -97,17 +110,32 @@
     $(document).ready(function() {
         $('.summernote').summernote();
         $('.cat-add').click(function(){
+          $('.cat').removeClass("w3-grey").addClass("w3-white");
           var val = $('.cat').val();
           $('.cat-list:first').append('<li>'+val+'</li>');
           $('.cat').val("");
-          $('.cat-list>li:first-child').addClass("w3-red");
+          $('.cat-list>li:first-child').addClass("w3-grey");
+          var len = $('.cat-list:eq(0)>li').length;
+          if(len > 1){
+            $('.add-cat-op').css("display","block");
+          }else{
+            $('.add-cat-op').css("display","none");
+          }
           getCat();
         });
         $('.add-cat-op').click(function(){
-          $('.cat-list').before('<ul class="cat-list w3-row w3-ul w3-blue"></ul>');
+          $('.cat-list').before('<ul class="cat-list w3-row w3-ul w3-white"></ul>');
+          $(this).css("display","none");
+          $('.cat').removeClass("w3-white").addClass("w3-grey");
         });
-        $('.cat-listli').click(function(){
-          alert('yay');
+
+        $('.suv-add').click(function(){
+          $('.suv').removeClass("w3-grey").addClass("w3-white");
+          var val = $('.suv').val();
+          $('.suv-list:first').append('<li>'+val+'</li>');
+          $('.suv').val("");
+          $('.suv-list>li:first-child').addClass("w3-grey");
+          getSuv();
         });
     });
 
@@ -122,9 +150,19 @@
           od += a+",";
         }
         cat += od+"-***-";
-        alert(cat)
       }
       $("[name='categories']").val(cat);
+    }
+
+    function getSuv(){
+      var od = [];
+        var list = $('.suv-list:eq(0)>li').length;
+        for(n=0;n<list;n++){
+          var a = $('.suv-list:eq(0)>li:eq('+n+')').text();
+          od.push(a);
+        }
+        var c = od.join(",");
+      $("[name='survey']").val(c);
     }
 
   </script>

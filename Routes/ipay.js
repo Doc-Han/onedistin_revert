@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/p_s', (req,res) =>{
+  console.log("query for payment is "+req.query);
   res.render("ipay/p_s");
 });
 
