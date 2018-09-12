@@ -86,7 +86,7 @@ router.post('/deal', upload.array('image'), (req,res) => {
     if(result.length < 1){
       var images = [];
       req.files.forEach(function(item,index){
-        cloudinary.uploader.upload(item.path, function(img_res){
+        await cloudinary.uploader.upload(item.path, function(img_res){
           if(img_res.url){
             images.push(img_res.public_id);
           }
