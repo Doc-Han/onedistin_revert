@@ -379,6 +379,10 @@ router.get('/support', (req,res,next) => {
 
 });
 
+router.get('/privacy', (req,res) => {
+  res.render('p_n_p');
+});
+
 router.post('/support', (req,res) => {
   var user = req.user.user_id;
   var body = req.body;

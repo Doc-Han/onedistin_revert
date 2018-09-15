@@ -35,24 +35,24 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
           </div>
 
           <div style="margin-bottom:8px" id="price-comparison">
-            <a class="w3-text-indigo w3-text-black" href="<%- currentPost.shoppy_link %>"><%= currentPost.shoppy_txt %></a>
+            <a class="w3-text-indigo w3-text-black muli-regular" style="font-size: 14px" href="<%- currentPost.shoppy_link %>"><%= currentPost.shoppy_txt %></a>
           </div>
           <div style="height:59px;" class="buy w3-row">
             <% if(isAuthenticated){ %>
-              <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
-                <span style="text-align:center" class="custom-txt-color w3-large"><b><%= currentPost.price %></b></span>
+              <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 0px" class="w3-col w3-button w3-round-xxlarge button-color">
+                <span style="text-align:center;font-size:24px;line-height:28px" class="custom-txt-color muli-semi-bold"><b><%= currentPost.price %></b></span>
                  <br>
-                <span class="custom-txt-color w3-medium">GET DISTIN</span>
+                <span style="font-size:16px;line-height:16px" class="custom-txt-color w3-medium muli-regular">BUY DISTIN</span>
               </a>
             <% }else{ %>
-              <a href="/login" style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
-                <span style="text-align:center" class="custom-txt-color w3-large"><b>GHS <%= currentPost.price %></b></span>
+              <a href="/login" style="width:78%;height: 59px; padding: 5px 0px" class="w3-col w3-button w3-round-xxlarge muli button-color">
+                <span style="text-align:center;font-size:24px;line-height:28px" class="custom-txt-color muli-semi-bold"><b>GHS <%= currentPost.price %></b></span>
                  <br>
-                <span class="custom-txt-color w3-medium">GET DISTIN</span>
+                <span style="font-size:16px;line-height:16px" class="custom-txt-color w3-medium muli-regular">BUY DISTIN</span>
               </a>
             <% } %>
 
-            <span id="share_btn" style="cursor:pointer;position:relative;background-color: #424242;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle" href="#">Share
+            <span id="share_btn" style="font-size: 18px;cursor:pointer;position:relative;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle muli-regular button-color" href="#">Share
             <div id="share_btns" style="cursor:pointer;position:absolute;left:50px;top:-120%;color:#fff;display:none;padding:16px;height:auto">
               <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fonedistin.herokuapp.com%2F&amp;src=sdkpreparse"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i></a>
               <a href="https://twitter.com/intent/tweet?text= <%= currentPost.share_txt %>"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>
@@ -60,7 +60,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
             </div>
           </span>
           </div>
-          <h3 style="text-align:left"><%= currentPost.title %></h3>
+          <h3 style="text-align:left;font-size:22px" class="muli-regular"><%= currentPost.title %></h3>
           <div class="w3-left thing-get">
             <%- currentPost.thingGet %>
           </div>
@@ -76,7 +76,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
           <ul style="width:100%" class="w3-ul w3-margin-top">
             <% forumPosts.forEach(function(item){ %>
               <a class="w3-left" style="width:100%" href="/forum/<%= item.post_url %>"><li style="padding-left:0;width:inherit">
-                <img class="w3-circle w3-left" src="http://via.placeholder.com/40x40" alt="">
+                <!--<img class="w3-circle w3-left" src="http://via.placeholder.com/40x40" alt="">-->
                   <%= item.post_title %>
                   <i class="fa fa-heart"> <%= item.post_likes %> </i>
                   <i class="fa fa-comment"> <%= item.post_comments %> </i>
@@ -85,7 +85,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
               </li></a>
             <% }); %>
           </ul>
-          <a href="/forum"><button style="background-color: #424242;margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-margin-top" type="submit" name="button"><h5 class="custom-txt-color" style="margin:0">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
+          <a href="/forum"><button style="margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><h5 class="custom-txt-color muli-regular" style="margin:0;font-size:22px;line-height:46px">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
       </div>
     </div>
 
@@ -134,7 +134,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                 </div>
                 </span>
                 </span>
-                <a style="width:100%;" class="add-item-bar w3-button w3-round-xlarge w3-border w3-text-teal" href="#"><h3 style="margin:0">Wanna add another?</h3></a>
+                <a style="width:100%;" class="add-item-bar w3-button w3-round-xxlarge w3-border w3-text-teal" href="#"><h3 style="margin:0">Wanna add another?</h3></a>
                 <h3 style="text-align:left">Where should we deliver distin?</h3>
                 <div class="shipping-address">
                   <dl>
@@ -237,7 +237,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                   <input type="hidden" name="deferred_url" value="https://onedistin.herokuapp.com/d_p" />
                   <input type="hidden" name="invoice_id" value="<%= token %>" />
                   <input type="hidden" name="total" value="" />
-                  <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Yes! Can't wait!</h3></button>
+                  <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Yes! Can't wait!</h3></button>
                 </form>
 
               </div>

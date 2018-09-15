@@ -1,66 +1,27 @@
-<style>
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
 
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 140px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 150%;
-    left: 50%;
-    margin-left: -75px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-/*.tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}*/
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-</style>
 <div style="width:100%;background-color: rgba(0,0,0,0.2);color:#000;font-weight:bolder">
   <div class="w3-row page-wrap">
-    <div class="w3-col w3-padding left-lane">
-      <h5>Don't miss out</h5>
-      <i style="background-color:#3B5998;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-facebook"></i> Like us on Facebook <br>
-      <i style="background-color:#2f87d2;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-twitter"></i> Follow us on Twitter <br>
-      <i style="background-color:#500f36;margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-instagram"></i> Follow us on Instagram
+    <div style="padding-right:20px" class="w3-col left-lane">
+      <h5 style="font-size:22px" class="muli-regular">Don't miss out</h5>
+      <i style="background-color:#3B5998;margin-bottom:5px;font-size:16px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-facebook"></i> <span class="muli-regular">Like us on Facebook</span> <br>
+      <i style="background-color:#2f87d2;margin-bottom:5px;font-size:16px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-twitter"></i> <span class="muli-regular">Follow us on Twitter</span> <br>
+      <i style="background-color:#500f36;margin-bottom:50px;font-size:16px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-instagram"></i> <span class="muli-regular">Follow us on Instagram</span>
     </div>
-    <div class="w3-col w3-padding middle-lane">
-      <h5>Introduce a friend</h5>
-      <p style="text-align:left">Give a friend 100 points when you introduce them to onedistin and Get 100 points when they make their first purchase.</p>
-      <div id="myInput" style="font-size:28px;overflow-x:scroll" class="w3-text-blue-grey w3-sand w3-border w3-round">
+    <div style="padding-right:20px" class="w3-col middle-lane">
+      <h5 style="font-size:22px" class="muli-regular" >Introduce a friend</h5>
+      <p style="text-align:left;font-size:16px" class="muli-regular">Give a friend 100 points when you introduce them to onedistin and Get 100 points when they make their first purchase.</p>
+      <div id="myInput" style="font-size:16px;" class="w3-text-blue-grey w3-sand w3-border w3-round">
         http://onedistin.herokuapp.com/referer/4yk378j
       </div>
       <div class="tooltip">
-        <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" onmouseout="outFunc()">
-          <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-          <h3 style="margin:0">Copy & Share</h3>
+        <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top">
+          <a href="whatsapp://send?text=" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Invite</h3></a>
         </button>
       </div>
     </div>
-      <div class="w3-col w3-padding right-lane">
+      <div style="padding-right:20px" class="w3-col right-lane">
     <% if(currentUser.survey == today){ %>
-      <p>You've already submitted your vote.</p>
+      <p style="font-size:22px" class="muli-regular" >You've already submitted your vote.</p>
           <!--<div class="w3-row">
             <div class="w3-col w3-blue" style="width:50%">
 
@@ -93,26 +54,26 @@
           </div>-->
     <% }else{ %>
       <span id="survey">
-        <h5><%= survey.question %></h5>
+        <h5 style="font-size:22px" class="muli-regular"><%= survey.question %></h5>
         <% if(survey.ans_one){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="one"> <span style="word-break:break-all"><%= survey.ans_one %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="one"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_one %></span> <br>
         <% } %>
         <% if(survey.ans_two){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="two"> <span style="word-break:break-all"><%= survey.ans_two %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="two"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_two %></span> <br>
         <% } %>
         <% if(survey.ans_three){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="three"> <span style="word-break:break-all"><%= survey.ans_three %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="three"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_three %></span> <br>
         <% } %>
         <% if(survey.ans_four){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="four"> <span style="word-break:break-all"><%= survey.ans_four %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="four"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_four %></span> <br>
         <% } %>
         <% if(survey.ans_five){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="five"> <span style="word-break:break-all"><%= survey.ans_five %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="five"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_five %></span> <br>
         <% } %>
         <% if(survey.ans_six){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="six"> <span style="word-break:break-all"><%= survey.ans_six %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="six"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_six %></span> <br>
         <% } %>
-        <button style="background-color: #424242;margin-bottom:10px;padding: auto 90px" class="submit-survey w3-button w3-round-xxlarge w3-margin-top" type="submit" name="button"><h5 class="custom-txt-color" style="margin:0"> <i class="fa fa-hand-spock-o"></i> Vote </h5></button>
+        <button style="margin-bottom:10px;padding: auto 90px" class="submit-survey w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><h5 class="custom-txt-color" style="margin:0;font-size:22px" class="muli-regular"> Vote </h5></button>
       </span>
     <% } %>
     </div>

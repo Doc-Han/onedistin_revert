@@ -1,5 +1,6 @@
 $(document).ready(function(){
   $(".submit-survey").click(function(){
+    $(this).hide(500);
     var a = $("input[name='survey']:checked").val();
     data = {
       ans: a
