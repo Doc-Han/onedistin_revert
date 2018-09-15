@@ -64,7 +64,7 @@ router.get('/', (req,res,next) => {
             }
             result[0][0].categories = one;
             var survey = result[4][0];
-            res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],img:images, token: tokenGen.getToken()});
+            res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],img:images, token: tokenGen.getToken(),today: currentDate.currentDate()});
           }
         });
 
@@ -93,7 +93,7 @@ router.get('/', (req,res,next) => {
 
           images.push(a);
           if(index == img_ids.length -1){
-            res.render('index',{currentPost: result[0][0], forumPosts: result[1],survey: result[2][0],img:images});
+            res.render('index',{currentPost: result[0][0], forumPosts: result[1],survey: result[2][0],img:images,today: currentDate.currentDate()});
           }
         });
       }else{
