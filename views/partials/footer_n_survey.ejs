@@ -1,65 +1,92 @@
-<style>
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 140px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 150%;
-    left: 50%;
-    margin-left: -75px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-/*.tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}*/
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-</style>
 <div style="width:100%;background-color: rgba(0,0,0,0.2);color:#000;font-weight:bolder">
   <div class="w3-row page-wrap">
-    <div class="w3-col w3-padding left-lane">
-      <h5>Don't miss out</h5>
-      <i style="background-color:#3B5998;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-facebook"></i> Like us on Facebook <br>
-      <i style="background-color:#2f87d2;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-twitter"></i> Follow us on Twitter <br>
-      <i style="background-color:#500f36;margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-instagram"></i> Follow us on Instagram
+    <div style="padding-right:20px" class="w3-col left-lane">
+      <h5 style="font-size:22px" class="muli-regular">Don't miss out</h5>
+      <i style="background-color:#3B5998;margin-bottom:5px;font-size:16px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-facebook"></i> <span class="muli-regular">Like us on Facebook</span> <br>
+      <i style="background-color:#2f87d2;margin-bottom:5px;font-size:16px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-twitter"></i> <span class="muli-regular">Follow us on Twitter</span> <br>
+      <i style="background-color:#500f36;margin-bottom:50px;font-size:16px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-instagram"></i> <span class="muli-regular">Follow us on Instagram</span>
     </div>
-    <div class="w3-col w3-padding middle-lane">
-      <h5>Introduce a friend</h5>
-      <p style="text-align:left">Give a friend 100 points when you introduce them to onedistin and Get 100 points when they make their first purchase.</p>
-      <div id="myInput" style="font-size:28px;overflow-x:scroll" class="w3-text-blue-grey w3-sand w3-border w3-round">
+    <div style="padding-right:20px" class="w3-col middle-lane">
+      <h5 style="font-size:22px" class="muli-regular" >Introduce a friend</h5>
+      <p style="text-align:left;font-size:16px" class="muli-regular">Give a friend 100 points when you introduce them to onedistin and Get 100 points when they make their first purchase.</p>
+      <div id="myInput" style="font-size:16px;" class="w3-text-blue-grey w3-sand w3-border w3-round">
         http://onedistin.herokuapp.com/referer/4yk378j
       </div>
       <div class="tooltip">
-        <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" onmouseout="outFunc()">
-          <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-          <h3 style="margin:0">Copy & Share</h3>
+        <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top">
+          <a href="whatsapp://send?text=" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Invite</h3></a>
         </button>
       </div>
     </div>
-      <div class="w3-col w3-padding right-lane">
-        <p>The survey is past!</p>
+      <div style="padding-right:20px" class="w3-col right-lane">
+      <h5 style="font-size:22px" class="muli-regular"><%= survey.question %></h5>
+      <% var total = (survey.ans_one_no*1) + (survey.ans_two_no*1) + (survey.ans_three_no*1) + (survey.ans_four_no*1) + (survey.ans_five_no*1) + (survey.ans_six_no*1); %>
+
+      <% if(survey.ans_one){ %>
+      <div style="position:relative" class="w3-row">
+        <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_one_no*1)/total)*100 %>%">
+          <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+          <%= survey.ans_one+' - '+ (((survey.ans_one_no*1)/total)*100).toFixed(0)+'%' %>
+        </div>
+        </div>
+      </div>
+      <% } %>
+
+      <% if(survey.ans_two){ %>
+      <div style="position:relative" class="w3-row">
+        <div class="w3-col w3-blue" style="height: 40px;margin-bottom:5px;width:<%= ((survey.ans_two_no*1)/total)*100 %>%">
+          <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+            <%= survey.ans_two+' - '+(((survey.ans_two_no*1)/total)*100).toFixed(0)+'%' %>
+          </div>
+
+        </div>
+      </div>
+      <% } %>
+
+      <% if(survey.ans_three){ %>
+      <div style="position:relative" class="w3-row">
+        <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_three_no*1)/total)*100 %>%">
+          <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+          <%= survey.ans_three+' - '+(((survey.ans_three_no*1)/total)*100).toFixed(0)+'%' %>
+        </div>
+        </div>
+      </div>
+
+      <% } %>
+
+      <% if(survey.ans_four){ %>
+      <div style="position:relative" class="w3-row">
+        <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_four_no*1)/total)*100 %>%">
+          <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+          <%= survey.ans_four+' - '+(((survey.ans_four_no*1)/total)*100).toFixed(0)+'%' %>
+        </div>
+        </div>
+      </div>
+
+      <% } %>
+
+      <% if(survey.ans_five){ %>
+      <div style="position:relative" class="w3-row">
+        <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_five_no*1)/total)*100 %>%">
+          <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+          <%= survey.ans_five+' - '+(((survey.ans_five_no*1)/total)*100).toFixed(0)+'%' %>
+        </div>
+        </div>
+      </div>
+
+      <% } %>
+
+      <% if(survey.ans_six){ %>
+      <div style="position:relative" class="w3-row">
+        <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_five_no*1)/total)*100 %>%;">
+          <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+          <%= survey.ans_six+' - '+(((survey.ans_six_no*1)/total)*100).toFixed(0)+'%' %>
+        </div>
+        </div>
+      </div>
+
+      <% } %>
+
     </div>
   </div>
 </div>

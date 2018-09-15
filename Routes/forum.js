@@ -5,27 +5,38 @@ var currentTime = require('../config/tools.js');
 var router = express.Router();
 
 router.get('/', (req,res) => {
-  var user = req.user.user_id;
-  var count = 0;
-  var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"'";
-  con.query(query,function(err,result){
-    if (err) throw err;
-    result.forEach(function(item,index){
-      con.query("SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[user,item.ID], function(err,l_result){
-        //console.log(l_result);
-        if(l_result.length > 0){
-          item.liked = "1";
-        }else{
-          item.liked = "0";
-        }
-        //console.log(result);
-        if(index == result.length -1){
-          res.render('forum', {posts: result})
-        }
+  if(req.isAuthenticated()){
+    var user = req.user.user_id;
+    var count = 0;
+    var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"'";
+    con.query(query,function(err,result){
+      if (err) throw err;
+      result.forEach(function(item,index){
+        con.query("SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[user,item.ID], function(err,l_result){
+          //console.log(l_result);
+          if(l_result.length > 0){
+            item.liked = "1";
+          }else{
+            item.liked = "0";
+          }
+          //console.log(result);
+          if(index == result.length -1){
+            res.render('forum', {posts: result})
+          }
+        });
       });
+      ;
     });
-    ;
-  });
+  }else{
+    var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"'";
+    con.query(query,function(err,result){
+      if (err) throw err;
+
+      res.render('forum', {posts: result})
+
+    });
+  }
+
 });
 
 router.get('/add', isLoggedIn, (req,res) => {

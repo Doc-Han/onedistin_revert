@@ -5,29 +5,48 @@
       </div>
       <div class="w3-half w3-mobile w3-container">
 
-        <a class="w3-button w3-teal w3-padding w3-margin-bottom w3-round-xxlarge" href="/forum/add"> <i class="fa fa-plus"></i> Add new post </a>
+        <a class="w3-button button-color-inverse w3-text-white w3-padding w3-margin-bottom w3-round-xxlarge" style="font-size:22px" href="/forum/add"> <i class="fa fa-plus"></i> Add new post </a>
 
-        <ul style="padding: 0" id="postList" class="w3-ul w3-container">
-          <% posts.forEach(function(item){ %>
-            <li class="w3-bar w3-border-bottom">
-              <a href="/forum/<%= item.post_url %>" class=" w3-xlarge w3-text-indigo">
-                <%= item.post_title %>
-              </a>
-              <span class="w3-small w3-right"><%= item.timestamp %></span>
-              <div class="w3-bar">
-                <a class="w3-bar-item w3-button post_like" href="#" ref-data="<%= item.ID %>">
-                <% if(item.liked == "0"){ %>
-                  <i class="fa fa-heart-o"> <%= item.post_likes %> </i>
-                <% }else{ %>
-                  <i class="fa fa-heart"> <%= item.post_likes %> </i> 
-                <% } %>
+        <% if(isAuthenticated){ %>
+          <ul style="padding: 0" id="postList" class="w3-ul w3-container">
+            <% posts.forEach(function(item){ %>
+              <li class="w3-bar w3-border-bottom">
+                <a href="/forum/<%= item.post_url %>" style="font-size:22px" class="muli-bold w3-text-black">
+                  <%= item.post_title %>
                 </a>
-                <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-comment-o"> <%= item.post_comments %> </i> </a>
-                <a class="w3-bar-item w3-button" href="#"> <i class="fa fa-star-o"> </i> </a>
-              </div>
-            </li>
-          <% }); %>
-        </ul>
+                <!--- lsdflsdhfsdlfdsldsfjdsl ---->
+                <div class="w3-bar">
+                  <a class="w3-bar-item w3-button post_like" href="#" ref-data="<%= item.ID %>">
+                  <% if(item.liked == "0"){ %>
+                    <i class="fa fa-heart-o w3-text-black"> <%= item.post_likes %> </i>
+                  <% }else{ %>
+                    <i class="fa fa-heart w3-text-black"> <%= item.post_likes %> </i>
+                  <% } %>
+                  </a>
+                  <a class="w3-bar-item w3-button" href="/login"> <i class="fa fa-comment-o w3-text-black"> <%= item.post_comments %> </i> </a>
+                </div>
+              </li>
+            <% }); %>
+          </ul>
+        <% }else{ %>
+          <ul style="padding: 0" id="postList" class="w3-ul w3-container">
+            <% posts.forEach(function(item){ %>
+              <li class="w3-bar w3-border-bottom">
+                <a href="/forum/<%= item.post_url %>" style="font-size:22px" class="muli-bold w3-text-black">
+                  <%= item.post_title %>
+                </a>
+                <!--- lsdflsdhfsdlfdsldsfjdsl ---->
+                <div class="w3-bar">
+                  <a class="w3-bar-item w3-button" href="/login" ref-data="<%= item.ID %>">
+                    <i class="fa fa-heart-o w3-text-black"> <%= item.post_likes %> </i>
+                  </a>
+                  <a class="w3-bar-item w3-button" href="/login"> <i class="fa fa-comment-o w3-text-black"> <%= item.post_comments %> </i> </a>
+                </div>
+              </li>
+            <% }); %>
+          </ul>
+        <% } %>
+
 
       </div>
       <div class="w3-quarter w3-container">

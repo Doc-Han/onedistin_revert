@@ -9,12 +9,12 @@
             <li class="w3-bar">
               <!--<a href="/pastdeal/<%= item.ID %>"><img src="/img/nice1.jpg" class="w3-left w3-border w3-round-xlarge" style="height:50px;width:50px"></a>-->
               <div style="padding-top: 0;" class="w3-bar-item">
-                <a href="/pastdeal/<%= item.ID %>"><span class="w3-large"><b><%= item.post_title %></b></span></a><br>
+                <a class="w3-text-black" href="/pastdeal/<%= item.timestamp %>"><span class="muli-bold" style="font-size:22px"><%= item.post_title %></span></a><br>
                 <span class="w3-opacity">Posted on <span class="time"><%= item.time %></span> </span><br>
                 <span class="w3-opacity">Current activity on post</span>
                 <span class="w3-bar">
-                  <a style="padding: 0;" href="/forum/<%= item.post_url %>"class="w3-bar-item"><i class="fa fa-heart-o"></i> 34 <br></a>
-                  <a style="padding: 0;" href="/forum/<%= item.post_url %>"class="w3-bar-item"><i class="fa fa-comment-o"></i> <%= item.post_comments %></a>
+                  <a style="padding: 0;" href="/forum/<%= item.post_url %>" class="w3-bar-item w3-text-black"><i class="fa fa-heart-o"></i> <%= item.post_likes %> <br></a>
+                  <a style="padding: 0;" href="/forum/<%= item.post_url %>" class="w3-bar-item w3-text-black"><i class="fa fa-comment-o"></i> <%= item.post_comments %></a>
                 </span>
               </div>
 

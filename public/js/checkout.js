@@ -49,26 +49,52 @@ var n = 1;
       }
     }
 
+    if(n == 1){
+      $(".reduce-item:first-child").hide();
+    }
+
 
     $('.total_price').text("GHS "+sm.toFixed(2));
     $("[name='total']").val(sm.toFixed(2));
   }
+
   $(".add-item-bar").click(function(){
     if(n <= 2){
       n++;
+      //This is for the checkout item increment
       var item = $(".checkout-items .single-item:first-child");
       var loc = $(".checkout-items");
-      var ip = $(".item-pricing");
-      var pp = ip.html();
       var prt = item.html();
       loc.append(prt);
-      ip.after("<dd>"+pp+"</dd>");
+      //This is for the checkout price increment
+      var ip = $(".item-pricing:first-child");
+      var pp = ip.html();
+      ip.after("<dd class='item-pricing'>"+pp+"</dd>");
       show();
       if(n==3){
         $(".add-item-bar").hide();
       }
+
+      if(n > 1){
+          $(".reduce-item:first-child").show();
+      }
+
     }
 
+  });
+
+  $(document).on("click",".reduce-item", function(){
+    if(n > 1){
+      n--;
+      $(".add-item-bar").show();
+      $(this).parent().remove();
+      var ip = $(".item-pricing:first-child");
+      ip.remove();
+      show();
+    }
+    if(n == 1){
+        $(".reduce-item:first-child").hide();
+    }
   });
 
   if($("#low").length < 1){
@@ -108,4 +134,5 @@ var n = 1;
     $(".coupon-box").toggle();
   });
   show();
+
 });

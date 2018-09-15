@@ -4,6 +4,13 @@
     /*background: #fff/*var(--main-color)*/
     background-color: #fff;
   }
+  a {
+    line-height: 18px;
+  }
+  h3 {
+    font-size: 22px;
+    line-height: 22px;
+  }
 </style>
 <!--<div style="position:absolute;top:12%;left:0;right:0;z-index:-1;opacity:0.3">
   <img style="width:100%" src="img/nice4.jpg" alt="">
@@ -13,9 +20,9 @@
 
       </div>
       <div style="margin-bottom:300px" class="w3-half w3-center w3-mobile w3-container w3-animate-bottom">
-        <h1 style="text-align:left"><b>Your Account</b></h1>
-        <h3 style="margin-bottom: 0;float:left">Your Info:</h3>
-        <a style="float:right" class="w3-button w3-round-xxlarge" href="/profile/user-info">edit</a>
+        <h1 style="text-align:left;font-size:36px" class="muli-bold">Your Account</h1>
+        <h3 style="margin-bottom: 0;float:left" class="muli-bold">Your Info:</h3>
+        <a style="float:right;margin-bottom:5px" class="w3-button w3-round-xxlarge button-color-inverse w3-text-white" href="/profile/user-info">edit</a>
         <div class="clearfix"></div>
         <div style="text-align:left" class="w3-container w3-border w3-round-large">
           <label><b>Username:</b></label> <%= userData.display_name %> <br>
@@ -23,7 +30,7 @@
           <label><b>Email:</b></label> <%= userData.user_email %> <br>
           <label><b>Phone:</b></label> <%= userData.user_phone %>
         </div>
-        <h3 style="text-align:left">Recent Orders:</h3>
+        <h3 style="text-align:left" class="muli-bold">Recent Orders:</h3>
         <dl class="straight">
             <dd><label>A smart watch</label> <span class="tag w3-green">Pending</span> </dd>
             <dd><label>A second Item</label> <span class="tag w3-green">Pending</span> </dd>
@@ -31,8 +38,8 @@
             <dd><label>A fan on the go</label> <span class="tag w3-red">Delivered</span> </dd>
         </dl>
         <br>
-        <h3 style="margin-bottom: 0;float:left">Your delivery info:</h3>
-        <a style="float:right;" class="w3-button w3-round-xxlarge" href="/profile/delivery-info">edit</a>
+        <h3 style="margin-bottom: 0;float:left" class="muli-bold">Your delivery info:</h3>
+        <a style="float:right;margin-bottom:5px;" class="w3-button w3-round-xxlarge button-color-inverse w3-text-white" href="/profile/delivery-info">edit</a>
         <div class="clearfix"></div>
         <div class="shipping-address">
           <div style="text-align:left" class="w3-container w3-border w3-round-large">
@@ -43,8 +50,8 @@
           </div>
         </div>
         <br>
-        <h3 style="margin-bottom: 0;float:left">Subscriptions:</h3>
-        <a style="float:right;" class="w3-button w3-round-xxlarge" href="/profile/subscriptions">edit</a>
+        <h3 style="margin-bottom: 0;float:left" class="muli-bold">Subscriptions:</h3>
+        <a style="float:right;margin-bottom:5px;" class="w3-button w3-round-xxlarge button-color-inverse w3-text-white" href="/profile/subscriptions">edit</a>
         <div class="clearfix"></div>
         <div style="text-align:left" class="w3-container w3-border w3-round-large">
         <% var subs = userData.subscriptions; %>

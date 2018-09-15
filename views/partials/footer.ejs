@@ -20,62 +20,125 @@
       </div>
     </div>
       <div style="padding-right:20px" class="w3-col right-lane">
+  <% if(isAuthenticated){%>
     <% if(currentUser.survey == today){ %>
-      <p style="font-size:22px" class="muli-regular" >You've already submitted your vote.</p>
-          <!--<div class="w3-row">
-            <div class="w3-col w3-blue" style="width:50%">
+            <h5 style="font-size:22px" class="muli-regular"><%= survey.question %></h5>
+            <% var total = (survey.ans_one_no*1) + (survey.ans_two_no*1) + (survey.ans_three_no*1) + (survey.ans_four_no*1) + (survey.ans_five_no*1) + (survey.ans_six_no*1); %>
 
+            <% if(survey.ans_one){ %>
+            <div style="position:relative" class="w3-row">
+              <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_one_no*1)/total)*100 %>%">
+                <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+                <%= survey.ans_one+' - '+ (((survey.ans_one_no*1)/total)*100).toFixed(0)+'%' %>
+              </div>
+              </div>
             </div>
-          </div>
-          <div class="w3-row">
-            <div class="w3-col w3-blue" style="width:50%">
+            <% } %>
 
-            </div>
-          </div>
-          <div class="w3-row">
-            <div class="w3-col w3-blue" style="width:50%">
+            <% if(survey.ans_two){ %>
+            <div style="position:relative" class="w3-row">
+              <div class="w3-col w3-blue" style="height: 40px;margin-bottom:5px;width:<%= ((survey.ans_two_no*1)/total)*100 %>%">
+                <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+                  <%= survey.ans_two+' - '+(((survey.ans_two_no*1)/total)*100).toFixed(0)+'%' %>
+                </div>
 
+              </div>
             </div>
-          </div>
-          <div class="w3-row">
-            <div class="w3-col w3-blue" style="width:50%">
+            <% } %>
 
+            <% if(survey.ans_three){ %>
+            <div style="position:relative" class="w3-row">
+              <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_three_no*1)/total)*100 %>%">
+                <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+                <%= survey.ans_three+' - '+(((survey.ans_three_no*1)/total)*100).toFixed(0)+'%' %>
+              </div>
+              </div>
             </div>
-          </div>
-          <div class="w3-row">
-            <div class="w3-col w3-blue" style="width:50%">
 
-            </div>
-          </div>
-          <div class="w3-row">
-            <div class="w3-col w3-blue" style="width:50%">
+            <% } %>
 
+            <% if(survey.ans_four){ %>
+            <div style="position:relative" class="w3-row">
+              <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_four_no*1)/total)*100 %>%">
+                <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+                <%= survey.ans_four+' - '+(((survey.ans_four_no*1)/total)*100).toFixed(0)+'%' %>
+              </div>
+              </div>
             </div>
-          </div>-->
+
+            <% } %>
+
+            <% if(survey.ans_five){ %>
+            <div style="position:relative" class="w3-row">
+              <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_five_no*1)/total)*100 %>%">
+                <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+                <%= survey.ans_five+' - '+(((survey.ans_five_no*1)/total)*100).toFixed(0)+'%' %>
+              </div>
+              </div>
+            </div>
+
+            <% } %>
+
+            <% if(survey.ans_six){ %>
+            <div style="position:relative" class="w3-row">
+              <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_five_no*1)/total)*100 %>%;">
+                <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
+                <%= survey.ans_six+' - '+(((survey.ans_six_no*1)/total)*100).toFixed(0)+'%' %>
+              </div>
+              </div>
+            </div>
+
+            <% } %>
+
     <% }else{ %>
       <span id="survey">
         <h5 style="font-size:22px" class="muli-regular"><%= survey.question %></h5>
         <% if(survey.ans_one){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="one"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_one %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="one"> <span style="overflow-x:hidden;font-size:16px" class="muli-regular"><%= survey.ans_one %></span> <br>
         <% } %>
         <% if(survey.ans_two){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="two"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_two %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="two"> <span style="overflow-x:hidden;font-size:16px" class="muli-regular"><%= survey.ans_two %></span> <br>
         <% } %>
         <% if(survey.ans_three){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="three"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_three %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="three"> <span style="overflow-x:hidden;font-size:16px" class="muli-regular"><%= survey.ans_three %></span> <br>
         <% } %>
         <% if(survey.ans_four){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="four"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_four %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="four"> <span style="overflow-x:hidden;font-size:16px" class="muli-regular"><%= survey.ans_four %></span> <br>
         <% } %>
         <% if(survey.ans_five){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="five"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_five %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="five"> <span style="overflow-x:hidden;font-size:16px" class="muli-regular"><%= survey.ans_five %></span> <br>
         <% } %>
         <% if(survey.ans_six){ %>
-          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="six"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_six %></span> <br>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="six"> <span style="overflow-x:hidden;font-size:16px" class="muli-regular"><%= survey.ans_six %></span> <br>
         <% } %>
-        <button style="margin-bottom:10px;padding: auto 90px" class="submit-survey w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><h5 class="custom-txt-color" style="margin:0;font-size:22px" class="muli-regular"> Vote </h5></button>
+        <button style="margin-bottom:10px;padding: auto 90px" class="submit-survey w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><p class="custom-txt-color" style="margin:0;font-size:22px" class="muli-regular"> Vote </p></button>
       </span>
     <% } %>
+
+  <% }else{ %>
+    <span id="survey">
+      <h5 style="font-size:22px" class="muli-regular"><%= survey.question %></h5>
+      <% if(survey.ans_one){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="one"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_one %></span> <br>
+      <% } %>
+      <% if(survey.ans_two){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="two"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_two %></span> <br>
+      <% } %>
+      <% if(survey.ans_three){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="three"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_three %></span> <br>
+      <% } %>
+      <% if(survey.ans_four){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="four"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_four %></span> <br>
+      <% } %>
+      <% if(survey.ans_five){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="five"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_five %></span> <br>
+      <% } %>
+      <% if(survey.ans_six){ %>
+        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="six"> <span style="word-break:break-all;font-size:16px" class="muli-regular"><%= survey.ans_six %></span> <br>
+      <% } %>
+      <button style="margin-bottom:10px;padding: auto 90px" class="submit-survey w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><p class="custom-txt-color" style="margin:0;font-size:22px" class="muli-regular"> Vote </p></button>
+    </span>
+  <% } %>
     </div>
   </div>
 </div>

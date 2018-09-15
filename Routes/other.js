@@ -23,28 +23,32 @@ router.post('/like', (req,res) =>{
 });
 
 router.post('/survey', (req,res) =>{
-  var user = req.user.user_id;
   var ans = req.body.ans;
-  console.log(ans);
-  if(ans == "one"){
-    var query = "UPDATE onedistin_survey SET ans_one_no=(ans_one_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
-  }else if(ans == "two"){
-    var query = "UPDATE onedistin_survey SET ans_two_no=(ans_two_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
-  }else if(ans == "three"){
-    var query = "UPDATE onedistin_survey SET ans_three_no=(ans_three_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
-  }else if(ans == "four"){
-    var query = "UPDATE onedistin_survey SET ans_four_no=(ans_four_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
-  }else if(ans == "five"){
-    var query = "UPDATE onedistin_survey SET ans_five_no=(ans_five_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
-  }else if(ans == "six"){
-    var query = "UPDATE onedistin_survey SET ans_six_no=(ans_six_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+  if(req.isAuthenticated()){
+    var user = req.user.user_id;
+    if(ans == "one"){
+      var query = "UPDATE onedistin_survey SET ans_one_no=(ans_one_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+    }else if(ans == "two"){
+      var query = "UPDATE onedistin_survey SET ans_two_no=(ans_two_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+    }else if(ans == "three"){
+      var query = "UPDATE onedistin_survey SET ans_three_no=(ans_three_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+    }else if(ans == "four"){
+      var query = "UPDATE onedistin_survey SET ans_four_no=(ans_four_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+    }else if(ans == "five"){
+      var query = "UPDATE onedistin_survey SET ans_five_no=(ans_five_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+    }else if(ans == "six"){
+      var query = "UPDATE onedistin_survey SET ans_six_no=(ans_six_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+    }
+
+    con.query(query, [user], function(err,result,next){
+      if(err)throw err;
+      console.log(result);
+    });
+    res.send("1");
+  }else{
+    res.send("0");
   }
 
-  con.query(query, [user], function(err,result,next){
-    if(err)throw err;
-    console.log(result);
-  });
-res.send("1");
 });
 
 module.exports = router;

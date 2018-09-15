@@ -4,6 +4,10 @@
   --txt-color: #000;
 }
 
+a {
+  color: #0090ff!important;
+}
+
 body {
   font-family: 'Muli',sans-serif;
   font-weight: 400;
@@ -13,6 +17,7 @@ body {
 }
 
 body,p,ul,li,table {
+  font-family: 'Muli',sans-serif;
   color: #000;
   text-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
@@ -139,6 +144,10 @@ li {
     position: relative;
 }
 
+.linky-button:hover {
+  background-color: #6cb4ea!important;
+}
+
 .button-color {
   background-color: #212e38;
   color: var(--custom-color)
@@ -146,6 +155,19 @@ li {
 
 .button-color:hover {
   background-color: #484b4e!important;
+}
+
+.button-color-inverse {
+  background-color: #fbbf14;
+  color: #fff;
+}
+.text-color-inverse {
+  color: #fbbf14;
+}
+
+.button-color-inverse:hover {
+  background-color: #dcae2c!important;
+  color: #fff!important;
 }
 
 #header nav a.logo img {
@@ -420,21 +442,16 @@ img {vertical-align: middle;}
     position: absolute;
     background-size: 1042px 1042px;
     background-repeat: no-repeat;
-    width: 900px;
-    height: 900px;
-    top: -300px;
-    left: -300px;
+    width: 600px;
+    height: 600px;
+    top: -150px;
+    left: -130px;
     z-index: -100;
     background-position: center;
 }
 
 .share_btn {
-  /*margin-bottom:5px;
-  font-size:30px;
-  width:50px;
-  height:50px;
-  text-align:center;
-  line-height:50px*/
+  color: #fff;
 }
 #share_btns a {
   color: #fff;
