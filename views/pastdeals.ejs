@@ -7,10 +7,10 @@
         <ul class="w3-ul">
           <% pastdeals.forEach(function(item){ %>
             <li class="w3-bar">
-              <a href="/pastdeal/<%= item.ID %>"><img src="/img/nice1.jpg" class="w3-left w3-border w3-round-xlarge" style="height:50px;width:50px"></a>
+              <!--<a href="/pastdeal/<%= item.ID %>"><img src="/img/nice1.jpg" class="w3-left w3-border w3-round-xlarge" style="height:50px;width:50px"></a>-->
               <div style="padding-top: 0;" class="w3-bar-item">
                 <a href="/pastdeal/<%= item.ID %>"><span class="w3-large"><b><%= item.post_title %></b></span></a><br>
-                <span class="w3-opacity">Posted on <%= item.timestamp %> </span><br>
+                <span class="w3-opacity">Posted on <span class="time"><%= item.time %></span> </span><br>
                 <span class="w3-opacity">Current activity on post</span>
                 <span class="w3-bar">
                   <a style="padding: 0;" href="/forum/<%= item.post_url %>"class="w3-bar-item"><i class="fa fa-heart-o"></i> 34 <br></a>
@@ -28,6 +28,6 @@
     </div>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-    <script src="js/forumsearch.js" type="text/javascript"></script>
+
   </body>
 </html>

@@ -23,28 +23,26 @@ router.post('/like', (req,res) =>{
 });
 
 router.post('/survey', (req,res) =>{
+  var user = req.user.user_id;
   var ans = req.body.ans;
   if(ans == "one"){
-    var query = "UPDATE onedistin_survey SET ans_one_no=(ans_one_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';";
+    var query = "UPDATE onedistin_survey SET ans_one_no=(ans_one_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey=1 WHERE ID=?";
   }else if(ans == "two"){
-    var query = "UPDATE onedistin_survey SET ans_two_no=(ans_two_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';";
+    var query = "UPDATE onedistin_survey SET ans_two_no=(ans_two_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey=1 WHERE ID=?";
   }else if(ans == "three"){
-    var query = "UPDATE onedistin_survey SET ans_three_no=(ans_three_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';";
+    var query = "UPDATE onedistin_survey SET ans_three_no=(ans_three_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey=1 WHERE ID=?";
   }else if(ans == "four"){
-    var query = "UPDATE onedistin_survey SET ans_four_no=(ans_four_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';";
+    var query = "UPDATE onedistin_survey SET ans_four_no=(ans_four_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey=1 WHERE ID=?";
   }else if(ans == "five"){
-    var query = "UPDATE onedistin_survey SET ans_five_no=(ans_five_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';";
+    var query = "UPDATE onedistin_survey SET ans_five_no=(ans_five_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey=1 WHERE ID=?";
   }else if(ans == "six"){
-    var query = "UPDATE onedistin_survey SET ans_six_no=(ans_six_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';";
+    var query = "UPDATE onedistin_survey SET ans_six_no=(ans_six_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey=1 WHERE ID=?";
   }
 
-  con.query(query+"SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"'", function(err,result,next){
+  con.query(query, [user], function(err,result,next){
     if(err)throw err;
-    if(result[1].length > 0){
-      res.send(result[1][0]);
-    }else {
-      res.send("0");
-    }
+    res.send("1");
+
 
   });
 

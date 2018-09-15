@@ -41,9 +41,9 @@
   <div class="w3-row page-wrap">
     <div class="w3-col w3-padding left-lane">
       <h5>Don't miss out</h5>
-      <i style="background-color:#3B5998;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle fa-facebook"></i> Like us on Facebook <br>
-      <i style="background-color:#2f87d2;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle fa-twitter"></i> Follow us on Twitter <br>
-      <i style="background-color:#500f36;margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle fa-instagram"></i> Follow us on Instagram
+      <i style="background-color:#3B5998;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-facebook"></i> Like us on Facebook <br>
+      <i style="background-color:#2f87d2;margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-twitter"></i> Follow us on Twitter <br>
+      <i style="background-color:#500f36;margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-white fa-instagram"></i> Follow us on Instagram
     </div>
     <div class="w3-col w3-padding middle-lane">
       <h5>Introduce a friend</h5>
@@ -58,27 +58,63 @@
         </button>
       </div>
     </div>
-    <div class="w3-col w3-padding right-lane">
-      <h5><%= survey.question %></h5>
-      <% if(survey.ans_one){ %>
-        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="one"> <%= survey.ans_one %> <br>
-      <% } %>
-      <% if(survey.ans_two){ %>
-        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="two"> <%= survey.ans_two %> <br>
-      <% } %>
-      <% if(survey.ans_three){ %>
-        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="three"> <%= survey.ans_three %> <br>
-      <% } %>
-      <% if(survey.ans_four){ %>
-        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="four"> <%= survey.ans_four %> <br>
-      <% } %>
-      <% if(survey.ans_five){ %>
-        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="five"> <%= survey.ans_five %> <br>
-      <% } %>
-      <% if(survey.ans_six){ %>
-        <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="six"> <%= survey.ans_six %> <br>
-      <% } %>
+      <div class="w3-col w3-padding right-lane">
+    <% if(currentUser.survey == 1){ %>
+      <p>You've already submitted your vote.</p>
+          <!--<div class="w3-row">
+            <div class="w3-col w3-blue" style="width:50%">
 
+            </div>
+          </div>
+          <div class="w3-row">
+            <div class="w3-col w3-blue" style="width:50%">
+
+            </div>
+          </div>
+          <div class="w3-row">
+            <div class="w3-col w3-blue" style="width:50%">
+
+            </div>
+          </div>
+          <div class="w3-row">
+            <div class="w3-col w3-blue" style="width:50%">
+
+            </div>
+          </div>
+          <div class="w3-row">
+            <div class="w3-col w3-blue" style="width:50%">
+
+            </div>
+          </div>
+          <div class="w3-row">
+            <div class="w3-col w3-blue" style="width:50%">
+
+            </div>
+          </div>-->
+    <% }else{ %>
+      <span id="survey">
+        <h5><%= survey.question %></h5>
+        <% if(survey.ans_one){ %>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="one"> <span style="word-break:break-all"><%= survey.ans_one %></span> <br>
+        <% } %>
+        <% if(survey.ans_two){ %>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="two"> <span style="word-break:break-all"><%= survey.ans_two %></span> <br>
+        <% } %>
+        <% if(survey.ans_three){ %>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="three"> <span style="word-break:break-all"><%= survey.ans_three %></span> <br>
+        <% } %>
+        <% if(survey.ans_four){ %>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="four"> <span style="word-break:break-all"><%= survey.ans_four %></span> <br>
+        <% } %>
+        <% if(survey.ans_five){ %>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="five"> <span style="word-break:break-all"><%= survey.ans_five %></span> <br>
+        <% } %>
+        <% if(survey.ans_six){ %>
+          <input class="w3-margin-bottom w3-xxlarge" type="radio" name="survey" value="six"> <span style="word-break:break-all"><%= survey.ans_six %></span> <br>
+        <% } %>
+        <button style="background-color: #424242;margin-bottom:10px;padding: auto 90px" class="submit-survey w3-button w3-round-xxlarge w3-margin-top" type="submit" name="button"><h5 class="custom-txt-color" style="margin:0"> <i class="fa fa-hand-spock-o"></i> Vote </h5></button>
+      </span>
+    <% } %>
     </div>
   </div>
 </div>

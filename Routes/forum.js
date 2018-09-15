@@ -40,8 +40,8 @@ router.post('/add', (req,res) => {
   var currentDate = currentTime.currentTime();
 
   var author = req.user.user_id;
-  var query = "INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp)VALUES(?,?,?,?,?,?,?,?)";
-  con.query(query,[null,author,title,body,url,0,0,currentDate], function(err){
+  var query = "INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?)";
+  con.query(query,[null,author,title,body,url,0,0,currentDate,Date.now()], function(err){
     if(err)throw err;
     console.log("post Inserted!");
     res.redirect('/forum');
@@ -82,6 +82,11 @@ router.get('/:title', (req,res) => {
       }else{
         var like = "0";
       }
+      var n = p_result[0].time;
+      var t = new Date(n *1);
+      var months = ["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"];
+      console.log(t.getDate());
+      p_result[0].time = t.getHours()+":"+t.getMinutes()+" - "+t.getDate()+" "+months[t.getMonth()]+" "+t.getFullYear();
       res.render('post', {post: p_result[0], comment: c_result[0],like: like});
     });
 

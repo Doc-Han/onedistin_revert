@@ -8,7 +8,8 @@
       <div class="w3-quarter w3-container">
 
       </div>
-      <div class="w3-half w3-border w3-round-xlarge w3-mobile w3-container">
+      <div style="margin-bottom:500px" class="w3-half w3-border w3-round-xlarge w3-mobile w3-container">
+        <form action="/support" method="POST">
         <h2>Dear Onedistin,</h2>
         <span style="text-align:left">This is about my
         <select name="complaint">
@@ -16,15 +17,17 @@
         </select>
       </span>
         <h3>Here's the issue</h3>
-        <textarea name="name" class="w3-input w3-round w3-border" style="height: 150px;"></textarea> <br>
+        <textarea name="issue" class="w3-input w3-round w3-border" style="height: 150px;"></textarea> <br>
         <span>You can write me back at
-        <input class="w3-round-xlarge w3-border w3-padding" type="text" name="" value="yahyafarhan48@gmail.com"> </span> <br>
-        <b>OR</b> <br>
+        <input class="w3-round-xlarge w3-border" type="text" name="user_email" value="<%= currentUser.user_email %>"> </span> <br>
+        <b>Or</b> <br>
         <span>Call me at
-        <input class="w3-round-xlarge w3-border w3-padding" type="text" name="" value="0237902030"> </span>
+        <input class="w3-round-xlarge w3-border" type="text" name="user_phone" value="<%= currentUser.user_phone %>"> </span>
 
         <h3>Your's truely</h3>
-        <span>farhano123</span>
+        <span><%= currentUser.user_name %></span>
+        <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Please help me!</h3></button>
+      </form>
       </div>
       <div class="w3-quarter w3-bold w3-container">
 

@@ -63,6 +63,7 @@ router.get('/', (req,res,next) => {
               one[i] = len[i].split(",");
             }
             result[0][0].categories = one;
+            var survey = result[4][0];
             res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],img:images, token: tokenGen.getToken()});
           }
         });
@@ -284,25 +285,33 @@ router.post('/facebookinfo', (req,res) => {
 });
 
 router.get('/pastdeals', (req,res) => {
-  var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp <= '"+currentTime.currentTime()+"' ";
-  con.query(query,[0],function(err,result){
+  var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp <= '"+currentTime.currentTime()+"' ORDER BY timestamp DESC";
+  con.query(query,['onedistin'],function(err,result){
     res.render('pastdeals',{pastdeals:result});
   });
 });
 
 router.get('/pastdeal/:id', (req,res) => {
-  var id = req.params.id;
-  var query = "SELECT * FROM onedistin_deals WHERE ID='"+id+"';SELECT post_title,post_url FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10";
+  var id = req.params.id.trim();
+  var query = "SELECT * FROM onedistin_deals WHERE ID='"+id+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10";
   con.query(query, function(err,result){
     if(err)throw err;
     var combined_img_string = result[0][0].img_id;
     var img_ids = combined_img_string.split("-***-");
     var images = [];
     img_ids.forEach(function(item,index){
-      var a = cloudinary.url(item, {effect: 'sharpen'});
+      if(index == 0){
+        var a = cloudinary.url(item,{transformation:[
+          {effect: "colorize:80", color: result[0][0].bg_color},
+          {width: 900, height: 900, crop: "scale"}
+        ]});
+      }else{
+        var a = cloudinary.url(item,{effect: "sharpen"});
+      }
       images.push(a);
       if(index == img_ids.length -1){
-        res.render('past-deal',{currentPost: result[0][0], forumPosts: result[1],img:images});
+        console.log(result[0][0]);
+        res.render('past-deal',{currentPost: result[0][0], forumPosts: result[1], img:images});
       }
     });
 
@@ -356,8 +365,32 @@ router.get('/our-story', (req,res) => {
   res.render('story');
 });
 
-router.get('/support', (req,res) => {
-  res.render('support');
+router.get('/support', (req,res,next) => {
+  var user = req.user.user_id;
+  var query = "SELECT * FROM onedistin_users WHERE ID = ?";
+  con.query(query,[user], function(err,result){
+    if(err)throw err;
+    if(result.length > 0){
+        res.render('support',{currentUser: result[0]});
+    }else{
+      next();
+    }
+  });
+
+});
+
+router.post('/support', (req,res) => {
+  var user = req.user.user_id;
+  var body = req.body;
+  var type = body.complaint;
+  var issue = body.issue;
+  var email = body.user_email;
+  var phone = body.user_phone;
+  var query = "INSERT INTO onedistin_support (ID,userId,type,issue,email,phone)VALUES(?,?,?,?,?,?)";
+  con.query(query,[null,user,type,issue,email,phone],function(err,result){
+    if(err)throw err;
+    res.send("We will surely respond to your report. THANK YOU!")
+  });
 });
 
 router.get('/logout', isLoggedIn, (req,res) => {
