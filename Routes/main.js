@@ -32,7 +32,29 @@ passport.use(new localStrategy(
   }
 ));
 
-router.get('/email', (req,res) =>{
+router.get('/api/v1/moneycallback', (req,res) => {
+  console.log("Query "+req.query);
+  console.log("Body "+req.body);
+});
+
+router.post('/api/v1/moneycallback', (req,res) => {
+  console.log("Query "+req.query);
+  console.log("Body "+req.body);
+});
+
+router.get('/pay', (req,res) =>{
+  var receivedata = {
+    "CustomerName": "Farhan Yahya",
+    "CustomerMsisdn": "233558359341",
+    "CustomerEmail": "yahyafarhan48@gmail.com",
+    "Channel": "mtn-gh",
+    "Amount": 1.0,
+    "PrimaryCallbackUrl": "https://onedistin.herokuapp.com/api/v1/moneycallback",  /////example callback
+    "Description": "Onedistin"
+  }
+hubtel_pay.ReceiveMobileMoney(receivedata).then(function(data) {
+         console.log(data)
+      })
   res.render('email');
 });
 
