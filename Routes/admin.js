@@ -89,13 +89,14 @@ router.post('/deal', upload.array('image'), (req,res) => {
       req.files.forEach(function(item,index){
         cloudinary.uploader.upload(item.path, function(img_res){
 
-              images.push(img_res.public_id);
-
+              images[index] = img_res.public_id;
+              console.log(images);
 
             if(index == 0){
               s_images = images.join("-***-");
-              var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,share_txt,categories)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_survey (ID,dealTime,question,ans_one,ans_two,ans_three,ans_four,ans_five,ans_six)VALUES(?,?,?,?,?,?,?,?,?)";
-              con.query(query,[null,title,price,ac_price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,s_images,bg_color,share_txt,cat,null,author,title,body,url,0,0,postDate,null,date,new Date(),survey[0],survey[1],survey[2],survey[3],survey[4],survey[5],survey[6]],function(err){
+              var time = new Date();
+              var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,share_txt,categories)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_survey (ID,dealTime,question,ans_one,ans_two,ans_three,ans_four,ans_five,ans_six)VALUES(?,?,?,?,?,?,?,?,?)";
+              con.query(query,[null,title,price,ac_price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,s_images,bg_color,share_txt,cat,null,author,title,body,url,0,0,postDate,time,null,date,survey[0],survey[1],survey[2],survey[3],survey[4],survey[5],survey[6]],function(err){
                 if(err)throw err;
                   res.send("deal Inserted");
                 });
