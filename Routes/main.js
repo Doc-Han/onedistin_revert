@@ -33,16 +33,6 @@ passport.use(new localStrategy(
   }
 ));
 
-router.get('/api/v1/moneycallback', (req,res) => {
-  console.log("Body "+req.body);
-  res.send("got a callback");
-});
-
-router.post('/api/v1/moneycallback', (req,res) => {
-  console.log("Query "+req.query);
-  console.log("Body "+req.body);
-});
-
 router.get('/', (req,res,next) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
@@ -56,7 +46,7 @@ router.get('/', (req,res,next) => {
         img_ids.forEach(function(item,index){
           if(index == 0){
             var a = cloudinary.url(item,{transformation:[
-              {effect: "colorize:80", color: result[0][0].bg_color},
+              {effect: "colorize:0", color: result[0][0].bg_color},
               {width: 900, height: 900, crop: "scale"}
             ]});
           }else{
@@ -176,10 +166,11 @@ router.get('/checkout', isLoggedIn, (req,res) => {
 
 router.get('/profile', isLoggedIn, (req,res) => {
   var user = req.user.user_id;
-  var query = "SELECT * FROM onedistin_users WHERE ID = ?";
-  con.query(query, [user], function(err,result){
+  var query = "SELECT * FROM onedistin_users WHERE ID = ?;SELECT * FROM onedistin_invoice WHERE user=?";
+  con.query(query, [user,user], function(err,result){
     if (err)throw err;
-    res.render('profile',{userData: result[0]});
+    console.log(result[1][0]);
+    res.render('profile',{userData: result[0][0],orders: result[1][0]});
   });
 });
 

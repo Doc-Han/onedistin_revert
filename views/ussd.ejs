@@ -18,19 +18,24 @@
       <h3 class="muli-semi-bold" style="font-size:36px">Follow these steps to complete your payment.</h3>
       <ol>
         <li>
-          <p>Dial <span class="muli-bold">*713*4970*Amount#</span>  </p>
+          <p>Dial <span class="muli-bold">*713*4970*<%= data.total %>#</span>  </p>
         </li>
         <li>
           <p>Provide the following details <span class="muli-bold">ONLY</span> after a successful payment.</p>
         </li>
       </ol>
-      <dl>
-        <dt> <label>Username</label> </dt>
-        <dd> <input type="text" name="" value=""> </dd>
-        <dt> <label>Payment Number</label> </dt>
-        <dd> <input type="text" name="" value=""> </dd>
-      </dl>
-      <button style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top" type="button" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Done!</h3></button>
+      <form action="/ussd" method="POST">
+        <input type="hidden" name="p_t" value="<%= data.item_title %>">
+        <input type="hidden" name="ref_f_i_d" value="<%= data.item_det %>">
+        <dl>
+          <dt> <label>Username</label> </dt>
+          <dd> <input type="text" name="order_user_name" value="<%= data.user_name %>" required> </dd>
+          <dt> <label>Payment Number</label> </dt>
+          <dd> <input type="text" name="order_phone" required> </dd>
+        </dl>
+        <button style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Done!</h3></button>
+      </form>
+
     </div>
     <div class="w3-third">
 

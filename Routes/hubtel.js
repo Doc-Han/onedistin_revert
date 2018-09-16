@@ -5,30 +5,77 @@ var currentDate = require('../config/tools.js');
 var rp = require('request-promise');
 var router = express.Router();
 
-router.get('/hubtel', (req,res) =>{
+router.get('/p_s', (req,res) =>{
+  res.render("/payment/payment_sent");
+});
 
+router.get('/p_c', (req,res) =>{
+  res.render("payment/payment_cancelled");
+});
 
+router.get('/d_p', (req,res) =>{
+  res.send("Please we are not here yet!");
+});
+
+router.get('/ipay', (req,res) =>{
+  res.render("payment/ipay");
 });
 
 router.get('/ussd', (req,res) =>{
-  res.render('ussd');
+  var user = req.user.user_id;
+  con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[user], function(err,result){
+    if(err)throw err;
+    var user_name = result[0].user_name;
+
+    var item_det = req.query.ref_f_i_d.split("-");
+    var num = item_det[0]*1;
+    var del = item_det[1]*1;
+    if(del == 0){
+      var delivery = 5;
+    }else{
+      var delivery = 10;
+    }
+    var total = (item_det[2]*1)+delivery;
+    var data = {
+      item_det: req.query.ref_f_i_d,
+      item_title: req.query.p_t,
+      total: total,
+      user_name: user_name
+    }
+    res.render('ussd',{data: data});
+  });
+});
+
+router.post('/ussd', (req,res) =>{
+  user = req.user.user_id;
+  var token = tokenGen.getToken();
+  token = "ussd"+token.substring(0,6);
+  var body = req.body;
+  var title = body.p_t;
+  var user_name = body.order_user_name;
+  var order_phone = body.order_phone;
+  var date = currentDate.currentDate();
+  con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,username,phone) VALUES (?,?,?,?,?,?,?)",[null,user,title,date,token,user_name,order_phone],function(err,result){
+    if(err)throw err;
+    res.redirect('/p_s');
+  });
 });
 
 router.post('/payment', (req,res) => {
   var user = req.user.user_id;
   var token = tokenGen.getToken();
   token = token.substring(0,6);
+  var body = req.body;
+  var item_det = body.item_no.split("-");
+  var num = item_det[0]*1;
+  var del = item_det[1]*1;
+  if(del == 0){
+    var delivery = 5;
+  }else{
+    var delivery = 10;
+  }
+  var total = (item_det[2]*1)+delivery;
   if(req.body.hubtel == "on"){
-    var body = req.body;
-    var item_det = body.item_no.split("-");
-    var num = item_det[0]*1;
-    var del = item_det[1]*1;
-    var total = item_det[2]*1;
-    if(del == 0){
-      var delivery = 5;
-    }else{
-      var delivery = 10;
-    }
     con.query("SELECT title,ac_price FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'",function(err,result){
       if(err) throw err;
       var post = result[0];
@@ -84,7 +131,12 @@ router.post('/payment', (req,res) => {
 
     });
   }else if(req.body.ipay == "on"){
-    res.send("It was Ipay!");
+    res.redirect('/ipay');
+  }else if(req.body.ussd == "on"){
+    con.query("SELECT title FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'", function(err,d_result){
+      if(err)throw err;
+      res.redirect('/ussd?ref_f_i_d='+body.item_no+"&p_t="+d_result[0].title);
+    });
   }
 });
 

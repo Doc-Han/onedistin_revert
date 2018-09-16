@@ -57,7 +57,6 @@ app.use(function(req,res,next){
 
 //Including all the routes available in this app
 app.use('/', require('./Routes/main.js'));
-app.use('/', require('./Routes/ipay.js'));
 app.use('/', require('./Routes/hubtel.js'));
 app.use('/other', require('./Routes/other.js'));
 app.use('/auth', require('./Routes/auth.js'))
