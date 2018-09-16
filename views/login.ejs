@@ -1,35 +1,59 @@
-<% include partials/header.ejs %>
-<style media="screen">
-  body {
-    background: #e9ebee;
-  }
-</style>
-    <div class="w3-row w3-margin-top">
-      <div style="color: #a9a9a9" class="w3-third w3-container">
-        .
-      </div>
-      <div class="w3-col w3-center center-card w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
-        <p style="font-size: 56px;margin:0" class="w3-round muli-semi-bold">Login</p>
-        <form class="w3-container w3-margin-bottom" action="/login" method="POST">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125049555-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-          <dl>
-            <dt> <label>USERNAME</label> </dt>
-            <dd> <input name="username" type="text" placeholder="Or email"></dd>
-            <dt> <label>PASSWORD</label> </dt>
-            <dd> <input name="password" type="password" placeholder="Password"></dd>
-          </dl>
-          <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><p class="w3-text-white" style="margin:0;font-size:22px">Send me in!</p></button>
-          <p style="padding:0"><a class="w3-link w3-text-indigo w3 w3-margin" href="#">I FORGOT MY PASSWORD</a></p>
-            OR LOGIN WITH
-          <a style="margin-bottom:10px;width:100%;background-color:#3B5998;color:#fff" href="/auth/facebook" class="w3-button w3-hover-indigo w3-round-xxlarge w3-margin-top"><p class="w3-text-white" style="margin:0;font-size:22px"> <i style="color:#3B5998!important" class="w3-white w3-padding w3-round fa fa-facebook"></i> Facebook </p></a>
-          <p><a href="/signup">OR CREATE A NEW ACCOUNT</a> </h3>
-        </form>
+  gtag('config', 'UA-125049555-1');
+</script>
 
-      </div>
-      <div class="w3-third w3-bold w3-container">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onedistin</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
-      </div>
-    </div>
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+  </head>
+  <body>
+    <style media="screen">
+      body {
+        background: #e9ebee;
+      }
+    </style>
+        <div class="w3-row">
+          <div style="color: #a9a9a9" class="w3-third w3-container">
+
+          </div>
+          <div class="w3-col w3-center center-card w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
+            <p style="font-size: 56px;margin:0;" class="w3-round  mobile-inline-margin-top muli-semi-bold">Login</p>
+            <form style="padding:0"class="w3-container w3-margin-bottom" action="/login" method="POST">
+
+              <dl>
+                <dt> <label>EMAIL OR</label> </dt>
+                <dd> <input name="username" type="text" placeholder="username"></dd>
+                <dt> <label>PASSWORD</label> </dt>
+                <dd> <input name="password" type="password" placeholder="Password"></dd>
+              </dl>
+              <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><p class="w3-text-white" style="margin:0;font-size:22px">Send me in!</p></button>
+              <p style="padding:0"><a class="w3-link w3-text-indigo w3 w3-margin" href="#">I FORGOT MY PASSWORD</a></p>
+                OR LOGIN WITH
+              <a style="margin-bottom:10px;width:100%;background-color:#3B5998;color:#fff" href="/auth/facebook" class="w3-button w3-hover-indigo w3-round-xxlarge w3-margin-top"><p class="w3-text-white" style="margin:0;font-size:22px"> <i style="color:#3B5998!important" class="w3-white w3-padding w3-round fa fa-facebook"></i> Facebook </p></a>
+              <p><a href="/signup">OR CREATE A NEW ACCOUNT</a> </h3>
+            </form>
+
+          </div>
+          <div class="w3-third w3-bold w3-container">
+
+          </div>
+        </div>
 
   </body>
 </html>

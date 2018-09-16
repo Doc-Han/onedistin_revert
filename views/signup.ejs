@@ -1,16 +1,40 @@
-<% include partials/header.ejs %>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125049555-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125049555-1');
+</script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onedistin</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+  </head>
+  <body>
 <style media="screen">
   body {
     background: #e9ebee;
   }
 </style>
-    <div class="w3-row w3-margin-top">
+    <div class="w3-row">
       <div class="w3-quarter w3-container">
-        .
+
       </div>
       <div class="w3-half w3-white w3-border w3-center w3-card-4 w3-mobile w3-container w3-animate-bottom">
         <p style="font-size: 56px;margin:0" class="w3-round muli-semi-bold">Sign Up</p>
-        <form onsubmit="return validate_signup()" class="w3-container w3-margin-bottom" action="/signup" method="POST">
+        <form style="padding:0" onsubmit="return validate_signup()" class="w3-container w3-margin-bottom" action="/signup" method="POST">
 
           <span class="errs"></span>
 
@@ -21,7 +45,7 @@
             <dd> <input name="fullname" type="text" placeholder="Full name"></dd>
             <dt> <label>GENDER</label> </dt>
             <dd> <select name="gender">
-              <option value=""></option>
+              <option value="0">Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select> </dd>
@@ -31,7 +55,7 @@
             <dd> <input name="phone" type="phone" placeholder="Phone"></dd>
             <dt> <label>REGION</label> </dt>
             <dd> <select name="region">
-              <option value=""></option>
+              <option value="0">Region</option>
               <option value="Ashanti">Ashanti</option>
               <option value="Brong Ahafo">Brong Ahafo</option>
               <option value="Central">Central</option>

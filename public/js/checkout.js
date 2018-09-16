@@ -13,6 +13,14 @@ var n = 1;
   var del = 0;
   function show(){
 
+    if($("[name='region']").val() == "Greater Accra"){
+      del = 0;
+      $(".delivery-fee").text("GHS 5.00");
+    }else{
+      del = 1;
+      $(".delivery-fee").text("GHS 10.00");
+    }
+
     if(del == 0 && offr_on == 0){
       sm = (ttl * n);
       if(offr_tw == 1){

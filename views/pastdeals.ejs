@@ -1,12 +1,12 @@
 <% include partials/header.ejs %>
     <div class="w3-row w3-margin-top">
       <div style="color: #fff" class="w3-quarter w3-container">
-        .
+
       </div>
-      <div class="w3-half w3-mobile w3-container">
+      <div style="padding: 0" class="w3-half w3-mobile w3-container">
         <ul class="w3-ul">
           <% pastdeals.forEach(function(item){ %>
-            <li class="w3-bar">
+            <li style="padding: 0" class="w3-bar">
               <!--<a href="/pastdeal/<%= item.ID %>"><img src="/img/nice1.jpg" class="w3-left w3-border w3-round-xlarge" style="height:50px;width:50px"></a>-->
               <div style="padding-top: 0;" class="w3-bar-item">
                 <a class="w3-text-black" href="/pastdeal/<%= item.timestamp %>"><span class="muli-bold" style="font-size:22px"><%= item.post_title %></span></a><br>
