@@ -49,6 +49,8 @@ var n = 1;
       }
     }
 
+    $(".payment_details").val(n+"-"+del+"-"+sm);
+
     if(n == 1){
       $(".reduce-item:first-child").hide();
     }

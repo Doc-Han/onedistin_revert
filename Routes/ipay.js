@@ -14,10 +14,4 @@ router.get('/d_p', (req,res) =>{
   res.send("Please we are not here yet!");
 });
 
-router.get('/payment', (req,res) =>{
-  console.log(req.query);
-  res.send("payment done");
-});
-
-
 module.exports = router;

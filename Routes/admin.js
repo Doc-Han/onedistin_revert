@@ -89,8 +89,10 @@ router.post('/deal', upload.array('image'), (req,res) => {
       req.files.forEach(function(item,index){
         cloudinary.uploader.upload(item.path, function(img_res){
 
-              images[index] = img_res.public_id;
-              console.log(images);
+              if(img_res.public_id.length > 1){
+                images[index] = img_res.public_id;
+                console.log(images);
+              }
 
             if(index == 0){
               s_images = images.join("-***-");

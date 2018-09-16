@@ -8,6 +8,7 @@ var localStrategy = require('passport-local').Strategy;
 var tokenGen = require('../config/tools.js');
 var cloudinary = require('cloudinary');
 var mailer = require('../config/nodemailer.js');
+var rp = require('request-promise');
 var router = express.Router();
 
 passport.use(new localStrategy(
@@ -33,8 +34,8 @@ passport.use(new localStrategy(
 ));
 
 router.get('/api/v1/moneycallback', (req,res) => {
-  console.log("Query "+req.query);
   console.log("Body "+req.body);
+  res.send("got a callback");
 });
 
 router.post('/api/v1/moneycallback', (req,res) => {
@@ -42,26 +43,10 @@ router.post('/api/v1/moneycallback', (req,res) => {
   console.log("Body "+req.body);
 });
 
-router.get('/pay', (req,res) =>{
-  var receivedata = {
-    "CustomerName": "Farhan Yahya",
-    "CustomerMsisdn": "233558359341",
-    "CustomerEmail": "yahyafarhan48@gmail.com",
-    "Channel": "mtn-gh",
-    "Amount": 1.0,
-    "PrimaryCallbackUrl": "https://onedistin.herokuapp.com/api/v1/moneycallback",  /////example callback
-    "Description": "Onedistin"
-  }
-hubtel_pay.ReceiveMobileMoney(receivedata).then(function(data) {
-         console.log(data)
-      })
-  res.render('email');
-});
-
 router.get('/', (req,res,next) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
-    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"' ";
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 10;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"' ";
     con.query(query,[user,user], function(err,result){
       if(err)throw err;
       if(result[0].length > 0 && result[2].length > 0 && result[3].length > 0){
