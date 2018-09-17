@@ -129,7 +129,7 @@ router.post('/payment', (req,res) => {
       if(data.status === 'Success'){
         var clientReference = data.data.clientReference;
         var checkoutId =data.data.checkoutId;
-        con.query("INSERT INTO onedistin_invoice (ID,user,dealTime,invoiceId,checkoutId)VALUES(?,?,?,?,?)",[null,user,currentDate.currentDate(),clientReference,checkoutId],function(err,result){
+        con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,checkoutId)VALUES(?,?,?,?,?,?)",[null,user,post.title,currentDate.currentDate(),clientReference,checkoutId],function(err,result){
           if(err)throw err;
         });
         res.redirect(data.data.checkoutUrl);
