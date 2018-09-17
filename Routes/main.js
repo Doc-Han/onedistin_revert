@@ -397,10 +397,11 @@ router.post('/support', (req,res) => {
   var issue = body.issue;
   var email = body.user_email;
   var phone = body.user_phone;
-  var query = "INSERT INTO onedistin_support (ID,userId,type,issue,email,phone)VALUES(?,?,?,?,?,?)";
-  con.query(query,[null,user,type,issue,email,phone],function(err,result){
+  var query = "INSERT INTO onedistin_support (ID,userId,type,issue,email,phone)VALUES(?,?,?,?,?,?);SELECT user_name FROM onedistin_users WHERE ID=?";
+  con.query(query,[null,user,type,issue,email,phone,user],function(err,result){
     if(err)throw err;
-    res.render("support-done");
+    var user_name = result[1][0].user_name;
+    res.render("support-done",{user_name: user_name});
   });
 });
 

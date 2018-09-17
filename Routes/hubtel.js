@@ -64,7 +64,7 @@ router.post('/ussd', (req,res) =>{
   var user_name = body.order_user_name;
   var order_phone = body.order_phone;
   var date = currentDate.currentDate();
-  con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,checkoutId,username,phone) VALUES (?,?,?,,??,?,?,?)",[null,user,title,date,token,0,user_name,order_phone],function(err,result){
+  con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,checkoutId,username,phone) VALUES (?,?,?,?,?,?,?,?)",[null,user,title,date,token,0,user_name,order_phone],function(err,result){
     if(err)throw err;
     res.render('ussd-done');
   });
