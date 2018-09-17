@@ -4,6 +4,7 @@ var currentDate = require('../config/tools.js').currentDate();
 var currentTime = require('../config/tools.js').currentTime();
 var tools = require('../config/tools.js');
 var multer = require('multer');
+var tokenGen = require('../config/tools.js');
 var upload = require('../config/upload.js');
 var cloudinary = require('cloudinary');
 
@@ -87,11 +88,11 @@ router.post('/deal', upload.array('image'), (req,res) => {
       var images = [];
       var s_images;
       req.files.forEach(function(item,index){
-        cloudinary.uploader.upload(item.path, function(img_res){
+        var public_id = tokenGen.getToken();
+        cloudinary.uploader.upload(item.path,{public_id: public_id}, function(img_res){
 
               if(img_res.public_id.length > 1){
-                images[index] = img_res.public_id;
-                console.log(images);
+                images[index] = public_id;
               }
 
             if(index == 0){
