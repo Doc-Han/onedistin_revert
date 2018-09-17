@@ -57,7 +57,7 @@ router.post('/ussd', (req,res) =>{
   var date = currentDate.currentDate();
   con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,username,phone) VALUES (?,?,?,?,?,?,?)",[null,user,title,date,token,user_name,order_phone],function(err,result){
     if(err)throw err;
-    res.redirect('/p_s');
+    res.render('ussd-done');
   });
 });
 
@@ -135,7 +135,7 @@ router.post('/payment', (req,res) => {
   }else if(req.body.ussd == "on"){
     con.query("SELECT title FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'", function(err,d_result){
       if(err)throw err;
-      res.redirect('/ussd?ref_f_i_d='+body.item_no+"&p_t="+d_result[0].title);
+      res.redirect("/ussd?p_t="+d_result[0].title+"&ref_f_i_d="+body.item_no);
     });
   }
 });

@@ -400,7 +400,7 @@ router.post('/support', (req,res) => {
   var query = "INSERT INTO onedistin_support (ID,userId,type,issue,email,phone)VALUES(?,?,?,?,?,?)";
   con.query(query,[null,user,type,issue,email,phone],function(err,result){
     if(err)throw err;
-    res.send("We will surely respond to your report. THANK YOU!")
+    res.render("support-done");
   });
 });
 
