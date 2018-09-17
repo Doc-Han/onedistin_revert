@@ -35,7 +35,7 @@
 				<dt> <label>Video of the day</label> </dt>
 				<dd><input type="text" placeholder="Video Link" name="VideoLink" value="<%= deal.video %>"></dd>
 			</dl>
-
+        <input type="hidden" name="actualDate" value="<%= deal.timestamp %>">
 			<dl>
 				<dt> <label>Date</label> </dt>
 				<dd><input id="date" type="date" placeholder="Day" name="date" value="<%= dealDate %>"></dd>

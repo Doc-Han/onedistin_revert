@@ -89,11 +89,9 @@ router.post('/deal', upload.array('image'), (req,res) => {
       var s_images;
       req.files.forEach(function(item,index){
         var public_id = tokenGen.getToken();
-        cloudinary.uploader.upload(item.path,{public_id: public_id}, function(img_res){
-
-              if(img_res.public_id.length > 1){
+        cloudinary.uploader.upload(item.path, {public_id: public_id}, function(img_res){
+            console.log(public_id);
                 images[index] = public_id;
-              }
 
             if(index == 0){
               s_images = images.join("-***-");
@@ -169,9 +167,10 @@ router.post('/edit', (req,res) =>{
   var shoppy_link = req.body.shopLink;
   var bg_color = req.body.bg_color;
   var share_txt = req.body.share_txt;
+  var ac_date = req.body.actualDate;
 
-  var query = "UPDATE onedistin_deals SET title= ?,price= ?,ac_price=?,thingGet= ?,writeup= ?,video= ?,shoppy_txt= ?,shoppy_link= ?,timestamp= ?,bg_color= ?, share_txt= ? WHERE ID= ?";
-  con.query(query,[title,price,ac_price,thingGet,writeup,vidlink, shoppy_txt, shoppy_link, date, bg_color,share_txt, id], function(err){
+  var query = "UPDATE onedistin_deals SET title= ?,price= ?,ac_price=?,thingGet= ?,writeup= ?,video= ?,shoppy_txt= ?,shoppy_link= ?,timestamp= ?,bg_color= ?, share_txt= ? WHERE ID= ?;UPDATE onedistin_survey SET dealTime=? WHERE dealTime=?";
+  con.query(query,[title,price,ac_price,thingGet,writeup,vidlink, shoppy_txt, shoppy_link, date, bg_color,share_txt, id,date,ac_date], function(err){
     if(err)throw err;
     res.redirect(referer);
   });

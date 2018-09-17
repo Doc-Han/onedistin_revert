@@ -10,6 +10,12 @@ router.get('/p_s', (req,res) =>{
 });
 
 router.get('/p_c', (req,res) =>{
+  if(req.query){
+    var checkoutid = req.query.checkoutid;
+    con.query("DELETE FROM onedistin_invoice WHERE checkoutid=?",[checkoutid],function(err,result){
+      if(err)throw err;
+    });
+  }
   res.render("payment/payment_cancelled");
 });
 
@@ -17,9 +23,12 @@ router.get('/d_p', (req,res) =>{
   res.send("Please we are not here yet!");
 });
 
-router.get('/ipay', (req,res) =>{
-  res.render("payment/ipay");
+router.get('/hubtel/callback', (req,res) =>{
+  var body = req.body;
+  console.log(body);
+  res.send("Thanks You!");
 });
+
 
 router.get('/ussd', (req,res) =>{
   var user = req.user.user_id;
@@ -55,7 +64,7 @@ router.post('/ussd', (req,res) =>{
   var user_name = body.order_user_name;
   var order_phone = body.order_phone;
   var date = currentDate.currentDate();
-  con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,username,phone) VALUES (?,?,?,?,?,?,?)",[null,user,title,date,token,user_name,order_phone],function(err,result){
+  con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,checkoutId,username,phone) VALUES (?,?,?,,??,?,?,?)",[null,user,title,date,token,0,user_name,order_phone],function(err,result){
     if(err)throw err;
     res.render('ussd-done');
   });
@@ -119,7 +128,8 @@ router.post('/payment', (req,res) => {
     rp(options).then(function(data){
       if(data.status === 'Success'){
         var clientReference = data.data.clientReference;
-        con.query("INSERT INTO onedistin_invoice (ID,user,dealTime,invoiceId)VALUES(?,?,?,?)",[null,user,currentDate.currentDate(),clientReference],function(err,result){
+        var checkoutId =data.data.checkoutId;
+        con.query("INSERT INTO onedistin_invoice (ID,user,dealTime,invoiceId,checkoutId)VALUES(?,?,?,?,?)",[null,user,currentDate.currentDate(),clientReference,checkoutId],function(err,result){
           if(err)throw err;
         });
         res.redirect(data.data.checkoutUrl);
