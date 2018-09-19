@@ -10,12 +10,16 @@
     <div style="padding-right:20px" class="w3-col middle-lane">
       <h5 style="font-size:22px" class="muli-regular" >Introduce a friend</h5>
       <p style="text-align:left;font-size:16px" class="muli-regular">Give a friend 100 points when you introduce them to onedistin and Get 100 points when they make their first purchase.</p>
-      <div id="myInput" style="font-size:16px;overflow-x:hidden" class="w3-text-blue-grey w3-sand w3-border w3-round">
-        http://onedistin.herokuapp.com/referer/4yk378j
-      </div>
-        <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button w3-center button-color w3-round-xxlarge w3-margin-top">
-          <a href="whatsapp://send?text=" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Invite</h3></a>
-        </button>
+      <% if(isAuthenticated){ %>
+        <div id="myInput" style="font-size:16px;overflow-x:hidden" class="w3-text-blue-grey w3-sand w3-border w3-round">
+          http://onedistin.herokuapp.com/signup?referer=<%= currentUser.refId %>
+        </div>
+          <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button w3-center button-color w3-round-xxlarge w3-margin-top">
+            <a href="whatsapp://send?text=Do you really wanna see the majic in prices. Create an account with this link on Onedistin and earn 20points. http://onedistin.herokuapp.com/signup?referer=<%= currentUser.refId %>" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Invite</h3></a>
+          </button>
+      <% }else{ %>
+        Login to see your invite code
+      <% } %>
     </div>
       <div style="padding-right:20px" class="w3-col right-lane">
   <% if(isAuthenticated){%>

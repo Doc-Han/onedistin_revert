@@ -70,6 +70,10 @@
               <option value="Volta">Volta</option>
               <option value="Western">Western</option>
             </select></dd>
+            <% if(referer != 0){ %>
+              <dt> <label>referer</label> </dt>
+              <dd> <input name="referer" class="w3-disabled" type="text" value="<%= referer %>" placeholder="Referer" disabled></dd>
+            <% } %>
             <dt> <label>PASSWORD</label> </dt>
             <dd> <input name="password" type="password" placeholder="Password"></dd>
           </dl>

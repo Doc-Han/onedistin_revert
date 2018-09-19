@@ -47,8 +47,8 @@ passport.use(new facebookStrategy({
     });
 
   }));
-
-router.get('/facebook', passport.authenticate('facebook', {scope:['email','user_gender','user_hometown','user_location']}));
+// ,'user_gender','user_hometown','user_location'
+router.get('/facebook', passport.authenticate('facebook', {scope:['email']}));
 
 router.get('/facebook/callback', passport.authenticate('facebook', {successRedirect: '/facebookinfo', failureRedirect: '/signup'}));
 

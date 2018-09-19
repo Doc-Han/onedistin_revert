@@ -111,7 +111,12 @@ router.post('/login', isNotLoggenIn, passport.authenticate('local', {
 }));
 
 router.get('/signup', isNotLoggenIn, (req,res) => {
-  res.render('signup');
+  if(req.query.referer){
+    var referer = req.query.referer;
+  }else{
+    var referer = 0;
+  }
+  res.render('signup',{referer: referer});
 });
 
 router.post('/signup', isNotLoggenIn, (req,res) => {
@@ -122,16 +127,30 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
   var phone = req.body.phone;
   var region = req.body.region;
   var password = req.body.password;
+  var refId = username[0]+username[1]+tokenGen.getToken();
+  if(req.body.referer){
+    var referer = req.body.referer;
+  }else{
+    var referer = 0;
+  }
+
   bcrypt.hash(password,10,function(err,hash){
     if(err) throw err;
-    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,gender,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered)VALUES(?,?,?,?,?,?,?,?,?,?)";
-    con.query(query, [null,username,fullname,gender,email,phone,region,'100',hash,currentDate.currentDate()] ,function(err){
+    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,gender,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered,refId)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+    con.query(query, [null,username,fullname,gender,email,phone,region,'100',hash,currentDate.currentDate(),refId] ,function(err){
       if(err) throw err;
       con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
         if(err) throw err;
         const user_id = result[0];
         var user = user_id.user_id;
-        con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,offer_one,offer_two,offer_three,last_activity) VALUES (?,?,?,?,?,?,?,?)",[null,user,0,0,0,0,0,'new user'],function(err){
+        if(referer != 0){
+          var nQuery = "INSERT INTO onedistin_points (ID,user_id,active_points,total_points,offer_one,offer_two,offer_three,last_activity) VALUES (?,?,?,?,?,?,?,?);UPDATE onedistin_points SET active_points=(active_points)+20, total_points=(total_points)+20, last_activity=concat(last_activity,',SignUp through Invite') WHERE user_id=?";
+          var vals = [null,user,0,0,0,0,0,'new user',user];
+        }else{
+          var nQuery = "INSERT INTO onedistin_points (ID,user_id,active_points,total_points,offer_one,offer_two,offer_three,last_activity) VALUES (?,?,?,?,?,?,?,?)";
+          var vals = [null,user,0,0,0,0,0,'new user'];
+        }
+        con.query(nQuery,vals,function(err){
           if(err)throw err;
           //mailer.throwMail(email,"Welcome to Onedistin","<p>Thank you for creating an account with Onedistin</p><p>Visit our site daily to uncover the mystery of cheap items. See ya</p><br><p>Your Login info</p><p>Email: "+email+"</p><p>Username: "+username+"</p><p>Password: "+password+"</p>");
           req.login(user_id,function(err){
