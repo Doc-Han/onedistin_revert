@@ -12,7 +12,9 @@ $(document).ready(function(){
       data: data,
       success: function(res){
         if(res == "1"){
-          $(".errs").append("<div class='panel w3-red w3-padding'>This username has been taken!</div>");
+          $(".errs .username").html("<div class='panel w3-red w3-padding'>This username has been taken!</div>");
+        }else {
+          $(".errs .username").html("");
         }
       }
     });
@@ -30,7 +32,9 @@ $(document).ready(function(){
       data: data,
       success: function(res){
         if(res == 1){
-          $(".errs").append("<div class='panel w3-red w3-padding'>The email is already been used!</div>");
+          $(".errs .email").html("<div class='panel w3-red w3-padding'>The email is already been used!</div>");
+        }else{
+          $(".errs .email").html("");
         }
       }
     })

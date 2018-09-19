@@ -6,7 +6,7 @@ var rp = require('request-promise');
 var router = express.Router();
 
 router.get('/p_s', (req,res) =>{
-  res.render("/payment/payment_sent");
+  res.render("payment/payment_sent");
 });
 
 router.get('/p_c', (req,res) =>{

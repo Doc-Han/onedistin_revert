@@ -391,18 +391,33 @@ router.get('/privacy', (req,res) => {
 });
 
 router.post('/support', (req,res) => {
-  var user = req.user.user_id;
-  var body = req.body;
-  var type = body.complaint;
-  var issue = body.issue;
-  var email = body.user_email;
-  var phone = body.user_phone;
-  var query = "INSERT INTO onedistin_support (ID,userId,type,issue,email,phone)VALUES(?,?,?,?,?,?);SELECT user_name FROM onedistin_users WHERE ID=?";
-  con.query(query,[null,user,type,issue,email,phone,user],function(err,result){
-    if(err)throw err;
-    var user_name = result[1][0].user_name;
-    res.render("support-done",{user_name: user_name});
-  });
+  if(req.isAuthenticated()){
+    var user = req.user.user_id;
+    var body = req.body;
+    var type = body.complaint;
+    var issue = body.issue;
+    var email = body.user_email;
+    var phone = body.user_phone;
+    var query = "INSERT INTO onedistin_support (ID,userId,type,issue,email,phone)VALUES(?,?,?,?,?,?);SELECT user_name FROM onedistin_users WHERE ID=?";
+    con.query(query,[null,user,type,issue,email,phone,user],function(err,result){
+      if(err)throw err;
+      var user_name = result[1][0].user_name;
+      res.render("support-done",{user_name: user_name});
+    });
+  }else{
+    var user = 0;
+    var body = req.body;
+    var type = body.complaint;
+    var issue = body.issue;
+    var email = body.user_email;
+    var phone = body.user_phone;
+    var query = "INSERT INTO onedistin_support (ID,userId,type,issue,email,phone)VALUES(?,?,?,?,?,?)";
+    con.query(query,[null,user,type,issue,email,phone],function(err,result){
+      if(err)throw err;
+      var user_name = "Nameless"
+      res.render("support-done",{user_name: user_name});
+    });
+  }
 });
 
 router.get('/logout', isLoggedIn, (req,res) => {

@@ -27,24 +27,24 @@ router.post('/survey', (req,res) =>{
   if(req.isAuthenticated()){
     var user = req.user.user_id;
     if(ans == "one"){
-      var query = "UPDATE onedistin_survey SET ans_one_no=(ans_one_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+      var query = "UPDATE onedistin_survey SET ans_one_no=(ans_one_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"'";
     }else if(ans == "two"){
-      var query = "UPDATE onedistin_survey SET ans_two_no=(ans_two_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+      var query = "UPDATE onedistin_survey SET ans_two_no=(ans_two_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"'";
     }else if(ans == "three"){
-      var query = "UPDATE onedistin_survey SET ans_three_no=(ans_three_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+      var query = "UPDATE onedistin_survey SET ans_three_no=(ans_three_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"'";
     }else if(ans == "four"){
-      var query = "UPDATE onedistin_survey SET ans_four_no=(ans_four_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+      var query = "UPDATE onedistin_survey SET ans_four_no=(ans_four_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"'";
     }else if(ans == "five"){
-      var query = "UPDATE onedistin_survey SET ans_five_no=(ans_five_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+      var query = "UPDATE onedistin_survey SET ans_five_no=(ans_five_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"'";
     }else if(ans == "six"){
-      var query = "UPDATE onedistin_survey SET ans_six_no=(ans_six_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?";
+      var query = "UPDATE onedistin_survey SET ans_six_no=(ans_six_no + 1) WHERE dealTime='"+currentDate.currentDate()+"';UPDATE onedistin_users SET survey='"+currentDate.currentDate()+"' WHERE ID=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"'";
     }
 
     con.query(query, [user], function(err,result,next){
       if(err)throw err;
-      console.log(result);
+      console.log(result[2][0]);
+      res.send(result[2][0]);
     });
-    res.send("1");
   }else{
     res.send("0");
   }
