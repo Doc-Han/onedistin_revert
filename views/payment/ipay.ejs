@@ -1,28 +1,46 @@
-
 <% include ../partials/header.ejs %>
 <style media="screen">
-  .custom-footer-color {
-    background-color: #000;
+  h3,li {
+    text-align:left
+  }
+  ol {
+    padding-left: 14px
+  }
+  li>p {
+    font-size:22px;
   }
 </style>
   <div class="w3-row">
-    <div class="w3-quarter">
+    <div class="w3-third">
 .
     </div>
-    <div class="w3-half w3-mobile w3-center">
-      <img width="100%" src="https://media.giphy.com/media/3ohzdYv6oVH6FvpaEw/giphy.gif" alt="">
-      <h3>Woo Hoo...</h3>
-      <p style="text-align:left"><b>Thank you for purchasing today’s distin.</b> <br>
-Your order will be delivered within (depending on the delivery option chosen). <b>Tick Tock</b></p>
-<h3 style="text-align:left">Now share this deal to earn 20 reward points. You can redeem your points here</h3>
+    <div class="w3-third w3-mobile w3-center">
+      <h3 class="muli-semi-bold" style="font-size:36px">Follow these steps to complete your payment.</h3>
 
-<div style="width:100%;text-align:left;font-size:24px;border:2px solid #000" class="panel w3-padding w3-round">
-    <i class="fa fa-quote-left"></i> I just saved GHS 20 on this deal on @onedistin. Want to get one? <i class="fa fa-quote-right"></i>
-</div>
-      <button style="margin-bottom:10px;width:100%;" class="w3-button w3-blue w3-round-xlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Inform your paddies!</h3></button>
-      <br><br><br><br><br><br><br><br><br>
+      <form>
+        <input type="hidden" name="invoiceId">
+        <input type="hidden" value="<%= data.item_title %>" name="p_t">
+        <input type="hidden" value="<%= data.item_det %>" name="ref_f_i_d" >
+        <dl>
+          <dt> <label>Username</label> </dt>
+          <dd> <input type="text" name="user_name" value="<%= data.user_name %>" required> </dd>
+          <dt> <label>Network Provider</label> </dt>
+          <dd> <select name="provider">
+            <option value="mtn">Mtn</option>
+            <option value="Vodafone">Vodafone</option>
+            <option value="aitel">Airtel</option>
+            <option value="tigo">Tigo</option>
+          </select> </dd>
+          <dt> <label>Payment Number</label> </dt>
+          <dd> <input type="text" name="order_phone"> </dd>
+        </dl>
+        <button type="button" style="margin-bottom:10px;width:100%;" class="w3-button ipay-initiate button-color w3-round-xxlarge w3-margin-top" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Send me Approval</h3></button>
+      </form>
+
     </div>
-    <div class="w3-quarter">
+    <div class="w3-third">
 
     </div>
   </div>
+
+  <script src="/js/ipay.js"></script>

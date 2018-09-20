@@ -1,5 +1,7 @@
 var express = require('express');
 var con = require('../config/db.js');
+var rp = require('request-promise');
+var tokenGen = require('../config/tools.js');
 var currentDate = require('../config/tools.js');
 var router = express.Router();
 
@@ -49,6 +51,72 @@ router.post('/survey', (req,res) =>{
     res.send("0");
   }
 
+});
+
+router.post('/ipay', (req,res) =>{
+  var user = req.user.user_id;
+  var body = req.body;
+  var title = body.dealTitle;
+  var provider = body.provider;
+  var invoiceId = "i"+tokenGen.getToken();
+  var username = body.username;
+  var phone = body.phone;
+  var item_det = body.ref.split("-");
+  var num = item_det[0]*1;
+  var del = item_det[1]*1;
+  if(del == 0){
+    var delivery = 5;
+  }else{
+    var delivery = 10;
+  }
+  var total = ((item_det[2]*1)*num)+delivery;
+  var data = {
+    "merchant_key": process.env.IPAY_MERCHANT_KEY,
+    "invoice_id": invoiceId,
+    "total": total,
+    "pymt_instrument": phone,
+    "extra_wallet_issuer_hint": provider,
+  }
+  let options = {
+    method: 'POST',
+    uri: 'https://community.ipaygh.com/v1/mobile_agents_v2',
+    body: data,
+    json: true
+  }
+  rp(options).then(function(data){
+    console.log(data);
+    if(data.success == true){
+      var query = "INSERT INTO onedistin_invoice (ID,user,dealTitle,invoiceId,username,phone)VALUES(?,?,?,?,?,?)";
+      con.query(query,[null,user,title,invoiceId,username,phone],function(err){
+        if(err)throw err;
+        res.send(invoiceId);
+      });
+    }else{
+      res.send("0");
+    }
+  });
+
+});
+
+router.post('/ipay/validate', (req,res) =>{
+  var invoiceId = req.body.invoiceId;
+  let options = {
+    method: 'GET',
+    uri: 'https://community.ipaygh.com/v1/gateway/json_status_chk?invoice_id='+invoiceId+'&merchant_key='+process.env.IPAY_MERCHANT_KEY,
+    json: true
+  }
+  rp(options).then(function(data){
+    console.log(data);
+    /*if(data.success == true){
+      var query = "INSERT INTO onedistin_invoice (ID,user,dealTitle,invoiceId,username,phone)VALUES(?,?,?,?,?,?)";
+      con.query(query,[null,user,title,invoiceId,username,phone],function(err){
+        if(err)throw err;
+        res.send(invoiceId);
+      });
+    }else{
+      res.send("0");
+    }*/
+  });
 });
 
 module.exports = router;

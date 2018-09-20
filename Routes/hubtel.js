@@ -29,6 +29,30 @@ router.get('/hubtel/callback', (req,res) =>{
   res.send("Thanks You!");
 });
 
+router.get('/ipay', (req,res) =>{
+  var user = req.user.user_id;
+  con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[user], function(err,result){
+    if(err)throw err;
+    var user_name = result[0].user_name;
+
+    var item_det = req.query.ref_f_i_d.split("-");
+    var num = item_det[0]*1;
+    var del = item_det[1]*1;
+    if(del == 0){
+      var delivery = 5;
+    }else{
+      var delivery = 10;
+    }
+    var total = ((item_det[2]*1)*num)+delivery;
+    var data = {
+      item_det: req.query.ref_f_i_d,
+      item_title: req.query.p_t,
+      total: total,
+      user_name: user_name
+    }
+    res.render('payment/ipay',{data: data});
+  });
+});
 
 router.get('/ussd', (req,res) =>{
   var user = req.user.user_id;
@@ -44,7 +68,7 @@ router.get('/ussd', (req,res) =>{
     }else{
       var delivery = 10;
     }
-    var total = (item_det[2]*1)+delivery;
+    var total = ((item_det[2]*1)*num)+delivery;
     var data = {
       item_det: req.query.ref_f_i_d,
       item_title: req.query.p_t,
@@ -83,7 +107,7 @@ router.post('/payment', (req,res) => {
   }else{
     var delivery = 10;
   }
-  var total = (item_det[2]*1)+delivery;
+  var total = ((item_det[2]*1)*num)+delivery;
   if(req.body.hubtel == "on"){
     con.query("SELECT title,ac_price FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'",function(err,result){
       if(err) throw err;
@@ -141,7 +165,10 @@ router.post('/payment', (req,res) => {
 
     });
   }else if(req.body.ipay == "on"){
-    res.redirect('/ipay');
+    con.query("SELECT title FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'", function(err,d_result){
+      if(err)throw err;
+      res.redirect("/ipay?p_t="+d_result[0].title+"&ref_f_i_d="+body.item_no);
+    });
   }else if(req.body.ussd == "on"){
     con.query("SELECT title FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'", function(err,d_result){
       if(err)throw err;

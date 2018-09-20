@@ -13,14 +13,6 @@ var n = 1;
   var del = 0;
   function show(){
 
-    if($("[name='region']").val() == "Greater Accra"){
-      del = 0;
-      $(".delivery-fee").text("GHS 5.00");
-    }else{
-      del = 1;
-      $(".delivery-fee").text("GHS 10.00");
-    }
-
     if(del == 0 && offr_on == 0){
       sm = (ttl * n);
       if(offr_tw == 1){
@@ -57,7 +49,7 @@ var n = 1;
       }
     }
 
-    $(".payment_details").val(n+"-"+del+"-"+sm);
+    $(".payment_details").val(n+"-"+del+"-"+ttl);
 
     if(n == 1){
       $(".reduce-item:first-child").hide();
@@ -107,24 +99,35 @@ var n = 1;
     }
   });
 
-  if($("#low").length < 1){
+  /*if($("#low").length < 1){
     del = 1;
     $(".delivery-fee").text("GHS 10.00");
     show();
+  }*/
+  function effect(){
+    if($("[name='user_region']").val() == "Greater Accra"){
+      del = 0;
+      $(".delivery-fee").text("GHS 5.00");
+    }else{
+      del = 1;
+      $(".delivery-fee").text("GHS 10.00");
+    }
   }
 
-  $("[name='region']").change(function(){
-    if($("[name='region']").val() == "Greater Accra"){
+  $("[name='user_region']").change(function(){
+    if($("[name='user_region']").val() == "Greater Accra"){
       $("#del_table01").hide();
       $("#del_table02").show();
       del = 0;
       $(".delivery-fee").text("GHS 5.00");
+      effect();
       show();
     }else{
       $("#del_table01").show();
       $("#del_table02").hide();
       del = 1;
       $(".delivery-fee").text("GHS 10.00");
+      effect();
       show();
     }
   });
