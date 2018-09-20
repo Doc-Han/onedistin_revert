@@ -86,8 +86,8 @@ router.post('/ipay', (req,res) =>{
   rp(options).then(function(data){
     console.log(data);
     if(data.success == true){
-      var query = "INSERT INTO onedistin_invoice (ID,user,dealTitle,invoiceId,username,phone)VALUES(?,?,?,?,?,?)";
-      con.query(query,[null,user,title,invoiceId,username,phone],function(err){
+      var query = "INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,username,phone)VALUES(?,?,?,?,?,?,?)";
+      con.query(query,[null,user,title,currentDate.currentDate(),invoiceId,username,phone],function(err){
         if(err)throw err;
         res.send(invoiceId);
       });
