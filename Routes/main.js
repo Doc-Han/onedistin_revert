@@ -279,7 +279,11 @@ router.get('/rewards', (req,res) => {
 });
 
 router.get('/introduce', (req,res) => {
-  res.render('introduce');
+  var user = req.user.user_id;
+  con.query("SELECT refId FROM onedistin_users WHERE ID=?",[user],function(err,result){
+    if(err)throw err;
+    res.render('introduce',{refId:result[0].refId});
+  });
 });
 
 router.get('/facebookinfo', (req,res) => {

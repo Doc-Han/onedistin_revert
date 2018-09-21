@@ -87,13 +87,16 @@ router.post('/deal', upload.array('image'), (req,res) => {
     if(result.length < 1){
       var images = [];
       var s_images;
+      var count = 0;
       req.files.forEach(function(item,index){
-        var public_id = tokenGen.getToken();
-        cloudinary.uploader.upload(item.path, {public_id: public_id}, function(img_res){
-            console.log(public_id);
-                images[index] = public_id;
-
-            if(index == 0){
+        var custom_id = tokenGen.getToken();
+        cloudinary.v2.uploader.upload(item.path, {public_id: custom_id}, function(img_res){
+          images[index] = custom_id;
+          if(custom_id != null && custom_id.trim() != ""){
+            count++;
+          }
+          
+            if(req.files.length == count){
               s_images = images.join("-***-");
               var time = new Date();
               var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,share_txt,categories)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_survey (ID,dealTime,question,ans_one,ans_two,ans_three,ans_four,ans_five,ans_six)VALUES(?,?,?,?,?,?,?,?,?)";
