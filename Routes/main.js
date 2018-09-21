@@ -46,7 +46,7 @@ router.get('/', (req,res,next) => {
         img_ids.forEach(function(item,index){
           if(index == 0){
             var a = cloudinary.url(item,{transformation:[
-              {effect: "colorize:0", color: result[0][0].bg_color},
+              {effect: "colorize:80", color: result[0][0].bg_color},
               {width: 900, height: 900, crop: "scale"}
             ]});
           }else{
@@ -282,7 +282,7 @@ router.get('/introduce', (req,res) => {
   var user = req.user.user_id;
   con.query("SELECT refId FROM onedistin_users WHERE ID=?",[user],function(err,result){
     if(err)throw err;
-    res.render('introduce',{refId:result[0].refId});
+    res.render('introduce',{refId: result[0].refId});
   });
 });
 

@@ -55,9 +55,7 @@ var n = 1;
       $(".reduce-item:first-child").hide();
     }
 
-
     $('.total_price').text("GHS "+sm.toFixed(2));
-    $("[name='total']").val(sm.toFixed(2));
   }
 
   $(".add-item-bar").click(function(){
