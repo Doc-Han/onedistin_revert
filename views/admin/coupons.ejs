@@ -1,0 +1,41 @@
+<% include partials/header.ejs %>
+
+<div class="w3-row w3-margin-top">
+  <% include partials/navs.ejs %>
+  <div style="width:60%" class="w3-padding w3-col w3-card-4 w3-mobile">
+    <form action="coupons" method="post">
+      <dl>
+        <dt> <label>Coupon Code </label> </dt>
+				<dd><input type="text" name="code" required></dd>
+				<dt> <label>% Off</label> </dt>
+				<dd><input type="text" name="percentage" required></dd>
+      </dl>
+      <div class="w3-center">
+        <button style="margin-top:50px;margin-bottom:50px;padding:50px;font-size:24px" class="w3-button w3-blue w3-round" type="submit"> <i class="fa fa-send"></i> Add Coupon!</button>
+      </div>
+    </form>
+
+      <table class="w3-table-all w3-bordered">
+        <tr>
+          <th>Code</th>
+          <th>% off</th>
+          <th></th>
+        </tr>
+    <% if(hasCoupons){ %>
+      <% coupons.forEach(function(item){ %>
+        <tr>
+          <td><%= item.code %></td>
+          <td><%= item.percentage+'%' %></td>
+          <td> <a href="coupons/<%= item.ID %>" >Delete</a> </td>
+        </tr>
+      <% }); %>
+    <% } %>
+        <!-- Do some crazy shit here! --->
+      </table>
+
+  </div>
+  <div style="width:20%" class="w3-col ">
+
+  </div>
+
+</div>

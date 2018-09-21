@@ -19,8 +19,8 @@ $(document).ready(function(){
           $("[name='invoiceId']").val(res);
           $(".ipay-wait").html('<h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Check your phone</h3>');
           setTimeout(function(){
-            $(".ipay-wait").html('<h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">I\'m done paying</h3>');
-            $(".ipay-wait").addClass("ipay-validate").removeClass("ipay-wait");
+            $(".ipay-wait").hide();
+            $(".ipay-validate").show();
           },6000);
         }else{
           $(".ipay-wait").html('<h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Retry!</h3>');
@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 
   $(".ipay-validate").click(function(){
-    alert("Valitdateing");
+    $(this).html('<h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Checking Payment...</h3>');
     data = {
       invoiceId: $("[name='invoiceId']").val(),
     }
@@ -41,7 +41,13 @@ $(document).ready(function(){
       data: data,
       method: 'POST',
       success: function(res){
-
+        if(res == "1"){
+          document.location = '/p_s';
+        }else if(res == "2"){
+          $(".ipay-validate").html('<h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Still awaiting payment!</h3>');
+        }else{
+          $(".ipay-validate").html('<h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Payment failed!</h3>');
+        }
       }
     });
   });

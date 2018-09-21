@@ -109,7 +109,7 @@ router.post('/deal', upload.array('image'), (req,res) => {
 
 
     }else{
-      console.log("Deal for this day already available");
+      res.send("Deal for this day already exists!");
     }
   });
 });
@@ -149,6 +149,43 @@ router.get('/users', (req,res) => {
   });
 });
 
+router.get('/coupons', (req,res) =>{
+  con.query("SELECT * FROM onedistin_coupons",function(err,result){
+    if(err)throw err;
+    if(result.length > 0){
+      var hasCoupons = true;
+    }else{
+      var hasCoupons = false;
+    }
+    console.log(hasCoupons);
+    var coupons = result;
+    res.render('admin/coupons',{coupons:coupons,hasCoupons:hasCoupons});
+  });
+});
+
+router.get('/coupons/:Id', (req,res) =>{
+  var id = req.params.Id;
+  con.query("DELETE FROM onedistin_coupons WHERE ID=?",[id],function(err){
+    if(err)throw err;
+    res.redirect('/admin/coupons');
+  });
+});
+
+router.post('/coupons', (req,res) =>{
+  var body = req.body;
+  var code = body.code;
+  var percentage = body.percentage;
+  var query = "INSERT INTO onedistin_coupons (ID,code,percentage)VALUES(?,?,?)";
+  con.query(query,[null,code,percentage],function(err){
+    if(err)throw err;
+    res.redirect('/admin/coupons');
+  })
+});
+
+router.get('/orders', (req,res) =>{
+  res.render('admin/orders');
+});
+
 router.get('/edit', (req,res) =>{
   res.send('page cannot be found!');
 });
@@ -181,12 +218,45 @@ router.get('/edit/:id', (req,res) =>{
   var query = "SELECT ID,title,timestamp FROM onedistin_deals ORDER BY timestamp DESC;SELECT * FROM onedistin_deals WHERE id=?";
   con.query(query,[id], function(err,result){
     if(err) throw err;
-      res.render('admin/edit', {deal:result[1][0],dealDate: tools.dateToEdit(result[1][0].timestamp), deals:result[0], currentDate: currentDate});
+    con.query("SELECT * FROM onedistin_survey WHERE dealTime=?",[result[1][0].timestamp],function(err,s_result){
+      if(err)throw err;
+      var cat = result[1][0].categories;
+      cat = cat.split("-***-");
+      var images = result[1][0].img_id.split("-***-");
+        res.render('admin/edit', {deal:result[1][0],dealDate: tools.dateToEdit(result[1][0].timestamp), deals:result[0],dealCats: cat, currentDate: currentDate,survey: s_result[0],images: images});
+    });
   });
 });
 
 router.get('/story', (req,res) => {
-  res.render('admin/story');
+  con.query("SELECT meta_content FROM onedistin_meta WHERE meta_title='story' ",function(err,result){
+    if(err)throw err;
+    if(result.length > 0){
+      var hasStory = true;
+      console.log(result[0]);
+      res.render('admin/story', {story: result[0].meta_content,hasStory: hasStory});
+    }else{
+      var hasStory = false;
+      res.render('admin/story', {hasStory: hasStory});
+    }
+  });
+});
+
+router.post('/story', (req,res) =>{
+  var story = req.body.story;
+  con.query("SELECT * FROM onedistin_meta WHERE meta_title=?",['story'],function(err,result){
+    if(result.length > 0){
+      var query = "UPDATE onedistin_meta SET meta_content=? WHERE meta_title=?";
+      var input = [story,'story'];
+    }else{
+      var query = "INSERT INTO onedistin_meta(ID,meta_title,meta_content)VALUES(?,?,?)";
+      var input = [null,'story',story];
+    }
+    con.query(query,input,function(err){
+      if(err)throw err;
+      res.send("Story Updated!");
+    });
+  });
 });
 
 router.get('/logout', (req,res) => {

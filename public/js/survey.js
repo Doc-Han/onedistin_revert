@@ -10,8 +10,9 @@ $(document).ready(function(){
       method: 'POST',
       data: data,
       success: function(res){
-        if(res == "1"){
-          $("#survey").html("<p>Your vote has been submitted.</p>");
+        if(res != "0"){
+          //$("#survey").html("<p>Your vote has been submitted.</p>");
+          console.log(res);
         }else if(res == "0"){
           document.location = "/login";
           /*$("#survey").html("<h5 style='font-size:22px' class='muli-regular'>Please <a href='/login'>login</a> to make a vote.</h5>");*/

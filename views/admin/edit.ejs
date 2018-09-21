@@ -5,6 +5,7 @@
   <div style="width:60%;margin-bottom:200px" class="w3-col w3-card-4 w3-mobile w3-animate-right">
     <form class="w3-container" action="/admin/edit" method="POST">
 			<br>
+      <!-- Displaying some BadAss Images Here! -->
 			<dl>
 				<dt> <label>Deal title</label> </dt>
 				<dd><input type="text" name="dealTitle" value="<%= deal.title %>"></dd>
@@ -14,6 +15,61 @@
 				<dd><input type="text" name="ac_price" value="<%= deal.ac_price %>"></dd>
 			</dl>
 
+      <div class="w3-row w3-margin-bottom">
+
+        <div class="w3-half">
+          <label class="w3-indigo w3-padding"> Categories</label>
+          <span class="w3-row">
+            <input class="cat w3-input w3-grey w3-row w3-border" type="text" name="" value="">
+            <button class="cat-add w3-button w3-quarter w3-teal" type="button" name="button">Add</button>
+            <button style="display:none" class="add-cat-op w3-quarter w3-black w3-button" type="button" name="button"> <i class="fa fa-plus"></i> </button>
+          </span>
+
+          <ul class="cat-list w3-row w3-ul w3-white">
+            <% dealCats.forEach(function(item){ %>
+              <% item.split(",").forEach(function(i,index){ %>
+                <% if(item.split(",").length-1 != index){ %>
+                  <% if(index == 0){ %>
+                    <li class="w3-grey"><%= i %></li>
+                  <% }else{ %>
+                    <li><%= i %></li>
+                  <% } %>
+                <% } %>
+              <% }); %>
+            <% }); %>
+          </ul>
+        </div>
+
+        <div class="w3-half">
+          <label class="w3-indigo w3-padding"> Survey</label>
+          <span class="w3-row">
+            <input class="suv w3-input w3-grey w3-threequarter w3-border" type="text" name="" value="">
+            <button class="suv-add w3-button w3-quarter w3-teal" type="button" name="button">Add</button>
+          </span>
+
+          <ul class="suv-list w3-row w3-ul w3-white">
+            <li class="w3-grey"><%= survey.question %></li>
+            <% if(survey.ans_one){ %>
+              <li><%= survey.ans_one %></li>
+            <% } %>
+            <% if(survey.ans_two){ %>
+              <li><%= survey.ans_two %></li>
+            <% } %>
+            <% if(survey.ans_three){ %>
+              <li><%= survey.ans_three %></li>
+            <% } %>
+            <% if(survey.ans_four){ %>
+              <li><%= survey.ans_four %></li>
+            <% } %>
+            <% if(survey.ans_five){ %>
+              <li><%= survey.ans_five %></li>
+            <% } %>
+            <% if(survey.ans_six){ %>
+              <li><%= survey.ans_six %></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
 
       <label class="w3-indigo w3-padding"> <i class="fa fa-pencil"></i> Marketing write up</label>
       <textarea class="summernote" name="marketingWriteUp"><%- deal.writeup%></textarea>

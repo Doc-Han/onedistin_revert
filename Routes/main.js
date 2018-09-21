@@ -385,7 +385,17 @@ router.get('/sell', (req,res) => {
 });
 
 router.get('/our-story', (req,res) => {
-  res.render('story');
+  con.query("SELECT meta_content FROM onedistin_meta WHERE meta_title='story' ",function(err,result){
+    if(err)throw err;
+    if(result.length > 0){
+      var hasStory = true;
+      console.log(result[0]);
+      res.render('story', {story: result[0].meta_content,hasStory: hasStory});
+    }else{
+      var hasStory = false;
+      res.render('story', {hasStory: hasStory});
+    }
+  });
 });
 
 router.get('/support', (req,res) => {

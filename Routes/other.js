@@ -106,16 +106,30 @@ router.post('/ipay/validate', (req,res) =>{
     json: true
   }
   rp(options).then(function(data){
-    console.log(data);
-    /*if(data.success == true){
-      var query = "INSERT INTO onedistin_invoice (ID,user,dealTitle,invoiceId,username,phone)VALUES(?,?,?,?,?,?)";
-      con.query(query,[null,user,title,invoiceId,username,phone],function(err){
+    var status = data[invoiceId].status;
+    if(status == "paid"){
+      var query = "UPDATE onedistin_invoice SET paid=? WHERE invoiceId=?";
+      con.query(query,[0,invoiceId],function(err){
         if(err)throw err;
-        res.send(invoiceId);
+        res.send("1");
       });
+    }else if(status == "awaiting_payment"){
+      res.send("2");
     }else{
       res.send("0");
-    }*/
+    }
+  });
+});
+
+router.post('/coupon', (req,res) =>{
+  var code = req.body.code;
+  con.query("SELECT percentage FROM onedistin_coupons WHERE code=?",[code],function(err,result){
+    console.log(result);
+    if(result.length > 0){
+      res.send(result[0].percentage);
+    }else{
+      res.send("0");
+    }
   });
 });
 

@@ -146,6 +146,37 @@ var n = 1;
   $(".show-coupon").click(function(){
     $(".coupon-box").toggle();
   });
+
+  $(".apply-coupon").click(function(){
+    var code = $(".coupon-input").val();
+    data = {
+      code: code.trim()
+    }
+    if(code.trim() == ""){
+      alert("Empty coupon doesn't exist!");
+    }else{
+      $(".apply-coupon").text("wait...");
+      $.ajax({
+        url: '/other/coupon',
+        data: data,
+        method: 'POST',
+        success: function(res){
+          if(res != "0"){
+            $(".apply-coupon").hide;
+            $(".show-coupon").after("<p>Coupon "+code+" Applied</p>");
+            $(".show-coupon").hide();
+            $(".coupon-tag").text(res+"% off");
+            var discount = (res*1)/100;
+            ttl = ttl - (ttl*discount);
+          }else{
+            $(".apply-coupon").text("Apply");
+            $(".coupon-error").text("Invalid coupon code!");
+          }
+        }
+      })
+    }
+  });
+
   show();
 
 });
