@@ -6,6 +6,7 @@ $(document).ready(function(){
       username: $("[name='user_name']").val(),
       provider: $("[name='provider']").val(),
       phone: $("[name='order_phone']").val(),
+      cat: $("[name='cat']").val(),
       dealTitle: $("[name='p_t']").val(),
       ref: $("[name='ref_f_i_d']").val()
     }

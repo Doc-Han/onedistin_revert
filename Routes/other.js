@@ -89,11 +89,19 @@ router.post('/ipay', isLoggedIn, (req,res) =>{
   rp(options).then(function(data){
     console.log(data);
     if(data.success == true){
-      var query = "INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,username,phone)VALUES(?,?,?,?,?,?,?)";
-      con.query(query,[null,user,title,currentDate.currentDate(),invoiceId,username,phone],function(err){
+      con.query("SELECT * FROM onedistin_users WHERE ID=?",[user],function(err,u_result){
         if(err)throw err;
-        res.send(invoiceId);
-      });
+        var uaddress = u_result[0].user_address;
+        var ucity = u_result[0].user_city;
+        var uregion = u_result[0].user_loc;
+        var cdate = currentDate.currentDate();
+        var query = "INSERT INTO `onedistin_invoice` (`ID`, `user`, `dealTitle`, `dealTime`, `invoiceId`, `checkoutId`, `username`, `phone`, `categories`, `address`, `city`, `region`, `item_ref`, `type`, `paid`) VALUES (NULL, '"+user+"', '"+title+"', '"+cdate+"', '"+invoiceId+"', '0', '"+username+"', '"+phone+"', '"+cat+"', '"+uaddress+"', '"+ucity+"', '"+uregion+"', '"+body.ref+"', '3', '0')";
+        con.query(query,function(err){
+          if(err)throw err;
+          res.send(invoiceId);
+        });
+     });
+
     }else{
       res.send("0");
     }

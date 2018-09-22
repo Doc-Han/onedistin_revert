@@ -180,7 +180,7 @@ router.post('/payment', isLoggedIn, (req,res) => {
       if(data.status === 'Success'){
         var clientReference = data.data.clientReference;
         var checkoutId =data.data.checkoutId;
-        con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,checkoutId,username,categories,address,city,region,item_ref,type)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",[null,user,post.title,currentDate.currentDate(),clientReference,checkoutId,user_name,_category,address,city,region,item_det,1],function(err){
+        con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,checkoutId,username,categories,address,city,region,item_ref,type)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",[null,user,post.title,currentDate.currentDate(),clientReference,checkoutId,user_name,_category,address,city,region,body.item_no,1],function(err){
           if(err)throw err;
         });
         res.redirect(data.data.checkoutUrl);
