@@ -69,11 +69,11 @@ router.get('/', (req,res) => {
 
 });
 
-router.get('/add', isLoggedIn, (req,res) => {
+router.get('/add',  isLoggedIn, (req,res) => {
   res.render('add');
 });
 
-router.post('/add', (req,res) => {
+router.post('/add', isLoggedIn, (req,res) => {
   var title = req.body.title;
   var body = req.body.body;
   var url = title.split(" ").join("-");
@@ -89,7 +89,7 @@ router.post('/add', (req,res) => {
   });
 });
 
-router.post('/comment', (req,res) => {
+router.post('/comment', isLoggedIn, (req,res) => {
   var comment = req.body.comment;
   var post_id = req.body.postId;
   var author = req.user.user_id;

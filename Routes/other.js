@@ -44,8 +44,7 @@ router.post('/survey', (req,res) =>{
 
     con.query(query, [user], function(err,result,next){
       if(err)throw err;
-      console.log(result[2][0]);
-      res.send(result[2][0]);
+      res.send(JSON.stringify(result[2][0]));
     });
   }else{
     res.send("0");

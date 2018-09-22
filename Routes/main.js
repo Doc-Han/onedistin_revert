@@ -193,7 +193,7 @@ router.get('/profile', isLoggedIn, (req,res) => {
   });
 });
 
-router.get('/profile/:type', (req,res,next) => {
+router.get('/profile/:type', isLoggedIn, (req,res,next) => {
   var user = req.user.user_id;
   var query = "SELECT * FROM onedistin_users WHERE ID = ?";
   con.query(query,[user],function(err,result){
@@ -212,7 +212,7 @@ router.get('/profile/:type', (req,res,next) => {
 
 });
 
-router.post('/profile/:type', (req,res) => {
+router.post('/profile/:type', isLoggedIn, (req,res) => {
   var user = req.user.user_id;
   var type = req.params.type;
   if(type == "user-info"){
@@ -271,14 +271,14 @@ router.post('/profile/:type', (req,res) => {
   res.redirect('/profile');
 });
 
-router.get('/rewards', (req,res) => {
+router.get('/rewards', isLoggedIn, (req,res) => {
   var user = req.user.user_id;
   con.query("SELECT * FROM onedistin_points WHERE user_id=?",[user],function(err,result){
     res.render('rewards',{pointData:result[0]});
   });
 });
 
-router.get('/introduce', (req,res) => {
+router.get('/introduce', isLoggedIn, (req,res) => {
   var user = req.user.user_id;
   con.query("SELECT refId FROM onedistin_users WHERE ID=?",[user],function(err,result){
     if(err)throw err;
@@ -286,11 +286,11 @@ router.get('/introduce', (req,res) => {
   });
 });
 
-router.get('/facebookinfo', (req,res) => {
+router.get('/facebookinfo', isLoggedIn, (req,res) => {
   res.render('facebook_next');
 });
 
-router.post('/facebookinfo', (req,res) => {
+router.post('/facebookinfo', isLoggedIn, (req,res) => {
   var user = req.user.user_id;
   var display_name = req.body.username;
   var region = req.body.region;
@@ -359,7 +359,7 @@ router.get('/pastdeal/:id', (req,res) => {
   });
 });
 
-router.get('/redeem/:offer',function(req,res, next){
+router.get('/redeem/:offer', isLoggedIn, function(req,res, next){
   var offer = req.params.offer;
   const user = req.user.user_id;
   con.query("SELECT active_points FROM onedistin_points WHERE user_id=?",[user],function(err,result){
