@@ -4,4 +4,3 @@
 .gitignore
 *send.js
 *nodemailer.js
-*app.js
