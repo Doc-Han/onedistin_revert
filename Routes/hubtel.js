@@ -102,12 +102,13 @@ router.post('/payment', (req,res) => {
   var item_det = body.item_no.split("-");
   var num = item_det[0]*1;
   var del = item_det[1]*1;
+  var ttl = item_det[2]*2;
   if(del == 0){
     var delivery = 5;
   }else{
     var delivery = 10;
   }
-  var total = ((item_det[2]*1)*num)+delivery;
+  var total = (ttl*num)+delivery;
   if(req.body.hubtel == "on"){
     con.query("SELECT title,ac_price FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'",function(err,result){
       if(err) throw err;
@@ -118,7 +119,7 @@ router.post('/payment', (req,res) => {
         {
           "name": post.title,
           "quantity": num,
-          "unitPrice": post.ac_price,
+          "unitPrice": ttl*num,
         },
         {
           "name": "Delivery fee",
