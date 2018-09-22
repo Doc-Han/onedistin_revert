@@ -170,7 +170,7 @@ router.post('/payment', (req,res) => {
   }else if(req.body.ipay == "on"){
     con.query("SELECT title FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'", function(err,d_result){
       if(err)throw err;
-      res.redirect("/ipay?p_t="+d_result[0].title+"&ref_f_i_d="+body.item_no);
+      res.redirect("/ipay?p_t="+d_result[0].title+"&j_wsdfk_sdkjfsah23452sdfe34532s43324dsf=fsa8df76adyfafd8adfysiuas7f8adsaifuag&ref_f_i_d="+body.item_no);
     });
   }else if(req.body.ussd == "on"){
     con.query("SELECT title FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"'", function(err,d_result){
