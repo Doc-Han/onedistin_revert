@@ -76,7 +76,7 @@ router.post('/ipay', isLoggedIn, (req,res) =>{
   var data = {
     "merchant_key": process.env.IPAY_MERCHANT_KEY,
     "invoice_id": invoiceId,
-    "total": ttl,
+    "total": total,
     "pymt_instrument": phone,
     "extra_wallet_issuer_hint": provider,
   }

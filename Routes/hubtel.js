@@ -42,8 +42,10 @@ router.get('/ipay', isLoggedIn, (req,res) =>{
     var ttl = item_det[2]*1;
     if(del == 0){
       var delivery = 5;
-    }else{
+    }else if(del == 1){
       var delivery = 10;
+    }else{
+      var delivery = 0;
     }
     var total = (ttl*num)+delivery;
     var data = {
@@ -67,6 +69,7 @@ router.get('/ussd', isLoggedIn, (req,res) =>{
     var item_det = req.query.ref_f_i_d.split("-");
     var num = item_det[0]*1;
     var del = item_det[1]*1;
+    var ttl = item_det[2]*1;
     if(del == 0){
       var delivery = 5;
     }else if(del == 1){
@@ -74,7 +77,7 @@ router.get('/ussd', isLoggedIn, (req,res) =>{
     }else{
       var delivery = 0;
     }
-    var total = ((item_det[2]*1)*num)+delivery;
+    var total = ((ttl)*num)+delivery;
     var data = {
       item_det: req.query.ref_f_i_d,
       item_title: req.query.p_t,
