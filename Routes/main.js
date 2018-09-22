@@ -307,27 +307,34 @@ router.post('/facebookinfo', isLoggedIn, (req,res) => {
 
 router.get('/pastdeals', (req,res) => {
   var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp < ? ORDER BY timestamp DESC";
-  con.query(query,['onedistin',currentTime.currentTime()],function(err,result){
+  var cTime = currentDate.currentDate()+'000000';
+  console.log(cTime);
+  con.query(query,['onedistin',cTime],function(err,result){
     if(err)throw err;
-    result.forEach(function(item,index){
-      var dealDate = item.timestamp;
-      var _dealDate = dealDate[0] + dealDate[1] + dealDate[2] + dealDate[3] + dealDate[4] + dealDate[5] + dealDate[6] + dealDate[7];
-      con.query("SELECT img_id FROM onedistin_deals WHERE timestamp='"+_dealDate+"'",function(err,s_result){
-        if(err)throw err;
-        if(s_result.length > 0){
-          var pastdeal_img = s_result[0].img_id.split("-***-")[2];
-          //console.log(pastdeal_img);
-          item.pastdeal_img = cloudinary.url(pastdeal_img,{transformation:[{effect: "sharpen"},{crop:'scale'}]});
-          var hasPastDeal = true;
-        }else{
-          var hasPastDeal = false;
-        }
-        if(index == result.length-1){
-          console.log(result);
-          res.render('pastdeals',{pastdeals:result, hasPastDeal: hasPastDeal});
-        }
+    if(result.length > 0){
+      result.forEach(function(item,index){
+        var dealDate = item.timestamp;
+        var _dealDate = dealDate[0] + dealDate[1] + dealDate[2] + dealDate[3] + dealDate[4] + dealDate[5] + dealDate[6] + dealDate[7];
+        con.query("SELECT img_id FROM onedistin_deals WHERE timestamp='"+_dealDate+"'",function(err,s_result){
+          if(err)throw err;
+          if(s_result.length > 0){
+            var pastdeal_img = s_result[0].img_id.split("-***-")[2];
+            //console.log(pastdeal_img);
+            item.pastdeal_img = cloudinary.url(pastdeal_img,{transformation:[{effect: "sharpen"},{crop:'scale'}]});
+            var hasPastDeal = true;
+          }else{
+            var hasPastDeal = false;
+          }
+          if(index == result.length-1){
+            console.log(result);
+            res.render('pastdeals',{pastdeals:result, hasPastDeal: hasPastDeal});
+          }
+        });
       });
-    });
+    }else{
+      var hasPastDeal = false;
+      res.render('pastdeals',{hasPastDeal: hasPastDeal});
+    }
   });
 });
 
