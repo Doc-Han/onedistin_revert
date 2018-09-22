@@ -85,29 +85,18 @@ router.post('/ipay', isLoggedIn, (req,res) =>{
     body: data,
     json: true
   }
-  console.log("Yay!");
-    /*con.query("SELECT user_address,user_loc,user_city FROM onedistin_users WHERE ID=?",[user],function(err,u_result){
-    if(err)throw err;
-    var ruser = u_result[0];
-    var address = ruser.user_address;
-    var region = ruser.user_loc;
-    var city = ruser.user_city;*/
-
-    rp(options).then(function(data){
-      console.log(data);
-      if(data.success == true){
-        var query = "INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,username,phone,categories,address,city,region,item_ref,type)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        con.query(query,[null,user,title,currentDate.currentDate(),invoiceId,username,phone,cat,address,city,region,item_det,3],function(err){
-          if(err)throw err;
-          res.send(invoiceId);
-        });
-      }else{
-        res.send("0");
-      }
-    });
-
-  //});
-
+  rp(options).then(function(data){
+    console.log(data);
+    if(data.success == true){
+      var query = "INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,username,phone)VALUES(?,?,?,?,?,?,?)";
+      con.query(query,[null,user,title,currentDate.currentDate(),invoiceId,username,phone],function(err){
+        if(err)throw err;
+        res.send(invoiceId);
+      });
+    }else{
+      res.send("0");
+    }
+  });
 
 });
 
