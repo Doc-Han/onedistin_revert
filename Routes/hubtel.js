@@ -30,6 +30,17 @@ router.post('/hubtel/callback', (req,res) =>{
   res.send("Thanks You!");
 });
 
+router.get('/hubtel/validate', (req,res) =>{
+  if(req.query){
+    var checkoutid = req.query.checkoutid;
+    console.log(checkoutid);
+    con.query("UPDATE onedistin_invoice SET paid=? WHERE checkoutid=?",[1,checkoutid],function(err,result){
+      if(err)throw err;
+      res.redirect('/p_s');
+    });
+  }
+});
+
 router.get('/ipay', isLoggedIn, (req,res) =>{
   var user = req.user.user_id;
   con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[user], function(err,result){
@@ -157,7 +168,7 @@ router.post('/payment', isLoggedIn, (req,res) => {
       "totalAmount": total,
       "Description": "Getting a cheap deal from Onedistin",
       "callbackUrl": "https://onedsitin.herokuapp.com/hubtel/callback",
-      "returnUrl": "https://onedistin.herokuapp.com/",
+      "returnUrl": "https://onedistin.herokuapp.com/hubtel/validate/",
       "merchantBusinessLogoUrl": "https://onedistin.herokuapp.com/img/onedistin_logo.png",
       "merchantAccountNumber": "HM2012170017",
       "cancellationUrl": "https://onedistin.herokuapp.com/p_c",
