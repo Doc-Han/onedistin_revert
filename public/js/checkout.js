@@ -23,6 +23,7 @@ var n = 1;
       }
       sm = sm + low_del;
     }else if(del == 0 && offr_on != 0){
+      del = 3;
       sm = (ttl * n);
       if(offr_tw == 1){
         sm = sm - (0.05*sm);
@@ -40,6 +41,7 @@ var n = 1;
       }
       sm = sm +high_del;
     }else if(del == 1 && offr_on != 0){
+      del = 3;
       sm = (ttl * n);
       if(offr_tw == 1){
         sm = sm - (0.05*sm);

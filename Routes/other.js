@@ -66,8 +66,10 @@ router.post('/ipay', isLoggedIn, (req,res) =>{
   var del = item_det[1]*1;
   if(del == 0){
     var delivery = 5;
-  }else{
+  }else if(del == 1){
     var delivery = 10;
+  }else{
+    var delivery = 0;
   }
   var total = ((item_det[2]*1)*num)+delivery;
   var data = {
@@ -83,12 +85,13 @@ router.post('/ipay', isLoggedIn, (req,res) =>{
     body: data,
     json: true
   }
-  con.query("SELECT user_address,user_loc,user_city FROM onedistin_users WHERE ID=?",[user],function(err,u_result){
+  console.log("Yay!");
+    /*con.query("SELECT user_address,user_loc,user_city FROM onedistin_users WHERE ID=?",[user],function(err,u_result){
     if(err)throw err;
     var ruser = u_result[0];
     var address = ruser.user_address;
     var region = ruser.user_loc;
-    var city = ruser.user_city;
+    var city = ruser.user_city;*/
 
     rp(options).then(function(data){
       console.log(data);
@@ -103,7 +106,7 @@ router.post('/ipay', isLoggedIn, (req,res) =>{
       }
     });
 
-  });
+  //});
 
 
 });
