@@ -5,7 +5,7 @@ var tokenGen = require('../config/tools.js');
 var currentDate = require('../config/tools.js');
 var router = express.Router();
 
-router.post('/like', (req,res) =>{
+router.post('/like', isLoggedIn, (req,res) =>{
   var postId = req.body.postId;
   var user = req.user.user_id;
   var query = "SELECT * FROM onedistin_likes WHERE user=? AND postId=?";
@@ -52,7 +52,7 @@ router.post('/survey', (req,res) =>{
 
 });
 
-router.post('/ipay', (req,res) =>{
+router.post('/ipay', isLoggedIn, (req,res) =>{
   var user = req.user.user_id;
   var body = req.body;
   var title = body.dealTitle;
@@ -60,6 +60,7 @@ router.post('/ipay', (req,res) =>{
   var invoiceId = "i"+tokenGen.getToken();
   var username = body.username;
   var phone = body.phone;
+  var cat = body.cat;
   var item_det = body.ref.split("-");
   var num = item_det[0]*1;
   var del = item_det[1]*1;
@@ -82,22 +83,32 @@ router.post('/ipay', (req,res) =>{
     body: data,
     json: true
   }
-  rp(options).then(function(data){
-    console.log(data);
-    if(data.success == true){
-      var query = "INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,username,phone)VALUES(?,?,?,?,?,?,?)";
-      con.query(query,[null,user,title,currentDate.currentDate(),invoiceId,username,phone],function(err){
-        if(err)throw err;
-        res.send(invoiceId);
-      });
-    }else{
-      res.send("0");
-    }
+  con.query("SELECT user_address,user_loc,user_city FROM onedistin_users WHERE ID=?",[user],function(err,u_result){
+    if(err)throw err;
+    var ruser = u_result[0];
+    var address = ruser.user_address;
+    var region = ruser.user_loc;
+    var city = ruser.user_city;
+
+    rp(options).then(function(data){
+      console.log(data);
+      if(data.success == true){
+        var query = "INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,username,phone,categories,address,city,region,item_ref,type)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        con.query(query,[null,user,title,currentDate.currentDate(),invoiceId,username,phone,cat,address,city,region,item_det,3],function(err){
+          if(err)throw err;
+          res.send(invoiceId);
+        });
+      }else{
+        res.send("0");
+      }
+    });
+
   });
+
 
 });
 
-router.post('/ipay/validate', (req,res) =>{
+router.post('/ipay/validate', isLoggedIn, (req,res) =>{
   var invoiceId = req.body.invoiceId;
   let options = {
     method: 'GET',
@@ -120,7 +131,7 @@ router.post('/ipay/validate', (req,res) =>{
   });
 });
 
-router.post('/coupon', (req,res) =>{
+router.post('/coupon', isLoggedIn, (req,res) =>{
   var code = req.body.code;
   con.query("SELECT percentage FROM onedistin_coupons WHERE code=?",[code],function(err,result){
     console.log(result);
@@ -131,5 +142,12 @@ router.post('/coupon', (req,res) =>{
     }
   });
 });
+
+function isLoggedIn(req,res,next){
+  if (req.isAuthenticated())
+  return next();
+
+  res.redirect('/login');
+}
 
 module.exports = router;
