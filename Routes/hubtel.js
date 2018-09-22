@@ -45,13 +45,13 @@ router.get('/ipay', (req,res) =>{
       var delivery = 10;
     }
     var total = (ttl*num)+delivery;
-    console.log(data);
     var data = {
       item_det: req.query.ref_f_i_d,
       item_title: req.query.p_t,
       total: total,
       user_name: user_name
     }
+    console.log(data);
     res.render('payment/ipay',{data: data});
   });
 });
