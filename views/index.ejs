@@ -20,7 +20,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
             <% img.forEach(function(item,index){ %>
               <% if(index > 0){ %>
                 <div class="mySlides fade">
-                  <img class="w3-center" src="<%= item %>" style="width:100%;height:300px">
+                  <img class="w3-center" onclick="currentSlide(<%= index+1 %>)" src="<%= item %>" style="width:100%;height:300px">
                 </div>
               <% } %>
             <% }); %>
@@ -76,7 +76,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
           <ul style="width:100%" class="w3-ul w3-margin-top">
             <% forumPosts.forEach(function(item){ %>
               <a class="w3-left" style="width:100%" href="/forum/<%= item.post_url %>"><li style="padding-left:0;width:inherit">
-                <!--<img class="w3-circle w3-left" src="http://via.placeholder.com/40x40" alt="">-->
+                <img style="width:50px;height:50px" class="w3-circle w3-left" src="https://source.unsplash.com/50x50/?<%= item.post_title.split(' ').join(',') %>" alt="">
                   <%= item.post_title %>
                   <i class="fa fa-heart"> <%= item.post_likes %> </i>
                   <i class="fa fa-comment"> <%= item.post_comments %> </i>
@@ -236,7 +236,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                     <span class="w3-tag coupon-tag w3-green"></span>
                     <span class="total_price">GHS 45.70</span></span> </dd>
                 </dl>
-                <input type="hidden" class="payment_details" name="item_no">
+                <input type="text" class="payment_details" name="item_no">
                 <!--<form method="POST" action="https://community.ipaygh.com/gateway">
                   <input type="hidden" name="merchant_key" value="965c2850-a0b4-11e8-af31-f23c9170642f" />
                   <input type="hidden" name="success_url" value="https://onedistin.herokuapp.com/p_s" />
@@ -300,7 +300,9 @@ showSlides(slideIndex += n);
 function currentSlide(n) {
 showSlides(slideIndex = n);
 }
-
+setInterval(function(){
+  showSlides(slideIndex += 1);
+},5000);
 function showSlides(n) {
 var i;
 var slides = document.getElementsByClassName("mySlides");

@@ -12,7 +12,7 @@ var transporter = nodemailer.createTransport({
 
 var throwMail = function(to,subject,html){
   const mailOptions = {
-  from: "Onedistin <support@onedistin.com>", // sender address
+  from: "support@onedistin.com", // sender address
   to: to, // list of receivers
   subject: subject, // Subject line
   html: html// plain text body

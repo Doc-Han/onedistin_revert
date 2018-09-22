@@ -19,6 +19,19 @@ router.get('/', (req,res) => {
           }else{
             item.liked = "0";
           }
+
+            function findLongestWord(str) {
+              const stringArray = str.split(" ");
+              const orderedArray = stringArray.sort((a, b) => {
+                return a.length < b.length;
+              });
+              return orderedArray;
+            }
+            var lng = findLongestWord(item.post_title);
+              lng = lng[0];
+            item.img_url = lng;
+            // ["jumped", "quick", "brown", "over", "lazy", "The", "fox", "the", "dog"]
+
           //console.log(result);
           if(index == result.length -1){
             res.render('forum', {posts: result})
@@ -32,7 +45,24 @@ router.get('/', (req,res) => {
     con.query(query,function(err,result){
       if (err) throw err;
 
-      res.render('forum', {posts: result})
+      result.forEach(function(item,index){
+            function findLongestWord(str) {
+              const stringArray = str.split(" ");
+              const orderedArray = stringArray.sort((a, b) => {
+                return a.length < b.length;
+              });
+              return orderedArray;
+            }
+            var lng = findLongestWord(item.post_title);
+              lng = lng[0];
+            item.img_url = lng;
+            // ["jumped", "quick", "brown", "over", "lazy", "The", "fox", "the", "dog"]
+
+          //console.log(result);
+          if(index == result.length -1){
+            res.render('forum', {posts: result})
+          }
+      });
 
     });
   }

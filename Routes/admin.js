@@ -95,10 +95,10 @@ router.post('/deal', upload.array('image'), (req,res) => {
           if(custom_id != null && custom_id.trim() != ""){
             count++;
           }
-          
+
             if(req.files.length == count){
               s_images = images.join("-***-");
-              var time = new Date();
+              var time = new Date(req.body.date);
               var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,share_txt,categories)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_survey (ID,dealTime,question,ans_one,ans_two,ans_three,ans_four,ans_five,ans_six)VALUES(?,?,?,?,?,?,?,?,?)";
               con.query(query,[null,title,price,ac_price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,s_images,bg_color,share_txt,cat,null,author,title,body,url,0,0,postDate,time,null,date,survey[0],survey[1],survey[2],survey[3],survey[4],survey[5],survey[6]],function(err){
                 if(err)throw err;
@@ -208,9 +208,9 @@ router.post('/edit', (req,res) =>{
   var bg_color = req.body.bg_color;
   var share_txt = req.body.share_txt;
   var ac_date = req.body.actualDate;
-
-  var query = "UPDATE onedistin_deals SET title= ?,price= ?,ac_price=?,thingGet= ?,writeup= ?,video= ?,shoppy_txt= ?,shoppy_link= ?,timestamp= ?,bg_color= ?, share_txt= ? WHERE ID= ?;UPDATE onedistin_survey SET dealTime=? WHERE dealTime=?";
-  con.query(query,[title,price,ac_price,thingGet,writeup,vidlink, shoppy_txt, shoppy_link, date, bg_color,share_txt, id,date,ac_date], function(err){
+  var time = new Date(req.body.date);
+  var query = "UPDATE onedistin_deals SET title= ?,price= ?,ac_price=?,thingGet= ?,writeup= ?,video= ?,shoppy_txt= ?,shoppy_link= ?,timestamp= ?,bg_color= ?, share_txt= ? WHERE ID= ?;UPDATE onedistin_survey SET dealTime=? WHERE dealTime=?;UPDATE onedistin_posts SET timestamp=?, time=? WHERE post_author='onedistin' AND timestamp=?";
+  con.query(query,[title,price,ac_price,thingGet,writeup,vidlink, shoppy_txt, shoppy_link, date, bg_color,share_txt, id,date,ac_date,date+'000000',time,ac_date+'000000'], function(err){
     if(err)throw err;
     res.redirect(referer);
   });
