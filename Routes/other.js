@@ -64,6 +64,7 @@ router.post('/ipay', isLoggedIn, (req,res) =>{
   var item_det = body.ref.split("-");
   var num = item_det[0]*1;
   var del = item_det[1]*1;
+  var ttl = item_det[2]*1;
   if(del == 0){
     var delivery = 5;
   }else if(del == 1){
@@ -71,11 +72,11 @@ router.post('/ipay', isLoggedIn, (req,res) =>{
   }else{
     var delivery = 0;
   }
-  var total = ((item_det[2]*1)*num)+delivery;
+  var total = ((ttl)*num)+delivery;
   var data = {
     "merchant_key": process.env.IPAY_MERCHANT_KEY,
     "invoice_id": invoiceId,
-    "total": total,
+    "total": ttl,
     "pymt_instrument": phone,
     "extra_wallet_issuer_hint": provider,
   }
