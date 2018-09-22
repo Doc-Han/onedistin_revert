@@ -8,7 +8,7 @@
           <% if(hasPastDeal){ %>
             <% pastdeals.forEach(function(item){ %>
               <li style="padding: 0" class="w3-bar">
-                <a href="/pastdeal/<%= item.timestamp %>"><img src="<%= item.pastdeal_img %>" class="w3-left w3-border w3-round-xlarge" style="height:100px;width:100px;margin-top:5px"></a>
+                <a href="/pastdeal/<%= item.timestamp %>"><img src="<%= item.pastdeal_img %>" class="w3-left w3-round-xlarge" style="height:100px;width:100px;margin-top:5px"></a>
                 <div style="padding-top: 0;" class="w3-bar-item">
                   <a class="w3-text-black" href="/pastdeal/<%= item.timestamp %>"><span class="muli-bold" style="font-size:22px"><%= item.post_title %></span></a><br>
                   <span class="w3-opacity">Posted on <span class="time"><%= item.time %></span> </span><br>

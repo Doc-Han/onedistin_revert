@@ -306,7 +306,7 @@ router.post('/facebookinfo', isLoggedIn, (req,res) => {
 });
 
 router.get('/pastdeals', (req,res) => {
-  var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp <= '"+currentTime.currentTime()+"' ORDER BY timestamp DESC";
+  var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC";
   con.query(query,['onedistin'],function(err,result){
     if(err)throw err;
     result.forEach(function(item,index){
