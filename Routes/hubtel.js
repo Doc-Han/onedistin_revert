@@ -119,7 +119,7 @@ router.post('/payment', (req,res) => {
         {
           "name": post.title,
           "quantity": num,
-          "unitPrice": ttl*num,
+          "unitPrice": ttl,
         },
         {
           "name": "Delivery fee",
