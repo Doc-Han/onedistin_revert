@@ -12,6 +12,7 @@ router.get('/p_s', isLoggedIn, (req,res) =>{
 router.get('/p_c', isLoggedIn, (req,res) =>{
   if(req.query){
     var checkoutid = req.query.checkoutid;
+    console.log(checkoutid);
     con.query("DELETE FROM onedistin_invoice WHERE checkoutid=?",[checkoutid],function(err,result){
       if(err)throw err;
     });
@@ -23,7 +24,7 @@ router.get('/d_p', isLoggedIn, (req,res) =>{
   res.send("Please we are not here yet!");
 });
 
-router.get('/hubtel/callback', (req,res) =>{
+router.post('/hubtel/callback', (req,res) =>{
   var body = req.body;
   console.log(body);
   res.send("Thanks You!");
@@ -156,10 +157,10 @@ router.post('/payment', isLoggedIn, (req,res) => {
       "totalAmount": total,
       "Description": "Getting a cheap deal from Onedistin",
       "callbackUrl": "https://onedsitin.herokuapp.com/hubtel/callback",
-      "returnUrl": "http://hubtel.com/online",
-      "merchantBusinessLogoUrl": "http://hubtel.com/online",
+      "returnUrl": "https://onedistin.herokuapp.com/",
+      "merchantBusinessLogoUrl": "https://onedistin.herokuapp.com/img/onedistin_logo.png",
       "merchantAccountNumber": "HM2012170017",
-      "cancellationUrl": "http://onedistin.herokuapp.com/p_c",
+      "cancellationUrl": "https://onedistin.herokuapp.com/p_c",
       "clientReference": "inv"+token,
     }
 
@@ -179,7 +180,7 @@ router.post('/payment', isLoggedIn, (req,res) => {
     rp(options).then(function(data){
       if(data.status === 'Success'){
         var clientReference = data.data.clientReference;
-        var checkoutId =data.data.checkoutId;
+        var checkoutId = data.data.checkoutId;
         con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,checkoutId,username,categories,address,city,region,item_ref,type)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",[null,user,post.title,currentDate.currentDate(),clientReference,checkoutId,user_name,_category,address,city,region,body.item_no,1],function(err){
           if(err)throw err;
         });
