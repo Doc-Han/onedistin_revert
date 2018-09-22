@@ -102,7 +102,7 @@ router.post('/payment', (req,res) => {
   var item_det = body.item_no.split("-");
   var num = item_det[0]*1;
   var del = item_det[1]*1;
-  var ttl = item_det[2]*2;
+  var ttl = item_det[2]*1;
   if(del == 0){
     var delivery = 5;
   }else{
