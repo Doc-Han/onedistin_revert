@@ -69,8 +69,10 @@ router.get('/ussd', isLoggedIn, (req,res) =>{
     var del = item_det[1]*1;
     if(del == 0){
       var delivery = 5;
-    }else{
+    }else if(del == 1){
       var delivery = 10;
+    }else{
+      var delivery = 0;
     }
     var total = ((item_det[2]*1)*num)+delivery;
     var data = {
@@ -120,8 +122,10 @@ router.post('/payment', isLoggedIn, (req,res) => {
   var ttl = item_det[2]*1;
   if(del == 0){
     var delivery = 5;
-  }else{
+  }else if(del == 1){
     var delivery = 10;
+  }else {
+    var delivery = 0;
   }
   var total = (ttl*num)+delivery;
   console.log("here!");
