@@ -26,6 +26,7 @@
       </ol>
       <form action="/ussd" method="POST">
         <input type="hidden" name="p_t" value="<%= data.item_title %>">
+        <input type="hidden" name="cat" value="<%= data.item_cat %>">
         <input type="hidden" name="ref_f_i_d" value="<%= data.item_det %>">
         <dl>
           <dt> <label>Username</label> </dt>

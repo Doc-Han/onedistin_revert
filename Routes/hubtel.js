@@ -93,6 +93,7 @@ router.get('/ussd', isLoggedIn, (req,res) =>{
     var data = {
       item_det: req.query.ref_f_i_d,
       item_title: req.query.p_t,
+      item_cat: req.query.cat,
       total: total,
       user_name: user_name
     }
@@ -106,12 +107,21 @@ router.post('/ussd', isLoggedIn, (req,res) =>{
   token = "ussd"+token.substring(0,6);
   var body = req.body;
   var title = body.p_t;
+  var item_ref = body.ref_f_i_d;
+  var cat = body.cat;
   var user_name = body.order_user_name;
   var order_phone = body.order_phone;
   var date = currentDate.currentDate();
-  con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,checkoutId,username,phone) VALUES (?,?,?,?,?,?,?,?)",[null,user,title,date,token,0,user_name,order_phone],function(err,result){
+  con.query("SELECT * FROM onedistin_users WHERE ID=?",[user],function(err,u_result){
     if(err)throw err;
-    res.render('ussd-done');
+    var ruser = u_result[0];
+    var uaddress = ruser.user_address;
+    var ucity = ruser.user_city;
+    var uregion = ruser.user_loc;
+    con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,checkoutId,username,phone,categories,address,city,region,item_ref,type,paid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[null,user,title,date,token,0,user_name,order_phone,cat,uaddress,ucity,uregion,item_ref,'2','0'],function(err,result){
+      if(err)throw err;
+      res.render('ussd-done');
+    });
   });
 });
 
