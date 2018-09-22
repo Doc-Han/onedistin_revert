@@ -140,11 +140,11 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                 <div class="shipping-address">
                   <dl>
                     <dt> <label>Name</label> </dt>
-                    <dd> <input type="text" name="user_name" value="<%= currentUser.user_name %>"> </dd>
+                    <dd> <input type="text" name="user_name" value="<%= currentUser.user_name %>" required> </dd>
                     <dt> <label>Address</label> </dt>
-                    <dd> <input type="text" name="user_address" value="<%= currentUser.user_address%>"> </dd>
+                    <dd> <input type="text" name="user_address" value="<%= currentUser.user_address%>" required> </dd>
                     <dt> <label>City</label> </dt>
-                    <dd> <input type="text" name="user_city" value="<%= currentUser.user_city %>"> </dd>
+                    <dd> <input type="text" name="user_city" value="<%= currentUser.user_city %>" required> </dd>
                     <dt> <label>Region</label> </dt>
                     <dd> <select name="user_region">
                       <option value="<%= currentUser.user_loc %>"><%= currentUser.user_loc %></option>
@@ -160,7 +160,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                       <option value="Western">Western</option>
                     </select> </dd>
                     <dt> <label>Phone</label> </dt>
-                    <dd> <input type="text" name="user_phone" value="<%= currentUser.user_phone %>"> </dd>
+                    <dd> <input type="text" name="user_phone" value="<%= currentUser.user_phone %>" required> </dd>
                   </dl>
                 </div>
                 <% if(offers.offer_one == 1){ %>
