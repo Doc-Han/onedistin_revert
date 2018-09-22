@@ -319,7 +319,7 @@ router.get('/pastdeals', (req,res) => {
           //console.log(pastdeal_img);
           item.pastdeal_img = cloudinary.url(pastdeal_img,{transformation:[{effect: "sharpen"},{crop:'scale'}]});
           var hasPastDeal = true;
-        }esle{
+        }else{
           var hasPastDeal = false;
         }
         if(index == result.length-1){
