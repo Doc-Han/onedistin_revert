@@ -306,8 +306,8 @@ router.post('/facebookinfo', isLoggedIn, (req,res) => {
 });
 
 router.get('/pastdeals', (req,res) => {
-  var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp < '"+currentTime.currentTime()+"' ORDER BY timestamp DESC";
-  con.query(query,['onedistin'],function(err,result){
+  var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp < ? ORDER BY timestamp DESC";
+  con.query(query,['onedistin',currentTime.currentTime()],function(err,result){
     if(err)throw err;
     result.forEach(function(item,index){
       var dealDate = item.timestamp;
