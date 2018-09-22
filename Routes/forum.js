@@ -111,27 +111,43 @@ router.post('/comment', (req,res) => {
 
 router.get('/:title', (req,res) => {
   var url = req.params.title;
-  var user = req.user.user_id;
-  var query = "SELECT * FROM onedistin_posts WHERE post_url= ?";
-  con.query(query,[url],function(err,p_result){
-    if (err)throw err;
-    const postId = p_result[0].ID;
-    con.query("SELECT * FROM onedistin_comments WHERE comment_post_ID=?;SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[postId,user,postId],function(err,c_result){
-      if(err)throw err;
-      if(c_result[1].length > 0){
-        var like = "1";
-      }else{
-        var like = "0";
-      }
-      var n = p_result[0].time;
-      var t = new Date(n *1);
-      var months = ["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"];
-      console.log(t.getDate());
-      p_result[0].time = t.getHours()+":"+t.getMinutes()+" - "+t.getDate()+" "+months[t.getMonth()]+" "+t.getFullYear();
-      res.render('post', {post: p_result[0], comment: c_result[0],like: like});
+  if(req.isAuthenticated()){
+    var user = req.user.user_id;
+    var query = "SELECT * FROM onedistin_posts WHERE post_url= ?";
+    con.query(query,[url],function(err,p_result){
+      if (err)throw err;
+      const postId = p_result[0].ID;
+      con.query("SELECT * FROM onedistin_comments WHERE comment_post_ID=?;SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[postId,user,postId],function(err,c_result){
+        if(err)throw err;
+        if(c_result[1].length > 0){
+          var like = "1";
+        }else{
+          var like = "0";
+        }
+        var n = p_result[0].time;
+        var t = new Date(n);
+        var months = ["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"];
+        p_result[0].time = t.getHours()+":"+t.getMinutes()+" - "+t.getDate()+" "+months[t.getMonth()]+" "+t.getFullYear();
+        res.render('post', {post: p_result[0], comment: c_result[0],like: like});
+      });
     });
+  }else{
+    var query = "SELECT * FROM onedistin_posts WHERE post_url= ?";
+    con.query(query,[url],function(err,p_result){
+      if (err)throw err;
+      const postId = p_result[0].ID;
+      con.query("SELECT * FROM onedistin_comments WHERE comment_post_ID=?",[postId],function(err,c_result){
+        if(err)throw err;
+        var n = p_result[0].time;
+        var t = new Date(n);
+        var months = ["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"];
+        p_result[0].time = t.getHours()+":"+t.getMinutes()+" - "+t.getDate()+" "+months[t.getMonth()]+" "+t.getFullYear();
 
-  });
+        res.render('post', {post: p_result[0], comment: c_result});
+      });
+
+    });
+  }
 });
 
 

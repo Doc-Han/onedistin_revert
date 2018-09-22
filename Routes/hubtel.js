@@ -38,12 +38,14 @@ router.get('/ipay', (req,res) =>{
     var item_det = req.query.ref_f_i_d.split("-");
     var num = item_det[0]*1;
     var del = item_det[1]*1;
+    var ttl = item_det[2]*1;
     if(del == 0){
       var delivery = 5;
     }else{
       var delivery = 10;
     }
-    var total = ((item_det[2]*1)*num)+delivery;
+    var total = (ttl*num)+delivery;
+    console.log(data);
     var data = {
       item_det: req.query.ref_f_i_d,
       item_title: req.query.p_t,
