@@ -163,9 +163,11 @@ var n = 1;
             $(".apply-coupon").hide;
             $(".show-coupon").after("<p>Coupon "+code+" Applied</p>");
             $(".show-coupon").hide();
+            $(".coupon-box").hide();
             $(".coupon-tag").text(res+"% off");
             var discount = (res*1)/100;
             ttl = ttl - (ttl*discount);
+            show();
           }else{
             $(".apply-coupon").text("Apply");
             $(".coupon-error").text("Invalid coupon code!");
