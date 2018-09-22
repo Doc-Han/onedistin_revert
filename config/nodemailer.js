@@ -2,22 +2,22 @@ var nodemailer = require('nodemailer');
 
 
 var transporter = nodemailer.createTransport({
-  host: 'onedistin.com',
-  port: 465,
-  secure: true,
+  host: 'smtp.office365.com',
+  secureConnection: false, // TLS requires secureConnection to be false
   auth: {
-    user: process.env.NODEMAILER_EMAIL,
-    pass: process.env.NODEMAILER_PASS
+    user: 'support@onedistin.com',
+    pass: 'Newworldorder2'
   }
 });
 
 var throwMail = function(to,subject,html){
   const mailOptions = {
-  from: process.env.NODEMAILER_EMAIL, // sender address
+  from: "Onedistin <support@onedistin.com>", // sender address
   to: to, // list of receivers
   subject: subject, // Subject line
   html: html// plain text body
   };
+  console.log(mailOptions);
 
   transporter.sendMail(mailOptions, function(err, info){
     if(err)
