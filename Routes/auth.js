@@ -28,8 +28,9 @@ passport.use(new facebookStrategy({
       if(result.length > 0){
         done(null, false);
       }else{
-        var query = "INSERT INTO onedistin_users (ID,user_name,gender,user_email,user_city,user_registered)VALUES(?,?,?,?,?,?)";
-        con.query(query,[null,fb_user.user_name,fb_user.gender,fb_user.email,fb_user.user_city,currentDate.currentDate()], function(err){
+        var refId = fb_user.user_name[0]+fb_user.user_name[1]+tokenGen.getToken();
+        var query = "INSERT INTO onedistin_users (ID,user_name,gender,user_email,user_city,user_registered,refId)VALUES(?,?,?,?,?,?,?)";
+        con.query(query,[null,fb_user.user_name,fb_user.gender,fb_user.email,fb_user.user_city,currentDate.currentDate(),refId], function(err){
           if(err)throw err;
           con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
             if(err) throw err;

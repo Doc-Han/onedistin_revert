@@ -2,38 +2,78 @@
 
 <div class="w3-row w3-margin-top">
   <% include partials/navs.ejs %>
-  <div style="width:60%" class="w3-padding w3-col w3-card-4 w3-mobile">
+  <div style="width:80%" class="w3-padding w3-col w3-card-4 w3-mobile">
 
-    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="orders/hubtel">HUBTEL</a>
-    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="orders/ussd">USSD</a>
-    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="orders/ipay">IPAY</a>
+    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/admin/orders/hubtel">HUBTEL</a>
+    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/admin/orders/ussd">USSD</a>
+    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/admin/orders/ipay">IPAY</a>
 
     <table style="margin-top:30px" class="w3-table-all w3-bordered">
       <tr>
+        <th>Title</th>
+        <th>Day</th>
         <th>Username</th>
         <th>Phone</th>
-        <th>Invoice</th>
+        <th>Categories</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Region</th>
+        <th>Number</th>
+        <th>Option</th>
         <th>Status</th>
       </tr>
-      <tr>
-        <td>Farhan Yahya</td>
-        <td>0558359341</td>
-        <td>fdsh4hkhri4h3ih43a</td>
-        <td> <span class="w3-text-green">Paid</span> </td>
-      </tr>
-      <tr>
-        <td>Victor Gorleku</td>
-        <td>0543566793</td>
-        <td>HSF4ESDAHsafdskl</td>
-        <td> <span class="w3-text-red">failed</span> </td>
 
-      </tr>
+      <% orders.forEach(function(item){ %>
+        <tr>
+          <% if(item.dealTitle){ %>
+            <td><%= item.dealTitle %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <% if(item.dealTime){ %>
+            <td><%= item.dealTime %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <% if(item.username){ %>
+            <td><%= item.username %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <% if(item.phone){ %>
+            <td><%= item.phone %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <% if(item.categories){ %>
+            <td><%= item.categories %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <% if(item.address){ %>
+            <td><%= item.address %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <% if(item.city){ %>
+            <td><%= item.city %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <% if(item.region){ %>
+            <td><%= item.region %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <td><%= item.item_ref.split("-")[0] %></td>
+          <td><%= item.type %></td>
+          <td><%= item.paid %></td>
+        </tr>
+      <% }); %>
 
     </table>
 
 
-  </div>
-  <div style="width:20%" class="w3-col ">
   </div>
 
 </div>

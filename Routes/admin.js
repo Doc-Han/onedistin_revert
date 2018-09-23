@@ -41,10 +41,10 @@ router.post('/', (req,res) => {
 });
 
 router.get('/dashboard', isNotLoggenIn, (req,res) => {
-  var query = "SELECT ID FROM onedistin_users";
+  var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1'";
   con.query(query, function(err,result){
     if(err)throw err;
-    res.render('admin/home', {users: result.length});
+    res.render('admin/home', {users: result[0].length,invoices:result[1].length,paid_invoices:result[2].length});
   });
 });
 
@@ -186,7 +186,28 @@ router.post('/coupons', (req,res) =>{
 });
 
 router.get('/orders', (req,res) =>{
-  res.render('admin/orders');
+  con.query("SELECT * FROM onedistin_invoice",function(err,result){
+    res.render('admin/orders',{orders:result});
+  });
+});
+
+router.get('/orders/:option', (req,res,next) =>{
+  var option = req.params.option;
+  if(option == 'hubtel'){
+    con.query("SELECT * FROM onedistin_invoice WHERE type='1'",function(err,result){
+      res.render('admin/orders',{orders:result});
+    });
+  }else if(option == 'ussd'){
+    con.query("SELECT * FROM onedistin_invoice WHERE type='2'",function(err,result){
+      res.render('admin/orders',{orders:result});
+    });
+  }else if(option == 'ipay'){
+    con.query("SELECT * FROM onedistin_invoice WHERE type='3'",function(err,result){
+      res.render('admin/orders',{orders:result});
+    });
+  }else{
+    next();
+  }
 });
 
 router.get('/edit', (req,res) =>{
