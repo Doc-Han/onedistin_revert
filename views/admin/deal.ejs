@@ -26,8 +26,8 @@
         <div class="w3-half">
           <label class="w3-indigo w3-padding"> Categories</label>
           <span class="w3-row">
-              <input class="cat w3-input w3-grey w3-row w3-border" type="text" name="" value="">
-              <input type="text" class="w3-half caty" name="" value=""><input type="text" class="w3-half pricy" name="" value="">
+            <input class="cat w3-input w3-grey w3-half w3-border" type="text" name="" value="">
+            <input type="text" class="cat-price w3-input w3-grey w3-half w3-border" name="" value="">
 
             <button class="cat-add w3-button w3-quarter w3-teal" type="button" name="button">Add</button>
             <button style="display:none" class="add-cat-op w3-quarter w3-black w3-button" type="button" name="button"> <i class="fa fa-plus"></i> </button>
@@ -121,7 +121,6 @@
           $('.cat-list>li:first-child').addClass("w3-grey");
           var len = $('.cat-list:eq(0)>li').length;
           if(len > 1){
-            $(".cat").hide();
             $('.add-cat-op').css("display","block");
           }else{
             $('.add-cat-op').css("display","none");

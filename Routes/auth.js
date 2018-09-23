@@ -3,6 +3,7 @@ var passport = require('passport');
 var facebookStrategy = require('passport-facebook').Strategy;
 var con = require('../config/db.js');
 var currentDate = require('../config/tools.js');
+var tokenGen = require('../config/tools.js');
 var nodemailer = require('../config/nodemailer.js');
 var router = express.Router();
 
