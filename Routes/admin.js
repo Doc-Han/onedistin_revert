@@ -40,7 +40,7 @@ router.post('/', (req,res) => {
 
 });
 
-router.get('/dashboard', isNotLoggenIn, (req,res) => {
+router.get('/dashboard', isLoggenIn, (req,res) => {
   var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1';SELECT ID FROM onedistin_support";
   con.query(query, function(err,result){
     if(err)throw err;
@@ -48,7 +48,7 @@ router.get('/dashboard', isNotLoggenIn, (req,res) => {
   });
 });
 
-router.get('/deal', (req,res) => {
+router.get('/deal', isLoggedIn, (req,res) => {
   con.query("SELECT ID,title,timestamp FROM onedistin_deals ORDER BY timestamp DESC", function(err,result){
     if(err) throw err;
 
@@ -118,7 +118,7 @@ router.post('/deal', upload.array('image'), (req,res) => {
   });
 });
 
-router.get('/users', (req,res) => {
+router.get('/users', isLoggedIn, (req,res) => {
   var query = "SELECT * FROM onedistin_users";
   con.query(query, function(err, result){
     if(err)throw err;
@@ -153,7 +153,7 @@ router.get('/users', (req,res) => {
   });
 });
 
-router.get('/coupons', (req,res) =>{
+router.get('/coupons', isLoggedIn, (req,res) =>{
   con.query("SELECT * FROM onedistin_coupons",function(err,result){
     if(err)throw err;
     if(result.length > 0){
@@ -167,7 +167,7 @@ router.get('/coupons', (req,res) =>{
   });
 });
 
-router.get('/coupons/:Id', (req,res) =>{
+router.get('/coupons/:Id', isLoggedIn, (req,res) =>{
   var id = req.params.Id;
   con.query("DELETE FROM onedistin_coupons WHERE ID=?",[id],function(err){
     if(err)throw err;
@@ -175,7 +175,7 @@ router.get('/coupons/:Id', (req,res) =>{
   });
 });
 
-router.post('/coupons', (req,res) =>{
+router.post('/coupons', isLoggedIn, (req,res) =>{
   var body = req.body;
   var code = body.code;
   var percentage = body.percentage;
@@ -186,13 +186,13 @@ router.post('/coupons', (req,res) =>{
   })
 });
 
-router.get('/orders', (req,res) =>{
+router.get('/orders', isLoggedIn, (req,res) =>{
   con.query("SELECT * FROM onedistin_invoice ORDER BY paid DESC",function(err,result){
     res.render('admin/orders',{orders:result});
   });
 });
 
-router.get('/orders/:option', (req,res,next) =>{
+router.get('/orders/:option', isLoggedIn, (req,res,next) =>{
   var option = req.params.option;
   if(option == 'hubtel'){
     con.query("SELECT * FROM onedistin_invoice WHERE type='1' ORDER BY paid DESC",function(err,result){
@@ -211,7 +211,7 @@ router.get('/orders/:option', (req,res,next) =>{
   }
 });
 
-router.get('/edit', (req,res) =>{
+router.get('/edit', isLoggedIn, (req,res) =>{
   res.send('page cannot be found!');
 });
 
@@ -238,7 +238,7 @@ router.post('/edit', (req,res) =>{
   });
 });
 
-router.get('/edit/:id', (req,res) =>{
+router.get('/edit/:id', isLoggedIn, (req,res) =>{
   var id = req.params.id;
   var query = "SELECT ID,title,timestamp FROM onedistin_deals ORDER BY timestamp DESC;SELECT * FROM onedistin_deals WHERE id=?";
   con.query(query,[id], function(err,result){
@@ -255,7 +255,7 @@ router.get('/edit/:id', (req,res) =>{
   });
 });
 
-router.get('/story', (req,res) => {
+router.get('/story', isLoggedIn, (req,res) => {
   con.query("SELECT meta_op,meta_content FROM onedistin_meta WHERE meta_title='story' ",function(err,result){
     if(err)throw err;
     if(result.length > 0){
@@ -270,7 +270,7 @@ router.get('/story', (req,res) => {
   });
 });
 
-router.post('/story', (req,res) =>{
+router.post('/story', isLoggedIn, (req,res) =>{
   var title = req.body.title;
   var _title = title.join("-***-");
   var story = req.body.story;
@@ -290,11 +290,11 @@ router.post('/story', (req,res) =>{
   });
 });
 
-router.get('/reports', (req,res) =>{
+router.get('/reports', isLoggedIn, (req,res) =>{
   res.render('admin/reports');
 });
 
-router.get('/logout', (req,res) => {
+router.get('/logout', isLoggedIn, (req,res) => {
   req.session.destroy();
   res.redirect('/admin');
 });
