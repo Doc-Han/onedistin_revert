@@ -199,11 +199,11 @@ router.get('/checkout', isLoggedIn, (req,res) => {
 
 router.get('/profile', isLoggedIn, (req,res) => {
   var user = req.user.user_id;
-  var query = "SELECT * FROM onedistin_users WHERE ID = ?;SELECT * FROM onedistin_invoice WHERE user=?";
+  var query = "SELECT * FROM onedistin_users WHERE ID = ?;SELECT * FROM onedistin_invoice WHERE user=? AND paid='1'";
   con.query(query, [user,user], function(err,result){
     if (err)throw err;
-    console.log(result[1][0]);
-    res.render('profile',{userData: result[0][0],orders: result[1][0]});
+    console.log(result[1]);
+    res.render('profile',{userData: result[0][0],orders: result[1]});
   });
 });
 

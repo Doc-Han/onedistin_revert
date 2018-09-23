@@ -31,6 +31,12 @@
         </div>
         <h3 style="text-align:left" class="muli-bold">Recent Orders:</h3>
         <dl class="straight">
+          <% if(orders.length > 0){ %>
+            <% orders.forEach(function(item){ %>
+              <dd><label><%= item.dealTitle %></label> <span class="tag w3-green">Pending delivery</span> </dd>
+            <% }); %>
+          <% } %>
+
             <!--<dd><label>A smart watch</label> <span class="tag w3-green">Pending</span> </dd>
             <dd><label>A second Item</label> <span class="tag w3-green">Pending</span> </dd>
             <dd><label>A new book for you</label> <span class="tag w3-red">Delivered</span> </dd>
