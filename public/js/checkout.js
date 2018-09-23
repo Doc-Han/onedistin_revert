@@ -150,6 +150,8 @@ var n = 1;
       if((first*1) != ttl){
         ttl = first;
       }
+      effect();
+      show();
     }
   });
 

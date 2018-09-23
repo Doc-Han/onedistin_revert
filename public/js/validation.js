@@ -43,8 +43,9 @@ $(document).ready(function(){
 
 
 function validate_signup(){
-  if($("input").val() == "" || $("select").val() == ""){
+  if($("input").val() == "" || $("select").val() == "0"){
     //alert("empty!");
+    $(".validate").html("<p class='w3-red w3-padding'>Fill in all fields!</p>")
     return false;
   }else{
     return true;
