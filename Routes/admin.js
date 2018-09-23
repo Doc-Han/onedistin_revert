@@ -41,10 +41,10 @@ router.post('/', (req,res) => {
 });
 
 router.get('/dashboard', isNotLoggenIn, (req,res) => {
-  var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1'";
+  var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1';SELECT ID FROM onedistin_support";
   con.query(query, function(err,result){
     if(err)throw err;
-    res.render('admin/home', {users: result[0].length,invoices:result[1].length,paid_invoices:result[2].length});
+    res.render('admin/home', {users: result[0].length,invoices:result[1].length,paid_invoices:result[2].length,support:result[3].length});
   });
 });
 
@@ -69,6 +69,7 @@ router.post('/deal', upload.array('image'), (req,res) => {
   var bg_color = req.body.bg_color;
   var share_txt = req.body.share_txt;
   var cat = req.body.categories.trim();
+  var cat_price = req.body.cat_price.trim();
   var survey = req.body.survey.split(",");
   for(i=0;i<6;i++){
     if(!(survey[i])){
@@ -99,8 +100,8 @@ router.post('/deal', upload.array('image'), (req,res) => {
             if(req.files.length == count){
               s_images = images.join("-***-");
               var time = new Date(req.body.date);
-              var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,share_txt,categories)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_survey (ID,dealTime,question,ans_one,ans_two,ans_three,ans_four,ans_five,ans_six)VALUES(?,?,?,?,?,?,?,?,?)";
-              con.query(query,[null,title,price,ac_price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,s_images,bg_color,share_txt,cat,null,author,title,body,url,0,0,postDate,time,null,date,survey[0],survey[1],survey[2],survey[3],survey[4],survey[5],survey[6]],function(err){
+              var query = "INSERT INTO onedistin_deals (ID,title,price,ac_price,thingGet,writeup,video,shoppy_txt,shoppy_link,timestamp,img_id,bg_color,share_txt,categories,cat_prices)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?);INSERT INTO onedistin_survey (ID,dealTime,question,ans_one,ans_two,ans_three,ans_four,ans_five,ans_six)VALUES(?,?,?,?,?,?,?,?,?)";
+              con.query(query,[null,title,price,ac_price,thingGet,writeup,vidlink,shoppy_txt,shoppy_link,date,s_images,bg_color,share_txt,cat,cat_price,null,author,title,body,url,0,0,postDate,time,null,date,survey[0],survey[1],survey[2],survey[3],survey[4],survey[5],survey[6]],function(err){
                 if(err)throw err;
                   res.send("deal Inserted");
                 });
@@ -186,7 +187,7 @@ router.post('/coupons', (req,res) =>{
 });
 
 router.get('/orders', (req,res) =>{
-  con.query("SELECT * FROM onedistin_invoice",function(err,result){
+  con.query("SELECT * FROM onedistin_invoice ORDER BY paid DESC",function(err,result){
     res.render('admin/orders',{orders:result});
   });
 });
@@ -194,15 +195,15 @@ router.get('/orders', (req,res) =>{
 router.get('/orders/:option', (req,res,next) =>{
   var option = req.params.option;
   if(option == 'hubtel'){
-    con.query("SELECT * FROM onedistin_invoice WHERE type='1'",function(err,result){
+    con.query("SELECT * FROM onedistin_invoice WHERE type='1' ORDER BY paid DESC",function(err,result){
       res.render('admin/orders',{orders:result});
     });
   }else if(option == 'ussd'){
-    con.query("SELECT * FROM onedistin_invoice WHERE type='2'",function(err,result){
+    con.query("SELECT * FROM onedistin_invoice WHERE type='2' ORDER BY paid DESC",function(err,result){
       res.render('admin/orders',{orders:result});
     });
   }else if(option == 'ipay'){
-    con.query("SELECT * FROM onedistin_invoice WHERE type='3'",function(err,result){
+    con.query("SELECT * FROM onedistin_invoice WHERE type='3' ORDER BY paid DESC",function(err,result){
       res.render('admin/orders',{orders:result});
     });
   }else{
@@ -244,21 +245,24 @@ router.get('/edit/:id', (req,res) =>{
     if(err) throw err;
     con.query("SELECT * FROM onedistin_survey WHERE dealTime=?",[result[1][0].timestamp],function(err,s_result){
       if(err)throw err;
-      var cat = result[1][0].categories;
-      cat = cat.split("-***-");
-      var images = result[1][0].img_id.split("-***-");
+      if(result[1][0].categories){
+        var cat = result[1][0].categories;
+        cat = cat.split("-***-");
+      }
+        var images = result[1][0].img_id.split("-***-");
         res.render('admin/edit', {deal:result[1][0],dealDate: tools.dateToEdit(result[1][0].timestamp), deals:result[0],dealCats: cat, currentDate: currentDate,survey: s_result[0],images: images});
     });
   });
 });
 
 router.get('/story', (req,res) => {
-  con.query("SELECT meta_content FROM onedistin_meta WHERE meta_title='story' ",function(err,result){
+  con.query("SELECT meta_op,meta_content FROM onedistin_meta WHERE meta_title='story' ",function(err,result){
     if(err)throw err;
     if(result.length > 0){
       var hasStory = true;
-      console.log(result[0]);
-      res.render('admin/story', {story: result[0].meta_content,hasStory: hasStory});
+      var titles = result[0].meta_op.split("-***-");
+      var content = result[0].meta_content.split("-***-");
+      res.render('admin/story', {content: content,titles: titles,hasStory: hasStory});
     }else{
       var hasStory = false;
       res.render('admin/story', {hasStory: hasStory});
@@ -267,20 +271,27 @@ router.get('/story', (req,res) => {
 });
 
 router.post('/story', (req,res) =>{
+  var title = req.body.title;
+  var _title = title.join("-***-");
   var story = req.body.story;
+  var _story = story.join("-***-");
   con.query("SELECT * FROM onedistin_meta WHERE meta_title=?",['story'],function(err,result){
     if(result.length > 0){
-      var query = "UPDATE onedistin_meta SET meta_content=? WHERE meta_title=?";
-      var input = [story,'story'];
+      var query = "UPDATE onedistin_meta SET meta_op=?,meta_content=? WHERE meta_title=?";
+      var input = [_title,_story,'story'];
     }else{
-      var query = "INSERT INTO onedistin_meta(ID,meta_title,meta_content)VALUES(?,?,?)";
-      var input = [null,'story',story];
+      var query = "INSERT INTO onedistin_meta(ID,meta_title,meta_op,meta_content)VALUES(?,?,?,?)";
+      var input = [null,'story',_title,_story];
     }
     con.query(query,input,function(err){
       if(err)throw err;
       res.send("Story Updated!");
     });
   });
+});
+
+router.get('/reports', (req,res) =>{
+  res.render('admin/reports');
 });
 
 router.get('/logout', (req,res) => {

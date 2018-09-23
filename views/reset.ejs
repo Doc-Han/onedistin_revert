@@ -33,21 +33,19 @@
 
           </div>
           <div class="w3-col w3-center center-card w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
-            <p style="font-size: 56px;margin:0;" class="w3-round  mobile-inline-margin-top muli-semi-bold">Login</p>
-            <p><%= msg %></p>
-            <form style="padding:0"class="w3-container w3-margin-bottom" action="/login" method="POST">
+            <p style="font-size: 56px;margin:0;" class="w3-round  mobile-inline-margin-top muli-semi-bold">Forgot</p>
 
+            <form action="/reset" method="POST">
+              <input type="hidden" name="phone" value="<%= data.phone %>">
+              <input type="hidden" name="id" value="<%= data.id %>">
               <dl>
-                <dt> <label>EMAIL OR</label> </dt>
-                <dd> <input name="username" type="text" placeholder="username"></dd>
-                <dt> <label>PASSWORD</label> </dt>
-                <dd> <input name="password" type="password" placeholder="Password"></dd>
+                <dt> <label>Password</label> </dt>
+                <dd> <input name="password" type="text" placeholder="Password" required></dd>
+                <dt> <label>Confirm Password</label> </dt>
+                <dd> <input name="confirm_password" type="text" placeholder="Confirm Password" required></dd>
               </dl>
-              <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><p class="w3-text-white" style="margin:0;font-size:22px">Send me in!</p></button>
-              <p style="padding:0"><a class="w3-link w3-text-indigo w3 w3-margin" href="/forgot">I FORGOT MY PASSWORD</a></p>
-                OR LOGIN WITH
-              <a style="margin-bottom:10px;width:100%;background-color:#3B5998;color:#fff" href="/auth/facebook" class="w3-button w3-hover-indigo w3-round-xxlarge w3-margin-top"><p class="w3-text-white" style="margin:0;font-size:22px"> <i style="color:#3B5998!important" class="w3-white w3-padding w3-round fa fa-facebook"></i> Facebook </p></a>
-              <p><a href="/signup">OR CREATE A NEW ACCOUNT</a> </h3>
+              <h1 id="contact"></h1>
+              <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><p class="w3-text-white" style="margin:0;font-size:22px">Reset</p></button>
             </form>
 
           </div>
@@ -55,6 +53,8 @@
 
           </div>
         </div>
+
+
 
   </body>
 </html>

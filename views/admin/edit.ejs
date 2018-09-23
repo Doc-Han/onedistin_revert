@@ -26,17 +26,20 @@
           </span>
 
           <ul class="cat-list w3-row w3-ul w3-white">
-            <% dealCats.forEach(function(item){ %>
-              <% item.split(",").forEach(function(i,index){ %>
-                <% if(item.split(",").length-1 != index){ %>
-                  <% if(index == 0){ %>
-                    <li class="w3-grey"><%= i %></li>
-                  <% }else{ %>
-                    <li><%= i %></li>
+            <% if(dealCats){ %>
+              <% dealCats.forEach(function(item){ %>
+                <% item.split(",").forEach(function(i,index){ %>
+                  <% if(item.split(",").length-1 != index){ %>
+                    <% if(index == 0){ %>
+                      <li class="w3-grey"><%= i %></li>
+                    <% }else{ %>
+                      <li><%= i %></li>
+                    <% } %>
                   <% } %>
-                <% } %>
+                <% }); %>
               <% }); %>
-            <% }); %>
+            <% } %>
+
           </ul>
         </div>
 

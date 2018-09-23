@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125049555-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125049555-1');
+</script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onedistin</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+  </head>
+  <body>
+    <style media="screen">
+      body {
+        background: #e9ebee;
+      }
+    </style>
+        <div class="w3-row">
+          <div style="color: #a9a9a9" class="w3-third w3-container">
+
+          </div>
+          <div class="w3-col w3-center center-card w3-center w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
+            <p style="font-size: 56px;margin:0;" class="w3-round  mobile-inline-margin-top muli-semi-bold">Forgot</p>
+
+            </form>
+              <dl>
+                <dt> <label>EMAIL OR</label> </dt>
+                <dd> <input name="username" type="text" placeholder="username"></dd>
+              </dl>
+              <h1 id="contact"></h1>
+              <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top forgot-send" name="button"><p class="w3-text-white" style="margin:0;font-size:22px">Find!</p></button>
+
+
+          </div>
+          <div class="w3-third w3-bold w3-container">
+
+          </div>
+        </div>
+
+<script type="text/javascript">
+var txt = "Finding account ....";
+var val = 0;
+var username;
+  $('.forgot-send').click(function(){
+    $('.forgot-send>p').text(txt);
+    if(val == 0){
+      username = $("[name='username']").val();
+      var data = {
+        username: $("[name='username']").val()
+      }
+    }else{
+      var data = {
+        phone: $("[name='phone']").val(),
+        username: username,
+      }
+    }
+
+
+    $.ajax({
+      url: '/ajax/forgot',
+      method: 'POST',
+      data: data,
+      success: function(res){
+        if(res != "0"){
+          if(val == 1){
+            document.location = res;
+          }else{
+            var phone = res.substring(0,3)+"●●●●●"+res.substring(8,10);
+            $("#contact").text(phone);
+            $("#contact").before('<p>Complete the contact below</p>');
+            $("[name='username']").val("");
+            $("[name='username']").attr("placeholder","phone");
+            $("[name='username']").attr("name","phone");
+            $("label").text("Phone");
+            var text = "submit";
+            val = 1;
+            txt = "Checking...";
+          }
+        }else{
+          if(val == 0){
+            $("[name='username']").val("");
+            $("#contact").before('<p>Username could\'nt be found</p>');
+            var text = "Retry";
+          }else{
+            $("[name='username']").val("");
+            $("#contact").before('<p>Phone incorrect</p>');
+            var text = "Retry";
+          }
+
+        }
+        $('.forgot-send>p').text(text);
+      }
+    });
+
+  });
+</script>
+
+  </body>
+</html>

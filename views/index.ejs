@@ -117,19 +117,23 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                     <p style="text-align:left;"><%= currentPost.price %></p>
                   </div>
 
-                  <% currentPost.categories.forEach(function(item){ %>
-                    <div style="width:100%;border-top:1px solid #cccccc;" class="w3-col w3-padding">
-                      <span class="w3-left w3-xlarge"><%= item[0] %></span>
-                      <select class="w3-right w3-xlarge" name="category">
-                          <% item.forEach(function(i,index){ %>
-                            <% if(index > 0 && index < item.length-1){ %>
-                              <option value="<%= i %>"><%= i %></option>
-                            <% }%>
+                  <% if(currentPost.categories){ %>
+                    <% currentPost.categories.forEach(function(item,p_index){ %>
+                      <div style="width:100%;border-top:1px solid #cccccc;" class="w3-col w3-padding">
+                        <span class="w3-left w3-xlarge"><%= item[0] %></span>
+                        <select class="w3-right w3-xlarge" name="category">
+                          <% var price_team = currentPost.cat_prices[p_index] %>
+                            <% item.forEach(function(i,index){ %>
+                              <% if(index > 0 && index < item.length-1){ %>
+                                <option rel-data="<%= price_team[index] %>" value="<%= i %>"><%= i %></option>
+                              <% }%>
 
-                          <% }); %>
-                      </select>
-                    </div>
-                  <% }); %>
+                            <% }); %>
+                        </select>
+                      </div>
+                    <% }); %>
+                  <% } %>
+
 
 
                 </div>
@@ -218,7 +222,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
 
                 <h3 style="text-align:left;font-size:22px;line-height:22px;" class="muli-semi-bold">Finally! Want this right?</h3>
                 <dl class="straight">
-                  <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price text-color-inverse"><%= currentPost.price %></span> </dd>
+                  <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price text-color-inverse">GHS <span class="pprice"><%= currentPost.ac_price %></span></span> </dd>
                   <dd> <label>Delivery fee</label>
                     <% if(offers.offer_one == 1){ %>
                       <span class="w3-tag w3-green price">free delivery</span>

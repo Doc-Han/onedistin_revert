@@ -132,6 +132,23 @@ var n = 1;
     }
   });
 
+  $("[name='category']").change(function(){
+    var len = $("[name='category']").length;
+    if(len > 1){
+      var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
+      var second = $("[name='category']:eq(1)").find("option:selected").attr("rel-data");
+      if((first*1)>(second*1)){
+        ttl = first;
+        $(".pprice").text(ttl);
+      }else{
+        ttl = second;
+        $(".pprice").text(ttl);
+      }
+      effect();
+      show();
+    }
+  });
+
   $("#low").click(function(){
     del = 0;
     $(".delivery-fee").text("GHS 5.00");

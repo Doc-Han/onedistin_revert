@@ -54,12 +54,21 @@ router.get('/', (req,res,next) => {
           }
           images.push(a);
           if(index == img_ids.length -1){
-            var one = [];
-            var len = result[0][0].categories.split("-***-");
-            for(i=0;i<len.length-1;i++){
-              one[i] = len[i].split(",");
+            if(result[0][0].categories){
+              var one = [];
+              var len = result[0][0].categories.split("-***-");
+              for(i=0;i<len.length-1;i++){
+                one[i] = len[i].split(",");
+              }
+              result[0][0].categories = one;
+              var two = [];
+              var _len = result[0][0].cat_prices.split("-***-");
+              for(i=0;i<len.length-1;i++){
+                two[i] = _len[i].split(",");
+              }
+              result[0][0].cat_prices = two;
             }
-            result[0][0].categories = one;
+
             var survey = result[4][0];
             res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],img:images, token: tokenGen.getToken(),today: currentDate.currentDate()});
           }
@@ -102,12 +111,17 @@ router.get('/', (req,res,next) => {
 });
 
 router.get('/login', isNotLoggenIn, (req,res) => {
-  res.render('login');
+  if(req.query.msg){
+    var msg = req.query.msg
+  }else{
+    var msg = "";
+  }
+  res.render('login',{msg: msg});
 });
 
 router.post('/login', isNotLoggenIn, passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login'
+  failureRedirect: '/login?msg=Invalid username or password!'
 }));
 
 router.get('/signup', isNotLoggenIn, (req,res) => {
@@ -415,12 +429,13 @@ router.get('/sell', (req,res) => {
 });
 
 router.get('/our-story', (req,res) => {
-  con.query("SELECT meta_content FROM onedistin_meta WHERE meta_title='story' ",function(err,result){
+  con.query("SELECT meta_op,meta_content FROM onedistin_meta WHERE meta_title='story' ",function(err,result){
     if(err)throw err;
     if(result.length > 0){
       var hasStory = true;
-      console.log(result[0]);
-      res.render('story', {story: result[0].meta_content,hasStory: hasStory});
+      var titles = result[0].meta_op.split("-***-");
+      var content = result[0].meta_content.split("-***-");
+      res.render('story', {content: content,titles: titles,hasStory: hasStory});
     }else{
       var hasStory = false;
       res.render('story', {hasStory: hasStory});
@@ -477,6 +492,43 @@ router.post('/support', (req,res) => {
       res.render("support-done",{user_name: user_name});
     });
   }
+});
+
+router.get('/forgot',isNotLoggenIn, (req,res) => {
+  res.render('forgot');
+});
+
+router.get('/reset/:phone/:id', (req,res,next) =>{
+  var phone = req.params.phone;
+  var id = req.params.id;
+  var data = {
+    phone: phone,
+    id: id
+  }
+  con.query("SELECT ID FROM onedistin_users WHERE user_phone=? AND ID=?",[phone,id],function(err,result){
+    if(err)throw err;
+    if(result.length > 0){
+      res.render('reset',{data:data});
+    }else{
+      next();
+    }
+  });
+});
+
+router.post('/reset', (req,res) =>{
+  var body = req.body;
+  var phone = body.phone;
+  var id = body.id;
+  var password = body.password;
+  var c_password = body.confirm_password;
+  bcrypt.hash(password,10,function(err,hash){
+    if(err)throw err;
+    var query = "UPDATE onedistin_users SET user_pass=? WHERE ID=? AND user_phone=?";
+    con.query(query,[hash,id,phone],function(err){
+      if(err)throw err;
+      res.redirect('/login?msg=login with your new password');
+    });
+  });
 });
 
 router.get('/logout', isLoggedIn, (req,res) => {

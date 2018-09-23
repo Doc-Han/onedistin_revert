@@ -20,12 +20,16 @@
 
       <input type="hidden" name="categories" value="">
       <input type="hidden" name="survey" value="">
+      <input type="hidden" name="cat_price" value="">
 
       <div class="w3-row w3-margin-bottom">
 
         <div class="w3-half">
           <label class="w3-indigo w3-padding"> Categories</label>
           <span class="w3-row">
+            <div class="cat-price-dis">
+
+            </div>
             <input class="cat w3-input w3-grey w3-half w3-border" type="text" name="" value="">
             <input type="text" class="cat-price w3-input w3-grey w3-half w3-border" name="" value="">
 
@@ -113,10 +117,21 @@
   <script>
     $(document).ready(function() {
         $('.summernote').summernote();
+        var priceGroup = "";
+        var priceArr = "";
+        var priceEnd = ""
         $('.cat-add').click(function(){
           $('.cat').removeClass("w3-grey").addClass("w3-white");
           var val = $('.cat').val();
           $('.cat-list:first').append('<li>'+val+'</li>');
+          //
+          var price = $('.cat-price').val();
+          priceArr += price+",";
+          priceEnd = priceArr+"-***-";
+
+          $('.cat-price-dis').text(priceEnd+priceGroup);
+          getPrice();
+          $(".cat-price").val($("[name='ac_price']").val());
           $('.cat').val("");
           $('.cat-list>li:first-child').addClass("w3-grey");
           var len = $('.cat-list:eq(0)>li').length;
@@ -129,6 +144,10 @@
         });
 
         $('.add-cat-op').click(function(){
+          priceGroup = priceEnd+priceGroup;
+          priceEnd="";
+          priceArr="";
+          getPrice;
           $('.cat-list').before('<ul class="cat-list w3-row w3-ul w3-white"></ul>');
           $(this).css("display","none");
           $('.cat').removeClass("w3-white").addClass("w3-grey");
@@ -141,6 +160,11 @@
           $('.suv').val("");
           $('.suv-list>li:first-child').addClass("w3-grey");
           getSuv();
+        });
+
+        $("[name='ac_price']").blur(function(){
+          var v = $(this).val();
+          $(".cat-price").val(v);
         });
     });
 
@@ -157,6 +181,11 @@
         cat += od+"-***-";
       }
       $("[name='categories']").val(cat);
+    }
+
+    function getPrice(){
+      var a = $(".cat-price-dis").text();
+      $("[name='cat_price']").val(a);
     }
 
     function getSuv(){

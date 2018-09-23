@@ -132,6 +132,7 @@ router.post('/ipay/validate', isLoggedIn, (req,res) =>{
   });
 });
 
+
 router.post('/coupon', isLoggedIn, (req,res) =>{
   var code = req.body.code;
   con.query("SELECT percentage FROM onedistin_coupons WHERE code=?",[code],function(err,result){

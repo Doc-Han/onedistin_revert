@@ -50,9 +50,16 @@ passport.use(new facebookStrategy({
 
   }));
 // ,'user_gender','user_hometown','user_location'
-router.get('/facebook', passport.authenticate('facebook', {scope:['email']}));
+router.get('/facebook', passport.authenticate('facebook', {scope:['email','user_gender','user_hometown','user_location']}));
 
 router.get('/facebook/callback', passport.authenticate('facebook', {successRedirect: '/facebookinfo', failureRedirect: '/signup'}));
+
+router.get('/facebook/deauth', (req,res) =>{
+  res.send("Yay!");
+});
+router.get('/facebook/del', (req,res) =>{
+  res.send("Yay!");
+});
 
 passport.serializeUser(function(user_id,done){
   return done(null, user_id);
