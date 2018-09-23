@@ -3,7 +3,7 @@
 <div class="w3-row w3-margin-top">
   <% include partials/navs.ejs %>
   <div style="width:60%;margin-bottom:200px" class="w3-col w3-card-4 w3-mobile w3-animate-right">
-    <form class="w3-container" action="/admin/deal" enctype="multipart/form-data" method="POST">
+    <form class="w3-container" action="/han/deal" enctype="multipart/form-data" method="POST">
 			<br>
 			<dl>
         <dt> <label>Bg Image</label> </dt>
@@ -99,7 +99,7 @@
     <ul class="w3-ul w3-bar-block">
 
 			<% deals.forEach(function(item){ %>
-				<a href="/admin/edit/<%= item.ID %>"><li class="w3-bar-item w3-button"><%= item.title %>
+				<a href="/han/edit/<%= item.ID %>"><li class="w3-bar-item w3-button"><%= item.title %>
 				<% if(item.timestamp == currentDate){ %>
 					<span class="w3-tag w3-green w3-right">on Fire</span>
 				<% }else if(item.timestamp < currentDate){ %>

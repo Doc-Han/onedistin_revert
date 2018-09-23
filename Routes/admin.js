@@ -30,7 +30,7 @@ router.post('/', (req,res) => {
       if(pass == admin_pass){
         req.session.admin = true;
         req.session.admin_id = admin_id;
-        res.redirect('/admin/dashboard');
+        res.redirect('/han/dashboard');
       }else {
         console.log('Details not match!');
       }
@@ -171,7 +171,7 @@ router.get('/coupons/:Id', isLoggedIn, (req,res) =>{
   var id = req.params.Id;
   con.query("DELETE FROM onedistin_coupons WHERE ID=?",[id],function(err){
     if(err)throw err;
-    res.redirect('/admin/coupons');
+    res.redirect('/han/coupons');
   });
 });
 
@@ -182,7 +182,7 @@ router.post('/coupons', isLoggedIn, (req,res) =>{
   var query = "INSERT INTO onedistin_coupons (ID,code,percentage)VALUES(?,?,?)";
   con.query(query,[null,code,percentage],function(err){
     if(err)throw err;
-    res.redirect('/admin/coupons');
+    res.redirect('/han/coupons');
   })
 });
 
@@ -296,19 +296,19 @@ router.get('/reports', isLoggedIn, (req,res) =>{
 
 router.get('/logout', isLoggedIn, (req,res) => {
   req.session.destroy();
-  res.redirect('/admin');
+  res.redirect('/han');
 });
 
 function isLoggedIn(req,res,next){
   if (req.session.admin)
     return next();
 
-  res.redirect('/admin');
+  res.redirect('/han');
 }
 
 function isNotLoggenIn(req,res,next){
   if (req.session.admin)
-    res.redirect('/admin/dashboard');
+    res.redirect('/han/dashboard');
   else
     return next();
 
