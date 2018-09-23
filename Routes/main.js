@@ -158,7 +158,7 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
         const user_id = result[0];
         var user = user_id.user_id;
         if(referer != 0){
-          var nQuery = "INSERT INTO onedistin_points (ID,user_id,active_points,total_points,offer_one,offer_two,offer_three,last_activity) VALUES (?,?,?,?,?,?,?,?);UPDATE onedistin_points SET active_points=(active_points)+20, total_points=(total_points)+20, last_activity=concat(last_activity,',SignUp through Invite') WHERE user_id=?";
+          var nQuery = "INSERT INTO onedistin_points (ID,user_id,active_points,total_points,offer_one,offer_two,offer_three,last_activity) VALUES (?,?,?,?,?,?,?,?);UPDATE onedistin_points SET active_points=(active_points)+100, total_points=(total_points)+100, last_activity=concat(last_activity,',SignUp through Invite') WHERE user_id=?";
           var vals = [null,user,0,0,0,0,0,'new user',user];
         }else{
           var nQuery = "INSERT INTO onedistin_points (ID,user_id,active_points,total_points,offer_one,offer_two,offer_three,last_activity) VALUES (?,?,?,?,?,?,?,?)";
@@ -231,23 +231,14 @@ router.post('/profile/:type', isLoggedIn, (req,res) => {
   var type = req.params.type;
   if(type == "user-info"){
     var display_name = req.body.display_name;
-    var password = req.body.password;
     var user_email = req.body.user_email;
     var user_phone = req.body.user_phone;
-    if(password.trim() == ""){
       var query = "UPDATE onedistin_users SET display_name= ?,user_email= ?, user_phone= ? WHERE ID=?";
-      con.query(query,[display_name,user_email,user_phone,user],function(err){
-        if(err)throw err;
-      });
-    }else{
-      var query = "UPDATE onedistin_users SET display_name= ?,user_email= ?, user_phone= ?,password= ? WHERE ID=?";
-      bcrypt.hash(password, 10, function(err,hash){
-        con.query(query,[display_name,user_email,user_phone,password,user],function(err){
+
+        con.query(query,[display_name,user_email,user_phone,user],function(err){
           if(err)throw err;
         });
-      });
 
-    }
   }else if(type == "delivery-info"){
     var user_name = req.body.user_name;
     var address = req.body.address;
@@ -395,7 +386,7 @@ router.get('/redeem/:offer', isLoggedIn, function(req,res, next){
       if(points >= 300){
         con.query("UPDATE onedistin_points SET last_activity='Purchase a free delivery(300pts)', offer_one=1, active_points=(active_points)-300 WHERE user_id=?",[user],function(err){
           if(err)throw err;
-          res.send('Your free delivery has been activated');
+          res.render('redeem-success');
         });
       }else {
         res.render('slow-down');
@@ -404,7 +395,7 @@ router.get('/redeem/:offer', isLoggedIn, function(req,res, next){
       if(points >= 600){
         con.query("UPDATE onedistin_points SET last_activity='Purchase a 5% off(600pts)', offer_two=1, active_points=(active_points)-600 WHERE user_id=?",[user],function(err){
           if(err)throw err;
-          res.send('Your 5% off on deal has been activated');
+          res.render('redeem-success');
         });
       }else {
         res.render('slow-down');
@@ -413,7 +404,7 @@ router.get('/redeem/:offer', isLoggedIn, function(req,res, next){
       if(points >= 1000){
         con.query("UPDATE onedistin_points SET last_activity='Purchase a 10% off(1000pts)', offer_three=1, active_points=(active_points)-1000 WHERE user_id=?",[user],function(err){
           if(err)throw err;
-          res.send('Your 10% off on deal has been activated');
+          res.render('redeem-success');
         });
       }else {
         res.render('slow-down');
@@ -426,6 +417,10 @@ router.get('/redeem/:offer', isLoggedIn, function(req,res, next){
 
 router.get('/sell', (req,res) => {
   res.render('sell');
+});
+
+router.post('/sell', (req,res) =>{
+  res.send(req.body);
 });
 
 router.get('/our-story', (req,res) => {
@@ -535,6 +530,10 @@ router.get('/logout', isLoggedIn, (req,res) => {
   req.logout();
   req.session.destroy();
   res.redirect('/login');
+});
+
+router.get('/alertme', (req,res) =>{
+  res.render('subs');
 });
 
 passport.serializeUser(function(user_id,done){

@@ -48,35 +48,15 @@
       <div style="margin-bottom:300px" class="w3-half w3-center w3-mobile w3-container w3-animate-bottom">
         <h1>Introduce a friend</h1>
         <p style="text-align:left">Give a friend 100 points when you introduce them to onedistin and Get 100 points when they make their first purchase.</p>
-        <div id="myInput" style="font-size:28px;overflow-x:scroll" class="w3-text-blue-grey w3-sand w3-border w3-round">
-          http://onedistin.herokuapp.com/signup?referer=<%= refId %>
-        </div>
-        <div class="tooltip">
           <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top" onmouseout="outFunc()">
-            <a class="w3-text-white" href="whatsapp://send?text=Do you really wanna see the majic in prices. Create an account with this link on Onedistin and earn 20points. http://onedistin.herokuapp.com/signup?referer=<%= refId %>" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Introduce Friends</h3></a>
+            <a class="w3-text-white" href="whatsapp://send?text=Want to get great discount deals every day? Click the link to create an account on Onedistin and get free 100 points. http://onedistin.herokuapp.com/signup?referer=<%= refId %>" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Introduce Friends</h3></a>
           </button>
-        </div>
       </div>
       <div class="w3-quarter w3-container">
 
       </div>
 
       <script>
-      $(document).ready(function(){
-        $("#share").click(function(){
-          var copyText = $("#myInput").text().trim();
-          copyText.select();
-          document.execCommand("copy");
-
-          var tooltip = $("#myTooltip");
-          tooltip.text("Copied: " + copyText.value);
-        });
-      });
-
-      function outFunc() {
-        var tooltip = document.getElementById("myTooltip");
-        tooltip.innerHTML = "Copy to clipboard";
-      }
       </script>
   </body>
 </html>

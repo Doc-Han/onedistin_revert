@@ -324,6 +324,8 @@ img {vertical-align: middle;}
 .thing-get ul {
   padding: 0;
   width: 100%;
+  margin-left: 20px;
+  padding-right: 20px;
 }
 
 .thing-get ul li {
@@ -333,15 +335,15 @@ img {vertical-align: middle;}
 
 .muli-regular {
   font-family: 'Muli', sans-serif;
-  font-weight: 400;
+  font-weight: 400!important;
 }
 .muli-semi-bold {
   font-family: 'Muli', sans-serif;
-  font-weight: 600;
+  font-weight: 600!important;
 }
 .muli-bold {
   font-family: 'Muli', sans-serif;
-  font-weight: 700;
+  font-weight: 700!important;
 }
 
 
@@ -504,6 +506,14 @@ img {vertical-align: middle;}
     padding: 8px;
     width: auto;
   }
+  .muli-bold {
+    font-size: 24px!important;
+  }
+  .muli-semi-bold {
+    font-size: 19px!important;
+    font-weight: bold;
+    line-height: 19px;
+  }
   #header nav a.logo img {
     background-position: -2px -28px;
     height: 50px;
@@ -534,11 +544,11 @@ img {vertical-align: middle;}
       position: absolute;
       background-size: 1042px 1042px;
       background-repeat: no-repeat;
-      width: 100%;
-      max-width: 100%;
+      width: inherit;
       height: 600px;
       top: -150px;
       left: -130px;
+      right: -20px;
       z-index: -100;
       background-position: center;
   }

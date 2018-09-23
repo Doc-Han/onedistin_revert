@@ -80,14 +80,9 @@
           <% if(comment.length > 0){ %>
             <% comment.forEach(function(item){ %>
               <li class="w3-bar">
-                <img class="w3-circle" src="http://via.placeholder.com/50x50" alt="">
                 <span class="w3-large w3-margin-left" ><%= item.comment_author_name %></span>
                 <span class="w3-small w3-right"><%= item.timestamp %></span>
                 <p style="margin-left:70px"><%= item.comment_content %></p>
-
-                <div class="w3-bar">
-                  <a class="w3-bar-item w3-text-black w3-button" href="#"> <i class="fa fa-reply"></i> </a>
-                </div>
               </li>
             <% }); %>
           <% } %>

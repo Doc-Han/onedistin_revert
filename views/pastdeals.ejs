@@ -4,15 +4,16 @@
 
       </div>
       <div style="padding: 0" class="w3-half w3-mobile w3-container">
+        <h1 style="margin-left:10px">Past Deals</h1>
         <ul class="w3-ul">
           <% if(hasPastDeal){ %>
             <% pastdeals.forEach(function(item){ %>
               <li style="padding: 0" class="w3-bar">
-                <a href="/pastdeal/<%= item.timestamp %>"><img src="<%= item.pastdeal_img %>" class="w3-left w3-round-xlarge" style="height:100px;width:100px;margin-top:5px"></a>
-                <div style="padding-top: 0;" class="w3-bar-item">
+                <a href="/pastdeal/<%= item.timestamp %>"><img src="<%= item.pastdeal_img %>" class="w3-left w3-round-xlarge" style="height:100px;width:100px;margin:10px;"></a>
+                <div style="padding-top: 5px;" class="w3-rest">
                   <a class="w3-text-black" href="/pastdeal/<%= item.timestamp %>"><span class="muli-bold" style="font-size:22px"><%= item.post_title %></span></a><br>
                   <span class="w3-opacity">Posted on <span class="time"><%= item.time %></span> </span><br>
-                  <span class="w3-opacity">Current activity on post</span>
+                  <!--<span class="w3-opacity">Current activity on post</span>-->
                   <span class="w3-bar">
                     <a style="padding: 0;" href="/forum/<%= item.post_url %>" class="w3-bar-item w3-text-black"><i class="fa fa-heart-o"></i> <%= item.post_likes %> <br></a>
                     <a style="padding: 0;" href="/forum/<%= item.post_url %>" class="w3-bar-item w3-text-black"><i class="fa fa-comment-o"></i> <%= item.post_comments %></a>

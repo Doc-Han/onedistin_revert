@@ -11,8 +11,8 @@
           <ul style="padding: 0" id="postList" class="w3-ul w3-container">
             <% posts.forEach(function(item){ %>
               <li style="padding-left: 0" class="w3-bar w3-row w3-border-bottom">
-                <img style="width:50px;height:50px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.img_url %>" alt="">
-                <span class="w3-twothird w3-margin-left">
+                <img style="width:50px;height:50px;margin-right:10px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.img_url %>" alt="">
+                <div class="w3-rest">
                   <a href="/forum/<%= item.post_url %>" style="font-size:22px;" class="muli-bold w3-text-black">
                     <%= item.post_title %>
                   </a>
@@ -27,7 +27,7 @@
                     </a>
                     <a class="w3-bar-item w3-button" href="/forum/<%=item.post_url %>"> <i class="fa fa-comment-o w3-text-black"> <%= item.post_comments %> </i> </a>
                   </div>
-                </span>
+                </div>
 
               </li>
             <% }); %>
@@ -36,8 +36,8 @@
           <ul style="padding: 0" id="postList" class="w3-ul w3-container">
             <% posts.forEach(function(item){ %>
               <li style="padding-left: 0" class="w3-bar w3-row w3-border-bottom">
-                <img style="width:50px;height:50px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.img_url %>" alt="">
-                <span class="w3-twothird w3-margin-left">
+                <img style="width:50px;height:50px;margin-right:10px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.img_url %>" alt="">
+                <div class="w3-rest">
                   <a href="/forum/<%= item.post_url %>" style="font-size:22px" class="muli-bold w3-text-black">
                     <%= item.post_title %>
                   </a>
@@ -48,7 +48,7 @@
                     </a>
                     <a class="w3-bar-item w3-button" href="/login"> <i class="fa fa-comment-o w3-text-black"> <%= item.post_comments %> </i> </a>
                   </div>
-                </span>
+                </div>
 
               </li>
             <% }); %>

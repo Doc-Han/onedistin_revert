@@ -34,31 +34,35 @@
 
       </div>
       <div style="padding:32px 10px" class="w3-center w3-half w3-white w3-border w3-card-4 w3-mobile w3-container w3-animate-bottom">
-        <form style="padding:0" action="/payment" method="POST">
+        <form action="/payment" method="POST">
         <h3 style="text-align:left;font-size:22px;line-height:22px;" class="muli-semi-bold">Here's what you are getting:</h3>
         <span class="checkout-items">
           <span class="single-item">
         <div style="padding:0;" class="checkout-item-bar w3-panel w3-row w3-border w3-round">
           <span class="w3-button reduce-item w3-right w3-red w3-xlarge w3-text-white">&times;</span>
-          <img style="width:100px;height: 100px;margin-right:10px" class="w3-left w3-col" style="margin-right:10px;" src="<%= img %>" alt="">
+          <img style="width:100px;height:100px;margin-right:10px" class="w3-left w3-col" style="margin-right:10px;" src="<%= img %>" alt="">
           <div style="width:65%;" class="w3-col">
             <h4 style="margin-bottom:0;text-align:left;"><b><%= currentPost.title %></b></h4>
             <p style="text-align:left;"><%= currentPost.price %></p>
           </div>
 
-          <% currentPost.categories.forEach(function(item){ %>
-            <div style="width:100%;border-top:1px solid #cccccc;" class="w3-col w3-padding">
-              <span class="w3-left w3-xlarge"><%= item[0] %></span>
-              <select class="w3-right w3-xlarge" name="category">
-                  <% item.forEach(function(i,index){ %>
-                    <% if(index > 0 && index < item.length-1){ %>
-                      <option value="<%= i %>"><%= i %></option>
-                    <% }%>
+          <% if(currentPost.categories){ %>
+            <% currentPost.categories.forEach(function(item,p_index){ %>
+              <div style="width:100%;border-top:1px solid #cccccc;" class="w3-col w3-padding">
+                <span class="w3-left w3-xlarge"><%= item[0] %></span>
+                <select class="w3-right w3-xlarge" name="category">
+                  <% var price_team = currentPost.cat_prices[p_index] %>
+                    <% item.forEach(function(i,index){ %>
+                      <% if(index > 0 && index < item.length-1){ %>
+                        <option rel-data="<%= price_team[index] %>" value="<%= i %>"><%= i %></option>
+                      <% }%>
 
-                  <% }); %>
-              </select>
-            </div>
-          <% }); %>
+                    <% }); %>
+                </select>
+              </div>
+            <% }); %>
+          <% } %>
+
 
 
         </div>
@@ -68,12 +72,12 @@
         <h3 style="text-align:left;font-size:22px;line-height:22px;" class="muli-semi-bold">Where should we deliver distin?</h3>
         <div class="shipping-address">
           <dl>
-            <dt> <label>Name</label> </dt>
-            <dd> <input type="text" name="user_name" value="<%= currentUser.user_name %>" required> </dd>
+            <dt> <label>Fullname</label> </dt>
+            <dd> <input type="text" name="user_name" placeholder="Fullname" value="<%= currentUser.user_name %>" required> </dd>
             <dt> <label>Address</label> </dt>
-            <dd> <input type="text" name="user_address" value="<%= currentUser.user_address%>" required> </dd>
+            <dd> <input type="text" name="user_address" placeholder="Address" value="<%= currentUser.user_address%>" required> </dd>
             <dt> <label>City</label> </dt>
-            <dd> <input type="text" name="user_city" value="<%= currentUser.user_city %>" required> </dd>
+            <dd> <input type="text" name="user_city" placeholder="City" value="<%= currentUser.user_city %>" required> </dd>
             <dt> <label>Region</label> </dt>
             <dd> <select name="user_region">
               <option value="<%= currentUser.user_loc %>"><%= currentUser.user_loc %></option>
@@ -89,7 +93,7 @@
               <option value="Western">Western</option>
             </select> </dd>
             <dt> <label>Phone</label> </dt>
-            <dd> <input type="text" name="user_phone" value="<%= currentUser.user_phone %>" required> </dd>
+            <dd> <input type="text" name="user_phone" placeholder="Phone" value="<%= currentUser.user_phone %>" required> </dd>
           </dl>
         </div>
         <% if(offers.offer_one == 1){ %>
@@ -147,7 +151,7 @@
 
         <h3 style="text-align:left;font-size:22px;line-height:22px;" class="muli-semi-bold">Finally! Want this right?</h3>
         <dl class="straight">
-          <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price text-color-inverse"><%= currentPost.price %></span> </dd>
+          <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price text-color-inverse">GHS <span class="pprice"><%= currentPost.ac_price %></span></span> </dd>
           <dd> <label>Delivery fee</label>
             <% if(offers.offer_one == 1){ %>
               <span class="w3-tag w3-green price">free delivery</span>
@@ -165,7 +169,7 @@
             <span class="w3-tag coupon-tag w3-green"></span>
             <span class="total_price">GHS 45.70</span></span> </dd>
         </dl>
-        <input type="text" class="payment_details" name="item_no">
+        <input type="hidden" class="payment_details" name="item_no">
         <!--<form method="POST" action="https://community.ipaygh.com/gateway">
           <input type="hidden" name="merchant_key" value="965c2850-a0b4-11e8-af31-f23c9170642f" />
           <input type="hidden" name="success_url" value="https://onedistin.herokuapp.com/p_s" />

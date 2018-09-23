@@ -35,7 +35,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
           </div>
           <div style="height:59px;" class="buy w3-row">
             <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
-              <span style="text-align:center" class="custom-txt-color w3-large"><b>Too Late</b></span>
+              <span style="text-align:center" class="custom-txt-color w3-large"><b><%= currentPost.price %></b></span>
                <br>
               <span class="custom-txt-color w3-medium">IT'S OVER</span>
             </a>
@@ -44,7 +44,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
           </div>
           <div style="margin-bottom:8px" id="price-comparison">
             <a class="w3-text-indigo w3-text-black" href="<%- currentPost.shoppy_link %>">
-            WE'RE NOT SELLING THIS ANYMORE BUT YOU CAN BUY IT ON JUMIA</a>
+            WE'RE NOT SELLING THIS ANYMORE BUT YOU CAN <u>BUY IT ON JUMIA</u></a>
           </div>
           <div class="w3-left thing-get">
             <%- currentPost.thingGet %>
@@ -61,7 +61,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
           <ul style="width:100%" class="w3-ul w3-margin-top">
             <% forumPosts.forEach(function(item){ %>
               <a class="w3-left" style="width:100%" href="/forum/<%= item.post_url %>"><li style="padding-left:0;width:inherit">
-                <img class="w3-circle w3-left" src="http://via.placeholder.com/40x40" alt="">
+                <img style="width:50px;height:50px" class="w3-circle w3-left" src="https://source.unsplash.com/50x50/?<%= item.post_title.split(' ').join(',') %>" alt="">
                   <%= item.post_title %>
                   <i class="fa fa-heart"> <%= item.post_likes %> </i>
                   <i class="fa fa-comment"> <%= item.post_comments %> </i>

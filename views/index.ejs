@@ -1,4 +1,6 @@
 <% include partials/header.ejs %>
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/e4eff813b779947c542d8c324/8748453e3959f82fb1ecc496d.js");</script>
+
 <script type="text/javascript">
 var html = document.getElementsByTagName('html')[0];
 html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
@@ -60,8 +62,8 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
             </div>
           </span>
           </div>
-          <h3 style="text-align:left;font-size:22px" class="muli-regular"><%= currentPost.title %></h3>
-          <div class="w3-left thing-get">
+          <h3 style="text-align:left;font-size:22px;margin-bottom:0" class="muli-regular"><%= currentPost.title %></h3>
+          <div style="margin-top:-10px"class="w3-left thing-get">
             <%- currentPost.thingGet %>
           </div>
       </div>
@@ -77,7 +79,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
             <% forumPosts.forEach(function(item){ %>
               <a class="w3-left" style="width:100%" href="/forum/<%= item.post_url %>"><li style="padding-left:0;width:inherit">
                 <img style="width:50px;height:50px" class="w3-circle w3-left" src="https://source.unsplash.com/50x50/?<%= item.post_title.split(' ').join(',') %>" alt="">
-                  <%= item.post_title %>
+                  <span style="word-break:break-word"><%= item.post_title %></span>
                   <i class="fa fa-heart"> <%= item.post_likes %> </i>
                   <i class="fa fa-comment"> <%= item.post_comments %> </i>
 
@@ -85,7 +87,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
               </li></a>
             <% }); %>
           </ul>
-          <a href="/forum"><button style="margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><h5 class="custom-txt-color muli-regular" style="margin:0;font-size:22px;line-height:46px">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
+          <a href="/forum"><button style="margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><h5 class="custom-txt-color muli-regular" style="margin:0;font-size:22px;line-height:33px">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
       </div>
     </div>
 
@@ -143,7 +145,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                 <h3 style="text-align:left;font-size:22px;line-height:22px;" class="muli-semi-bold">Where should we deliver distin?</h3>
                 <div class="shipping-address">
                   <dl>
-                    <dt> <label>Name</label> </dt>
+                    <dt> <label>Fullname</label> </dt>
                     <dd> <input type="text" name="user_name" value="<%= currentUser.user_name %>" required> </dd>
                     <dt> <label>Address</label> </dt>
                     <dd> <input type="text" name="user_address" value="<%= currentUser.user_address%>" required> </dd>
@@ -240,7 +242,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                     <span class="w3-tag coupon-tag w3-green"></span>
                     <span class="total_price">GHS 45.70</span></span> </dd>
                 </dl>
-                <input type="text" class="payment_details" name="item_no">
+                <input type="hidden" class="payment_details" name="item_no">
                 <!--<form method="POST" action="https://community.ipaygh.com/gateway">
                   <input type="hidden" name="merchant_key" value="965c2850-a0b4-11e8-af31-f23c9170642f" />
                   <input type="hidden" name="success_url" value="https://onedistin.herokuapp.com/p_s" />
@@ -253,7 +255,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                 <button onclick="document.getElementById('id02').style.display='block'" style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="button" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px">Yes! Can't wait!</h3></button>
 
                 <div id="id02" class="w3-modal">
-                  <div style="padding:32px 48px" class="w3-modal-content w3-animate-zoom">
+                  <div class="w3-modal-content w3-animate-zoom" style="padding:32px 48px">
                     <div class="w3-container">
                       <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                       <h1>Payment Options</h1>
@@ -276,11 +278,19 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
 <script src="/js/survey.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  $("#share_btn").hover(function(){
-    $("#share_btns").stop().show(400);
+  var on = false;
+  $("#share_btn").click(function(){
+    if(on == false){
+      $("#share_btns").stop().show(400);
+      on = true;
+    }else{
+      $("#share_btns").stop().hide(400);
+      on = false;
+    }
+
   });
   $("#share_btn").mouseleave(function(){
-    $("#share_btns").stop().hide(400);
+      $("#share_btns").stop().hide(400);
   });
 });
 // This is the code to redirect checkout to another link on mobile view!
@@ -289,6 +299,15 @@ function checkout_btn_press() {
   document.location = "/checkout";
   }else{
     document.getElementById('id01').style.display='block';
+  }
+}
+
+function validate_signup(){
+  if($("input").val() == "" || $("select").val() == ""){
+    //alert("empty!");
+    return false;
+  }else{
+    alert("filled!");
   }
 }
 

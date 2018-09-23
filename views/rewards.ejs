@@ -4,6 +4,9 @@
     /*background: #fff/*var(--main-color)*/
     background-color: #fff;
   }
+  .w3-hide {
+    text-align: left!important;
+  }
 </style>
 <!--<div style="position:absolute;top:12%;left:0;right:0;z-index:-1;opacity:0.3">
   <img style="width:100%" src="img/nice4.jpg" alt="">
@@ -15,7 +18,7 @@
       <div style="margin-bottom:300px" class="w3-half w3-center w3-mobile w3-container w3-animate-bottom">
         <p>YOUR REWARD BALANCE:</p>
         <h1 class="w3-padding"><b><%= pointData.active_points %></b> points</h1>
-        <p>Accumulated since <b>31st Dec 1956</b></p>
+        <!--<p>Accumulated since <b>31st Dec 1956</b></p>-->
 <hr>
           <div class="w3-row">
             <h3 style="text-align:left"><b>Turn your points into discounts</b></h3>
@@ -50,7 +53,7 @@
 <hr>
           <span style="cursor:pointer" onclick="myFunction('faq1')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>How do I earn points? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
             <div id="faq1" class="w3-hide w3-container">
-              <table class="w3-table">
+              <table class="w3-table-all">
                 <tr>
                   <td class="w3-large">Make a Purchase</td>
                   <td class="w3-large">Share today's distin</td>
@@ -67,14 +70,14 @@
             <div id="fag2" class="w3-hide w3-container">
               <p> Redeem your points for coupons and get extra discounts <br> Tap on the <b>Redeem</b> tab to get started </p>
             </div>
-          <span style="cursor:pointer" onclick="myFunction('faq3')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>How do I use my coupon? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
-            <!--<div id="faq3" class="w3-hide w3-container">
-              <p>Lorem ipsum...</p>
-            </div>-->
+          <span style="cursor:pointer" onclick="myFunction('faq3')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>What about coupon codes? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
+            <div id="faq3" class="w3-hide w3-container">
+              <p>Enter a coupon code during checkout to activate your coupon reward.</p>
+            </div>
           <span style="cursor:pointer" onclick="myFunction('fag4')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>Do my points expire? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
-            <!--<div id="fag4" class="w3-hide w3-container">
-              <p>Lorem ipsum...</p>
-            </div>-->
+            <div id="fag4" class="w3-hide w3-container">
+              <p>Think of it like your money in the bank. Does it expire? Great!</p>
+            </div>
 
       </div>
       <div class="w3-quarter w3-container">

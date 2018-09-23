@@ -4,6 +4,9 @@
   h5 {
     font-size: 22px;
   }
+  .w3-hide {
+    text-align: left!important;
+  }
 </style>
 
 <div class="w3-row w3-center">
@@ -14,43 +17,114 @@
     <h3 style="text-align:left;line-height: 60px;font-size:56px"><b>Sell on Onedistin:</b></h3>
     <h4 style="text-align:left">OFFER A DISCOUNT DEAL, GET NEW CUSTOMERS, GROW YOUR BUSINESS</h4>
     <h5 style="text-align:left;margin-bottom:0" class="muli-bold">Do we know you?</h5>
-    <form action="sell" method="post">
+    <form style="margin-bottom:100px" action="sell" method="post">
+      <section>
     <dl style="margin-top:0">
       <dt> <label>Fullname</label> </dt>
-      <dd> <input type="text" name="fullname" value=""> </dd>
+      <dd> <input type="text" name="fullname" placeholder="Fullname" value="" required> </dd>
       <dt> <label>I am a/an</label> </dt>
       <dd> <select name="profession">
-        <option></option>
+        <option>I am a/an</option>
         <option>Manufacturer</option>
         <option>Wholesaler</option>
         <option>Importer</option>
       </select> </dd>
       <dt> <label>Email</label> </dt>
-      <dd> <input type="text" name="email" value=""> </dd>
+      <dd> <input type="text" name="email" placeholder="Email" value="" required> </dd>
       <dt> <label>Location</label> </dt>
-      <dd> <input type="text" name="location" value=""> </dd>
+      <dd> <input type="text" name="location" placeholder="Location" value="" required> </dd>
     </dl>
 
     <h5 style="text-align:left;margin-bottom:0" class="muli-bold">What do you want to sell?</h5>
     <dl style="margin-top:0">
       <dt> <label>Product name</label> </dt>
-      <dd> <input type="text" name="Product_name" value=""> </dd>
+      <dd> <input type="text" name="Product_name" placeholder="Product name" value="" required> </dd>
       <dt> <label>Category</label> </dt>
-      <dd> <select name="category">
-        <option></option>
-        <option>Banku</option>
-        <option>Akpele</option>
-        <option>Fufu</option>
-      </select> </dd>
+      <dd> <input type="text" name="category" placeholder="Category" value="" required></dd>
       <dt> <label>Brand</label> </dt>
-      <dd> <input type="text" name="Brand" value=""> </dd>
+      <dd> <input type="text" name="Brand" placeholder="Brand" value="" required> </dd>
       <dt> <label>Offer price</label> </dt>
-      <dd> <input type="text" name="price" value=""> </dd>
+      <dd> <input type="text" name="price" placeholder="Offer Price" value="" required> </dd>
       <dt> <label>Product description</label> </dt>
-      <dd> <input type="text" name="description" value=""> </dd>
+      <dd> <input type="text" name="description" placeholder="Product description" value="" required> </dd>
     </dl>
+    </section>
     <a style="width:100%;" class="add-item-bar w3-button w3-round-xxlarge w3-border w3-text-blue" href="#"><h3 style="margin:0">Wanna add another?</h3></a>
     <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Done! Submit</h3></button>
     </form>
+
+    <span style="cursor:pointer" onclick="myFunction('faq1')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>Who can offer a deal on Onedistin? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
+      <div id="faq1" class="w3-hide w3-container">
+        <p>Basically anyone who is a descendant of Adam and Eve can offer a deal here.
+
+But you must also be a manufacturer/wholesaler/importer/Large store with inventory surplus/overstocked/out-of-season/discontinued products that you want to move out (obviously at a steep discount).</p>
+
+      </div>
+    <span style="cursor:pointer" onclick="myFunction('fag2')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>Why should I offer a discount deal on Onedistin? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
+      <div id="fag2" class="w3-hide w3-container">
+        <p>Well, you shouldn’t. Nobody SHOULD ever do anything.
+
+Unless you are in search of a new way to get exposure, expand customer reach or move inventory surpluses.
+
+Our targeted audience of smart ready-to-buy customers provides you the perfect platform to create awareness for newly introduced products and cut costs by moving surplus inventory.</p>
+      </div>
+    <span style="cursor:pointer" onclick="myFunction('faq3')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>How does this help me grow my business? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
+      <div id="faq3" class="w3-hide w3-container">
+        <p>Great! Looks like you’re finally coming along.<br>
+        Whether you are trying to get a new product to consumers or moving old/surplus inventory, we have the perfect environment to help you succeed.</p>
+        <table class="w3-table-all">
+          <tr>
+            <td class="w3-large">Quality customers</td>
+            <td class="w3-large">Exposure</td>
+            <td class="w3-large">Smart Promotions</td>
+          </tr>
+          <tr>
+            <td>Dedicated customers who are loyal to the brands they love. They spend more on great products and recommend their favourite brands to friends.</td>
+            <td>Using our daily email and whatsapp deal alerts, you can reach a massive audience of customers for your products.</td>
+            <td>Our interest based email and whatsapp alerts exposes your products to active buying customers.</td>
+          </tr>
+        </table>
+      </div>
+    <span style="cursor:pointer" onclick="myFunction('fag4')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>Can I submit more than one product? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
+      <div id="fag4" class="w3-hide w3-container">
+        <p>Of course. Why not? Who are we to tell you what to do? Or most importantly, what not to do?</p>
+      </div>
+    <span style="cursor:pointer" onclick="myFunction('fag5')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>Do you post my product on Onedistin immediately I click the submit button? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
+      <div id="fag5" class="w3-hide w3-container">
+        <p>Wow! Slow down tiger. No need to get ahead of yourself.
+
+Your products will go through a simple but rigorous vetting process mainly to ensure that your offer price catches the heart of our cheap souls (remember our mantra is “cheapest </p>
+      </div>
+    <span style="cursor:pointer" onclick="myFunction('fag6')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>Do I pay Onedistin for posting my products? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
+      <div id="fag6" class="w3-hide w3-container">
+        <p>Hells no! We are not that cruel.
+
+We like to think of ourselves as cheap, descent deal makers so we are not going to charge you for posting your products here.</p>
+      </div>
+    <span style="cursor:pointer" onclick="myFunction('fag7')" class="w3-padding w3-block w3-left-align w3-border w3-round-large"><b>Ok, I get it now. What next? <span class="w3-right"> <i class="fa fa-angle-down"></i> </b></span> </span>
+      <div id="fag7" class="w3-hide w3-container">
+        <p>Submit your products and we will get in touch as quickly as light travels.</p>
+      </div>
   </div>
 </div>
+
+<script>
+$(documtent).ready(function(){
+  $(".add-item-bar").click(function(){
+    var content = $("section").html();
+    $("section").after(content);
+  });
+});
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        //x.previousElementSibling.className = x.previousElementSibling.className.replace("w3-light-grey", "w3-blue-grey");
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+      //  x.previousElementSibling.className = x.previousElementSibling.className.replace("w3-blue-grey", "w3-light-grey");
+    }
+}
+</script>
+</body>
+</html>

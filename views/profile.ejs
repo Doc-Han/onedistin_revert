@@ -26,7 +26,6 @@
         <div class="clearfix"></div>
         <div style="text-align:left" class="w3-container w3-border w3-round-large">
           <label><b>Username:</b></label> <%= userData.display_name %> <br>
-          <label><b>Password:</b></label> ●●●●●●●● <br>
           <label><b>Email:</b></label> <%= userData.user_email %> <br>
           <label><b>Phone:</b></label> <%= userData.user_phone %>
         </div>
@@ -56,7 +55,7 @@
         <div style="text-align:left" class="w3-container w3-border w3-round-large">
         <% var subs = userData.subscriptions; %>
         <% if(subs[0] == 1){ %>
-            <section class="w3-bar-item"> OneDistin daily deals (email) </section>
+            <section class="w3-bar-item"> Onedistin daily deals (email) </section>
         <% } %>
         <% if(subs[1] == 1){ %>
             <section class="w3-bar-item"> Forum notifications (email) </section>

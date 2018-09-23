@@ -16,11 +16,11 @@
     <div class="shipping-address">
       <dl>
         <dt> <label>Fullname</label> </dt>
-        <dd> <input type="text" name="user_name" value="<%= user.user_name %>"> </dd>
+        <dd> <input type="text" name="user_name" placeholder="Fullname" value="<%= user.user_name %>"> </dd>
         <dt> <label>Address</label> </dt>
-        <dd> <input type="text" name="address" value="<%= user.user_address %>"> </dd>
+        <dd> <input type="text" name="address" placeholder="Address" value="<%= user.user_address %>"> </dd>
         <dt> <label>City</label> </dt>
-        <dd> <input type="text" name="city" value="<%= user.user_city %>"> </dd>
+        <dd> <input type="text" name="city" placeholder="City" value="<%= user.user_city %>"> </dd>
         <dt> <label>Region</label> </dt>
         <dd> <select name="region">
           <option value="<%= user.user_loc %>"><%= user.user_loc %></option>

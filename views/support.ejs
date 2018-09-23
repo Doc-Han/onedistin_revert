@@ -8,11 +8,11 @@
       <div class="w3-quarter w3-container">
 
       </div>
-      <div style="margin-bottom:500px" class="w3-half w3-border w3-round-xxlarge w3-mobile w3-container">
+      <div style="margin-bottom:100px;" class="w3-half w3-mobile w3-container">
         <% if(isAuthenticated){ %>
-          <form action="/support" method="POST">
+          <form action="/support" class="w3-border" style="padding:10px" method="POST">
           <h2 class="muli-bold" style="font-size:32px">Dear Onedistin,</h2>
-          <span style="text-align:left">This is about my
+          <span style="text-align:left">This is about
           <select name="complaint">
             <option value="0"> </option>
             <option value="puchase">a purchase</option>
@@ -22,22 +22,22 @@
             <option>pure bliss</option>
           </select>
         </span>
-          <h3>Here's the issue</h3>
+          <h3>Here's the issue:</h3>
           <textarea name="issue" class="w3-input w3-round w3-border" style="height: 150px;"></textarea> <br>
           <span>You can write me back at
           <input class="w3-round-xxlarge w3-border" type="text" name="user_email" value="<%= currentUser.user_email %>"> </span> <br>
           <b>Or</b> <br>
-          <span>Call me at
+          <span>Call me on
           <input class="w3-round-xxlarge w3-border" type="text" name="user_phone" value="<%= currentUser.user_phone %>"> </span>
 
-          <h3>Your's truely</h3>
+          <h3>Your's truely,</h3>
           <span><%= currentUser.user_name %></span>
           <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0;font-size:22px;line-height:46px">Please help me!</h3></button>
         </form>
         <% }else{ %>
-          <form action="/support" method="POST">
+          <form action="/support" class="w3-border" style="padding:10px" method="POST">
           <h2 class="muli-bold" style="font-size:32px">Dear Onedistin,</h2>
-          <span style="text-align:left">This is about my
+          <span style="text-align:left">This is about
           <select name="complaint">
             <option value="0"> </option>
             <option value="puchase">a purchase</option>
@@ -47,15 +47,15 @@
             <option>pure bliss</option>
           </select>
         </span>
-          <h3>Here's the issue</h3>
+          <h3>Here's the issue:</h3>
           <textarea name="issue" class="w3-input w3-round w3-border" style="height: 150px;"></textarea> <br>
           <span>You can write me back at
           <input class="w3-round-xxlarge w3-border" type="text" name="user_email" placeholder="email"> </span> <br>
           <b>Or</b> <br>
-          <span>Call me at
+          <span>Call me on
           <input class="w3-round-xxlarge w3-border" type="text" name="user_phone" placeholder="mobile"> </span>
 
-          <h3>Your's truely</h3>
+          <h3>Your's truely,</h3>
           <span></span>
           <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0;font-size:22px;line-height:46px">Please help me!</h3></button>
         </form>

@@ -4,6 +4,14 @@
     font-size: 22px;
     line-height: 31px;
   }
+  h2 {
+    margin:0;
+  }
+  .w3-leftbar>p {
+    margin:0px;
+    padding: 0px;
+    font-size: 16px;
+  }
 </style>
 <div class="w3-row w3-center">
   <div class="w3-quarter w3-container">
@@ -11,10 +19,10 @@
   </div>
   <div style="margin-bottom:300px" class="w3-half w3-center w3-mobile w3-container w3-animate-bottom">
 
-    <h2 class="muli-bold" style="text-align:left;font-size:56px">The Onedistin Story</h2>
+    <h2 style="text-align:left;font-size:56px" class="muli-bold">The Onedistin Story</h2>
     <hr>
     <% titles.forEach(function(item,index){ %>
-      <h2 class="muli-bold" style="text-align:left;font-size:28px;line-height:32px"><%= item %></h2>
+      <h2 class="muli-semi-bold" style="text-align:left;font-size:28px;line-height:32px"><%= item %></h2>
       <div style="text-align:left;padding-left:10px;border-color:#fbbf14!important" class="w3-leftbar muli-regular">
         <%- content[index] %>
       </div>

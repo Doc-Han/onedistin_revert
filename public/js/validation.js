@@ -47,6 +47,6 @@ function validate_signup(){
     //alert("empty!");
     return false;
   }else{
-    alert("filled!");
+    return true;
   }
 }

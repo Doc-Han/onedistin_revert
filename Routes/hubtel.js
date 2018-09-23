@@ -30,75 +30,87 @@ router.post('/hubtel/callback', (req,res) =>{
   res.send("Thanks You!");
 });
 
-router.get('/hubtel/validate', (req,res) =>{
-  if(req.query){
+router.get('/hubtel/validate', (req,res,next) =>{
+  if(req.query.checkoutid){
     var checkoutid = req.query.checkoutid;
     console.log(checkoutid);
     con.query("UPDATE onedistin_invoice SET paid=? WHERE checkoutid=?",[1,checkoutid],function(err,result){
       if(err)throw err;
       res.redirect('/p_s');
     });
+  }else{
+    next();
   }
 });
 
-router.get('/ipay', isLoggedIn, (req,res) =>{
-  var user = req.user.user_id;
-  con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[user], function(err,result){
-    if(err)throw err;
-    var user_name = result[0].user_name;
+router.get('/ipay', isLoggedIn, (req,res,next) =>{
+  if(req.query.cat){
+    var user = req.user.user_id;
+    con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[user], function(err,result){
+      if(err)throw err;
+      var user_name = result[0].user_name;
 
-    var category = req.query.cat;
-    var item_det = req.query.ref_f_i_d.split("-");
-    var num = item_det[0]*1;
-    var del = item_det[1]*1;
-    var ttl = item_det[2]*1;
-    if(del == 0){
-      var delivery = 5;
-    }else if(del == 1){
-      var delivery = 10;
-    }else{
-      var delivery = 0;
-    }
-    var total = (ttl*num)+delivery;
-    var data = {
-      item_det: req.query.ref_f_i_d,
-      item_title: req.query.p_t,
-      item_cat: category,
-      total: total,
-      user_name: user_name
-    }
-    console.log(data);
-    res.render('payment/ipay',{data: data});
-  });
+      var category = req.query.cat;
+      var item_det = req.query.ref_f_i_d.split("-");
+      var num = item_det[0]*1;
+      var del = item_det[1]*1;
+      var ttl = item_det[2]*1;
+      if(del == 0){
+        var delivery = 5;
+      }else if(del == 1){
+        var delivery = 10;
+      }else{
+        var delivery = 0;
+      }
+      var total = (ttl*num)+delivery;
+      var data = {
+        item_det: req.query.ref_f_i_d,
+        item_title: req.query.p_t,
+        item_cat: category,
+        total: total,
+        user_name: user_name
+      }
+      console.log(data);
+      res.render('payment/ipay',{data: data});
+    });
+  }else{
+    next();
+  }
 });
 
 router.get('/ussd', isLoggedIn, (req,res) =>{
-  var user = req.user.user_id;
-  con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[user], function(err,result){
-    if(err)throw err;
-    var user_name = result[0].user_name;
+  //console.log(req.query.cat);
+  if(req.query.cat){
+    var user = req.user.user_id;
+    con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[user], function(err,result){
+      if(err)throw err;
+      var user_name = result[0].user_name;
 
-    var item_det = req.query.ref_f_i_d.split("-");
-    var num = item_det[0]*1;
-    var del = item_det[1]*1;
-    var ttl = item_det[2]*1;
-    if(del == 0){
-      var delivery = 5;
-    }else if(del == 1){
-      var delivery = 10;
-    }else{
-      var delivery = 0;
-    }
-    var total = ((ttl)*num)+delivery;
-    var data = {
-      item_det: req.query.ref_f_i_d,
-      item_title: req.query.p_t,
-      item_cat: req.query.cat,
-      total: total,
-      user_name: user_name
-    }
-    res.render('ussd',{data: data});
-  });
+      var item_det = req.query.ref_f_i_d.split("-");
+      var num = item_det[0]*1;
+      var del = item_det[1]*1;
+      var ttl = item_det[2]*1;
+      if(del == 0){
+        var delivery = 5;
+      }else if(del == 1){
+        var delivery = 10;
+      }else{
+        var delivery = 0;
+      }
+      var total = ((ttl)*num)+delivery;
+      var data = {
+        item_det: req.query.ref_f_i_d,
+        item_title: req.query.p_t,
+        item_cat: req.query.cat,
+        total: total,
+        user_name: user_name
+      }
+      res.render('ussd',{data: data});
+    });
+  }else{
+    next();
+  }
+
 });
 
 router.post('/ussd', isLoggedIn, (req,res) =>{

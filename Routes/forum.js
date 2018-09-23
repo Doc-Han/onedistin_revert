@@ -82,7 +82,7 @@ router.post('/add', isLoggedIn, (req,res) => {
 
   var author = req.user.user_id;
   var query = "INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?)";
-  con.query(query,[null,author,title,body,url,0,0,currentDate,Date.now()], function(err){
+  con.query(query,[null,author,title,body,url,0,0,currentDate,new Date()], function(err){
     if(err)throw err;
     console.log("post Inserted!");
     res.redirect('/forum');
@@ -124,10 +124,19 @@ router.get('/:title', (req,res) => {
         }else{
           var like = "0";
         }
+        //formatting time for post
         var n = p_result[0].time;
         var t = new Date(n);
         var months = ["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"];
         p_result[0].time = t.getHours()+":"+t.getMinutes()+" - "+t.getDate()+" "+months[t.getMonth()]+" "+t.getFullYear();
+        //ends Here
+        //formatting time for Comments
+        c_result[0].forEach(function(item){
+          var c = item.timestamp;
+          var g = new Date(c);
+          item.timestamp = g.getHours()+":"+g.getMinutes()+" - "+g.getDate()+" "+months[g.getMonth()]+" "+g.getFullYear();
+        });
+        //ends here
         res.render('post', {post: p_result[0], comment: c_result[0],like: like});
       });
     });
@@ -138,11 +147,19 @@ router.get('/:title', (req,res) => {
       const postId = p_result[0].ID;
       con.query("SELECT * FROM onedistin_comments WHERE comment_post_ID=?",[postId],function(err,c_result){
         if(err)throw err;
+        //formatting time for post
         var n = p_result[0].time;
         var t = new Date(n);
         var months = ["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"];
         p_result[0].time = t.getHours()+":"+t.getMinutes()+" - "+t.getDate()+" "+months[t.getMonth()]+" "+t.getFullYear();
-
+        //ends Here
+        //formatting time for Comments
+        c_result.forEach(function(item){
+          var c = item.timestamp;
+          var g = new Date(c);
+          item.timestamp = g.getHours()+":"+g.getMinutes()+" - "+g.getDate()+" "+months[g.getMonth()]+" "+g.getFullYear();
+        });
+        //ends here
         res.render('post', {post: p_result[0], comment: c_result});
       });
 
