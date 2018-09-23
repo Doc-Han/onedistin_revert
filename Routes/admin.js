@@ -40,7 +40,7 @@ router.post('/', (req,res) => {
 
 });
 
-router.get('/dashboard', isLoggenIn, (req,res) => {
+router.get('/dashboard', isLoggedIn, (req,res) => {
   var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1';SELECT ID FROM onedistin_support";
   con.query(query, function(err,result){
     if(err)throw err;
