@@ -69,7 +69,7 @@ app.use('/', require('./Routes/hubtel.js'));
 app.use('/other', require('./Routes/other.js'));
 app.use('/auth', require('./Routes/auth.js'))
 app.use('/forum', require('./Routes/forum.js'));
-app.use('/admin', require('./Routes/admin.js'));
+app.use('/han', require('./Routes/admin.js'));
 app.use('/ajax', require('./Routes/ajax.js'));
 
 // catch 404 and forward to error handler
