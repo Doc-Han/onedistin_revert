@@ -137,15 +137,19 @@ var n = 1;
     if(len > 1){
       var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
       var second = $("[name='category']:eq(1)").find("option:selected").attr("rel-data");
-      if((first*1)>(second*1)){
+      if((first*1) != ttl){
         ttl = first;
-        $(".pprice").text(ttl);
-      }else{
-        ttl = second;
-        $(".pprice").text(ttl);
+      }
+      if((second*1) != ttl){
+        ttl = second
       }
       effect();
       show();
+    }else{
+      var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
+      if((first*1) != ttl){
+        ttl = first;
+      }
     }
   });
 
