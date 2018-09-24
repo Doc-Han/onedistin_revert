@@ -10,7 +10,7 @@ var router = express.Router();
 passport.use(new facebookStrategy({
     clientID: process.env.FB_CLIENT_ID,
     clientSecret: process.env.FB_CLIENT_SECRET,
-    callbackURL: 'https://onedistin.herokuapp.com/auth/facebook/callback',
+    callbackURL: 'https://onedistin.com/auth/facebook/callback',
     profileFields:['id','displayName','emails','gender','hometown','location']
   },
   function(accessToken, refreshToken, profile, done) {
@@ -39,7 +39,7 @@ passport.use(new facebookStrategy({
             var user = user_id.user_id;
             con.query("INSERT INTO onedistin_points (ID,user_id,active_points,total_points,last_activity) VALUES (?,?,?,?,?)",[null,user,0,0,'new user'],function(err){
               if(err)throw err;
-              //nodemailer.throwMail(fb_user.email,"Welcome to Onedistin","<p>Thank you for creating an account with Onedistin</p><br><p>Visit our site daily to uncover the mystery of cheap items. See ya</p><br><br><p>Your Login info</p><br><p>Email: "+fb_user.email+"</p><br><p>Username: "+fb_user.user_name+"</p><br><p>Password: <a href='onedistin.herokuapp.com/profile/user-info'>Set it up</a></p>");
+              //nodemailer.throwMail(fb_user.email,"Welcome to Onedistin","<p>Thank you for creating an account with Onedistin</p><br><p>Visit our site daily to uncover the mystery of cheap items. See ya</p><br><br><p>Your Login info</p><br><p>Email: "+fb_user.email+"</p><br><p>Username: "+fb_user.user_name+"</p><br><p>Password: <a href='onedistin.com/profile/user-info'>Set it up</a></p>");
               done(null,{user_id: user});
             });
 

@@ -56,9 +56,9 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
 
             <span id="share_btn" style="font-size: 18px;cursor:pointer;position:relative;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle muli-regular button-color" href="#">Share
             <div id="share_btns" style="cursor:pointer;position:absolute;left:50px;top:-120%;color:#fff;display:none;padding:16px;height:auto">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fonedistin.herokuapp.com%2F&amp;src=sdkpreparse"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i></a>
-              <a href="https://twitter.com/intent/tweet?text= <%= currentPost.share_txt %> http://onedistin.herokuapp.com/signup?referer=<%= currentUser.refId %>"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>
-              <a href="whatsapp://send?text=<%= currentPost.share_txt %> http://onedistin.herokuapp.com/signup?referer=<%= currentUser.refId %>" data-action="share/whatsapp/share"><i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i></a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fonedistin.com%2F&amp;src=sdkpreparse"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i></a>
+              <a href="https://twitter.com/intent/tweet?text= <%= currentPost.share_txt %> http://onedistin.com/signup?referer=<%= currentUser.refId %>"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>
+              <a href="whatsapp://send?text=<%= currentPost.share_txt %> http://onedistin.com/signup?referer=<%= currentUser.refId %>" data-action="share/whatsapp/share"><i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i></a>
             </div>
           </span>
           </div>
@@ -245,9 +245,9 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                 <input type="hidden" class="payment_details" name="item_no">
                 <!--<form method="POST" action="https://community.ipaygh.com/gateway">
                   <input type="hidden" name="merchant_key" value="965c2850-a0b4-11e8-af31-f23c9170642f" />
-                  <input type="hidden" name="success_url" value="https://onedistin.herokuapp.com/p_s" />
-                  <input type="hidden" name="cancelled_url" value="https://onedistin.herokuapp.com/p_c" />
-                  <input type="hidden" name="deferred_url" value="https://onedistin.herokuapp.com/d_p" />
+                  <input type="hidden" name="success_url" value="https://onedistin.com/p_s" />
+                  <input type="hidden" name="cancelled_url" value="https://onedistin.com/p_c" />
+                  <input type="hidden" name="deferred_url" value="https://onedistin.com/d_p" />
                   <input type="hidden" name="invoice_id" value="<%= token %>" />
                   <input type="hidden" name="total" value="" />
 

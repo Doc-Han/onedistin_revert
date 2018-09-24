@@ -190,10 +190,10 @@ router.post('/payment', isLoggedIn, (req,res) => {
       "totalAmount": total,
       "Description": "Getting a cheap deal from Onedistin",
       "callbackUrl": "https://onedsitin.herokuapp.com/hubtel/callback",
-      "returnUrl": "https://onedistin.herokuapp.com/hubtel/validate/",
-      "merchantBusinessLogoUrl": "https://onedistin.herokuapp.com/img/onedistin_logo.png",
+      "returnUrl": "https://onedistin.com/hubtel/validate/",
+      "merchantBusinessLogoUrl": "https://onedistin.com/img/onedistin_logo.png",
       "merchantAccountNumber": "HM2012170017",
-      "cancellationUrl": "https://onedistin.herokuapp.com/p_c",
+      "cancellationUrl": "https://onedistin.com/p_c",
       "clientReference": "inv"+token,
     }
 
