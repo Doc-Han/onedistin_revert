@@ -11,6 +11,31 @@ var n = 1;
   var ttl = hvsplt[1];
   var sm;
   var del = 0;
+
+  function cat_price(){
+    var len = $("[name='category']").length;
+    if(len > 1){
+      var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
+      var second = $("[name='category']:eq(1)").find("option:selected").attr("rel-data");
+      if((first*1) != ttl){
+        ttl = first;
+      }
+      if((second*1) != ttl){
+        ttl = second;
+      }
+      $(".pprice").text(ttl);
+      effect();
+      show();
+    }else{
+      var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
+      if((first*1) != ttl){
+        ttl = first;
+      }
+      $(".pprice").text(ttl);
+      effect();
+      show();
+    }
+  }
   function show(){
 
     if(del == 0 && offr_on == 0){
@@ -204,5 +229,15 @@ var n = 1;
   });
   effect();
   show();
-
+  cat_price();
 });
+
+function validate(){
+  if($("[name='user_name']").val() == "" || $("[name='user_address']").val() == "" || $("[name='user_city']").val() == "" || $("[name='user_phone']").val() == ""){
+    //alert("empty!");
+    $(".error").html('<p class="w3-text-red">Please fill out all inputs!<p>');
+  }else{
+    $(".error").html('');
+    document.getElementById('id02').style.display='block';
+  }
+}

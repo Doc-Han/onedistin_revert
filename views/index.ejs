@@ -252,7 +252,8 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                   <input type="hidden" name="total" value="" />
 
                 </form>-->
-                <button onclick="document.getElementById('id02').style.display='block'" style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="button" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px">Yes! Can't wait!</h3></button>
+                <span class="error"></span>
+                <button onclick="validate()" style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="button" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px">Yes! Can't wait!</h3></button>
 
                 <div id="id02" class="w3-modal">
                   <div class="w3-modal-content w3-animate-zoom" style="padding:32px 48px">
@@ -299,15 +300,6 @@ function checkout_btn_press() {
   document.location = "/checkout";
   }else{
     document.getElementById('id01').style.display='block';
-  }
-}
-
-function validate_signup(){
-  if($("input").val() == "" || $("select").val() == ""){
-    //alert("empty!");
-    return false;
-  }else{
-    alert("filled!");
   }
 }
 
