@@ -441,12 +441,12 @@ img {vertical-align: middle;}
     position: absolute;
     background-size: 1042px 1042px;
     background-repeat: no-repeat;
-    width: 600px;
-    height: 600px;
+    width: 700px;
+    height: 700px;
     top: -150px;
-    left: -130px;
+    left: -150px;
     z-index: -100;
-    background-position: center;
+    background-position: center!important;
 }
 
 .share_btn {
