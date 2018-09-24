@@ -186,12 +186,20 @@ router.get('/checkout', isLoggedIn, (req,res) => {
     var img_ids = combined_img_string.split("-***-");
     var a = cloudinary.url(img_ids[1], {effect: 'sharpen'});
 
-    var one = [];
-    var len = result[1][0].categories.split("-***-");
-    for(i=0;i<len.length-1;i++){
-      one[i] = len[i].split(",");
+    if(result[1][0].categories){
+      var one = [];
+      var len = result[1][0].categories.split("-***-");
+      for(i=0;i<len.length-1;i++){
+        one[i] = len[i].split(",");
+      }
+      result[1][0].categories = one;
+      var two = [];
+      var _len = result[1][0].cat_prices.split("-***-");
+      for(i=0;i<len.length-1;i++){
+        two[i] = _len[i].split(",");
+      }
+      result[1][0].cat_prices = two;
     }
-    result[1][0].categories = one;
 
       res.render('checkout',{currentUser: result[0][0],currentPost: result[1][0],offers: result[2][0],img: a, token: tokenGen.getToken()});
   });

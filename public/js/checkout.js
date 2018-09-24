@@ -14,7 +14,10 @@ var n = 1;
 
   function cat_price(){
     var len = $("[name='category']").length;
-    if(len > 1){
+    console.log(len);
+    if(len < 1){
+
+    }else if(len == 2){
       var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
       var second = $("[name='category']:eq(1)").find("option:selected").attr("rel-data");
       if((first*1) != ttl){
@@ -26,7 +29,7 @@ var n = 1;
       $(".pprice").text(ttl);
       effect();
       show();
-    }else{
+    }else if(len == 1){
       var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
       if((first*1) != ttl){
         ttl = first;
