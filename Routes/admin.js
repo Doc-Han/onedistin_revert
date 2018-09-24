@@ -269,12 +269,15 @@ router.get('/story', isLoggedIn, (req,res) => {
   });
 });
 
-router.post('/story', isLoggedIn, (req,res) =>{
+router.post('/story', (req,res) =>{
+  console.log(req.body);
   var title = req.body.title;
   var _title = title.join("-***-");
   var story = req.body.story;
   var _story = story.join("-***-");
+  console.log(_title);
   con.query("SELECT * FROM onedistin_meta WHERE meta_title=?",['story'],function(err,result){
+    if(err)throw err;
     if(result.length > 0){
       var query = "UPDATE onedistin_meta SET meta_op=?,meta_content=? WHERE meta_title=?";
       var input = [_title,_story,'story'];
@@ -282,6 +285,7 @@ router.post('/story', isLoggedIn, (req,res) =>{
       var query = "INSERT INTO onedistin_meta(ID,meta_title,meta_op,meta_content)VALUES(?,?,?,?)";
       var input = [null,'story',_title,_story];
     }
+
     con.query(query,input,function(err){
       if(err)throw err;
       res.send("Story Updated!");

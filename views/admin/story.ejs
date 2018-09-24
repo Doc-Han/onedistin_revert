@@ -3,7 +3,7 @@
 <div class="w3-row w3-margin-top">
   <% include partials/navs.ejs %>
   <div style="width:60%" class="w3-col w3-padding w3-card-4 w3-mobile">
-    <form action="story" method="post">
+    <form action="/han/story" method="POST">
       <% if(hasStory){ %>
         <% titles.forEach(function(item,index){ %>
           <section>
