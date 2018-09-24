@@ -153,6 +153,7 @@ router.post('/payment', isLoggedIn, (req,res) => {
   var region = body.user_region;
   var phone = body.user_phone;
   var address = body.user_address;
+  console.log(address);
   var city = body.user_city;
   var category = body.category;
   if(Array.isArray(category)){
