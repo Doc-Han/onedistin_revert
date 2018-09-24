@@ -121,8 +121,8 @@ li {
 }
 
 .middle-lane h1,h2,h3 {
-  font-family: 'Muli', sans-serif;
-  font-size: 45px;
+  font-family: 'Muli', sans-serif!important;
+  font-size: 45px!important;
   line-height: 45px;
   text-align: left;
   font-weight: normal;
@@ -130,8 +130,8 @@ li {
 }
 
 .middle-lane p,span,li,ul,ol {
-  font-family: 'Muli', sans-serif;
-  font-size: 16px;
+  font-family: 'Muli', sans-serif!important;
+  font-size: 16px!important;
   text-align: left;
   color: #000000;
 }
