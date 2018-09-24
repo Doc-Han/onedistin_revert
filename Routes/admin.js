@@ -31,7 +31,7 @@ router.post('/', (req,res) => {
         req.session.admin_id = admin_id;
         res.redirect('/han/dashboard');
       }else {
-        console.log('Details not match!');
+        res.redirect('/han');
       }
     }
 
