@@ -4,14 +4,21 @@
   <% include partials/navs.ejs %>
   <div style="width:60%" class="w3-col w3-padding w3-card-4 w3-mobile">
     <form action="story" method="post">
-      <% titles.forEach(function(item,index){ %>
+      <% if(titles.length > 0){ %>
+        <% titles.forEach(function(item,index){ %>
+          <section>
+            <input type="text" class="w3-input w3-border w3-border-teal" name="title" placeholder="**Title of Section**" value="<%= item %>">
+            <textarea name="story" class="summernote"><%- content[index] %></textarea>
+            <button type="button" class="story-add w3-button w3-black" name="button"> <i class="fa fa-plus"></i> </button>
+          </section>
+        <% }); %>
+      <% }else{ %>
         <section>
           <input type="text" class="w3-input w3-border w3-border-teal" name="title" placeholder="**Title of Section**" value="<%= item %>">
           <textarea name="story" class="summernote"><%- content[index] %></textarea>
           <button type="button" class="story-add w3-button w3-black" name="button"> <i class="fa fa-plus"></i> </button>
         </section>
-      <% }); %>
-
+      <% } %>
 
       <div class="w3-center">
         <button style="margin-top:50px;margin-bottom:50px;padding:50px;font-size:24px" class="w3-button w3-blue w3-round" type="submit"> <i class="fa fa-send"></i> Update Story!</button>
