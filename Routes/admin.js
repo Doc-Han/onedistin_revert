@@ -23,7 +23,6 @@ router.post('/', (req,res) => {
   con.query(query,[admin],function(err,result){
     if(err) throw err;
     if(result.length < 1){
-      console.log('Login failed!');
     }else{
       const admin_pass = result[0].admin_pass;
       const admin_id = result[0].ID;

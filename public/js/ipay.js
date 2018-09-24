@@ -10,7 +10,6 @@ $(document).ready(function(){
       dealTitle: $("[name='p_t']").val(),
       ref: $("[name='ref_f_i_d']").val()
     }
-    console.log(data);
     $.ajax({
       url: '/other/ipay',
       method: 'POST',

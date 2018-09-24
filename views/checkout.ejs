@@ -73,11 +73,11 @@
         <div class="shipping-address">
           <dl>
             <dt> <label>Fullname</label> </dt>
-            <dd> <input type="text" name="user_name" value="<%= currentUser.user_name %>" required> </dd>
+            <dd> <input type="text" name="user_name" placeholder="Fullname" value="<%= currentUser.user_name %>" required> </dd>
             <dt> <label>Address</label> </dt>
-            <dd> <input type="text" name="user_address" value="<%= currentUser.user_address%>" required> </dd>
+            <dd> <input type="text" name="user_address" placeholder="Address" value="<%= currentUser.user_address%>" required> </dd>
             <dt> <label>City</label> </dt>
-            <dd> <input type="text" name="user_city" value="<%= currentUser.user_city %>" required> </dd>
+            <dd> <input type="text" name="user_city" placeholder="City" value="<%= currentUser.user_city %>" required> </dd>
             <dt> <label>Region</label> </dt>
             <dd> <select name="user_region">
               <option value="<%= currentUser.user_loc %>"><%= currentUser.user_loc %></option>
@@ -93,7 +93,7 @@
               <option value="Western">Western</option>
             </select> </dd>
             <dt> <label>Phone</label> </dt>
-            <dd> <input type="text" name="user_phone" value="<%= currentUser.user_phone %>" required> </dd>
+            <dd> <input type="text" name="user_phone" placeholder="Phone" value="<%= currentUser.user_phone %>" required> </dd>
           </dl>
         </div>
         <% if(offers.offer_one == 1){ %>

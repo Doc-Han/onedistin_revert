@@ -428,7 +428,25 @@ router.get('/sell', (req,res) => {
 });
 
 router.post('/sell', (req,res) =>{
-  res.send(req.body);
+  var body = req.body;
+  var fullname = body.fullname;
+  var profession = body.profession;
+  var email = body.email;
+  var phone = body.phone;
+  var location = body.location;
+  var product_name = body.product_name;
+  var category = body.category;
+  var brand = body.brand;
+  var price = body.price;
+  var desc = body.description;
+  var custom_id = tokenGen.getToken();
+  console.log(body);
+
+  var query = "INSERT INTO onedistin_sell(ID,custom_ID,fullname,profession,email,phone,product_name,category,brand,price,description,location,timestamp)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  con.query(query,[null,custom_id,fullname,profession,email,phone,product_name,category,brand,price,desc,location,new Date()],function(err){
+    if(err)throw err;
+    res.render('sell-success');
+  });
 });
 
 router.get('/our-story', (req,res) => {

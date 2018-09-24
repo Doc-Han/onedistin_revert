@@ -14,7 +14,6 @@ var n = 1;
 
   function cat_price(){
     var len = $("[name='category']").length;
-    console.log(len);
     if(len < 1){
 
     }else if(len == 2){

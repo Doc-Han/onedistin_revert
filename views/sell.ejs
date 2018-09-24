@@ -17,7 +17,7 @@
     <h3 style="text-align:left;line-height: 60px;font-size:56px"><b>Sell on Onedistin:</b></h3>
     <h4 style="text-align:left">OFFER A DISCOUNT DEAL, GET NEW CUSTOMERS, GROW YOUR BUSINESS</h4>
     <h5 style="text-align:left;margin-bottom:0" class="muli-bold">Do we know you?</h5>
-    <form style="margin-bottom:100px" action="sell" method="post">
+    <form style="margin-bottom:100px" action="/sell" method="post">
       <section>
     <dl style="margin-top:0">
       <dt> <label>Fullname</label> </dt>
@@ -31,6 +31,8 @@
       </select> </dd>
       <dt> <label>Email</label> </dt>
       <dd> <input type="text" name="email" placeholder="Email" value="" required> </dd>
+      <dt> <label>Phone Number</label> </dt>
+      <dd> <input type="text" name="phone" placeholder="Phone Number" value="" required> </dd>
       <dt> <label>Location</label> </dt>
       <dd> <input type="text" name="location" placeholder="Location" value="" required> </dd>
     </dl>
@@ -38,18 +40,18 @@
     <h5 style="text-align:left;margin-bottom:0" class="muli-bold">What do you want to sell?</h5>
     <dl style="margin-top:0">
       <dt> <label>Product name</label> </dt>
-      <dd> <input type="text" name="Product_name" placeholder="Product name" value="" required> </dd>
+      <dd> <input type="text" name="product_name" placeholder="Product name" value="" required> </dd>
       <dt> <label>Category</label> </dt>
       <dd> <input type="text" name="category" placeholder="Category" value="" required></dd>
       <dt> <label>Brand</label> </dt>
-      <dd> <input type="text" name="Brand" placeholder="Brand" value="" required> </dd>
+      <dd> <input type="text" name="brand" placeholder="Brand" value="" required> </dd>
       <dt> <label>Offer price</label> </dt>
       <dd> <input type="text" name="price" placeholder="Offer Price" value="" required> </dd>
       <dt> <label>Product description</label> </dt>
       <dd> <input type="text" name="description" placeholder="Product description" value="" required> </dd>
     </dl>
     </section>
-    <a style="width:100%;" class="add-item-bar w3-button w3-round-xxlarge w3-border w3-text-blue" href="#"><h3 style="margin:0">Wanna add another?</h3></a>
+    <!--<a style="width:100%;" class="add-item-bar w3-button w3-round-xxlarge w3-border w3-text-blue" href="#"><h3 style="margin:0">Wanna add another?</h3></a>-->
     <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Done! Submit</h3></button>
     </form>
 
