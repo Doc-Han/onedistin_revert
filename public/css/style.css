@@ -120,7 +120,7 @@ li {
     display: table;
 }
 
-.middle-lane h1,h2,h3 {
+.middle-lane h1 {
   font-family: 'Muli', sans-serif!important;
   font-size: 45px!important;
   line-height: 45px;
