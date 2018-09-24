@@ -26,7 +26,7 @@
 
             <% if(survey.ans_one){ %>
             <div style="position:relative" class="w3-row">
-              <div class="w3-col w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_one_no*1)/total)*100 %>%">
+              <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_one_no*1)/total)*100 %>%">
                 <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
                 <%= survey.ans_one+' - '+ (((survey.ans_one_no*1)/total)*100).toFixed(0)+'%' %>
               </div>
@@ -47,7 +47,7 @@
 
             <% if(survey.ans_three){ %>
             <div style="position:relative" class="w3-row">
-              <div class="w3-col w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_three_no*1)/total)*100 %>%">
+              <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_three_no*1)/total)*100 %>%">
                 <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
                 <%= survey.ans_three+' - '+(((survey.ans_three_no*1)/total)*100).toFixed(0)+'%' %>
               </div>
@@ -58,7 +58,7 @@
 
             <% if(survey.ans_four){ %>
             <div style="position:relative" class="w3-row">
-              <div class="w3-col w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_four_no*1)/total)*100 %>%">
+              <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_four_no*1)/total)*100 %>%">
                 <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
                 <%= survey.ans_four+' - '+(((survey.ans_four_no*1)/total)*100).toFixed(0)+'%' %>
               </div>
@@ -69,7 +69,7 @@
 
             <% if(survey.ans_five){ %>
             <div style="position:relative" class="w3-row">
-              <div class="w3-col w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_five_no*1)/total)*100 %>%">
+              <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_five_no*1)/total)*100 %>%">
                 <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
                 <%= survey.ans_five+' - '+(((survey.ans_five_no*1)/total)*100).toFixed(0)+'%' %>
               </div>
@@ -80,7 +80,7 @@
 
             <% if(survey.ans_six){ %>
             <div style="position:relative" class="w3-row">
-              <div class="w3-col w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_five_no*1)/total)*100 %>%;">
+              <div class="w3-col w3-padding w3-blue" style="height:40px;overflow-x: hidden;margin-bottom:5px;width:<%= ((survey.ans_five_no*1)/total)*100 %>%;">
                 <div style="position:absolute;top:0;right:0;left:3%;bottom:0;line-height:40px;">
                 <%= survey.ans_six+' - '+(((survey.ans_six_no*1)/total)*100).toFixed(0)+'%' %>
               </div>
@@ -113,7 +113,8 @@
         <button class="submit-survey w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><p class="custom-txt-color muli-regular" style="margin:0;font-size:20px;line-height: 33px"> Vote </p></button>
       </span>
     <% } %>
- %>
+
+  <% }else{ %>
     <span id="survey">
       <h5 style="font-size:22px" class="muli-regular"><%= survey.question %></h5>
       <% if(survey.ans_one){ %>
