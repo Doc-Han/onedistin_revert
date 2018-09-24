@@ -441,10 +441,10 @@ img {vertical-align: middle;}
     position: absolute;
     background-size: 1042px 1042px;
     background-repeat: no-repeat;
-    width: 700px;
-    height: 700px;
-    top: -150px;
-    left: -150px;
+    width: 900px;
+    height: 900px;
+    top: -300px;
+    left: -275px;
     z-index: -100;
     background-position: center!important;
 }
