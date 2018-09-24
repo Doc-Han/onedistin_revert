@@ -4,7 +4,7 @@
   <% include partials/navs.ejs %>
   <div style="width:60%" class="w3-col w3-padding w3-card-4 w3-mobile">
     <form action="story" method="post">
-      <% if(titles.length > 0){ %>
+      <% if(hasStory){ %>
         <% titles.forEach(function(item,index){ %>
           <section>
             <input type="text" class="w3-input w3-border w3-border-teal" name="title" placeholder="**Title of Section**" value="<%= item %>">
