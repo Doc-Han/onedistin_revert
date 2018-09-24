@@ -62,8 +62,8 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                 <a href="whatsapp://send?text=<%= currentPost.share_txt %> http://onedistin.com/signup?referer=<%= currentUser.refId %>" data-action="share/whatsapp/share"><i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i></a>
               <% }else{ %>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fonedistin.com%2F&amp;src=sdkpreparse"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i></a>
-                <a href="https://twitter.com/intent/tweet?text= <%= currentPost.share_txt %>"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>
-                <a href="whatsapp://send?text=<%= currentPost.share_txt %>" data-action="share/whatsapp/share"><i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i></a>
+                <a href="https://twitter.com/intent/tweet?text= <%= currentPost.share_txt %> onedistin.com"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>
+                <a href="whatsapp://send?text=<%= currentPost.share_txt %> onedistin.com" data-action="share/whatsapp/share"><i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i></a>
               <% } %>
 
             </div>
