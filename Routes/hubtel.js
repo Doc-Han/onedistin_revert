@@ -26,6 +26,13 @@ router.get('/d_p', isLoggedIn, (req,res) =>{
 
 router.post('/hubtel/callback', (req,res) =>{
   var body = req.body;
+  var checkoutId = body.Data.CheckoutId;
+  if(body.Status == "Success"){
+    con.query("UPDATE onedistin_invoice SET paid=? WHERE checkoutid=?",[1,checkoutid],function(err,result){
+      if(err)throw err;
+      res.redirect('/p_s');
+    });
+  }
   console.log(body);
   res.send("Thanks You!");
 });
@@ -44,7 +51,7 @@ router.get('/hubtel/validate', (req,res,next) =>{
 });
 
 router.get('/ipay', isLoggedIn, (req,res,next) =>{
-  if(req.query.cat){
+  if(req.query.ref_f_i_d){
     var user = req.user.user_id;
     con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[user], function(err,result){
       if(err)throw err;
@@ -80,7 +87,7 @@ router.get('/ipay', isLoggedIn, (req,res,next) =>{
 
 router.get('/ussd', isLoggedIn, (req,res) =>{
   //console.log(req.query.cat);
-  if(req.query.cat){
+  if(req.query.ref_f_i_d){
     var user = req.user.user_id;
     con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[user], function(err,result){
       if(err)throw err;
@@ -189,7 +196,7 @@ router.post('/payment', isLoggedIn, (req,res) => {
       ],
       "totalAmount": total,
       "Description": "Getting a cheap deal from Onedistin",
-      "callbackUrl": "https://onedsitin.herokuapp.com/hubtel/callback",
+      "callbackUrl": "https://onedistin.com/hubtel/callback",
       "returnUrl": "https://onedistin.com/hubtel/validate/",
       "merchantBusinessLogoUrl": "https://onedistin.com/img/onedistin_logo.png",
       "merchantAccountNumber": "HM2012170017",
