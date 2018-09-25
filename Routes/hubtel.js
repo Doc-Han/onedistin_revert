@@ -158,6 +158,8 @@ router.post('/payment', isLoggedIn, (req,res) => {
   var category = body.category;
   if(Array.isArray(category)){
     var _category = category.join("-***-");
+  }else if(category == "" || category == null || category == 'undefined' || category == 'Empty'){
+    var _category = "no category";
   }else{
     var _category = category;
   }

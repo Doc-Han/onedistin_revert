@@ -186,7 +186,7 @@ router.post('/coupons', isLoggedIn, (req,res) =>{
 });
 
 router.get('/orders', isLoggedIn, (req,res) =>{
-  con.query("SELECT * FROM onedistin_invoice ORDER BY paid DESC",function(err,result){
+  con.query("SELECT * FROM onedistin_invoice ORDER BY paid,dealTime DESC",function(err,result){
     res.render('admin/orders',{orders:result});
   });
 });

@@ -50,10 +50,10 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
             <%- currentPost.thingGet %>
           </div>
       </div>
-      <div class="w3-col middle-lane w3-left w3-mobile w3-container">
+      <div class="w3-col middle-lane w3-left w3-mobile w3-container" style="margin-top:0px!important">
         <span style="text-align:left"><%- currentPost.writeup %></span>
       </div>
-      <div class="w3-col right-lane w3-mobile">
+      <div class="w3-col right-lane w3-mobile" style="margin-top:0px!important">
           <iframe id="ytplayer" type="text/html" width="100%" height="300"
             src="https://www.youtube.com/embed/<%= currentPost.video %>"
             frameborder="0"></iframe>
