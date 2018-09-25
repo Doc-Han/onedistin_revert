@@ -30,9 +30,6 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
           <% }); %>
           </div>
 
-          <div style="margin-bottom:8px" id="price-comparison">
-            <a class="w3-text-indigo w3-text-black" href="<%- currentPost.shoppy_link %>"><%= currentPost.shoppy_txt %></a>
-          </div>
           <div style="height:59px;" class="buy w3-row">
             <a style="width:78%;height: 59px; padding: 5px 0px;background-color:#424242" class="w3-col w3-button w3-round-xxlarge">
               <span style="text-align:center" class="custom-txt-color w3-large"><b><%= currentPost.price %></b></span>
@@ -105,7 +102,9 @@ showSlides(slideIndex += n);
 function currentSlide(n) {
 showSlides(slideIndex = n);
 }
-
+setInterval(function(){
+  showSlides(slideIndex += 1);
+},5000);
 function showSlides(n) {
 var i;
 var slides = document.getElementsByClassName("mySlides");
