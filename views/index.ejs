@@ -83,14 +83,18 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
             frameborder="0"></iframe>
             <p style="margin:0 auto;text-align:left">Our daily video</p>
           <ul style="width:100%" class="w3-ul w3-margin-top">
+            <a class="w3-left" style="width:100%" href="/forum/<%= topPost.post_url %>"><li style="padding-left:0;width:inherit">
+              <img style="width:50px;height:50px" class="w3-circle w3-left" src="/img/onedistin_head.png" alt="">
+                <span style="word-break:break-word"><%= topPost.post_title %></span>
+                <i class="fa fa-heart"> <%= topPost.post_likes %> </i>
+                <i class="fa fa-comment"> <%= topPost.post_comments %> </i>
+            </li></a>
             <% forumPosts.forEach(function(item){ %>
               <a class="w3-left" style="width:100%" href="/forum/<%= item.post_url %>"><li style="padding-left:0;width:inherit">
                 <img style="width:50px;height:50px" class="w3-circle w3-left" src="https://source.unsplash.com/50x50/?<%= item.post_title.split(' ').join(',') %>" alt="">
                   <span style="word-break:break-word"><%= item.post_title %></span>
                   <i class="fa fa-heart"> <%= item.post_likes %> </i>
                   <i class="fa fa-comment"> <%= item.post_comments %> </i>
-
-
               </li></a>
             <% }); %>
           </ul>
