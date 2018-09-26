@@ -8,7 +8,7 @@ router.get('/', (req,res) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
     var count = 0;
-    var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"'";
+    var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC";
     con.query(query,function(err,result){
       if (err) throw err;
       result.forEach(function(item,index){
@@ -41,7 +41,7 @@ router.get('/', (req,res) => {
       ;
     });
   }else{
-    var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"'";
+    var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC";
     con.query(query,function(err,result){
       if (err) throw err;
 
