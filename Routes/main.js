@@ -46,7 +46,7 @@ router.get('/', (req,res,next) => {
         img_ids.forEach(function(item,index){
           if(index == 0){
             var a = cloudinary.url(item,{transformation:[
-              {effect: "colorize:0", color: result[0][0].bg_color},
+              {effect: "colorize:40", color: result[0][0].bg_color},
               {width: 900, height: 900, crop: "scale"}
             ]});
           }else{
@@ -91,7 +91,7 @@ router.get('/', (req,res,next) => {
         img_ids.forEach(function(item,index){
           if(index == 0){
             var a = cloudinary.url(item,{transformation:[
-              {effect: "colorize:0", color: result[0][0].bg_color},
+              {effect: "colorize:40", color: result[0][0].bg_color},
               {width: 900, height: 900, crop: "scale"}
             ]});
           }else{
