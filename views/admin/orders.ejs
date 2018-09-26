@@ -66,7 +66,15 @@
             <td>Empty</td>
           <% } %>
           <td><%= item.item_ref.split("-")[0] %></td>
-          <td><%= item.type %></td>
+          <td>
+            <% if(item.type == '1'){ %>
+              <%= 'HUBTEL' %>
+            <% }else if(item.type == '2'){ %>
+              <%= 'USSD' %>
+            <% }else{ %>
+              <%= 'IPAY' %>
+            <% } %>
+          </td>
           <td>
             <% if(item.paid == '0'){ %>
               <%- '<span class="w3-red w3-padding w3-round">Unpaid</span>' %>
