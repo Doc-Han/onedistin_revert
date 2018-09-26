@@ -67,7 +67,13 @@
           <% } %>
           <td><%= item.item_ref.split("-")[0] %></td>
           <td><%= item.type %></td>
-          <td><%= item.paid %></td>
+          <td>
+            <% if(item.paid == '0'){ %>
+              <%- '<span class="w3-red">Unpaid</span>' %>
+            <% }else{ %>
+              <%- '<span class="w3-green">Paid</span>' %>
+            <% } %>
+          </td>
         </tr>
       <% }); %>
 
