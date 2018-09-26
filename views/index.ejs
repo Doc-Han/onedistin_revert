@@ -235,7 +235,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
 
                 <h3 style="text-align:left;font-size:22px;line-height:22px;" class="muli-semi-bold">Finally! Want this right?</h3>
                 <dl class="straight">
-                  <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price text-color-inverse">GHS <span class="pprice"><%= currentPost.ac_price %></span></span> </dd>
+                  <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price text-color-inverse">GHS <span class="pprice text-color-inverse"><%= currentPost.ac_price %></span></span> </dd>
                   <dd> <label>Delivery fee</label>
                     <% if(offers.offer_one == 1){ %>
                       <span class="w3-tag w3-green price">free delivery</span>
@@ -251,7 +251,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                       <span class="w3-tag w3-green">5% off</span>
                     <% } %>
                     <span class="w3-tag coupon-tag w3-green"></span>
-                    <span class="total_price">GHS 45.70</span></span> </dd>
+                    <span class="total_price text-color-inverse">GHS 45.70</span></span> </dd>
                 </dl>
                 <input type="hidden" class="payment_details" name="item_no">
                 <!--<form method="POST" action="https://community.ipaygh.com/gateway">
