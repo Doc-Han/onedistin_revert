@@ -4,3 +4,4 @@
 .gitignore
 *send.js
 *nodemailer.js
+/proto
