@@ -26,6 +26,10 @@ router.get('/d_p', isLoggedIn, (req,res) =>{
 
 router.post('/hubtel/callback', (req,res) =>{
   var body = req.body;
+  for(i=0;i<10;i++){
+    console.log("HUBTEL CALLBACK HERE!");
+  }
+  console.log(body);
   var checkoutId = body.Data.CheckoutId;
   if(body.Status == "Success"){
     con.query("UPDATE onedistin_invoice SET paid=? WHERE checkoutid=?",[1,checkoutid],function(err,result){
@@ -33,7 +37,6 @@ router.post('/hubtel/callback', (req,res) =>{
       res.redirect('/p_s');
     });
   }
-  console.log(body);
   res.send("Thanks You!");
 });
 
