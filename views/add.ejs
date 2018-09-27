@@ -10,8 +10,8 @@
       <div class="w3-half w3-light-grey w3-mobile w3-container">
         <h2 class="w3-margin-left">Write your post</h2>
         <form class="w3-container w3-margin-bottom" action="/forum/add" method="POST">
-          <input class="w3-input w3-border w3-border-teal w3-margin-top w3-margin-bottom w3-center" placeholder="What's the title of your post?" type="text" name="title" value="">
-          <textarea class="summernote w3-margin-top" style="resize:none" name="body" rows="8" cols="80"></textarea>
+          <input class="w3-input w3-border w3-border-teal w3-margin-top w3-margin-bottom w3-center" minlength="3" maxlength="75" placeholder="What's the title of your post?" type="text" name="title" value="">
+          <textarea class="w3-input w3-border yellow w3-margin-top" placeholder="Write all what you want to say here!" style="resize:none" name="body" rows="8" cols="80" minlength="3"></textarea>
           <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0;font-size:22px; line-height:46px">I'm done! Put it out there!</h3></button>
         </form>
 
