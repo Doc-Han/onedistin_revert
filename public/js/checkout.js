@@ -39,7 +39,6 @@ var n = 1;
     }
   }
   function show(){
-
     if(del == 0 && offr_on == 0){
       sm = (ttl * n);
       if(offr_tw == 1){
@@ -223,9 +222,7 @@ var n = 1;
             ttl = ttl - (ttl*discount);
             show();
           }else if(res == "F1"){
-            high_del = 0;
-            low_del = 0;
-            offr_on = 1; 
+            offr_on = 1;
             $(".f_delivery").html("<p>Your delivery is free</p>");
             $(".apply-coupon").hide;
             $(".show-coupon").after("<p class='w3-green'>Coupon "+code+" Applied</p>");
