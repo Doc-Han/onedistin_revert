@@ -176,10 +176,11 @@ router.get('/coupons/:Id', isLoggedIn, (req,res) =>{
 
 router.post('/coupons', isLoggedIn, (req,res) =>{
   var body = req.body;
+  var type = body.type;
   var code = body.code;
   var percentage = body.percentage;
-  var query = "INSERT INTO onedistin_coupons (ID,code,percentage)VALUES(?,?,?)";
-  con.query(query,[null,code,percentage],function(err){
+  var query = "INSERT INTO onedistin_coupons (ID,code,percentage,type)VALUES(?,?,?,?)";
+  con.query(query,[null,code,percentage,type],function(err){
     if(err)throw err;
     res.redirect('/han/coupons');
   })

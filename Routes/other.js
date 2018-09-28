@@ -135,10 +135,14 @@ router.post('/ipay/validate', isLoggedIn, (req,res) =>{
 
 router.post('/coupon', isLoggedIn, (req,res) =>{
   var code = req.body.code;
-  con.query("SELECT percentage FROM onedistin_coupons WHERE code=?",[code],function(err,result){
+  con.query("SELECT percentage,type FROM onedistin_coupons WHERE code=?",[code],function(err,result){
     console.log(result);
     if(result.length > 0){
-      res.send(result[0].percentage);
+      if(result[0].type == "0"){
+        res.send("F1");
+      }else if(result[0].type == "1"){
+        res.send(result[0].percentage);
+      }
     }else{
       res.send("0");
     }

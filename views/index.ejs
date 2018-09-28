@@ -180,6 +180,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                     <dd> <input type="text" name="user_phone" value="<%= currentUser.user_phone %>" required> </dd>
                   </dl>
                 </div>
+              <span class="f_delivery">
                 <% if(offers.offer_one == 1){ %>
                   <p>Your delivery is free</p>
                 <% }else{ %>
@@ -225,6 +226,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                   <% } %>
 
                 <% } %>
+              </span>
                 <br>
                 <a style="cursor: pointer;text-align:left" class="show-coupon"><h3 style="font-size: 22px;line-height:22px">Got a coupon code? <i class="fa fa-angle-down"></i> </h3></a>
                 <div style="display: none" class="w3-row coupon-box">

@@ -4,9 +4,17 @@
   <% include partials/navs.ejs %>
   <div style="width:60%" class="w3-padding w3-col w3-card-4 w3-mobile">
     <form action="coupons" method="post">
+      <p class="w3-padding w3-light-grey w3-leftbar w3-border-red">You are to pick a dummy percentage discount for free delivery which will not be effective!</p>
       <dl>
         <dt> <label>Coupon Code </label> </dt>
 				<dd><input type="text" name="code" required></dd>
+        <dt> <label>Type</label> </dt>
+				<dd>
+          <select name="type">
+            <option value="0">Free delivery</option>
+            <option value="1">Discount</option>
+          </select>
+        </dd>
 				<dt> <label>% Off</label> </dt>
 				<dd><input type="text" name="percentage" required></dd>
       </dl>
@@ -14,10 +22,10 @@
         <button style="margin-top:50px;margin-bottom:50px;padding:50px;font-size:24px" class="w3-button w3-blue w3-round" type="submit"> <i class="fa fa-send"></i> Add Coupon!</button>
       </div>
     </form>
-
       <table class="w3-table-all w3-bordered">
         <tr>
           <th>Code</th>
+          <th>Type</th>
           <th>% off</th>
           <th></th>
         </tr>
@@ -25,6 +33,13 @@
       <% coupons.forEach(function(item){ %>
         <tr>
           <td><%= item.code %></td>
+          <td>
+            <% if(item.type == "0"){ %>
+              <%= 'Free delivery' %>
+            <% }else{ %>
+              <%= 'Discount' %>
+            <% } %>
+          </td>
           <td><%= item.percentage+'%' %></td>
           <td> <a href="coupons/<%= item.ID %>" >Delete</a> </td>
         </tr>
