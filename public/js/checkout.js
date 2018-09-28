@@ -223,6 +223,8 @@ var n = 1;
             show();
           }else if(res == "F1"){
             offr_on = 1;
+            high_del = 0;
+            low_del = 0;
             $(".f_delivery").html("<p>Your delivery is free</p>");
             $(".apply-coupon").hide;
             $(".show-coupon").after("<p class='w3-green'>Coupon "+code+" Applied</p>");
