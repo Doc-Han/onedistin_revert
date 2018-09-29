@@ -12,7 +12,6 @@ router.get('/p_s', isLoggedIn, (req,res) =>{
 router.get('/p_c', isLoggedIn, (req,res) =>{
   if(req.query){
     var checkoutid = req.query.checkoutid;
-    console.log(checkoutid);
     con.query("DELETE FROM onedistin_invoice WHERE checkoutid=?",[checkoutid],function(err,result){
       if(err)throw err;
     });
@@ -43,7 +42,6 @@ router.post('/hubtel/callback', (req,res) =>{
 router.get('/hubtel/validate', (req,res,next) =>{
   if(req.query.checkoutid){
     var checkoutid = req.query.checkoutid;
-    console.log(checkoutid);
     con.query("UPDATE onedistin_invoice SET paid=? WHERE checkoutid=?",[1,checkoutid],function(err,result){
       if(err)throw err;
       res.redirect('/p_s');
@@ -80,7 +78,6 @@ router.get('/ipay', isLoggedIn, (req,res,next) =>{
         total: total,
         user_name: user_name
       }
-      console.log(data);
       res.render('payment/ipay',{data: data});
     });
   }else{
@@ -89,7 +86,6 @@ router.get('/ipay', isLoggedIn, (req,res,next) =>{
 });
 
 router.get('/ussd', isLoggedIn, (req,res) =>{
-  //console.log(req.query.cat);
   if(req.query.ref_f_i_d){
     var user = req.user.user_id;
     con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[user], function(err,result){
@@ -156,7 +152,6 @@ router.post('/payment', isLoggedIn, (req,res) => {
   var region = body.user_region;
   var phone = body.user_phone;
   var address = body.user_address;
-  console.log(address);
   var city = body.user_city;
   var category = body.category;
   if(Array.isArray(category)){
@@ -178,7 +173,6 @@ router.post('/payment', isLoggedIn, (req,res) => {
     var delivery = 0;
   }
   var total = (ttl*num)+delivery;
-  console.log("here!");
   con.query("UPDATE onedistin_users SET user_address=?, user_city=?, user_name=?,user_phone=?,user_loc=? WHERE ID=?",[address,city,user_name,phone,region,user],function(err){
     if(err)throw err;
   });
@@ -234,7 +228,6 @@ router.post('/payment', isLoggedIn, (req,res) => {
       }else{
         res.send("An error occured!");
       }
-      console.log(data);
     });
 
     });

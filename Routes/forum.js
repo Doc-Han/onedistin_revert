@@ -13,7 +13,6 @@ router.get('/', (req,res) => {
       if (err) throw err;
       result.forEach(function(item,index){
         con.query("SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[user,item.ID], function(err,l_result){
-          //console.log(l_result);
           if(l_result.length > 0){
             item.liked = "1";
           }else{
@@ -30,9 +29,6 @@ router.get('/', (req,res) => {
             var lng = findLongestWord(item.post_title);
               lng = lng[0];
             item.img_url = lng;
-            // ["jumped", "quick", "brown", "over", "lazy", "The", "fox", "the", "dog"]
-
-          //console.log(result);
           if(index == result.length -1){
             res.render('forum', {posts: result})
           }
@@ -56,9 +52,6 @@ router.get('/', (req,res) => {
             var lng = findLongestWord(item.post_title);
               lng = lng[0];
             item.img_url = lng;
-            // ["jumped", "quick", "brown", "over", "lazy", "The", "fox", "the", "dog"]
-
-          //console.log(result);
           if(index == result.length -1){
             res.render('forum', {posts: result})
           }
@@ -84,7 +77,6 @@ router.post('/add', isLoggedIn, (req,res) => {
   var query = "INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?)";
   con.query(query,[null,author,title,body,url,0,0,currentDate,new Date()], function(err){
     if(err)throw err;
-    console.log("post Inserted!");
     res.redirect('/forum');
   });
 });
@@ -101,7 +93,6 @@ router.post('/comment', isLoggedIn, (req,res) => {
     var query = "INSERT INTO onedistin_comments (ID,comment_post_ID,comment_author,comment_author_name,comment_content,comment_parent,timestamp)VALUES(?,?,?,?,?,?,?);UPDATE onedistin_posts SET post_comments=(post_comments)+1 WHERE ID=?";
     con.query(query,[null,post_id,author,author_name,comment,0,date,post_id],function(err){
       if(err)throw err;
-      console.log("Comment Inserted!");
       res.redirect(referer);
     });
   });

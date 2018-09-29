@@ -147,7 +147,6 @@ router.get('/users', isLoggedIn, (req,res) => {
     if(query.region == 'on'){
       all.push("user_loc");
     }
-    console.log(all);
     res.render('admin/users', {users:result, options: all});
   });
 });
@@ -160,7 +159,6 @@ router.get('/coupons', isLoggedIn, (req,res) =>{
     }else{
       var hasCoupons = false;
     }
-    console.log(hasCoupons);
     var coupons = result;
     res.render('admin/coupons',{coupons:coupons,hasCoupons:hasCoupons});
   });
@@ -271,12 +269,10 @@ router.get('/story', isLoggedIn, (req,res) => {
 });
 
 router.post('/story', (req,res) =>{
-  console.log(req.body);
   var title = req.body.title;
   var _title = title.join("-***-");
   var story = req.body.story;
   var _story = story.join("-***-");
-  console.log(_title);
   con.query("SELECT * FROM onedistin_meta WHERE meta_title=?",['story'],function(err,result){
     if(err)throw err;
     if(result.length > 0){

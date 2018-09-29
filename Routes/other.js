@@ -87,7 +87,6 @@ router.post('/ipay', isLoggedIn, (req,res) =>{
     json: true
   }
   rp(options).then(function(data){
-    console.log(data);
     if(data.success == true){
       con.query("SELECT * FROM onedistin_users WHERE ID=?",[user],function(err,u_result){
         if(err)throw err;
@@ -136,7 +135,6 @@ router.post('/ipay/validate', isLoggedIn, (req,res) =>{
 router.post('/coupon', isLoggedIn, (req,res) =>{
   var code = req.body.code;
   con.query("SELECT percentage,type FROM onedistin_coupons WHERE code=?",[code],function(err,result){
-    console.log(result);
     if(result.length > 0){
       if(result[0].type == "0"){
         res.send("F1");

@@ -30,7 +30,6 @@ router.post('/validate/:field', (req,res) => {
 });
 
 router.post('/forgot', (req,res) =>{
-  //console.log(req.body);
   if(req.body.username && !(req.body.phone)){
     var name = req.body.username;
     var query = "SELECT user_phone FROM onedistin_users WHERE display_name=?";
@@ -48,7 +47,6 @@ router.post('/forgot', (req,res) =>{
     var query = "SELECT ID FROM onedistin_users WHERE user_phone=? AND display_name=?";
     con.query(query,[phone.trim(),username],function(err,result){
       if(err)throw err;
-      console.log(result);
       if(result.length > 0){
         res.send('/reset/'+phone+'/'+result[0].ID);
       }else{

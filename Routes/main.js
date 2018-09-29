@@ -70,7 +70,6 @@ router.get('/', (req,res,next) => {
             }
 
             var survey = result[4][0];
-            console.log(result);
             res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],topPost: result[5][0],img:images, token: tokenGen.getToken(),today: currentDate.currentDate()});
           }
         });
@@ -100,7 +99,6 @@ router.get('/', (req,res,next) => {
 
           images.push(a);
           if(index == img_ids.length -1){
-            console.log(result);
             res.render('index',{currentPost: result[0][0], forumPosts: result[1],survey: result[2][0],topPost: result[3][0],img:images,today: currentDate.currentDate()});
           }
         });
@@ -212,7 +210,6 @@ router.get('/profile', isLoggedIn, (req,res) => {
   var query = "SELECT * FROM onedistin_users WHERE ID = ?;SELECT * FROM onedistin_invoice WHERE user=? AND paid='1'";
   con.query(query, [user,user], function(err,result){
     if (err)throw err;
-    console.log(result[1]);
     res.render('profile',{userData: result[0][0],orders: result[1]});
   });
 });
@@ -323,7 +320,6 @@ router.post('/facebookinfo', isLoggedIn, (req,res) => {
 router.get('/pastdeals', (req,res) => {
   var query = "SELECT * FROM onedistin_posts WHERE post_author = ? && timestamp < ? ORDER BY timestamp DESC";
   var cTime = currentDate.currentDate()+'000000';
-  console.log(cTime);
   con.query(query,['onedistin',cTime],function(err,result){
     if(err)throw err;
     if(result.length > 0){
@@ -334,14 +330,12 @@ router.get('/pastdeals', (req,res) => {
           if(err)throw err;
           if(s_result.length > 0){
             var pastdeal_img = s_result[0].img_id.split("-***-")[2];
-            //console.log(pastdeal_img);
             item.pastdeal_img = cloudinary.url(pastdeal_img,{transformation:[{effect: "sharpen"},{crop:'scale'}]});
             var hasPastDeal = true;
           }else{
             var hasPastDeal = false;
           }
           if(index == result.length-1){
-            console.log(result);
             res.render('pastdeals',{pastdeals:result, hasPastDeal: hasPastDeal});
           }
         });
@@ -442,7 +436,6 @@ router.post('/sell', (req,res) =>{
   var price = body.price;
   var desc = body.description;
   var custom_id = tokenGen.getToken();
-  console.log(body);
 
   var query = "INSERT INTO onedistin_sell(ID,custom_ID,fullname,profession,email,phone,product_name,category,brand,price,description,location,timestamp)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
   con.query(query,[null,custom_id,fullname,profession,email,phone,product_name,category,brand,price,desc,location,new Date()],function(err){

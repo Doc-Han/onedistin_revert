@@ -14,7 +14,6 @@ passport.use(new facebookStrategy({
     profileFields:['id','displayName','emails','gender','hometown','location']
   },
   function(accessToken, refreshToken, profile, done) {
-    //console.log(profile);
     var data = profile._json;
     var fb_user = {
       email: profile.emails[0].value,
@@ -22,7 +21,6 @@ passport.use(new facebookStrategy({
       gender: data.gender,
       user_city: data.location.name.split(",")[0],
     }
-    console.log(fb_user);
     var query = "SELECT * FROM onedistin_users WHERE user_email='"+fb_user.email+"'";
     con.query(query, function(err,result){
       if(err)throw err;
