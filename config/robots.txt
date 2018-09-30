@@ -1,0 +1,9 @@
+User-Agent: *
+Allow: /
+Disallow: /han
+
+User-Agent: bingbot
+Crawl-delay: 1
+
+User-agent: Yandex
+Disallow: /

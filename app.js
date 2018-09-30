@@ -63,6 +63,7 @@ app.use(function(req,res,next){
   res.render('soon');
 });*/
 
+
 //Including all the routes available in this app
 app.use('/', require('./Routes/main.js'));
 app.use('/', require('./Routes/hubtel.js'));
@@ -71,6 +72,10 @@ app.use('/auth', require('./Routes/auth.js'))
 app.use('/forum', require('./Routes/forum.js'));
 app.use('/han', require('./Routes/admin.js'));
 app.use('/ajax', require('./Routes/ajax.js'));
+
+app.get('*', (req,res) => {
+  res.sendFile(__dirname + '/config/'+req.url);
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
