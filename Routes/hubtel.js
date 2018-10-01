@@ -130,6 +130,19 @@ router.post('/ussd', isLoggedIn, (req,res) =>{
   var user_name = body.order_user_name;
   var order_phone = body.order_phone;
   var date = currentDate.currentDate();
+  var item_det = item_ref.split("-");
+  var num = item_det[0]*1;
+  var del = item_det[1]*1;
+  var ttl = item_det[2]*1;
+  if(del == 0){
+    var delivery = 5;
+  }else if(del == 1){
+    var delivery = 10;
+  }else{
+    var delivery = 0;
+  }
+  var amt = (ttl*num) + delivery;
+  console.log(amt);
   con.query("SELECT * FROM onedistin_users WHERE ID=?",[user],function(err,u_result){
     if(err)throw err;
     var ruser = u_result[0];
@@ -138,7 +151,7 @@ router.post('/ussd', isLoggedIn, (req,res) =>{
     var uregion = ruser.user_loc;
     con.query("INSERT INTO onedistin_invoice (ID,user,dealTitle,dealTime,invoiceId,checkoutId,username,phone,categories,address,city,region,item_ref,type,paid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[null,user,title,date,token,0,user_name,order_phone,cat,uaddress,ucity,uregion,item_ref,'2','0'],function(err,result){
       if(err)throw err;
-      res.render('ussd-done');
+      res.render('ussd-done',{amt:amt});
     });
   });
 });
