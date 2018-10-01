@@ -1,9 +1,11 @@
 User-Agent: *
 Allow: /
 Disallow: /han
+Sitemap: https://www.onedistin.com/sitemap.xml
 
 User-Agent: bingbot
 Crawl-delay: 1
 
 User-agent: Yandex
+Crawl-delay: 1
 Disallow: /
