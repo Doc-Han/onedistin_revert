@@ -31,7 +31,12 @@ var currentDate = function() {
   var date = new Date();
   var year = date.getFullYear();
   var _month = parseInt(date.getMonth())+1;
-  var month = "0"+_month;
+  if(_month.length == 1){
+    var month = "0"+_month;
+  }else{
+    var month = _month+"";
+  }
+
   var day = date.getDate()+"";
   if(day.length == 1){
     day = "0"+day;
