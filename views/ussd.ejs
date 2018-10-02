@@ -18,7 +18,7 @@
       <h3 class="muli-semi-bold" style="font-size:36px">Follow these steps to complete your payment.</h3>
       <ol>
         <li>
-          <p>Please Enter the mobile money number you will be using for payment.</p>
+          <p>Please Enter the mobile money(MoMo) number you will be using for payment.</p>
           <form action="/ussd" method="POST">
             <input type="hidden" name="p_t" value="<%= data.item_title %>">
             <input type="hidden" name="cat" value="<%= data.item_cat %>">
@@ -29,7 +29,7 @@
               <dt> <label>MoMo Number</label> </dt>
               <dd> <input type="text" name="order_phone" placeholder="Momo Number" required> </dd>
             </dl>
-            <button style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Done!</h3></button>
+            <button style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Next</h3></button>
           </form>
         </li>
 
