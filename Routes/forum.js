@@ -37,7 +37,7 @@ router.get('/', (req,res) => {
       ;
     });
   }else{
-    var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC";
+    var query = "SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC";
     con.query(query,function(err,result){
       if (err) throw err;
 
