@@ -7,53 +7,7 @@
 
         <a class="w3-button button-color-inverse w3-text-white w3-padding w3-margin-bottom w3-round-xxlarge" style="font-size:22px" href="/forum/add"> <i class="fa fa-plus"></i> Add new post </a>
 
-        <% if(isAuthenticated){ %>
-          <ul style="padding: 0" id="postList" class="w3-ul w3-container">
-            <% posts.forEach(function(item){ %>
-              <li style="padding-left: 0" class="w3-bar w3-row w3-border-bottom">
-                <img style="width:50px;height:50px;margin-right:10px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.post_title.split(' ').join(',') %>" alt="">
-                <div class="w3-rest">
-                  <a href="/forum/<%= item.post_url %>" style="font-size:22px;" class="muli-bold w3-text-black">
-                    <%= item.post_title %>
-                  </a>
-                  <!--- lsdflsdhfsdlfdsldsfjdsl ---->
-                  <div class="w3-bar">
-                    <a style="padding-left: 0" class="w3-bar-item w3-button post_like" href="#" ref-data="<%= item.ID %>">
-                    <% if(item.liked == "0"){ %>
-                      <i class="fa fa-heart-o w3-text-black"> <%= item.post_likes %> </i>
-                    <% }else{ %>
-                      <i class="fa fa-heart w3-text-black"> <%= item.post_likes %> </i>
-                    <% } %>
-                    </a>
-                    <a class="w3-bar-item w3-button" href="/forum/<%=item.post_url %>"> <i class="fa fa-comment-o w3-text-black"> <%= item.post_comments %> </i> </a>
-                  </div>
-                </div>
-
-              </li>
-            <% }); %>
-          </ul>
-        <% }else{ %>
-          <ul style="padding: 0" id="postList" class="w3-ul w3-container">
-            <% posts.forEach(function(item){ %>
-              <li style="padding-left: 0" class="w3-bar w3-row w3-border-bottom">
-                <img style="width:50px;height:50px;margin-right:10px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.img_url %>" alt="">
-                <div class="w3-rest">
-                  <a href="/forum/<%= item.post_url %>" style="font-size:22px" class="muli-bold w3-text-black">
-                    <%= item.post_title %>
-                  </a>
-                  <!--- lsdflsdhfsdlfdsldsfjdsl ---->
-                  <div class="w3-bar">
-                    <a style="padding-left: 0" class="w3-bar-item w3-button" href="/login" ref-data="<%= item.ID %>">
-                      <i class="fa fa-heart-o w3-text-black"> <%= item.post_likes %> </i>
-                    </a>
-                    <a class="w3-bar-item w3-button" href="/login"> <i class="fa fa-comment-o w3-text-black"> <%= item.post_comments %> </i> </a>
-                  </div>
-                </div>
-
-              </li>
-            <% }); %>
-          </ul>
-        <% } %>
+      
 
 
       </div>
