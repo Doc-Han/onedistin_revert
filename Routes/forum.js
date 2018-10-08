@@ -6,7 +6,25 @@ var router = express.Router();
 
 router.get('/', (req,res) => {
   if(req.isAuthenticated()){
-    res.send("SORRY, This page is under maintenance!")
+    var user = req.user.user_id;
+    var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 10";
+    con.query(query,function(err,result){
+      if (err) throw err;
+      result.forEach(function(item,index){
+        con.query("SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[user,item.ID], function(err,l_result){
+          if(l_result.length > 0){
+            item.liked = "1";
+          }else{
+            item.liked = "0";
+          }
+
+          if(index == result.length -1){
+            res.render('forum', {posts: result})
+          }
+        });
+      });
+      ;
+    });
   }else{
     var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC";
     con.query(query,function(err,result){
