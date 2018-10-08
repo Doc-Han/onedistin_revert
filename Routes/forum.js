@@ -8,7 +8,7 @@ router.get('/', (req,res) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
     var count = 0;
-    var query = "SELECT * FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC";
+    var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC";
     con.query(query,function(err,result){
       if (err) throw err;
       result.forEach(function(item,index){
