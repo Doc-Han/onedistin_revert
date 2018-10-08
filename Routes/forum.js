@@ -18,17 +18,7 @@ router.get('/', (req,res) => {
           }else{
             item.liked = "0";
           }
-
-            function findLongestWord(str) {
-              const stringArray = str.split(" ");
-              const orderedArray = stringArray.sort((a, b) => {
-                return a.length < b.length;
-              });
-              return orderedArray;
-            }
-            var lng = findLongestWord(item.post_title);
-              lng = lng[0];
-            item.img_url = lng;
+          
           if(index == result.length -1){
             res.render('forum', {posts: result})
           }
@@ -37,7 +27,7 @@ router.get('/', (req,res) => {
       ;
     });
   }else{
-    var query = "SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC";
+    var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC";
     con.query(query,function(err,result){
       if (err) throw err;
 

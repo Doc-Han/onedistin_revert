@@ -11,7 +11,7 @@
           <ul style="padding: 0" id="postList" class="w3-ul w3-container">
             <% posts.forEach(function(item){ %>
               <li style="padding-left: 0" class="w3-bar w3-row w3-border-bottom">
-                <img style="width:50px;height:50px;margin-right:10px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.img_url %>" alt="">
+                <img style="width:50px;height:50px;margin-right:10px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.post_title.split(' ').join(',') %>" alt="">
                 <div class="w3-rest">
                   <a href="/forum/<%= item.post_url %>" style="font-size:22px;" class="muli-bold w3-text-black">
                     <%= item.post_title %>
