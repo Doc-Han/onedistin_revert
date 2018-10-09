@@ -40,10 +40,10 @@ router.post('/', (req,res) => {
 });
 
 router.get('/dashboard', isLoggedIn, (req,res) => {
-  var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1';SELECT ID FROM onedistin_support";
+  var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1';SELECT ID FROM onedistin_support;SELECT ID FROM onedistin_invoice WHERE dealTime ='"+currentDate+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+currentDate+"' AND paid='1';SELECT ID FROM onedistin_users WHERE user_registered='"+currentDate+"'";
   con.query(query, function(err,result){
     if(err)throw err;
-    res.render('admin/home', {users: result[0].length,invoices:result[1].length,paid_invoices:result[2].length,support:result[3].length});
+    res.render('admin/home', {users: result[0].length,invoices:result[1].length,paid_invoices:result[2].length,support:result[3].length,todays_invoice:result[4].length,todays_paid:result[5].length,todays_accounts:result[6].length});
   });
 });
 
@@ -209,7 +209,7 @@ router.get('/orders/:option', isLoggedIn, (req,res,next) =>{
   }
 });
 
-router.get('/verify-ussd', (req,res) =>{
+router.get('/verify-ussd', isLoggedIn, (req,res) =>{
   var q = req.query.q;
     query = "SELECT * FROM onedistin_invoice WHERE type='2' ORDER BY ID DESC";
   if(q){
@@ -228,7 +228,7 @@ router.get('/verify-ussd/:id', (req,res) =>{
   });
 });
 
-router.get('/verify-ussd/rem/:id', (req,res) =>{
+router.get('/verify-ussd/rem/:id', isLoggedIn, (req,res) =>{
   var id = req.params.id;
   con.query("UPDATE onedistin_invoice SET paid = '0' WHERE ID=?",[id],function(err){
     if(err)throw err;

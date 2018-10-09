@@ -3,25 +3,46 @@
 <div class="w3-row w3-margin-top">
   <% include partials/navs.ejs %>
   <div style="width:60%" class="w3-col w3-card-4 w3-mobile">
+    <div class="w3-container">
+      <h3>Today</h3>
+    </div>
     <div class="w3-row">
       <div style="width:30%;margin:12px" class="w3-col w3-card-2 w3-red w3-padding w3-center">
-          <h4>Accounts</h4>
-          <a href="/han/users"><h2><%= users%></h2></a>
+          <h1><%= todays_accounts %></h1>
+          <h6>Account(s) created</h6>
       </div>
       <div style="width:30%;margin:12px" class="w3-col w3-card-2 w3-pink w3-padding w3-center w3-mobile">
-          <h4>Orders</h4>
-          <h2><%= invoices %></h2>
+          <h1><%= todays_invoice %></h1>
+          <h6>Initiated order(s)</h6>
       </div>
       <div style="width:30%;margin:12px" class="w3-col w3-card-2 w3-black w3-padding w3-center w3-mobile">
-          <h4>Paid Orders</h4>
-          <h2><%= paid_invoices%></h2>
+          <h1><%= todays_paid %></h1>
+          <h6>Paid Order(s)</h6>
+      </div>
+    </div>
+
+    <div class="w3-container">
+      <h3>All Time</h3>
+    </div>
+    <div class="w3-row">
+      <div style="width:30%;margin:12px" class="w3-col w3-card-2 w3-red w3-padding w3-center">
+          <h1><%= users%></h1>
+          <h6>Account(s) created</h6>
+      </div>
+      <div style="width:30%;margin:12px" class="w3-col w3-card-2 w3-pink w3-padding w3-center w3-mobile">
+          <h1><%= invoices %></h1>
+          <h6>Order(s) Initiated</h6>
+      </div>
+      <div style="width:30%;margin:12px" class="w3-col w3-card-2 w3-black w3-padding w3-center w3-mobile">
+          <h1><%= paid_invoices%></h1>
+          <h6>Paid Order(s)</h6>
       </div>
     </div>
 
     <div class="w3-row">
-      <div style="width:30%;margin:12px" class="w3-col w3-card-2 w3-red w3-padding w3-center">
-          <h4>Reports</h4>
-          <a href="/han/users"><h2><%= support %></h2></a>
+      <div style="width:30%;margin:12px" class="w3-col w3-card-2 w3-teal w3-padding w3-center">
+          <h1><%= support %></h1>
+          <h6>Report(s)</h6>
       </div>
     </div>
 
