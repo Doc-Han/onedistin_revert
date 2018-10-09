@@ -70,13 +70,7 @@
           <% } %>
           <td><%= item.item_ref.split("-")[0] %></td>
           <td>
-          <% if(item.item_ref.split("-")[1] == '0'){ %>
-            <%= '5days' %>
-          <% }else if(item.item_ref.split("-")[1] == '1'){ %>
-            <%= '24hrs' %>
-          <% }else{ %>
-            <%= 'Free' %>
-          <% } %>
+          <%= item.item_ref %>
         </td>
           <td>
             <% if(item.type == '1'){ %>
