@@ -318,7 +318,16 @@ router.post('/story', (req,res) =>{
 });
 
 router.get('/reports', isLoggedIn, (req,res) =>{
-  res.render('admin/reports');
+  con.query("SELECT * FROM onedistin_support",function(err,result){
+    if(err)throw err;
+    if(result.length > 0){
+      var hasReports = true;
+      res.render('admin/reports', {reports:result, hasReports: hasReports});
+    }else{
+      var hasReports = false;
+      res.render('admin/reports', {reports:result, hasReports: hasReports});
+    }
+  });
 });
 
 router.get('/logout', isLoggedIn, (req,res) => {
