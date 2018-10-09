@@ -74,7 +74,11 @@
           <% if(del == 0){ %>
             5days
           <% }else if(del == 1){ %>
-            24hrs/ 5days for distant
+            <% if(item.region == 'Greater Accra'){ %>
+              24hrs
+            <% }else{ %>
+              5days distant
+            <% } %>
           <% }else{ %>
             Free
           <% } %>
