@@ -1,0 +1,59 @@
+<% include partials/header.ejs %>
+
+<div class="w3-row w3-margin-top">
+  <% include partials/navs.ejs %>
+  <div style="width:80%" class="w3-padding w3-col w3-card-4 w3-mobile">
+
+    <form action="/han/verify-ussd" method="GET">
+      <input class="w3-input w3-third w3-border" placeholder="Find the contact, Even Last 3 digits" type="text" name="q">
+      <button class="w3-button w3-teal" type="submit">Search</button>
+    </form>
+    <table style="margin-top:30px" class="w3-table-all w3-bordered">
+      <tr>
+        <th>Title</th>
+        <th>Day</th>
+        <th>Username</th>
+        <th>Phone</th>
+        <th>Number</th>
+        <th>Status</th>
+      </tr>
+
+      <% orders.forEach(function(item){ %>
+        <tr>
+          <% if(item.dealTitle){ %>
+            <td><%= item.dealTitle %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <% if(item.dealTime){ %>
+            <td><%= item.dealTime %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <% if(item.username){ %>
+            <td><%= item.username %></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <% if(item.phone){ %>
+            <td><h3><%= item.phone %></h3></td>
+          <% }else{ %>
+            <td>Empty</td>
+          <% } %>
+          <td><%= item.item_ref.split("-")[0] %></td>
+          <td>
+            <% if(item.paid == '0'){ %>
+              <a href="/han/verify-ussd/<%= item.ID %>"><button class="w3-dark-grey w3-padding w3-round">VERIFY</button></a>
+            <% }else{ %>
+              <a href="/han/verify-ussd/rem/<%= item.ID %>"><button class="w3-teal w3-padding w3-round">VERIFIED</button></a>
+            <% } %>
+          </td>
+        </tr>
+      <% }); %>
+
+    </table>
+
+
+  </div>
+
+</div>

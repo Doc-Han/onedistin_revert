@@ -8,6 +8,8 @@
     <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/han/orders/ussd">USSD</a>
     <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/han/orders/ipay">IPAY</a>
 
+    <p class="w3-padding w3-margin-top w3-light-grey w3-leftbar w3-border-red">Please check with your eyes to know those who's deliveries are outside Accra !</p>
+
     <table style="margin-top:30px" class="w3-table-all w3-bordered">
       <tr>
         <th>Title</th>
@@ -19,6 +21,7 @@
         <th>City</th>
         <th>Region</th>
         <th>Number</th>
+        <th>Delivery</th>
         <th>Option</th>
         <th>Status</th>
       </tr>
@@ -66,6 +69,15 @@
             <td>Empty</td>
           <% } %>
           <td><%= item.item_ref.split("-")[0] %></td>
+          <td>
+          <% if(item.item_ref.split("-")[1] == '0'){ %>
+            <%= '24hrs' %>
+          <% }else if(item.item_ref.split("-")[1] == '1'){ %>
+            <%= '5days' %>
+          <% }else{ %>
+            <%= 'Free' %>
+          <% } %>
+        </td>
           <td>
             <% if(item.type == '1'){ %>
               <%= 'HUBTEL' %>

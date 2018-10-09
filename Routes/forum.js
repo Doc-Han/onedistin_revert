@@ -5,6 +5,7 @@ var currentTime = require('../config/tools.js');
 var router = express.Router();
 
 router.get('/', (req,res) => {
+  console.log("Starting...");
   if(req.isAuthenticated()){
     var user = req.user.user_id;
     var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 2";
@@ -17,7 +18,6 @@ router.get('/', (req,res) => {
           }else{
             item.liked = "0";
           }
-
           if(index == result.length -1){
             res.render('forum', {posts: result})
           }

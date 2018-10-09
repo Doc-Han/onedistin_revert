@@ -209,6 +209,33 @@ router.get('/orders/:option', isLoggedIn, (req,res,next) =>{
   }
 });
 
+router.get('/verify-ussd', (req,res) =>{
+  var q = req.query.q;
+    query = "SELECT * FROM onedistin_invoice WHERE type='2' ORDER BY ID DESC";
+  if(q){
+    query = "SELECT * FROM onedistin_invoice WHERE type='2' AND phone LIKE '%"+q.trim()+"%' ORDER BY ID DESC"
+  }
+  con.query(query,function(err,result){
+    res.render('admin/verify',{orders:result});
+  });
+});
+
+router.get('/verify-ussd/:id', (req,res) =>{
+  var id = req.params.id;
+  con.query("UPDATE onedistin_invoice SET paid = '1' WHERE ID=?",[id],function(err){
+    if(err)throw err;
+    res.redirect(req.headers.referer);
+  });
+});
+
+router.get('/verify-ussd/rem/:id', (req,res) =>{
+  var id = req.params.id;
+  con.query("UPDATE onedistin_invoice SET paid = '0' WHERE ID=?",[id],function(err){
+    if(err)throw err;
+    res.redirect(req.headers.referer);
+  });
+});
+
 router.get('/edit', isLoggedIn, (req,res) =>{
   res.send('page cannot be found!');
 });
