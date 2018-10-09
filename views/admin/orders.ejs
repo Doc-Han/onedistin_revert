@@ -70,8 +70,14 @@
           <% } %>
           <td><%= item.item_ref.split("-")[0] %></td>
           <td>
-          <% var del = item.item_ref.split("-")[1] %>
-          <%= del %>
+          <% var del = item.item_ref.split("-")[1]*1 %>
+          <% if(del == 0){ %>
+            5days
+          <% }else if(del == 1){ %>
+            24hrs
+          <% }else{ %>
+            Free
+          <% } %>
         </td>
           <td>
             <% if(item.type == '1'){ %>
