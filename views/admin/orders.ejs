@@ -70,7 +70,8 @@
           <% } %>
           <td><%= item.item_ref.split("-")[0] %></td>
           <td>
-          <%= item.item_ref %>
+          <% var del = item.item_ref.split("-")[1] %>
+          <%= del %>
         </td>
           <td>
             <% if(item.type == '1'){ %>
