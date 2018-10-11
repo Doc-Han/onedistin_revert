@@ -10,9 +10,9 @@
     <div class="w3-row">
       <div style="width:30%;margin:12px" class="w3-col w3-padding w3-center">
           <% if(todays_accounts > yes_accounts){ %>
-          <h3 class="w3-text-green"><%= todays_accounts - yes_accounts %></h3>
+          <h3 class="w3-text-green">+<%= todays_accounts - yes_accounts %></h3>
           <% }else if(yes_accounts > todays_accounts){ %>
-          <h3 class="w3-text-red"><%= yes_accounts - todays_accounts %></h3>
+          <h3 class="w3-text-red">-<%= yes_accounts - todays_accounts %></h3>
           <% }else{ %>
           <h3>0</h3>
           <% } %>
@@ -20,9 +20,9 @@
       </div>
       <div style="width:30%;margin:12px" class="w3-col w3-padding w3-center w3-mobile">
         <% if(todays_invoice > yes_invoice){ %>
-        <h3 class="w3-text-green"><%= todays_invoice - yes_invoice %></h3>
+        <h3 class="w3-text-green">+<%= todays_invoice - yes_invoice %></h3>
         <% }else if(yes_invoice > todays_invoice){ %>
-        <h3 class="w3-text-red"><%= yes_invoice - todays_invoice %></h3>
+        <h3 class="w3-text-red">-<%= yes_invoice - todays_invoice %></h3>
         <% }else{ %>
         <h3>0</h3>
         <% } %>
@@ -30,9 +30,9 @@
       </div>
       <div style="width:30%;margin:12px" class="w3-col w3-padding w3-center w3-mobile">
         <% if(todays_paid > yes_paid){ %>
-        <h3 class="w3-text-green"><%= todays_paid - yes_paid %></h3>
+        <h3 class="w3-text-green">+<%= todays_paid - yes_paid %></h3>
         <% }else if(yes_paid > todays_paid){ %>
-        <h3 class="w3-text-red"><%= yes_paid - todays_paid %></h3>
+        <h3 class="w3-text-red">-<%= yes_paid - todays_paid %></h3>
         <% }else{ %>
         <h3>0</h3>
         <% } %>
