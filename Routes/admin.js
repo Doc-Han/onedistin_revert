@@ -1,6 +1,7 @@
 var express = require('express');
 var con = require('../config/db.js');
 var currentDate = require('../config/tools.js').currentDate();
+var previousDate = require('../config/tools.js').previousDate();
 var currentTime = require('../config/tools.js').currentTime();
 var tools = require('../config/tools.js');
 var multer = require('multer');
@@ -40,10 +41,10 @@ router.post('/', (req,res) => {
 });
 
 router.get('/dashboard', isLoggedIn, (req,res) => {
-  var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1';SELECT ID FROM onedistin_support;SELECT ID FROM onedistin_invoice WHERE dealTime ='"+currentDate+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+currentDate+"' AND paid='1';SELECT ID FROM onedistin_users WHERE user_registered='"+currentDate+"'";
+  var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1';SELECT ID FROM onedistin_support;SELECT ID FROM onedistin_invoice WHERE dealTime ='"+currentDate+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+currentDate+"' AND paid='1';SELECT ID FROM onedistin_users WHERE user_registered='"+currentDate+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+previousDate+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+previousDate+"' AND paid='1';SELECT ID FROM onedistin_users WHERE user_registered='"+previousDate+"'";
   con.query(query, function(err,result){
     if(err)throw err;
-    res.render('admin/home', {users: result[0].length,invoices:result[1].length,paid_invoices:result[2].length,support:result[3].length,todays_invoice:result[4].length,todays_paid:result[5].length,todays_accounts:result[6].length});
+    res.render('admin/home', {users: result[0].length,invoices:result[1].length,paid_invoices:result[2].length,support:result[3].length,todays_invoice:result[4].length,todays_paid:result[5].length,todays_accounts:result[6].length,yes_invoice:result[7].length,yes_paid:result[8].length,yes_accounts:result[9].length});
   });
 });
 

@@ -45,17 +45,28 @@ var currentDate = function() {
   return currentDate;
 }
 
+var previousDate = function() {
+  var date = new Date();
+  date.setDate(date.getDate()-1);
+  var year = date.getFullYear();
+  var _month = parseInt(date.getMonth())+1;
+  if(_month.length == 1){
+    var month = "0"+_month;
+  }else{
+    var month = _month+"";
+  }
+
+  var day = date.getDate()+"";
+  if(day.length == 1){
+    day = "0"+day;
+  }
+  var previousDate = year+month+day;
+  return previousDate;
+}
+
 var getToken = function(){
   var uid = uidgen.generateSync();
   return uid;
-}
-
-var uploadImage = function(path){
-  cloudinary.uploader.upload(path, function(img_res){
-    if(img_res > 0){
-      return img_res.public_id;
-    }
-  });
 }
 
 var dateToEdit = function(date){
@@ -68,8 +79,8 @@ var dateToEdit = function(date){
 
 module.exports = {
   currentDate: currentDate,
+  previousDate: previousDate,
   currentTime: currentTime,
   getToken: getToken,
-  uploadImage: uploadImage,
   dateToEdit: dateToEdit
 }
