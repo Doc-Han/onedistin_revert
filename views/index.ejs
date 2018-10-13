@@ -41,16 +41,16 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
           </div>
           <div style="height:59px;" class="buy w3-row">
             <% if(isAuthenticated){ %>
-              <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 0px" class="w3-col w3-button w3-round-xxlarge button-color">
+              <a onclick="#" style="width:78%;height: 59px; padding: 5px 0px" class="w3-col w3-button w3-round-xxlarge button-color">
                 <span style="text-align:center;font-size:24px;line-height:28px" class="custom-txt-color muli-semi-bold"><b><%= currentPost.price %></b></span>
                  <br>
-                <span style="font-size:16px;line-height:16px" class="custom-txt-color w3-medium muli-regular">BUY DISTIN</span>
+                <span style="font-size:16px;line-height:16px" class="custom-txt-color w3-medium muli-regular">YOU'RE LATE</span>
               </a>
             <% }else{ %>
               <a href="/login" style="width:78%;height: 59px; padding: 5px 0px" class="w3-col w3-button w3-round-xxlarge muli button-color">
                 <span style="text-align:center;font-size:24px;line-height:28px" class="custom-txt-color muli-semi-bold"><b><%= currentPost.price %></b></span>
                  <br>
-                <span style="font-size:16px;line-height:16px" class="custom-txt-color w3-medium muli-regular">BUY DISTIN</span>
+                <span style="font-size:16px;line-height:16px" class="custom-txt-color w3-medium muli-regular">YOU'RE LATE</span>
               </a>
             <% } %>
 
