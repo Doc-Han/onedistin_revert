@@ -13,27 +13,35 @@ $(document).ready(function(){
   var del = 0;
 
   function cat_price(){
-    var len = $("[name='category']").length;
-    if(len < 1){
-
-    }else if(len > 2){
-      var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
-      var second = $("[name='category']:eq(1)").find("option:selected").attr("rel-data");
-      if((first*1) != ttl){
-        ttl = first;
+    var len = $("[name='category']").find("option:selected").length;
+    var cat_ttl = [];
+    var indx = 0;
+    var single_cat_len = $(".single_cat_len").text() * 1;
+    if(len == single_cat_len){
+      for(i=0;i<len;i++){
+        var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
+        if((first*1) != ttl){
+          ttl = first;
+          $(".cat_price_single").text("GHS "+ttl);
+        }
       }
-      if((second*1) != ttl){
-        ttl = second;
-      }
-      $(".pprice").text(ttl);
       effect();
       show();
-    }else if(len == 1){
-      var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
-      if((first*1) != ttl){
-        ttl = first;
+    }else{
+      for(i=0;i<len;i++){
+        var first = $("[name='category']:eq("+i+")").find("option:selected").attr("rel-data");
+        if((first*1) != ttl){
+          cat_ttl.push(first);
+          //$(".cat_price_single").text("GHS "+ttl);
+        }
       }
-      $(".pprice").text(ttl);
+      var t_ttl = 0;
+      console.log(cat_ttl);
+      for(i=0;i<cat_ttl.length;i++){
+        $(".cat_price_single:eq("+i+")").text("GHS "+cat_ttl[i]);
+        t_ttl += (cat_ttl[i]*1);
+      }
+      ttl = t_ttl;
       effect();
       show();
     }
@@ -85,6 +93,9 @@ $(document).ready(function(){
       }
     }
 
+    var new_p_txt = "GHS "+ttl*n+" for "+n;
+    $(".pprice").text(new_p_txt);
+
     $(".payment_details").val(n+"-"+del+"-"+ttl);
 
     if(n == 1){
@@ -103,9 +114,10 @@ $(document).ready(function(){
       var prt = item.html();
       loc.append(prt);
       //This is for the checkout price increment
-      var ip = $(".item-pricing:first-child");
+      /*var ip = $(".item-pricing:first-child");
       var pp = ip.html();
-      ip.after("<dd class='item-pricing'>"+pp+"</dd>");
+      ip.after("<dd class='item-pricing'>"+pp+"</dd>");*/
+      cat_price();
       show();
       if(n==3){
         $(".add-item-bar").hide();
@@ -124,8 +136,8 @@ $(document).ready(function(){
       n--;
       $(".add-item-bar").show();
       $(this).parent().remove();
-      var ip = $(".item-pricing:first-child");
-      ip.remove();
+      /*var ip = $(".item-pricing:first-child");
+      ip.remove();*/
       show();
     }
     if(n == 1){
@@ -167,28 +179,38 @@ $(document).ready(function(){
   });
 
   $("[name='category']").change(function(){
-    var length = $("[name='category']").length;
-    var len = length/n;
-    if(len > 1){
-      var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
-      var second = $("[name='category']:eq(1)").find("option:selected").attr("rel-data");
-      if((first*1) != ttl){
-        ttl = first;
-      }
-      if((second*1) != ttl){
-        ttl = second
+    var len = $("[name='category']").find("option:selected").length;
+    var cat_ttl = [];
+    var indx = 0;
+    var single_cat_len = $(".single_cat_len").text() * 1;
+    if(len == single_cat_len){
+      for(i=0;i<len;i++){
+        var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
+        if((first*1) != ttl){
+          ttl = first;
+          $(".cat_price_single").text("GHS "+ttl);
+        }
       }
       effect();
       show();
     }else{
-      var first = $("[name='category']:eq(0)").find("option:selected").attr("rel-data");
-      if((first*1) != ttl){
-        ttl = first;
+      for(i=0;i<len;i++){
+        var first = $("[name='category']:eq("+i+")").find("option:selected").attr("rel-data");
+        if((first*1) != ttl){
+          cat_ttl.push(first);
+          //$(".cat_price_single").text("GHS "+ttl);
+        }
       }
+      var t_ttl = 0;
+      console.log(cat_ttl);
+      for(i=0;i<cat_ttl.length;i++){
+        $(".cat_price_single:eq("+i+")").text("GHS "+cat_ttl[i]);
+        t_ttl += (cat_ttl[i]*1);
+      }
+      ttl = t_ttl / n;
       effect();
       show();
     }
-    $(".pprice").text(ttl);
   });
 
   $("#low").click(function(){

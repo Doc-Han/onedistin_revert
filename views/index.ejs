@@ -127,10 +127,11 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                   <img style="width:100px;height:100px;margin-right:10px" class="w3-left w3-col" style="margin-right:10px;" src="<%= img[1] %>" alt="">
                   <div style="width:65%;" class="w3-col">
                     <h4 style="margin-bottom:0;text-align:left;"><b><%= currentPost.title %></b></h4>
-                    <p style="text-align:left;"><%= currentPost.price %></p>
+                    <p style="text-align:left;font-weight:bold" class="cat_price_single text-color-inverse">GHS <%= currentPost.ac_price %></p>
                   </div>
 
                   <% if(currentPost.categories){ %>
+                    <span class="single_cat_len"><%= currentPost.categories.length %></span>
                     <% currentPost.categories.forEach(function(item,p_index){ %>
                       <div style="width:100%;border-top:1px solid #cccccc;" class="w3-col w3-padding">
                         <span class="w3-left w3-xlarge"><%= item[0] %></span>
@@ -237,7 +238,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
 
                 <h3 style="text-align:left;font-size:22px;line-height:22px;" class="muli-semi-bold">Finally! Want this right?</h3>
                 <dl class="straight">
-                  <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price text-color-inverse">GHS <span class="pprice text-color-inverse"><%= currentPost.ac_price %></span></span> </dd>
+                  <dd class="item-pricing"> <label><%= currentPost.title %></label> <span class="price text-color-inverse"><span class="pprice text-color-inverse">GHS <%= currentPost.ac_price %> for 1</span></span> </dd>
                   <dd> <label>Delivery fee</label>
                     <% if(offers.offer_one == 1){ %>
                       <span class="w3-tag w3-green price">free delivery</span>
@@ -256,15 +257,6 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                     <span class="total_price text-color-inverse">GHS 45.70</span></span> </dd>
                 </dl>
                 <input type="hidden" class="payment_details" name="item_no">
-                <!--<form method="POST" action="https://community.ipaygh.com/gateway">
-                  <input type="hidden" name="merchant_key" value="965c2850-a0b4-11e8-af31-f23c9170642f" />
-                  <input type="hidden" name="success_url" value="https://onedistin.com/p_s" />
-                  <input type="hidden" name="cancelled_url" value="https://onedistin.com/p_c" />
-                  <input type="hidden" name="deferred_url" value="https://onedistin.com/d_p" />
-                  <input type="hidden" name="invoice_id" value="<%= token %>" />
-                  <input type="hidden" name="total" value="" />
-
-                </form>-->
                 <span class="error"></span>
                 <button onclick="validate()" style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="button" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px">Yes! Can't wait!</h3></button>
 
