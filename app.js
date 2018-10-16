@@ -7,6 +7,7 @@ var MySQLStore = require('express-mysql-session')(session);
 var passport = require('passport');
 var favicon = require('express-favicon');
 var logger = require('morgan');
+var compression = require('compression');
 var secure = require('express-force-https');
 var cloudinary = require('cloudinary');
 
@@ -19,6 +20,7 @@ app.use(secure);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.set('view engine', 'ejs');
+app.use(compression());
 app.use(express.static('./public'));
 var options = {
   host: process.env.DB_HOST,
