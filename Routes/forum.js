@@ -8,7 +8,7 @@ router.get('/', (req,res) => {
   console.log("Starting...");
   if(req.isAuthenticated()){
     var user = req.user.user_id;
-    var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 2";
+    var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12";
     con.query(query,function(err,result){
       if (err) throw err;
       result.forEach(function(item,index){
@@ -26,7 +26,7 @@ router.get('/', (req,res) => {
       ;
     });
   }else{
-    var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC";
+    var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12";
     con.query(query,function(err,result){
       if (err) throw err;
 
