@@ -131,7 +131,6 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                   </div>
 
                   <% if(currentPost.categories){ %>
-                    <span class="single_cat_len"><%= currentPost.categories.length %></span>
                     <% currentPost.categories.forEach(function(item,p_index){ %>
                       <div style="width:100%;border-top:1px solid #cccccc;" class="w3-col w3-padding">
                         <span class="w3-left w3-xlarge"><%= item[0] %></span>

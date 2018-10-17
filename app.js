@@ -8,6 +8,7 @@ var passport = require('passport');
 var favicon = require('express-favicon');
 var logger = require('morgan');
 var compression = require('compression');
+var currentDate = require('./config/tools.js');
 var secure = require('express-force-https');
 var cloudinary = require('cloudinary');
 
@@ -64,7 +65,15 @@ app.use(function(req,res,next){
 
   res.render('soon');
 });*/
-
+app.use(function(req,res,next){
+  console.log(req.session.date);
+  if(req.session.date != currentDate.currentDate()){
+    req.session.date = currentDate.currentDate();
+    res.redirect('/');
+  }else{
+    next();
+  }
+});
 
 //Including all the routes available in this app
 app.use('/', require('./Routes/main.js'));

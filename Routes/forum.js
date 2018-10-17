@@ -5,7 +5,6 @@ var currentTime = require('../config/tools.js');
 var router = express.Router();
 
 router.get('/', (req,res) => {
-  console.log("Starting...");
   if(req.isAuthenticated()){
     var user = req.user.user_id;
     var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12";
