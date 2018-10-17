@@ -7,6 +7,7 @@ var tools = require('../config/tools.js');
 var multer = require('multer');
 var tokenGen = require('../config/tools.js');
 var upload = require('../config/upload.js');
+var rp = require('request-promise');
 var cloudinary = require('cloudinary');
 
 var router = express.Router();
@@ -223,9 +224,35 @@ router.get('/verify-ussd', isLoggedIn, (req,res) =>{
 
 router.get('/verify-ussd/:id', (req,res) =>{
   var id = req.params.id;
-  con.query("UPDATE onedistin_invoice SET paid = '1' WHERE ID=?",[id],function(err){
+  con.query("SELECT * FROM onedistin_users WHERE ID = (SELECT user FROM onedistin_invoice WHERE ID=?);SELECT item_ref,phone FROM onedistin_invoice WHERE id=?;UPDATE onedistin_invoice SET paid = '1' WHERE ID=?",[id,id,id],function(err,result){
     if(err)throw err;
-    res.redirect(req.headers.referer);
+    var item_ref = result[1][0].item_ref;
+    var phone = result[1][0].phone;
+    var delivery = item_ref.split("-")[1];
+    if(delivery == 0){
+      var _delivery = "5 working days";
+    }else if(delivery == 1){
+      var _delivery = "24hours";
+    }else{
+      var _delivery = "5 working days";
+    }
+    var user = result[0][0];
+    var fullname = user.user_name;
+    var msg = "Great! "+fullname+", Your deal has been sealed. Your order will be delivered within "+_delivery+", Thanks for buying less with onedistin.";
+    let options = {
+      method: 'GET',
+      uri: 'https://api.hubtel.com/v1/messages/send',
+      qs: { From: 'Onedistin',
+     To: phone,
+     Content: msg,
+     ClientID: process.env.HUBTEL_CLIENT_ID,
+     ClientSecret: process.env.HUBTEL_CLIENT_SECRET,
+     FromToContentClientIdClientSecretRegisteredDelivery: '' }
+    }
+
+    rp(options).then(function(data){
+      res.redirect(req.headers.referer);
+    });
   });
 });
 
