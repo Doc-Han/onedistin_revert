@@ -174,6 +174,26 @@ router.post('/coupon', isLoggedIn, (req,res) =>{
   });
 });
 
+router.post('/support/reply', (req,res) =>{
+  var body = req.body;
+  var phone = body.phone;
+  var msg = body.msg;
+  let options = {
+    method: 'GET',
+    uri: 'https://api.hubtel.com/v1/messages/send',
+    qs: { From: 'Onedistin',
+   To: phone,
+   Content: msg,
+   ClientID: process.env.HUBTEL_CLIENT_ID,
+   ClientSecret: process.env.HUBTEL_CLIENT_SECRET,
+   FromToContentClientIdClientSecretRegisteredDelivery: '' }
+  }
+
+  rp(options).then(function(data){
+    res.send("1");
+  });
+});
+
 function isLoggedIn(req,res,next){
   if (req.isAuthenticated())
   return next();

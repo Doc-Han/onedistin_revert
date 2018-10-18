@@ -3,6 +3,18 @@
 <div class="w3-row w3-margin-top">
   <% include partials/navs.ejs %>
   <div style="width:80%" class="w3-padding w3-col w3-card-4 w3-mobile">
+
+    <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom w3-round-xlarge">
+      <div class="w3-container w3-padding">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <h3>Reply</h3>
+      <textarea class="w3-input w3-border" placeholder="Write your reply here!" rows="8" cols="80"></textarea>
+        <button class="w3-teal w3-round w3-right w3-padding reply-submit" type="button" name="button">send <i class="fa fa-reply"></i> </button>
+      </div>
+    </div>
+  </div>
+
 <!--
     <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/han/reports/purchase">Purchase</a>
     <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/han/reports/site">Site Account</a>
@@ -17,6 +29,7 @@
           <th>Phone</th>
           <th>Type</th>
           <th>Issue</th>
+          <th>Action</th>
         </tr>
         <% reports.forEach(function(item){ %>
           <tr>
@@ -24,6 +37,7 @@
             <td><%= item.phone %></td>
             <td><%= item.type %></td>
             <td><%= item.issue %></td>
+            <td><button onclick="document.getElementById('id01').style.display='block'" rel-data="<%= item.phone %>" class="w3-button reply-button w3-teal">Reply</button></td>
           </tr>
         <% }); %>
       </table>
@@ -35,3 +49,29 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var phone;
+    $(".reply-button").click(function(){
+      phone = $(this).attr("rel-data");
+    });
+    $(".reply-submit").click(function(){
+      var msg = $("textarea").val();
+      var data = {
+        phone: phone,
+        msg: msg
+      }
+      $.ajax({
+        url: '/other/support/reply',
+        method: 'POST',
+        data: data,
+        success: function(res){
+          $("textarea").val("");
+          document.getElementById('id01').style.display='none';
+          alert("message sent");
+        }
+      });
+    });
+  });
+</script>
