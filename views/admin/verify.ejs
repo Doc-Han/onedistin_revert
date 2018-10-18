@@ -15,6 +15,7 @@
         <th>Username</th>
         <th>Phone</th>
         <th>Number</th>
+        <th>Delivery</th>
         <th>Status</th>
       </tr>
 
@@ -41,6 +42,20 @@
             <td>Empty</td>
           <% } %>
           <td><%= item.item_ref.split("-")[0] %></td>
+          <td>
+          <% var del = item.item_ref.split("-")[1]*1 %>
+          <% if(del == 0){ %>
+            5days
+          <% }else if(del == 1){ %>
+            <% if(item.region == 'Greater Accra'){ %>
+              24hrs
+            <% }else{ %>
+              5days distant
+            <% } %>
+          <% }else{ %>
+            Free
+          <% } %>
+        </td>
           <td>
             <% if(item.paid == '0'){ %>
               <a href="/han/verify-ussd/<%= item.ID %>"><button class="w3-dark-grey w3-padding w3-round">VERIFY</button></a>
