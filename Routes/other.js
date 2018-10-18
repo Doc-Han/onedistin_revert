@@ -120,7 +120,7 @@ router.post('/ipay/validate', isLoggedIn, (req,res) =>{
     var status = data[invoiceId].status;
     if(status == "paid"){
       var query = "SELECT * FROM onedistin_users WHERE ID = (SELECT user FROM onedistin_invoice WHERE invoiceId=?);SELECT item_ref,phone FROM onedistin_invoice WHERE invoiceId=?;UPDATE onedistin_invoice SET paid=? WHERE invoiceId=?";
-      con.query(query,[1,invoiceId,invoiceId,invoiceId],function(err,result){
+      con.query(query,[invoiceId,invoiceId,1,invoiceId],function(err,result){
         if(err)throw err;
         var item_ref = result[1][0].item_ref;
         var phone = result[1][0].phone;
