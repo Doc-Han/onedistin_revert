@@ -238,7 +238,7 @@ router.get('/verify-ussd/:id', (req,res) =>{
     }
     var user = result[0][0];
     var fullname = user.user_name;
-    var msg = "Great! "+fullname+", Your deal has been sealed. Your order will be delivered within "+_delivery+", Thanks for buying less with onedistin.";
+    var msg = "This is cool - Awesome! "+fullname.split(" ")[0]+". It's a done deal. Your order will be delivered within "+_delivery+", Thanks for buying from onedistin.";
     let options = {
       method: 'GET',
       uri: 'https://api.hubtel.com/v1/messages/send',
