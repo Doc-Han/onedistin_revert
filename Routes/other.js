@@ -109,6 +109,7 @@ router.post('/ipay', isLoggedIn, (req,res) =>{
 });
 
 router.post('/ipay/validate', isLoggedIn, (req,res) =>{
+  var user = req.user.user_name;
   var invoiceId = req.body.invoiceId;
   let options = {
     method: 'GET',
@@ -118,10 +119,36 @@ router.post('/ipay/validate', isLoggedIn, (req,res) =>{
   rp(options).then(function(data){
     var status = data[invoiceId].status;
     if(status == "paid"){
-      var query = "UPDATE onedistin_invoice SET paid=? WHERE invoiceId=?";
-      con.query(query,[1,invoiceId],function(err){
+      var query = "SELECT * FROM onedistin_users WHERE ID = (SELECT user FROM onedistin_invoice WHERE invoiceId=?);SELECT item_ref,phone FROM onedistin_invoice WHERE invoiceId=?;UPDATE onedistin_invoice SET paid=? WHERE invoiceId=?";
+      con.query(query,[1,invoiceId,invoiceId,invoiceId],function(err,result){
         if(err)throw err;
-        res.send("1");
+        var item_ref = result[1][0].item_ref;
+        var phone = result[1][0].phone;
+        var delivery = item_ref.split("-")[1];
+        if(delivery == 0){
+          var _delivery = "5 working days";
+        }else if(delivery == 1){
+          var _delivery = "24hours";
+        }else{
+          var _delivery = "5 working days";
+        }
+        var user = result[0][0];
+        var fullname = user.user_name;
+        var msg = "Awesome! "+fullname.split(" ")[0]+". It's a done deal. Your order will be delivered within "+_delivery+", Thanks for buying from onedistin.";
+        let options = {
+          method: 'GET',
+          uri: 'https://api.hubtel.com/v1/messages/send',
+          qs: { From: 'Onedistin',
+         To: phone,
+         Content: msg,
+         ClientID: process.env.HUBTEL_CLIENT_ID,
+         ClientSecret: process.env.HUBTEL_CLIENT_SECRET,
+         FromToContentClientIdClientSecretRegisteredDelivery: '' }
+        }
+
+        rp(options).then(function(data){
+          res.send("1");
+        });
       });
     }else if(status == "awaiting_payment"){
       res.send("2");

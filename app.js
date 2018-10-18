@@ -66,7 +66,6 @@ app.use(function(req,res,next){
   res.render('soon');
 });*/
 app.use(function(req,res,next){
-  console.log(req.session.date);
   if(req.session.date != currentDate.currentDate()){
     req.session.date = currentDate.currentDate();
     res.redirect('/');
