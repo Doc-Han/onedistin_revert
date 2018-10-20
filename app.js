@@ -13,6 +13,7 @@ var secure = require('express-force-https');
 var cloudinary = require('cloudinary');
 
 
+
 var port = process.env.PORT || 8080;
 var app = express();
 //app.use(logger('dev'));
@@ -77,7 +78,6 @@ app.use(function(req,res,next){
     }
   }
 });
-
 //Including all the routes available in this app
 app.use('/', require('./Routes/main.js'));
 app.use('/', require('./Routes/hubtel.js'));
