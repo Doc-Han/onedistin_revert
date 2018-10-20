@@ -62,16 +62,21 @@
         phone: phone,
         msg: msg
       }
-      $.ajax({
-        url: '/other/support/reply',
-        method: 'POST',
-        data: data,
-        success: function(res){
-          $("textarea").val("");
-          document.getElementById('id01').style.display='none';
-          alert("message sent");
-        }
-      });
+      if(phone.length < 10){
+        alert("The phone number is not up to 10!");
+      }else{
+        $.ajax({
+          url: '/other/support/reply',
+          method: 'POST',
+          data: data,
+          success: function(res){
+            $("textarea").val("");
+            document.getElementById('id01').style.display='none';
+            alert("message sent");
+          }
+        });
+      }
+
     });
   });
 </script>
