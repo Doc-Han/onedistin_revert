@@ -66,11 +66,15 @@ app.use(function(req,res,next){
   res.render('soon');
 });*/
 app.use(function(req,res,next){
-  if(req.session.date != currentDate.currentDate()){
+  if(typeof req.session.date == 'undefined'){
     req.session.date = currentDate.currentDate();
-    res.redirect('/');
   }else{
-    next();
+    if(req.session.date != currentDate.currentDate()){
+      req.session.date = currentDate.currentDate();
+      res.redirect('/');
+    }else{
+      next();
+    }
   }
 });
 
