@@ -194,6 +194,18 @@ router.post('/support/reply', (req,res) =>{
   });
 });
 
+router.post('/view_sell', (req,res) =>{
+  var id = req.body.custom_ID;
+  con.query("SELECT * FROM onedistin_sell WHERE custom_ID=?",[id],function(err,result){
+    if(err) throw err;
+    if(result.length >0){
+      res.send(result[0]);
+    }else{
+      res.send("0");
+    }
+  });
+});
+
 function isLoggedIn(req,res,next){
   if (req.isAuthenticated())
   return next();
