@@ -41,10 +41,10 @@ router.post('/', (req,res) => {
 });
 
 router.get('/dashboard', isLoggedIn, (req,res) => {
-  var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1';SELECT ID FROM onedistin_support;SELECT ID FROM onedistin_invoice WHERE dealTime ='"+currentDate.currentDate()+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+currentDate.currentDate()+"' AND paid='1';SELECT ID FROM onedistin_users WHERE user_registered='"+currentDate.currentDate()+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+previousDate.previousDate()+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+previousDate.previousDate()+"' AND paid='1';SELECT ID FROM onedistin_users WHERE user_registered='"+previousDate.previousDate()+"'";
+  var query = "SELECT ID FROM onedistin_users;SELECT ID FROM onedistin_invoice;SELECT ID FROM onedistin_invoice WHERE paid='1';SELECT ID FROM onedistin_support;SELECT ID FROM onedistin_invoice WHERE dealTime ='"+currentDate.currentDate()+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+currentDate.currentDate()+"' AND paid='1';SELECT ID FROM onedistin_users WHERE user_registered='"+currentDate.currentDate()+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+previousDate.previousDate()+"';SELECT ID FROM onedistin_invoice WHERE dealTime ='"+previousDate.previousDate()+"' AND paid='1';SELECT ID FROM onedistin_users WHERE user_registered='"+previousDate.previousDate()+"';SELECT ID FROM onedistin_sell;";
   con.query(query, function(err,result){
     if(err)throw err;
-    res.render('admin/home', {users: result[0].length,invoices:result[1].length,paid_invoices:result[2].length,support:result[3].length,todays_invoice:result[4].length,todays_paid:result[5].length,todays_accounts:result[6].length,yes_invoice:result[7].length,yes_paid:result[8].length,yes_accounts:result[9].length});
+    res.render('admin/home', {users: result[0].length,invoices:result[1].length,paid_invoices:result[2].length,support:result[3].length,todays_invoice:result[4].length,todays_paid:result[5].length,todays_accounts:result[6].length,yes_invoice:result[7].length,yes_paid:result[8].length,yes_accounts:result[9].length,sell: result[10].length});
   });
 });
 
@@ -341,6 +341,17 @@ router.post('/story', (req,res) =>{
       if(err)throw err;
       res.send("Story Updated!");
     });
+  });
+});
+
+router.get('/sell', isLoggedIn, (req,res) =>{
+  con.query("SELECT custom_ID,fullname,email,phone,location FROM onedistin_sell",function(err,result){
+    if(err)throw err;
+    if(result.length > 0){
+      res.render('admin/sell',{sale: result});
+    }else{
+      res.send("There is no data here!");
+    }
   });
 });
 
