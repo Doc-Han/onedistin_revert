@@ -68,7 +68,6 @@ app.use(function(req,res,next){
 });*/
 app.use(function(req,res,next){
   if(typeof req.session.date == 'undefined'){
-    console.log("It was empty!");
     req.session.date = currentDate.currentDate();
     next();
   }else{
