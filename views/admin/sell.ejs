@@ -1,0 +1,94 @@
+<% include partials/header.ejs %>
+
+<div class="w3-row w3-margin-top">
+  <% include partials/navs.ejs %>
+  <div style="width:80%" class="w3-padding w3-col w3-card-4 w3-mobile">
+
+    <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom w3-round-xlarge">
+      <div class="w3-container w3-padding">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <span style="display:none" class="loader">
+          <p style="margin:30px 0 0 0" class="w3-center">Loading</p>
+          <h1 style="margin:0 0 30px 0" class="w3-center loading">......</h1>
+        </span>
+        <div class="message w3-animate-top" style="display:none">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--
+    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/han/reports/purchase">Purchase</a>
+    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/han/reports/site">Site Account</a>
+    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/han/reports/account">Account</a>
+    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/han/reports/blind-rage">Blind rage</a>
+    <a class="w3-button button-color w3-round-xxlarge w3-text-white muli-bold" href="/han/reports/pure-bliss">Pure Bliss</a>
+-->
+
+      <table style="margin-top:30px" class="w3-table-all w3-bordered">
+        <tr>
+          <th>Fullname</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Location</th>
+          <th>Action</th>
+        </tr>
+        <% sale.forEach(function(item){ %>
+          <tr>
+            <td><%= item.fullname %></td>
+            <td><%= item.phone %></td>
+            <td><%= item.email %></td>
+            <td><%= item.location %></td>
+            <td><button onclick="document.getElementById('id01').style.display='block'" rel-data="<%= item.custom_ID %>" class="w3-button view-button w3-teal">View Offer</button></td>
+          </tr>
+        <% }); %>
+      </table>
+
+
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".view-button").click(function(){
+      $(".loader").show();
+      var loadtxt = "......";
+      var h = 1;
+      setInterval(function(){
+        if (h > 6){
+          h = 1;
+        }
+        var sho = loadtxt.substring(0,h);
+        $(".loading").text(sho);
+        h++;
+      },500);
+
+
+      var custom_ID = $(this).attr("rel-data");
+      var data = {
+        custom_ID: custom_ID
+      }
+      $.ajax({
+        url: '/other/view_sell',
+        method: 'POST',
+        data: data,
+        success: function(res){
+          if(res != "0"){
+            $(".loader").hide();
+            var message = "I am <span style='font-size: 30px' class='w3-text-blue muli-bold'>"+res.fullname+"</span>, a <span style='font-size: 30px' class='w3-text-blue muli-bold'>"+res.profession+"</span>. I would like to deal with you on some <span style='font-size: 30px' class='w3-text-blue muli-bold'>"+res.product_name+"</span> which is categorized as <span style='font-size: 30px' class='w3-text-blue muli-bold'>"+res.category+"</span>. Actually of the brand <span style='font-size: 30px' class='w3-text-blue muli-bold'>"+res.brand+"</span> at a sweet price of <span style='font-size: 30px' class='w3-text-blue muli-bold'>"+res.price+"</span>. <u>Maybe you'll wanna read this too:</u> <span style='font-size: 30px' class='w3-text-blue muli-bold'>"+res.description+"</span>.";
+            $(".message").html("<p style='font-size:26px'>"+message+"<p>");
+            $(".message").show();
+          }else{
+            $(".loader").hide();
+            var message = "There's an error here!";
+            $(".message").html("<p style='font-size:26px'>"+message+"<p>");
+            $(".message").show();
+          }
+        }
+      });
+    });
+  });
+</script>
