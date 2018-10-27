@@ -1,9 +1,18 @@
 <% include partials/header.ejs %>
+<style media="screen">
+  .w3-mobile{
+    margin-top: 10px!important;
+  }
+</style>
     <div class="w3-row w3-margin-top">
       <div style="color: #fff" class="w3-quarter w3-container">
         .
       </div>
       <div class="w3-half w3-mobile w3-container">
+
+        <div style="padding: 30px;margin-bottom: 20px; border: 2px solid #343434;border-radius:50px" class="w3-container">
+          Fuck anyone who created an account here!
+        </div>
 
         <a class="w3-button button-color-inverse w3-text-white w3-padding w3-margin-bottom w3-round-xxlarge" style="font-size:22px" href="/forum/add"> <i class="fa fa-plus"></i> Add new post </a>
 
@@ -16,6 +25,7 @@
                   <a href="/forum/<%= item.post_url %>" style="font-size:22px;" class="muli-bold w3-text-black">
                     <%= item.post_title %>
                   </a>
+                  <div class="w3-text-grey">Posted by <%= item.user_name %></div>
                   <!--- lsdflsdhfsdlfdsldsfjdsl ---->
                   <div class="w3-bar">
                     <a style="padding-left: 0" class="w3-bar-item w3-button post_like" href="#" ref-data="<%= item.ID %>">

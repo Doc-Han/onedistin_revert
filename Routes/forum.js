@@ -7,22 +7,36 @@ var router = express.Router();
 router.get('/', (req,res) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
-    var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12";
+    var query = "SELECT ID,post_author,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12";
     con.query(query,function(err,result){
       if (err) throw err;
       result.forEach(function(item,index){
-        con.query("SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[user,item.ID], function(err,l_result){
-          if(l_result.length > 0){
-            item.liked = "1";
-          }else{
-            item.liked = "0";
-          }
+        /*if(item.post_author == 'onedistin'){
+          item.user_name = 'onedistin';
           if(index == result.length -1){
+            console.log(result);
+            console.log("--"+index+"---");
             res.render('forum', {posts: result})
           }
-        });
+        }else{*/
+          con.query("SELECT user FROM onedistin_likes WHERE user=? AND postId=?;SELECT display_name FROM onedistin_users WHERE ID=?",[user,item.ID,item.post_author], function(err,l_result){
+            if(item.post_author == 'onedistin'){
+              item.user_name = 'onedistin';
+            }else{
+              item.user_name = l_result[1][0].display_name;
+            }
+            if(l_result[0].length > 0){
+              item.liked = "1";
+            }else{
+              item.liked = "0";
+            }
+            if(index == result.length -1){
+              res.render('forum', {posts: result})
+            }
+          });
+        //}
+
       });
-      ;
     });
   }else{
     var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12";

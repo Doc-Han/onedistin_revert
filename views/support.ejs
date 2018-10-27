@@ -10,7 +10,7 @@
       </div>
       <div style="margin-bottom:100px;" class="w3-half w3-mobile w3-container">
         <% if(isAuthenticated){ %>
-          <form action="/support" class="w3-border" style="padding:10px" method="POST">
+          <form action="/support" onsubmit="return validate()" class="w3-border" style="padding:10px" method="POST">
           <h2 class="muli-bold" style="font-size:32px">Dear Onedistin,</h2>
           <span style="text-align:left">This is about
           <select name="complaint">
@@ -20,22 +20,22 @@
             <option value="account">my account</option>
             <option>blind rage</option>
             <option>pure bliss</option>
-          </select>
+          </select> <span class="w3-text-red complaint-err" style="display:none"><i class="fa fa-warning"></i> Please select one of these</span>
         </span>
-          <h3>Here's the issue:</h3>
+          <h3>Here's the issue:</h3> <span class="w3-text-red issue-err" style="display:none"><i class="fa fa-warning"></i> Please let us know your issue</span>
           <textarea name="issue" class="w3-input w3-round w3-border" style="height: 150px;"></textarea> <br>
           <span>You can write me back at
-          <input class="w3-round-xxlarge w3-border" type="text" name="user_email" value="<%= currentUser.user_email %>"> </span> <br>
+          <input class="w3-round-xxlarge w3-border" type="text" name="user_email" value="<%= currentUser.user_email %>"> <span class="w3-text-red email-err" style="display:none"><i class="fa fa-warning"></i> What is your email</span> </span> <br>
           <b>Or</b> <br>
           <span>Call me on
-          <input class="w3-round-xxlarge w3-border" type="text" name="user_phone" value="<%= currentUser.user_phone %>"> </span>
+          <input class="w3-round-xxlarge w3-border" type="text" name="user_phone" value="<%= currentUser.user_phone %>"> <span class="w3-text-red phone-err" style="display:none"><i class="fa fa-warning"></i> What is your phone number</span> </span>
 
           <h3>Your's truely,</h3>
           <span><%= currentUser.user_name %></span>
           <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0;font-size:22px;line-height:46px">Please help me!</h3></button>
         </form>
         <% }else{ %>
-          <form action="/support" class="w3-border" style="padding:10px" method="POST">
+          <form action="/support" onsubmit="return validate()" class="w3-border" style="padding:10px" method="POST">
           <h2 class="muli-bold" style="font-size:32px">Dear Onedistin,</h2>
           <span style="text-align:left">This is about
           <select name="complaint">
@@ -66,6 +66,31 @@
 
       </div>
     </div>
+    <script type="text/javascript">
+      function validate(){
+        var complaint = $("[name='complaint']").val();
+        var issue = $("textarea").val();
+        var email = $("[name='user_email']").val();
+        var phone = $("[name='user_phone']").val();
+        $(".complaint-err").hide();$(".issue-err").hide();$(".email-err").hide();$(".phone-err").hide();
+        if(complaint == 0){
+          $(".complaint-err").show();
+          return false;
+        }else if(issue.trim().length < 4){
+          $(".issue-err").show();
+          return false;
+        }else if(email.trim().length < 5){
+          $(".email-err").show();
+          return false;
+        }else if(phone.trim().length < 10){
+          $(".phone-err").show();
+          return false;
+        }else{
+          return true;
+        }
 
+
+      }
+    </script>
   </body>
 </html>
