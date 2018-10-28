@@ -1,6 +1,5 @@
 User-Agent: *
 Allow: /
-Disallow: /han
 Sitemap: https://www.onedistin.com/sitemap.xml
 
 User-Agent: bingbot
