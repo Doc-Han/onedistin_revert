@@ -17,17 +17,17 @@
     <h3 style="text-align:left;line-height: 60px;font-size:56px"><b>Sell on Onedistin:</b></h3>
     <h4 style="text-align:left">OFFER A DISCOUNT DEAL, GET NEW CUSTOMERS, GROW YOUR BUSINESS</h4>
     <h5 style="text-align:left;margin-bottom:0" class="muli-bold">Do we know you?</h5>
-    <form style="margin-bottom:100px" action="/sell" method="post">
+    <form style="margin-bottom:100px" onsubmit="return sell()" action="/sell" method="post">
       <section>
     <dl style="margin-top:0">
       <dt> <label>Fullname</label> </dt>
       <dd> <input type="text" name="fullname" placeholder="Fullname" value="" required> </dd>
-      <dt> <label>I am a/an</label> </dt>
+      <dt> <label class="hehe">I am a/an</label> </dt>
       <dd> <select name="profession">
-        <option>I am a/an</option>
-        <option>Manufacturer</option>
-        <option>Wholesaler</option>
-        <option>Importer</option>
+        <option value="0">I am a/an</option>
+        <option value="Manufacturer">Manufacturer</option>
+        <option value="Wholesaler">Wholesaler</option>
+        <option value="Importer">Importer</option>
       </select> </dd>
       <dt> <label>Email</label> </dt>
       <dd> <input type="text" name="email" placeholder="Email" value="" required> </dd>
@@ -51,6 +51,7 @@
       <dd> <input type="text" name="description" placeholder="Product description" value="" required> </dd>
     </dl>
     </section>
+    <span class="w3-text-red err" style="display:none"><i class="fa fa-warning"></i> Please select an option above!</span>
     <!--<a style="width:100%;" class="add-item-bar w3-button w3-round-xxlarge w3-border w3-text-blue" href="#"><h3 style="margin:0">Wanna add another?</h3></a>-->
     <button style="margin-bottom:10px;width:100%;" class="w3-button button-color-inverse w3-round-xxlarge w3-margin-top" type="submit" name="button"><h3 style="margin:0">Done! Submit</h3></button>
     </form>
@@ -117,6 +118,20 @@ $(documtent).ready(function(){
     $("section").after(content);
   });
 });
+
+function sell(){
+  var p = $(".profession").val();
+  if(p == '0'){
+    $(".err").show();
+    $(".hehe").addClass("w3-red");
+    return false;
+  }else{
+    $(".err").hide();
+    $(".hehe").removeClass("w3-red");
+    return true;
+  }
+}
+
 function myFunction(id) {
     var x = document.getElementById(id);
     if (x.className.indexOf("w3-show") == -1) {
