@@ -37,7 +37,7 @@ passport.use(new localStrategy(
 router.get('/', (req,res,next) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
-    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp <> '"+currentDate.currentDate()+"000000"+"' ORDER BY ID DESC LIMIT 5;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE post_author='onedistin' AND timestamp = '"+currentDate.currentDate()+"000000"+"'";
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp <> '"+currentDate.currentDate()+"000000"+"' ORDER BY ID DESC LIMIT 5;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE post_author='onedistin' AND timestamp = '"+currentDate.currentDate()+"000000"+"';SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement'";
     con.query(query,[user,user], function(err,result){
       if(err)throw err;
       if(result[0].length > 0 && result[2].length > 0 && result[3].length > 0){
@@ -71,7 +71,12 @@ router.get('/', (req,res,next) => {
             }
 
             var survey = result[4][0];
-            res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],topPost: result[5][0],img:images, token: tokenGen.getToken(),today: currentDate.currentDate()});
+            if(result[6].length < 1){
+              var ann = false;
+            }else{
+              var ann = result[6][0].meta_content
+            }
+            res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],topPost: result[5][0],announcement: ann,img:images, token: tokenGen.getToken(),today: currentDate.currentDate()});
           }
         });
 
