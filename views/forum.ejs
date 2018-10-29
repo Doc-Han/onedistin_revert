@@ -10,9 +10,18 @@
       </div>
       <div class="w3-half w3-mobile w3-container">
 
-        <div style="padding: 30px;margin-bottom: 20px; border: 2px solid #343434;border-radius:50px" class="w3-container">
-          Fuck anyone who created an account here!
-        </div>
+        <% if(announcement != false){ %>
+          <div style="margin-bottom: 20px;padding:5px" class="w3-container w3-border w3-border-black w3-round-large">
+            <div style="float: left">
+              <img class="w3-quater" src="img/announcement.svg" style="width:70px" alt="">
+            </div>
+            <div class="w3-margin-left" style="width:80%;float: left">
+              <span style="font-weight:bold" class=" w3-rest w3-text-grey" >Anouncement</span> <br> <span class="ann"> <%- announcement %> </span>
+            </div>
+
+          </div>
+        <% } %>
+
 
         <a class="w3-button button-color-inverse w3-text-white w3-padding w3-margin-bottom w3-round-xxlarge" style="font-size:22px" href="/forum/add"> <i class="fa fa-plus"></i> Add new post </a>
 
