@@ -4,6 +4,19 @@
   <% include partials/navs.ejs %>
   <div style="width:60%" class="w3-col w3-card-4">
 
+    <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom w3-round-xlarge">
+      <div class="w3-container w3-padding">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <h3>Announcement</h3>
+      <textarea class="w3-input w3-border announcement summernote" placeholder="***-- Text here! --***" rows="8" cols="80"> <%- announcement %> </textarea>
+        <button class="w3-teal w3-round w3-right w3-padding announcement-submit" type="button" name="button">Post </button>
+      </div>
+    </div>
+    </div>
+
+    <marquee onclick="document.getElementById('id01').style.display='block'" style="cursor:pointer" class="w3-teal w3-xlarge">Do you have any announcements to give! Click here!!!</marquee>
+
     <div class="w3-container">
       <h3>Yesterday vs Today</h3>
     </div>
@@ -93,3 +106,24 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".summernote").summernote();
+  });
+  $(".announcement-submit").click(function(){
+    var announcement = $(".announcement").val();
+    var data = {
+      text: announcement
+    }
+    $.ajax({
+      url: '/other/announcement',
+      data: data,
+      method: 'POST',
+      success: function(res){
+        alert(res);
+        document.getElementById('id01').style.display='none';
+      }
+    });
+  });
+</script>
