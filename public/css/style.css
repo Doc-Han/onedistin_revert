@@ -23,6 +23,15 @@ body,p,ul,li,table {
   text-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
 
+.ann * {
+  margin: 0;
+  padding: 0;
+}
+.ann h1,h2,h3 {
+  font-size: 18px;
+  font-weight: bolder;
+}
+
 dl.straight dd {
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
