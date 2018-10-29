@@ -82,6 +82,19 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
             src="https://www.youtube.com/embed/<%= currentPost.video %>"
             frameborder="0"></iframe>
             <p style="margin:0 auto;text-align:left">Our daily video</p>
+            <% if(announcement != false){ %>
+              <div style="margin-bottom: 20px;padding:5px" class="w3-container w3-border w3-border-black w3-round-large">
+                <div style="float: left">
+                  <img class="w3-quater" src="img/announcement.svg" style="width:40px" alt="">
+                </div>
+                <div class="w3-margin-left" style="width:80%;float: left">
+                  <span style="font-weight:bold" class=" w3-rest w3-text-grey" >Anouncement</span> <br> <span class="ann"> <%- announcement %> </span>
+                </div>
+
+              </div>
+            <% } %>
+
+
           <ul style="width:100%" class="w3-ul w3-margin-top">
             <a class="w3-left" style="width:100%" href="/forum/<%= topPost.post_url %>"><li style="padding-left:0;width:inherit">
               <img style="width:50px;height:50px" class="w3-left" src="/img/shopping_bag.png" alt="">
