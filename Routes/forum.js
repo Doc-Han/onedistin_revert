@@ -7,10 +7,10 @@ var router = express.Router();
 router.get('/', (req,res) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
-    var query = "SELECT ID,post_author,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12";
+    var query = "SELECT ID,post_author,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12;SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement'";
     con.query(query,function(err,result){
       if (err) throw err;
-      result.forEach(function(item,index){
+      result[0].forEach(function(item,index){
         /*if(item.post_author == 'onedistin'){
           item.user_name = 'onedistin';
           if(index == result.length -1){
@@ -30,8 +30,13 @@ router.get('/', (req,res) => {
             }else{
               item.liked = "0";
             }
-            if(index == result.length -1){
-              res.render('forum', {posts: result})
+            if(index == result[0].length -1){
+              if(result[1].length < 1){
+                var ann = false;
+              }else{
+                var ann = result[1][0].meta_content;
+              }
+              res.render('forum', {posts: result[0], announcement: ann})
             }
           });
         //}
