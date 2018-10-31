@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/', (req,res) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
-    var query = "SELECT ID,post_author,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12;SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement'";
+    var query = "SELECT ID,post_author,post_title,post_url,post_likes,post_comments,last_activity FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12;SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement'";
     con.query(query,function(err,result){
       if (err) throw err;
       result[0].forEach(function(item,index){
@@ -44,24 +44,23 @@ router.get('/', (req,res) => {
       });
     });
   }else{
-    var query = "SELECT ID,post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12";
+    var query = "SELECT ID,post_title,post_url,post_likes,post_comments,last_activity FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12;SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement'";
     con.query(query,function(err,result){
       if (err) throw err;
-
-      result.forEach(function(item,index){
-            function findLongestWord(str) {
-              const stringArray = str.split(" ");
-              const orderedArray = stringArray.sort((a, b) => {
-                return a.length < b.length;
-              });
-              return orderedArray;
+      result[0].forEach(function(item,index){
+        con.query("SELECT display_name FROM onedistin_users WHERE ID=?",[item.ID],function(err,a_result){
+          if(err)throw err;
+          item.user_name = a_result[0].display_name;
+          if(index == result[0].length -1){
+            if(result[1].length < 1){
+              var ann = false;
+            }else{
+              var ann = result[1][0].meta_content;
             }
-            var lng = findLongestWord(item.post_title);
-              lng = lng[0];
-            item.img_url = lng;
-          if(index == result.length -1){
-            res.render('forum', {posts: result})
+            res.render('forum', {posts: result[0], announcement: ann});
           }
+        });
+
       });
 
     });
@@ -97,7 +96,7 @@ router.post('/comment', isLoggedIn, (req,res) => {
   con.query("SELECT display_name FROM onedistin_users WHERE ID=?",[author],function(err,result){
     if(err) throw err;
     const author_name = result[0].display_name;
-    var query = "INSERT INTO onedistin_comments (ID,comment_post_ID,comment_author,comment_author_name,comment_content,comment_parent,timestamp)VALUES(?,?,?,?,?,?,?);UPDATE onedistin_posts SET post_comments=(post_comments)+1 WHERE ID=?";
+    var query = "INSERT INTO onedistin_comments (ID,comment_post_ID,comment_author,comment_author_name,comment_content,comment_parent,timestamp)VALUES(?,?,?,?,?,?,?);UPDATE onedistin_posts SET post_comments=(post_comments)+1, last_activity='"+author_name+" commented on this'  WHERE ID=?";
     con.query(query,[null,post_id,author,author_name,comment,0,date,post_id],function(err){
       if(err)throw err;
       res.redirect(referer);
