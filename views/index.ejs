@@ -4,6 +4,21 @@
 <script type="text/javascript">
 var html = document.getElementsByTagName('html')[0];
 html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
+var fontColor = "<%= currentPost.bg_color %>";
+
+// remove hash character from string
+var rawFontColor = fontColor.substring(1,fontColor.length);
+
+// convert hex string to int
+var rgb = parseInt(rawFontColor, 16);
+
+/*if (brightness < 0.5) {
+   // use a bright background
+   alert("color is bright");
+} else {
+   // use a dark background
+   alert("color is dark");
+}*/
 </script>
 <% if(isAuthenticated){ %>
   <input class="acpoit" type="hidden" value="<%= offers.offer_one+offers.offer_two+offers.offer_three%>-<%= currentPost.ac_price %>" />
@@ -88,7 +103,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                   <img class="w3-quater" src="img/announcement.svg" style="width:40px" alt="">
                 </div>
                 <div class="w3-margin-left" style="width:80%;float: left">
-                  <span style="font-weight:bold" class=" w3-rest w3-text-grey" >Anouncement</span> <br> <span class="ann"> <%- announcement %> </span>
+                  <span style="font-weight:bold" class=" w3-rest w3-text-grey" >Announcement</span> <br> <span class="ann"> <%- announcement %> </span>
                 </div>
 
               </div>
@@ -214,7 +229,7 @@ html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
                         <td><input id="low" type="radio" name="fee" checked> <b>GHS 5</b> - <span class="w3-opacity">Delivery within 5 working days</span></td>
                       </tr>
                       <tr>
-                        <td style="text-align:left"><input id="high" type="radio" name="fee"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 24Hrs</span></td>
+                        <td style="text-align:left"><input id="high" type="radio" name="fee"> <b>GHS 10</b> - <span class="w3-opacity">Delivery within 24 working hours</span></td>
                       </tr>
                     </table>
                   <% }else{ %>
