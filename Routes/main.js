@@ -86,7 +86,7 @@ router.get('/', (req,res,next) => {
       }
     });
   }else {
-    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp <> '"+currentDate.currentDate()+"000000"+"' ORDER BY ID DESC LIMIT 5;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE post_author='onedistin' AND timestamp = '"+currentDate.currentDate()+"000000"+"'";
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp <> '"+currentDate.currentDate()+"000000"+"' ORDER BY ID DESC LIMIT 5;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE post_author='onedistin' AND timestamp = '"+currentDate.currentDate()+"000000"+"';SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement'";
     con.query(query, function(err,result){
       if(err)throw err;
       if(result[0].length > 0){
@@ -105,7 +105,12 @@ router.get('/', (req,res,next) => {
 
           images.push(a);
           if(index == img_ids.length -1){
-            res.render('index',{currentPost: result[0][0], forumPosts: result[1],survey: result[2][0],topPost: result[3][0],img:images,today: currentDate.currentDate()});
+            if(result[4].length < 1){
+              var ann = false;
+            }else{
+              var ann = result[4][0].meta_content
+            }
+            res.render('index',{currentPost: result[0][0], forumPosts: result[1],survey: result[2][0],topPost: result[3][0],img:images,today: currentDate.currentDate(), announcement: ann});
           }
         });
       }else{
@@ -131,25 +136,28 @@ router.post('/login', isNotLoggenIn, passport.authenticate('local', {
 }));
 
 router.get('/signup', isNotLoggenIn, (req,res) => {
-
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  const msg = {
-    to: 'hme18079@gmail.com',
-    from: 'support@onedistin.com',
-    subject: 'Sending with SendGrid is Fun',
-    text: 'and easy to do anywhere, even with Node.js',
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-  };
-  sgMail.send(msg);
+  var referer = 0;
   if(req.query.referer){
-    var referer = req.query.referer;
+    referer = req.query.referer;
+    console.log(referer);
+    con.query("SELECT user_name FROM onedistin_users WHERE refId=?",[referer],function(err,result){
+      if(result.length > 0){
+        var referer_name = result[0].user_name;
+      }else{
+        referer = 0;
+      }
+      console.log(referer);
+      res.render('signup',{referer: referer,referer_name: referer_name});
+    });
   }else{
-    var referer = 0;
+    referer = 0;
+    res.render('signup',{referer: referer});
   }
-  res.render('signup',{referer: referer});
+
 });
 
 router.post('/signup', isNotLoggenIn, (req,res) => {
+  console.log(req.body);
   var username = req.body.username;
   var fullname = req.body.fullname;
   var gender = req.body.gender;
@@ -158,16 +166,20 @@ router.post('/signup', isNotLoggenIn, (req,res) => {
   var region = req.body.region;
   var password = req.body.password;
   var refId = username[0]+username[1]+tokenGen.getToken();
+  refId = refId.substring(0,8);
+  var referer = 0;
+  console.log(req.body.referer);
   if(req.body.referer){
-    var referer = req.body.referer;
+    referer = req.body.referer;
   }else{
-    var referer = 0;
+    referer = 0;
   }
+  console.log(referer+" at signup post");
 
   bcrypt.hash(password,10,function(err,hash){
     if(err) throw err;
-    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,gender,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered,refId)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-    con.query(query, [null,username,fullname,gender,email,phone,region,'100',hash,currentDate.currentDate(),refId] ,function(err){
+    var query = "INSERT INTO onedistin_users (ID, display_name,user_name,gender,user_email,user_phone,user_loc,subscriptions,user_pass,user_registered,refId,referer)VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+    con.query(query, [null,username,fullname,gender,email,phone,region,'100',hash,currentDate.currentDate(),refId,referer] ,function(err){
       if(err) throw err;
       con.query("SELECT LAST_INSERT_ID() AS user_id", function(err,result){
         if(err) throw err;
@@ -306,11 +318,23 @@ router.get('/rewards', isLoggedIn, (req,res) => {
   });
 });
 
-router.get('/introduce', isLoggedIn, (req,res) => {
+router.get('/thesavers', isLoggedIn, (req,res) => {
   var user = req.user.user_id;
-  con.query("SELECT refId FROM onedistin_users WHERE ID=?",[user],function(err,result){
+  con.query("SELECT refId FROM onedistin_users WHERE ID=?;SELECT referals,redeemed FROM onedistin_savers WHERE user=?",[user,user],function(err,result){
     if(err)throw err;
-    res.render('introduce',{refId: result[0].refId});
+    var isSaver = false;
+    if(result[1].length > 0){
+      isSaver = true;
+    }
+    res.render('introduce',{refId: result[0][0].refId, isSaver: isSaver, saver: result[1][0]});
+  });
+});
+
+router.get('/thesavers/start', isLoggedIn, (req,res) => {
+  const user = req.user.user_id;
+  con.query("INSERT INTO onedistin_savers (referals,redeemed,user) VALUES (?,?,?)",[0,0,user],function(err){
+    if(err)throw err;
+    res.redirect('/thesavers');
   });
 });
 
@@ -569,8 +593,21 @@ router.get('/logout', isLoggedIn, (req,res) => {
   res.redirect('/login');
 });
 
-router.get('/alertme', (req,res) =>{
-  res.render('subs');
+router.get('/sub', (req,res) =>{
+  res.render('subs',{ref_user: 'none'});
+});
+
+router.get('/sub/:refId', (req,res) =>{
+  var refId = req.params.refId;
+  con.query("SELECT ID from onedistin_users WHERE refId=?",[refId],function(err,result){
+    if(err)throw err;
+    if(result.length < 1){
+      res.render('subs',{ref_user: 'none'});
+    }else{
+      res.render('subs',{ref_user: result[0].ID});
+    }
+  });
+
 });
 
 passport.serializeUser(function(user_id,done){
