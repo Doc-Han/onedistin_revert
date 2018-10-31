@@ -16,7 +16,7 @@
               <img class="w3-quater" src="img/announcement.svg" style="width:70px" alt="">
             </div>
             <div class="w3-margin-left" style="width:80%;float: left">
-              <span style="font-weight:bold" class=" w3-rest w3-text-grey" >Anouncement</span> <br> <span class="ann"> <%- announcement %> </span>
+              <span style="font-weight:bold" class=" w3-rest w3-text-grey" >Announcement</span> <br> <span class="ann"> <%- announcement %> </span>
             </div>
 
           </div>
@@ -34,7 +34,8 @@
                   <a href="/forum/<%= item.post_url %>" style="font-size:22px;" class="muli-bold w3-text-black">
                     <%= item.post_title %>
                   </a>
-                  <div class="w3-text-grey">Posted by <%= item.user_name %></div>
+                  <div class="w3-text-grey">Posted by <b><%= item.user_name %></b></div>
+                  <div style="font-weight: bold" class="w3-text-grey"><%= item.last_activity %></div>
                   <!--- lsdflsdhfsdlfdsldsfjdsl ---->
                   <div class="w3-bar">
                     <a style="padding-left: 0" class="w3-bar-item w3-button post_like" href="#" ref-data="<%= item.ID %>">
@@ -54,11 +55,13 @@
           <ul style="padding: 0" id="postList" class="w3-ul w3-container">
             <% posts.forEach(function(item){ %>
               <li style="padding-left: 0" class="w3-bar w3-row w3-border-bottom">
-                <img style="width:50px;height:50px;margin-right:10px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.img_url %>" alt="">
+                <img style="width:50px;height:50px;margin-right:10px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.post_title.split(' ').join(',') %>" alt="">
                 <div class="w3-rest">
                   <a href="/forum/<%= item.post_url %>" style="font-size:22px" class="muli-bold w3-text-black">
                     <%= item.post_title %>
                   </a>
+                  <div class="w3-text-grey">Posted by <b><%= item.user_name %></b></div>
+                  <div style="font-weight: bold" class="w3-text-grey"><%= item.last_activity %></div>
                   <!--- lsdflsdhfsdlfdsldsfjdsl ---->
                   <div class="w3-bar">
                     <a style="padding-left: 0" class="w3-bar-item w3-button" href="/login" ref-data="<%= item.ID %>">
