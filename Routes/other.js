@@ -8,15 +8,16 @@ var router = express.Router();
 router.post('/like', isLoggedIn, (req,res) =>{
   var postId = req.body.postId;
   var user = req.user.user_id;
-  var query = "SELECT * FROM onedistin_likes WHERE user=? AND postId=?";
-  con.query(query, [user,postId], function(err,result){
-    if(result.length > 0){
+  var query = "SELECT * FROM onedistin_likes WHERE user=? AND postId=?;SELECT display_name FROM onedistin_users WHERE ID=?";
+  con.query(query, [user,postId,user], function(err,result){
+    const author_name = result[1][0].display_name;
+    if(result[0].length > 0){
       con.query("DELETE FROM onedistin_likes WHERE user=? AND postId=?;UPDATE onedistin_posts SET post_likes=(post_likes)-1 WHERE ID=?",[user,postId,postId], function(err,result){
         if(err)throw err;
         res.send("0");
       });
     }else{
-      con.query("INSERT INTO onedistin_likes (user,postId)VALUES(?,?);UPDATE onedistin_posts SET post_likes=(post_likes)+1 WHERE ID=?",[user,postId,postId], function(err,result){
+      con.query("INSERT INTO onedistin_likes (user,postId)VALUES(?,?);UPDATE onedistin_posts SET post_likes=(post_likes)+1, last_activity='"+author_name+" liked this' WHERE ID=?",[user,postId,postId], function(err,result){
         if(err)throw err;
         res.send("1");
       });
@@ -223,6 +224,23 @@ router.post('/announcement', (req,res) =>{
       if(err)throw err;
       res.send("Announcement Updated!");
     });
+  });
+});
+
+router.post('/saver/sub', (req,res) =>{
+  var body = req.body;
+  var email = body.email;
+  var user = body.user;
+  con.query("SELECT user FROM onedistin_savers WHERE emails LIKE '%"+email+"%' ",function(err,result){
+    if(err)throw err;
+    if(result.length > 0){
+      res.send("Already Exists!");
+    }else{
+      con.query("UPDATE onedistin_users SET referals=(referals)+1, emails=concat(emails,'-***-"+email+"') WHERE user=?",[user],function(err){
+        if(err)throw err;
+        res.send("Done successfully");
+      });
+    }
   });
 });
 
