@@ -76,7 +76,8 @@
             </select></dd>
             <% if(referer != 0){ %>
               <dt> <label>referer</label> </dt>
-              <dd> <input name="referer" class="w3-disabled" type="text" value="<%= referer %>" placeholder="Referer" disabled></dd>
+              <dd> <input style="font-weight: bolder" type="text" value="<%= referer_name %>" disabled></dd>
+              <input name="referer" type="hidden" value="<%= referer %>" >
             <% } %>
             <dt> <label>PASSWORD</label> </dt>
             <dd> <input name="password" type="password" placeholder="Password"></dd>
