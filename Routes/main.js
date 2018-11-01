@@ -10,6 +10,7 @@ var cloudinary = require('cloudinary');
 var mailer = require('../config/nodemailer.js');
 var rp = require('request-promise');
 const sgMail = require('@sendgrid/mail');
+var striptags = require('striptags');
 var router = express.Router();
 
 passport.use(new localStrategy(
@@ -410,6 +411,7 @@ router.get('/pastdeal/:id', (req,res) => {
         }
         images.push(a);
         if(index == img_ids.length -1){
+          result[0][0].description = striptags(result[0][0].thingGet);
           res.render('past-deal',{currentPost: result[0][0], forumPosts: result[1], img:images,survey: s_result[0]});
         }
       });

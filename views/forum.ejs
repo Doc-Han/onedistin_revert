@@ -1,3 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126294820-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126294820-1');
+</script>
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '1482111765221792');
+fbq('track', 'PageView');
+</script>
+<noscript>
+ <img height="1" width="1"
+src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+<!-- Hotjar Tracking Code for www.onedistin.com -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1015846,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community</title>
+    <meta name="description" content="Join the thousands of #bargainHunters who share their shopping experiences, money saving tips, rants and pure bliss.">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  </head>
+  <body style="position:relative">
 <% include partials/header.ejs %>
 <style media="screen">
   .w3-mobile{
@@ -23,7 +80,7 @@
         <% } %>
 
 
-        <a class="w3-button button-color-inverse w3-text-white w3-padding w3-margin-bottom w3-round-xxlarge" style="font-size:22px" href="/forum/add"> <i class="fa fa-plus"></i> Add new post </a>
+        <a class="w3-button button-color-inverse w3-text-white w3-padding w3-margin-bottom w3-round-xxlarge" style="font-size:22px" href="/community/add"> <i class="fa fa-plus"></i> Add new post </a>
 
         <% if(isAuthenticated){ %>
           <ul style="padding: 0" id="postList" class="w3-ul w3-container">
@@ -31,7 +88,7 @@
               <li style="padding-left: 0" class="w3-bar w3-row w3-border-bottom">
                 <img style="width:50px;height:50px;margin-right:10px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.post_title.split(' ').join(',') %>" alt="">
                 <div class="w3-rest">
-                  <a href="/forum/<%= item.post_url %>" style="font-size:22px;" class="muli-bold w3-text-black">
+                  <a href="/community/<%= item.post_url %>" style="font-size:22px;" class="muli-bold w3-text-black">
                     <%= item.post_title %>
                   </a>
                   <div class="w3-text-grey">Posted by <b><%= item.user_name %></b></div>
@@ -45,7 +102,7 @@
                       <i class="fa fa-heart w3-text-black"> <%= item.post_likes %> </i>
                     <% } %>
                     </a>
-                    <a class="w3-bar-item w3-button" href="/forum/<%=item.post_url %>"> <i class="fa fa-comment-o w3-text-black"> <%= item.post_comments %> </i> </a>
+                    <a class="w3-bar-item w3-button" href="/community/<%=item.post_url %>"> <i class="fa fa-comment-o w3-text-black"> <%= item.post_comments %> </i> </a>
                   </div>
                 </div>
                </li>
@@ -57,7 +114,7 @@
               <li style="padding-left: 0" class="w3-bar w3-row w3-border-bottom">
                 <img style="width:50px;height:50px;margin-right:10px" class="w3-circle w3-left w3-quater" src="https://source.unsplash.com/50x50/?<%= item.post_title.split(' ').join(',') %>" alt="">
                 <div class="w3-rest">
-                  <a href="/forum/<%= item.post_url %>" style="font-size:22px" class="muli-bold w3-text-black">
+                  <a href="/community/<%= item.post_url %>" style="font-size:22px" class="muli-bold w3-text-black">
                     <%= item.post_title %>
                   </a>
                   <div class="w3-text-grey">Posted by <b><%= item.user_name %></b></div>

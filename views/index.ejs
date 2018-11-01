@@ -1,25 +1,84 @@
-<% include partials/header.ejs %>
-<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/f1c7226a1d6725eb641a7cea7/97bdaea85ee41431bcbd0eb67.js");</script>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126294820-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-<script type="text/javascript">
-var html = document.getElementsByTagName('html')[0];
-html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
-var fontColor = "<%= currentPost.bg_color %>";
-
-// remove hash character from string
-var rawFontColor = fontColor.substring(1,fontColor.length);
-
-// convert hex string to int
-var rgb = parseInt(rawFontColor, 16);
-
-/*if (brightness < 0.5) {
-   // use a bright background
-   alert("color is bright");
-} else {
-   // use a dark background
-   alert("color is dark");
-}*/
+  gtag('config', 'UA-126294820-1');
 </script>
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '1482111765221792');
+fbq('track', 'PageView');
+</script>
+<noscript>
+ <img height="1" width="1"
+src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+<!-- Hotjar Tracking Code for www.onedistin.com -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1015846,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onedistin - Great Deals Everyday at 12:00 midnight.</title>
+    <meta name="description" content="Join the thousands of #bargainHunters who share their shopping experiences, money saving tips, rants and pure bliss.">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/f1c7226a1d6725eb641a7cea7/97bdaea85ee41431bcbd0eb67.js");</script>
+
+    <script type="text/javascript">
+    var html = document.getElementsByTagName('html')[0];
+    html.style.cssText = "--custom-color: <%= currentPost.bg_color %>;";
+    var fontColor = "<%= currentPost.bg_color %>";
+
+    // remove hash character from string
+    var rawFontColor = fontColor.substring(1,fontColor.length);
+
+    // convert hex string to int
+    var rgb = parseInt(rawFontColor, 16);
+
+    /*if (brightness < 0.5) {
+       // use a bright background
+       alert("color is bright");
+    } else {
+       // use a dark background
+       alert("color is dark");
+    }*/
+    </script>
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  </head>
+  <body style="position:relative">
+<% include partials/header.ejs %>
+
 <% if(isAuthenticated){ %>
   <input class="acpoit" type="hidden" value="<%= offers.offer_one+offers.offer_two+offers.offer_three%>-<%= currentPost.ac_price %>" />
 <% } %>
@@ -111,14 +170,14 @@ var rgb = parseInt(rawFontColor, 16);
 
 
           <ul style="width:100%" class="w3-ul w3-margin-top">
-            <a class="w3-left" style="width:100%" href="/forum/<%= topPost.post_url %>"><li style="padding-left:0;width:inherit">
+            <a class="w3-left" style="width:100%" href="/community/<%= topPost.post_url %>"><li style="padding-left:0;width:inherit">
               <img style="width:50px;height:50px" class="w3-left" src="/img/shopping_bag.png" alt="">
                 <span style="word-break:break-word"><%= topPost.post_title %></span>
                 <i class="fa fa-heart"> <%= topPost.post_likes %> </i>
                 <i class="fa fa-comment"> <%= topPost.post_comments %> </i>
             </li></a>
             <% forumPosts.forEach(function(item){ %>
-              <a class="w3-left" style="width:100%" href="/forum/<%= item.post_url %>"><li style="padding-left:0;width:inherit">
+              <a class="w3-left" style="width:100%" href="/community/<%= item.post_url %>"><li style="padding-left:0;width:inherit">
                 <img style="width:50px;height:50px" class="w3-circle w3-left" src="https://source.unsplash.com/50x50/?<%= item.post_title.split(' ').join(',') %>" alt="">
                   <span style="word-break:break-word"><%= item.post_title %></span>
                   <i class="fa fa-heart"> <%= item.post_likes %> </i>
@@ -126,7 +185,7 @@ var rgb = parseInt(rawFontColor, 16);
               </li></a>
             <% }); %>
           </ul>
-          <a href="/forum"><button style="margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><h5 class="custom-txt-color muli-regular" style="margin:0;font-size:22px;line-height:33px">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
+          <a href="/community"><button style="margin-bottom:10px;width:100%;" class="w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><h5 class="custom-txt-color muli-regular" style="margin:0;font-size:22px;line-height:33px">Checkout the community <i class="fa fa-angle-right"></i> </h5></button></a>
       </div>
     </div>
 

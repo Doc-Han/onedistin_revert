@@ -44,13 +44,17 @@ router.get('/', (req,res) => {
       });
     });
   }else{
-    var query = "SELECT ID,post_title,post_url,post_likes,post_comments,last_activity FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12;SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement'";
+    var query = "SELECT ID,post_title,post_author,post_url,post_likes,post_comments,last_activity FROM onedistin_posts WHERE timestamp < '"+currentTime.currentTime()+"' ORDER BY ID DESC LIMIT 12;SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement'";
     con.query(query,function(err,result){
       if (err) throw err;
       result[0].forEach(function(item,index){
-        con.query("SELECT display_name FROM onedistin_users WHERE ID=?",[item.ID],function(err,a_result){
+        con.query("SELECT display_name FROM onedistin_users WHERE ID=?",[item.post_author],function(err,a_result){
           if(err)throw err;
-          item.user_name = a_result[0].display_name;
+          if(item.post_author == 'onedistin'){
+            item.user_name = 'onedistin';
+          }else{
+            item.user_name = a_result[0].display_name;
+          }
           if(index == result[0].length -1){
             if(result[1].length < 1){
               var ann = false;
@@ -83,7 +87,7 @@ router.post('/add', isLoggedIn, (req,res) => {
   var query = "INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?)";
   con.query(query,[null,author,title,body,url,0,0,currentDate,new Date()], function(err){
     if(err)throw err;
-    res.redirect('/forum');
+    res.redirect('/community');
   });
 });
 
@@ -106,59 +110,69 @@ router.post('/comment', isLoggedIn, (req,res) => {
 
 });
 
-router.get('/:title', (req,res) => {
+router.get('/:title', (req,res,next) => {
   var url = req.params.title;
   if(req.isAuthenticated()){
     var user = req.user.user_id;
     var query = "SELECT * FROM onedistin_posts WHERE post_url= ?";
     con.query(query,[url],function(err,p_result){
       if (err)throw err;
-      const postId = p_result[0].ID;
-      con.query("SELECT * FROM onedistin_comments WHERE comment_post_ID=?;SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[postId,user,postId],function(err,c_result){
-        if(err)throw err;
-        if(c_result[1].length > 0){
-          var like = "1";
-        }else{
-          var like = "0";
-        }
-        //formatting time for post
-        var n = p_result[0].time;
-        var t = new Date(n);
-        var months = ["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"];
-        p_result[0].time = t.getHours()+":"+t.getMinutes()+" - "+t.getDate()+" "+months[t.getMonth()]+" "+t.getFullYear();
-        //ends Here
-        //formatting time for Comments
-        c_result[0].forEach(function(item){
-          var c = item.timestamp;
-          var g = new Date(c);
-          item.timestamp = g.getHours()+":"+g.getMinutes()+" - "+g.getDate()+" "+months[g.getMonth()]+" "+g.getFullYear();
+      if(p_result.length > 0){
+        const postId = p_result[0].ID;
+        con.query("SELECT * FROM onedistin_comments WHERE comment_post_ID=?;SELECT * FROM onedistin_likes WHERE user=? AND postId=?",[postId,user,postId],function(err,c_result){
+          if(err)throw err;
+          if(c_result[1].length > 0){
+            var like = "1";
+          }else{
+            var like = "0";
+          }
+          //formatting time for post
+          var n = p_result[0].time;
+          var t = new Date(n);
+          var months = ["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"];
+          p_result[0].time = t.getHours()+":"+t.getMinutes()+" - "+t.getDate()+" "+months[t.getMonth()]+" "+t.getFullYear();
+          //ends Here
+          //formatting time for Comments
+          c_result[0].forEach(function(item){
+            var c = item.timestamp;
+            var g = new Date(c);
+            item.timestamp = g.getHours()+":"+g.getMinutes()+" - "+g.getDate()+" "+months[g.getMonth()]+" "+g.getFullYear();
+          });
+          //ends here
+          res.render('post', {post: p_result[0], comment: c_result[0],like: like});
         });
-        //ends here
-        res.render('post', {post: p_result[0], comment: c_result[0],like: like});
-      });
+      }else{
+        next();
+      }
+
     });
   }else{
     var query = "SELECT * FROM onedistin_posts WHERE post_url= ?";
     con.query(query,[url],function(err,p_result){
       if (err)throw err;
-      const postId = p_result[0].ID;
-      con.query("SELECT * FROM onedistin_comments WHERE comment_post_ID=?",[postId],function(err,c_result){
-        if(err)throw err;
-        //formatting time for post
-        var n = p_result[0].time;
-        var t = new Date(n);
-        var months = ["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"];
-        p_result[0].time = t.getHours()+":"+t.getMinutes()+" - "+t.getDate()+" "+months[t.getMonth()]+" "+t.getFullYear();
-        //ends Here
-        //formatting time for Comments
-        c_result.forEach(function(item){
-          var c = item.timestamp;
-          var g = new Date(c);
-          item.timestamp = g.getHours()+":"+g.getMinutes()+" - "+g.getDate()+" "+months[g.getMonth()]+" "+g.getFullYear();
+      if(p_result.length > 0){
+        const postId = p_result[0].ID;
+        con.query("SELECT * FROM onedistin_comments WHERE comment_post_ID=?",[postId],function(err,c_result){
+          if(err)throw err;
+          //formatting time for post
+          var n = p_result[0].time;
+          var t = new Date(n);
+          var months = ["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"];
+          p_result[0].time = t.getHours()+":"+t.getMinutes()+" - "+t.getDate()+" "+months[t.getMonth()]+" "+t.getFullYear();
+          //ends Here
+          //formatting time for Comments
+          c_result.forEach(function(item){
+            var c = item.timestamp;
+            var g = new Date(c);
+            item.timestamp = g.getHours()+":"+g.getMinutes()+" - "+g.getDate()+" "+months[g.getMonth()]+" "+g.getFullYear();
+          });
+          //ends here
+          res.render('post', {post: p_result[0], comment: c_result});
         });
-        //ends here
-        res.render('post', {post: p_result[0], comment: c_result});
-      });
+
+      }else{
+        next();
+      }
 
     });
   }

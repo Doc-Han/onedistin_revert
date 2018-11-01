@@ -30,6 +30,14 @@
    text-align: left;
  }
 
+ h2 {
+   font-size: 28px;
+   font-weight: normal!important;
+   text-align: left;
+   margin: 0;
+   padding: 0;
+ }
+
  .progress {
    display: flex;
    flex-direction: row;
@@ -60,8 +68,8 @@
       </div>
       <div style="margin-bottom:300px" class="w3-half w3-center w3-mobile w3-container w3-animate-bottom">
         <% if(isSaver){ %>
+          <span style="font-weight: bolder;" class="w3-large">Your Status</span>
 
-          <span style="font-weight: bolder" class="w3-large">Your Status</span>
           <% if(saver.referals < 10){ %>
             <div style="margin-top: 30px" class="progress">
               <% for(i=1; i<=10; i++){ %>
@@ -87,12 +95,12 @@
             </div>
             <p style="text-align: center!important">You have introduced <b><%= saver.referals %> people</b>, only <b> <%= 25 - saver.referals %> more</b> to get your <b>swag T-shirt</b></p>
           <% }else if(saver.referals < 50 && saver.referals >= 25){ %>
-            <div style="margin-top: 30px" class="progress">
-            <div class="w3-border">
-              <div class="w3-grey" style="height:24px;width:<%= (((saver.referals - 25)/50)*100)+'%' %>"></div>
+            <div style="margin-top: 30px">
+            <div class="w3-border w3-border-blue w3-round-xlarge">
+              <div class="w3-blue w3-text-black w3-round-xlarge" style="font-weight:bold;height:24px;width:<%= (((saver.referals - 25)/25)*100)+'%' %>"><%= saver.referals+'/'+50%></div>
             </div>
             </div>
-            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> people</b>, only <b> <%= 50 - saver.referals %> more</b> to get your <b>swag DrawString Bag</b></p>
+            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> people</b>, only <b> <%= 50 - saver.referals %> more</b> to get your <b>swag drawstring bag</b></p>
           <% } %>
 
 
@@ -103,33 +111,33 @@
           <div>
             <span style="font-weight: bolder" class="w3-large">Share</span>
             <p style="text-align: center!important">Use your personal link below to get new people to subscribe to the deal alerts.</p>
-            <span class="w3-padding w3-blue w3-round"><b class="w3-large">https://1distin.com/sub/<%= refId %></b></span>
+            <span class="w3-padding w3-round-xlarge w3-border w3-border-blue"  style="font-size:15px!important">https://1distin.com/sub/<%= refId %></span>
             <div class="container w3-margin-top">
-              <a href="https://bit.ly/FBdistin" ><i style="background-color:#3B5998;margin-bottom:5px;font-size:16px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-black fa-facebook"></i>
-              <a href="https://bit.ly/TwitaDistin" ><i style="background-color:#2f87d2;margin-bottom:5px;font-size:16px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-black fa-twitter"></i>
-              <a href="https://bit.ly/InstaDistin" ><i style="background-color:#25d366;margin-bottom:5px;font-size:16px;width:50px;height:50px;text-align:center;line-height:50px" class="fa w3-circle w3-text-black fa-whatsapp"></i>
+              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fonedistin.com%2F&amp;src=sdkpreparse"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i></a>
+              <a target="_blank" href="https://twitter.com/intent/tweet?text=  http://onedistin.com/signup?referer="><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>
+              <a href="whatsapp://send?text= http://onedistin.com/signup?referer=" data-action="share/whatsapp/share"><i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i></a>
             </div>
           </div>
 
 
         <% }else{ %>
           <h1>theSavers</h1>
-          <p class="w3-text-grey">You know you want to be a part of this…</p>
+          <h2 style="margin-top: -20px;margin-bottom: 16px" class="w3-text-grey">You know you want to be a part of this…</h2>
 
-          <h1>Who are theSavers?</h1>
+          <h2>Who are theSavers?</h2>
   <p>theSavers are Onedistin’s brand ambassadors. They are a community committed to getting the best bargains and empowering others to do the same. theSavers connect with one another online and IRL and get unique access to Onedistin, invites to private events and exclusive content. Side note: They also get Onedistin swag.</p>
-          <h1>What would I do?</h1>
+          <h2>What would I do?</h2>
   <p>Spread the word about Onedistin in your place of work, campus, network, family, those random Facebook and Twitter friends... use a unique link that gives you credit for getting people to subscribe to the daily deal alert.
   Wear Onedistin swag around town.
   Give feedback and brainstorm with the Onedistin team.</p>
-          <h1>What would I get?</h1>
+          <h2>What would I get?</h2>
   <p>Swag on swag. Go wild. Rock your Onedistin Drawstring bag and rock your Onedistin shirt, while typing on your Onedistin-cased phone, writing in your Onedistin diary and getting free delivery on all purchases for 12 months.
   An invite to our private Savers’ Facebook group where you can connect and network with other Savers and get free self-improvement resources.</p>
 
   <p>Extra birthday love</p>
 
   <p>Partnership perks. Exclusives with our partner brands.</p>
-          <h1>How do I start?</h1>
+          <h2>How do I start?</h2>
   <p>Use your personal link below to get 10 new smart shoppers or deal hunters to subscribe to the daily deal alerts.</p>
   <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top">
   <a class="w3-text-white" href="/thesavers/start" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Get me started!</h3></a>
