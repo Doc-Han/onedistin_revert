@@ -77,6 +77,7 @@ router.get('/', (req,res,next) => {
             }else{
               var ann = result[6][0].meta_content
             }
+            result[0][0].description = striptags(result[0][0].thingGet);
             res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],topPost: result[5][0],announcement: ann,img:images, token: tokenGen.getToken(),today: currentDate.currentDate()});
           }
         });
@@ -111,6 +112,7 @@ router.get('/', (req,res,next) => {
             }else{
               var ann = result[4][0].meta_content
             }
+            result[0][0].description = striptags(result[0][0].thingGet);
             res.render('index',{currentPost: result[0][0], forumPosts: result[1],survey: result[2][0],topPost: result[3][0],img:images,today: currentDate.currentDate(), announcement: ann});
           }
         });

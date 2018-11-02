@@ -54,7 +54,7 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
     <meta property="og:url"           content="https://www.onedistin.com" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Deal of the day | Onedistin" />
-    <meta property="og:description"   content="<%= currentPost.price %> <%= currentPost.thingGet %>" />
+    <meta property="og:description"   content="<%= currentPost.price %> <%= currentPost.description %>" />
     <meta property="og:image"         content="<%= img[1] %>" />
 
     <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/f1c7226a1d6725eb641a7cea7/97bdaea85ee41431bcbd0eb67.js");</script>
@@ -140,8 +140,8 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
             <div id="share_btns" style="cursor:pointer;position:absolute;left:50px;top:-120%;color:#fff;display:none;padding:16px;height:auto">
               <% if(isAuthenticated){ %>
                 <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.onedistin.com%2F&amp;src=sdkpreparse"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i></a>
-                <a target="_blank" href="https://twitter.com/intent/tweet?text= <%= currentPost.share_txt %> http://onedistin.com/signup?referer=<%= currentUser.refId %>"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>
-                <a href="whatsapp://send?text=<%= currentPost.share_txt %> http://onedistin.com/signup?referer=<%= currentUser.refId %>" data-action="share/whatsapp/share"><i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i></a>
+                <a target="_blank" href="https://twitter.com/intent/tweet?text= <%= currentPost.share_txt %> http://onedistin.com/signup"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>
+                <a href="whatsapp://send?text=<%= currentPost.share_txt %> http://onedistin.com/signup" data-action="share/whatsapp/share"><i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i></a>
               <% }else{ %>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.onedistin.com%2F&amp;src=sdkpreparse"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i></a>
                 <a href="https://twitter.com/intent/tweet?text= <%= currentPost.share_txt %> onedistin.com"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>

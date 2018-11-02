@@ -1,6 +1,7 @@
 var express = require('express');
 var con = require('../config/db.js');
 var currentTime = require('../config/tools.js');
+var striptags = require('striptags');
 
 var router = express.Router();
 
