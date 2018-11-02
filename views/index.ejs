@@ -46,7 +46,9 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onedistin - Great Deals Everyday at 12:00 midnight.</title>
-    <meta name="description" content="Join the thousands of #bargainHunters who share their shopping experiences, money saving tips, rants and pure bliss.">
+    <meta name="description" content="Ghana’s 1st daily deal company made for the #bargainHunter.  Get big discounts direct from top brands and manufacturers on one product every 24 hours. Prices Reduced | 100% authentic products | Fast nationwide delivery | Best bargains on electronics, phones, books, fashion, Beauty Products. Unlike Jumia, Tonaton, olx, and kikuu, we don’t offer a huge selection of products at once. It is one product, every 24 hours at the best prices in Ghana. ">
+    <link rel="canonical" href="https://www.onedistin.com">
+    <link rel="alternate" href="x-default">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
     <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/f1c7226a1d6725eb641a7cea7/97bdaea85ee41431bcbd0eb67.js");</script>
@@ -115,17 +117,17 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
           </div>
           <div style="height:59px;" class="buy w3-row">
             <% if(isAuthenticated){ %>
-              <a onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 0px" class="w3-col w3-button w3-round-xxlarge button-color">
+              <button onclick="checkout_btn_press()" style="width:78%;height: 59px; padding: 5px 0px" class="w3-col w3-button w3-round-xxlarge button-color">
                 <span style="text-align:center;font-size:24px;line-height:28px" class="custom-txt-color muli-semi-bold"><b><%= currentPost.price %></b></span>
                  <br>
                 <span style="font-size:16px;line-height:16px" class="custom-txt-color w3-medium muli-regular">BUY DISTIN</span>
-              </a>
+              </button>
             <% }else{ %>
-              <a href="/login" style="width:78%;height: 59px; padding: 5px 0px" class="w3-col w3-button w3-round-xxlarge muli button-color">
+              <button href="/login" style="width:78%;height: 59px; padding: 5px 0px" class="w3-col w3-button w3-round-xxlarge muli button-color">
                 <span style="text-align:center;font-size:24px;line-height:28px" class="custom-txt-color muli-semi-bold"><b><%= currentPost.price %></b></span>
                  <br>
                 <span style="font-size:16px;line-height:16px" class="custom-txt-color w3-medium muli-regular">BUY DISTIN</span>
-              </a>
+              </button>
             <% } %>
 
             <span id="share_btn" style="font-size: 18px;cursor:pointer;position:relative;height: 59px;width:59px;line-height:59px;text-align:center" class="custom-txt-color w3-col-rest w3-right w3-circle muli-regular button-color" href="#">Share
