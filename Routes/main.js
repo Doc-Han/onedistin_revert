@@ -115,8 +115,8 @@ router.get('/', (req,res,next) => {
             if(result[4].length < 1){
               var ann = false;
             }else{
-              if(striptags(result[6][0].meta_content).trim() != ""){
-                var ann = result[6][0].meta_content;
+              if(striptags(result[4][0].meta_content).trim() != ""){
+                var ann = result[4][0].meta_content;
               }else{
                 var ann = false;
               }
