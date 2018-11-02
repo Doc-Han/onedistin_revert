@@ -166,8 +166,8 @@ li {
 }
 
 .button-color {
-  background-color: #212e38;
-  color: var(--custom-color)
+  background-color: #212e38!important;
+  color: var(--custom-color)!important;
 }
 
 .button-color:hover {
