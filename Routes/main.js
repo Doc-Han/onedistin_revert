@@ -606,7 +606,7 @@ router.get('/sub/:refId', (req,res) =>{
     if(result.length < 1){
       res.render('subs',{ref_user: 'none'});
     }else{
-      res.render('subs',{ref_user: result[0].ID});
+      res.render('subs',{ref_user: result[0].ID,refId: refId});
     }
   });
 

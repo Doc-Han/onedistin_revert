@@ -27,6 +27,7 @@
           <ul style="overflow:hidden" class="content w3-round-xlarge">
             <% if(isAuthenticated){ %>
               <a href="/profile"><li>profile</li></a>
+              <a href="/theSavers"><li>theSavers</li></a>
               <a href="/logout"><li>logout</li></a>
             <% }else{ %>
               <a href="/login"><li>login</li></a>
@@ -36,18 +37,18 @@
 
           </ul>
         </li>
-        <% if(isAuthenticated){ %>
-          <li class="main">
+
+          <!--<li class="main">
             <a href="/thesavers" title="rewards">
               <i style="background-image: url('../img/reward.png')"></i>
               <p>theSavers</p>
             </a>
-            <!--<ul style="overflow:hidden" class="content w3-round-xlarge">
+            <ul style="overflow:hidden" class="content w3-round-xlarge">
               <a href="/thesavers"><li>Introduce a Friend</li></a>
               <a href="/rewards"><li>rewards</li></a>
-            </ul>-->
-          </li>
-        <% } %>
+            </ul>
+          </li>-->
+
         <li>
           <a href="/community" title="community">
             <i style="background-image: url('../img/community.png')"></i>

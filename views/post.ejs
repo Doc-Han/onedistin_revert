@@ -49,6 +49,12 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
     <meta name="description" content="<%= post.post_content %>">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
+    <meta property="og:url"           content="https://www.ondistin.com/community/<%= post.post_url %>" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="<%= post.post_title %>" />
+    <meta property="og:description"   content="<%= post.post_content%>" />
+    <meta property="og:image"         content="https://www.onedistin.com/img/onedistin_head.png" />
+
     <link rel="stylesheet" href="/css/w3.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
