@@ -35,7 +35,12 @@ router.get('/', (req,res) => {
               if(result[1].length < 1){
                 var ann = false;
               }else{
-                var ann = result[1][0].meta_content;
+                if(striptags(result[1][0].meta_content).trim() != ""){
+                  var ann = result[1][0].meta_content;
+                }else{
+                  var ann = false;
+                }
+
               }
               res.render('forum', {posts: result[0], announcement: ann})
             }
@@ -60,7 +65,12 @@ router.get('/', (req,res) => {
             if(result[1].length < 1){
               var ann = false;
             }else{
-              var ann = result[1][0].meta_content;
+              if(striptags(result[1][0].meta_content).trim() != ""){
+                var ann = result[1][0].meta_content;
+              }else{
+                var ann = false;
+              }
+
             }
             res.render('forum', {posts: result[0], announcement: ann});
           }

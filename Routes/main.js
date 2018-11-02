@@ -75,7 +75,12 @@ router.get('/', (req,res,next) => {
             if(result[6].length < 1){
               var ann = false;
             }else{
-              var ann = result[6][0].meta_content
+              if(striptags(result[6][0].meta_content).trim() != ""){
+                var ann = result[6][0].meta_content;
+              }else{
+                var ann = false;
+              }
+
             }
             result[0][0].description = striptags(result[0][0].thingGet);
             res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],topPost: result[5][0],announcement: ann,img:images, token: tokenGen.getToken(),today: currentDate.currentDate()});
@@ -110,7 +115,11 @@ router.get('/', (req,res,next) => {
             if(result[4].length < 1){
               var ann = false;
             }else{
-              var ann = result[4][0].meta_content
+              if(striptags(result[6][0].meta_content).trim() != ""){
+                var ann = result[6][0].meta_content;
+              }else{
+                var ann = false;
+              }
             }
             result[0][0].description = striptags(result[0][0].thingGet);
             res.render('index',{currentPost: result[0][0], forumPosts: result[1],survey: result[2][0],topPost: result[3][0],img:images,today: currentDate.currentDate(), announcement: ann});
