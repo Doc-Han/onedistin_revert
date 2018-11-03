@@ -83,13 +83,14 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
           <dd> <input type="text" name="user_name" placeholder="Fullname" value="<%= data.user_name %>" required> </dd>
           <dt> <label>Network Provider</label> </dt>
           <dd> <select name="provider">
+            <option value="0">Select network provider</option>
             <option value="mtn">MTN</option>
             <option value="Vodafone">Vodafone</option>
             <option value="aitel">Airtel</option>
             <option value="tigo">Tigo</option>
           </select> </dd>
-          <dt> <label>Payment Number</label> </dt>
-          <dd> <input type="text" placeholder="Payment Number" name="order_phone"> </dd>
+          <dt> <label>MoMo Number</label> </dt>
+          <dd> <input type="text" placeholder="MoMo Number" name="order_phone"> </dd>
         </dl>
         <button type="button" style="margin-bottom:10px;width:100%;" class="w3-button ipay-initiate button-color w3-round-xxlarge w3-margin-top" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">Send me Approval</h3></button>
         <button type="button" style="display:none;margin-bottom:10px;width:100%;" class="w3-button ipay-validate button-color w3-round-xxlarge w3-margin-top" name="button"><h3 style="margin:0;font-size: 22px;line-height:46px;text-align:center">I'm done Paying</h3></button>
