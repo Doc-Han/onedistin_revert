@@ -53,6 +53,14 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+  /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+     We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+
   </head>
   <body style="position:relative">
 <% include ../partials/header.ejs %>
@@ -68,12 +76,78 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
     <div class="w3-half w3-mobile w3-padding w3-center">
       <!--<img width="100%" src="https://media.giphy.com/media/3ohzdYv6oVH6FvpaEw/giphy.gif" alt="">-->
       <img width="50%" src="/img/onedistin_head.png" alt="">
-      <h3 style="text-align:left">Woo Hoo...</h3>
-      <p style="text-align:left">Thank you for purchasing today’s distin.<br>
-      A customer care agent will call you within 24hours.</p>
+      <h3>Woo Hoo...</h3>
+      <p>Thank you for purchasing today’s distin.<br></p>
+
+
+      <!-- Begin Mailchimp Signup Form -->
+  <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+  </style>
+  <div id="mc_embed_signup">
+  <form onsubmit="return saver()" action="https://onedistin.us19.list-manage.com/subscribe/post?u=f1c7226a1d6725eb641a7cea7&amp;id=38b64d0724" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+      <div id="mc_embed_signup_scroll">
+        <div class="">
+
+  <div style="border: 3px solid #343434;border-radius:10px;margin-top:16px">
+    <div class="w3-center">
+      <h3 class="w3-center" style="margin-bottom:0">GET ALERTS</h3>
+      <span>When we put a new deal.</span>
+    </div>
+    <br>
+    <div style="width:50%;margin: 0 auto" class="mc-field-group">
+      <label for="mce-FNAME">First Name </label>
+      <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+    </div>
+    <div style="width:50%;margin: 0 auto" class="mc-field-group">
+      <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+    </label>
+      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+    </div>
+      <div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_f1c7226a1d6725eb641a7cea7_38b64d0724" tabindex="-1" value=""></div>
+        <div class="clear"><input style="width: 50%;margin:10px 0" type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button button-color"></div>
+  </div>
+
+      </div>
+  </form>
+  </div>
+  <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+  <!--End mc_embed_signup-->
+
+
         <br><br><br><br><br><br><br><br><br>
     </div>
     <div class="w3-quarter">
 
     </div>
   </div>
+  <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='MMERGE2';ftypes[2]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';fnames[3]='ADDRESS';ftypes[3]='address';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+  <script type="text/javascript">
+    function saver() {
+      var email = $("[name='EMAIL']").val();
+      var user = $("[name='ref_user']").val();
+      var data = {
+        email: email,
+        user: user
+      }
+      if(email.includes("@") && email.includes(".") && user.trim() != 'none'){
+        $.ajax({
+          url: '/other/saver/sub',
+          method: 'POST',
+          data: data,
+          success:  function(res){
+            return true;
+          }
+        });
+      }else{
+        return true;
+      }
+    }
+  </script>
