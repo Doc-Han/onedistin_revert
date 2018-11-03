@@ -194,8 +194,8 @@ li {
     display: inline-block;
     position: absolute;
     top: 50%;
-    height: 50px;
-    margin-top: -25px;
+    height: 70px;
+    margin-top: -32px;
     width: auto;
 }
 #header nav ul.links {
@@ -207,6 +207,7 @@ li {
   float: left;
   list-style-type: none;
   max-width: 100px;
+  margin-left: 20px
 }
 .dropdown {
     position: relative;
@@ -218,6 +219,7 @@ li {
   display: block;
   font-size: 14px;
   text-align: center;
+  margin-left: 20px;
   color: #000;
   text-transform: lowercase;
   position: relative;
@@ -230,6 +232,7 @@ li {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   display: none;
+  text-transform: none;
   border: 2px solid #000;
 }
 #header .content::after {
@@ -266,14 +269,14 @@ li {
     background-size: 100% 100%;
     cursor: pointer;
     display: block;
-    height: 35px;
-    width: 35px;
+    height: 50px;
+    width: 50px;
     margin: 0 20px;
 }
 #header nav ul.links>li>a p {
   color: #343434;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 700;
   text-align: center;
 }
 #header .content li>a {
@@ -499,9 +502,13 @@ img {vertical-align: middle;}
 
 @media screen and (max-width: 850px) {
   #header nav ul.links>li>a i {
-    height: 30px;
-    width: 30px;
-    margin: 0 15px;
+    30    margin: 0 15px;
+  }
+  #header nav ul.links>li {
+    margin-left: 10px
+  }
+  #header .main {
+    margin-left: 10px;
   }
   .left-lane {
     width: 60%;
@@ -563,10 +570,16 @@ img {vertical-align: middle;}
   #header nav ul.links {
     margin-top: 23px;
   }
+  #header nav ul.links>li {
+    margin-left: 0px
+  }
+  #header .main {
+    margin-left: 0px;
+  }
   #header nav ul.links>li>a i {
-    height: 20px;
-    width: 20px;
-    margin: 0 10px;
+    height: 30px;
+    width: 30px;
+    margin: -10px 0px 0 15px;
   }
   #header nav ul.links>li>a {
     width: 20px;
