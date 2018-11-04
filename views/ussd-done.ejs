@@ -60,12 +60,13 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
 .
     </div>
     <div style="margin-top:0" class="w3-half w3-mobile w3-center">
-      <h1 style="margin-bottom:30px">Thank You</h1>
-      <h3>Please dial <b>*713*4970*<%= amt %>#</b> on your mobile</h3>
-      <h3>Or if you are as lazy as we are, click below</h3>
-      <p class="w3-padding w3-light-grey w3-leftbar w3-border-red">Please add <b>#</b> after you are being sent to your dailer!</p>
-      <a href="tel: *713*4970*<%= amt+'' %>"><button style="margin-bottom:10px;padding: auto 90px" class="submit-survey w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><p class="custom-txt-color" style="margin:0;font-size:22px" class="muli-regular"> Pay now! </p></button></a>
-      <h3>You will recieve a confirmation message as soon we confirm your payment.</h3>
+      <div class="w3-margin">
+        <h1 style="margin-bottom:30px">Thank You</h1>
+        <h3>Dial <b><a href="tel: *713*4970*<%= amt+'' %>%23">*713*4970*<%= amt %>#</a></b> on your mobile to complete payment</h3>
+        <p>OR</p>
+        <a href="tel: *713*4970*<%= amt+'' %>%23"><button style="margin-bottom:10px;padding: auto 90px" class="submit-survey w3-button w3-round-xxlarge w3-margin-top button-color" type="submit" name="button"><p class="custom-txt-color" style="margin:0;font-size:22px" class="muli-regular"> Click Here! </p></button></a>
+        <h3 style="text-transform:uppercase;" class="w3-text-grey">You will recieve a confirmation message as soon as we confirm your payment.</h3>
+      </div>
     </div>
     <div class="w3-quarter">
 
