@@ -53,7 +53,11 @@ cloudinary.config({
 });
 
 app.use(function(req,res,next){
-  res.locals.isAuthenticated = req.isAuthenticated();
+  if(req.isAuthenticated() != false || req.isAuthenticated() != true){
+    res.locals.isAuthenticated = false;
+  }else{
+    res.locals.isAuthenticated = req.isAuthenticated();
+  }
   next();
 });
 
