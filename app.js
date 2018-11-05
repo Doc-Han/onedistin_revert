@@ -53,6 +53,7 @@ cloudinary.config({
 });
 
 app.use(function(req,res,next){
+  console.log("isAuthenticated = "+req.isAuthenticated());
   if(req.isAuthenticated() != false || req.isAuthenticated() != true){
     res.locals.isAuthenticated = false;
   }else{
