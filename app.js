@@ -52,12 +52,15 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
+
 app.use(function(req,res,next){
-  console.log("isAuthenticated = "+req.isAuthenticated());
   if(req.isAuthenticated() != false || req.isAuthenticated() != true){
     res.locals.isAuthenticated = false;
   }else{
     res.locals.isAuthenticated = req.isAuthenticated();
+  }
+  if(typeof res.locals.isAuthenticated == 'undefined'){
+    res.locals.isAuthenticated = false;
   }
   next();
 });
@@ -107,7 +110,7 @@ app.use(function (req, res, next) {
 // error handler
 app.use(function (err, req, res, next) {
     // render the error page
-    res.status(err.status || 500);
+    //res.status(err.status || 500);
     res.render('error');
 });
 
