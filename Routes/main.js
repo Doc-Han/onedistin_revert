@@ -342,10 +342,9 @@ router.get('/thesavers', isLoggedIn, (req,res) => {
   var user = req.user.user_id;
   con.query("SELECT refId FROM onedistin_users WHERE ID=?;SELECT referals,redeemed FROM onedistin_savers WHERE user=?",[user,user],function(err,result){
     if(err)throw err;
-    var isSaver = false;
     if(result[1].length > 0){
-      isSaver = true;
-      res.render('theSavers',{refId: result[0][0].refId, isSaver: isSaver, saver: result[1][0]});
+      var isSaver = true;
+      res.render('thesavers',{refId: result[0][0].refId, isSaver: isSaver, saver: result[1][0]});
     }else{
       res.redirect('/introduce');
     }
