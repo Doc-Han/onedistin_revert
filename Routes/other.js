@@ -5,6 +5,22 @@ var tokenGen = require('../config/tools.js');
 var currentDate = require('../config/tools.js');
 var router = express.Router();
 
+router.get('/shortener', (req,res) => {
+  con.query("SELECT ID,refId FROM onedistin_users",function(err,result){
+    if(err)throw err;
+    result.forEach(function(item,index){
+      var got = item.refId;
+      var newer = got.substring(0,8);
+      con.query("UPDATE onedistin_users SET refId=? WHERE ID=?",[newer,item.ID],function(err){
+        if(err)throw err;
+        if(index == result.length -1){
+          res.send("All done now!");
+        }
+      });
+    });
+  });
+});
+
 router.post('/like', isLoggedIn, (req,res) =>{
   var postId = req.body.postId;
   var user = req.user.user_id;
