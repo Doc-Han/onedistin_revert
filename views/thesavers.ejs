@@ -144,7 +144,7 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
               <% } %>
               <!--<span style="background: #fff;margin-top: -10px"><img src="/img/diary.svg" style="width:50px" alt=""></span>-->
             </div>
-            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> distiners</b>, only <b> <%= 10 - saver.referals %> more</b> to get your <b>Onedistin swag diary</b></p>
+            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> friends</b>, only <b> <%= 10 - saver.referals %> more</b> to get your <b>Onedistin swag diary</b></p>
           <% }else if(saver.referals < 25 && saver.referals >= 10){ %>
             <div style="margin-top: 30px" class="progress">
               <% for(i=10; i<=25; i++){ %>
@@ -156,14 +156,14 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
               <% } %>
               <!--<span style="background: #fff;margin-top: -10px"><img src="/img/shirt.svg" style="width:50px" alt=""></span>-->
             </div>
-            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> people</b>, only <b> <%= 25 - saver.referals %> more</b> to get your <b>swag T-shirt</b></p>
+            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> friends</b>, only <b> <%= 25 - saver.referals %> more</b> to get your <b>swag T-shirt</b></p>
           <% }else if(saver.referals < 50 && saver.referals >= 25){ %>
             <div style="margin-top: 30px">
             <div class="w3-border w3-border-blue w3-round-xlarge">
               <div class="w3-blue w3-text-black w3-round-xlarge" style="font-weight:bold;height:24px;width:<%= (((saver.referals - 25)/25)*100)+'%' %>"><%= saver.referals+'/'+50%></div>
             </div>
             </div>
-            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> people</b>, only <b> <%= 50 - saver.referals %> more</b> to get your <b>swag drawstring bag</b></p>
+            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> friends</b>, only <b> <%= 50 - saver.referals %> more</b> to get your <b>swag drawstring bag</b></p>
           <% } %>
 
           <% } %>
