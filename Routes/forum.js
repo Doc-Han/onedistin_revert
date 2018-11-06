@@ -12,14 +12,6 @@ router.get('/', (req,res) => {
     con.query(query,function(err,result){
       if (err) throw err;
       result[0].forEach(function(item,index){
-        /*if(item.post_author == 'onedistin'){
-          item.user_name = 'onedistin';
-          if(index == result.length -1){
-            console.log(result);
-            console.log("--"+index+"---");
-            res.render('forum', {posts: result})
-          }
-        }else{*/
           con.query("SELECT user FROM onedistin_likes WHERE user=? AND postId=?;SELECT display_name FROM onedistin_users WHERE ID=?",[user,item.ID,item.post_author], function(err,l_result){
             if(item.post_author == 'onedistin'){
               item.user_name = 'onedistin';
@@ -36,7 +28,11 @@ router.get('/', (req,res) => {
                 var ann = false;
               }else{
                 if(striptags(result[1][0].meta_content).trim() != ""){
-                  var ann = result[1][0].meta_content;
+                  var ann_content = result[1][0].meta_content;
+                  var a = /<h1>(.*?)<\/h1>/g.exec(ann_content);
+                  result[1][0].title = a[0];
+                  result[1][0].url = a[1].split(" ").join("-");
+                  var ann = result[1][0];
                 }else{
                   var ann = false;
                 }
@@ -66,7 +62,11 @@ router.get('/', (req,res) => {
               var ann = false;
             }else{
               if(striptags(result[1][0].meta_content).trim() != ""){
-                var ann = result[1][0].meta_content;
+                var ann_content = result[1][0].meta_content;
+                var a = /<h1>(.*?)<\/h1>/g.exec(ann_content);
+                result[1][0].title = a[0];
+                result[1][0].url = a[1].split(" ").join("-");
+                var ann = result[1][0];
               }else{
                 var ann = false;
               }

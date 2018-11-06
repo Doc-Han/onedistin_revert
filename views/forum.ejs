@@ -68,15 +68,17 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
       <div class="w3-half w3-mobile w3-container">
 
         <% if(announcement != false){ %>
+          <a href="/community/<%= announcement.url %>">
           <div style="margin-bottom: 20px;padding:5px" class="w3-container w3-border w3-border-black w3-round-large">
             <div style="float: left">
-              <img class="w3-quater" src="img/announcement.svg" style="width:70px" alt="">
+              <img class="w3-quater" src="img/announcement.svg" style="width:40px" alt="">
             </div>
             <div class="w3-margin-left" style="width:80%;float: left">
-              <span style="font-weight:bold" class=" w3-rest w3-text-grey" >Announcement</span> <br> <span class="ann"> <%- announcement %> </span>
+              <span style="font-weight:bold" class=" w3-rest w3-text-grey" >Announcement</span> <br> <span class="ann"> <%- announcement.title %> </span>
             </div>
 
           </div>
+          </a>
         <% } %>
 
 

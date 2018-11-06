@@ -45,7 +45,7 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>theSavers</title>
+    <title>Introduce</title>
     <meta name="description" content="The page you are looking for could not be found">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
@@ -130,93 +130,37 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
 
       </div>
       <div style="margin-bottom:300px" class="w3-half w3-center w3-mobile w3-container w3-animate-bottom">
-        <% if(isSaver){ %>
-          <span style="font-weight: bolder;" class="w3-xxlarge">Your Status</span>
-
-          <% if(saver.referals < 10){ %>
-            <div style="margin-top: 30px" class="progress">
-              <% for(i=1; i<=10; i++){ %>
-                <% if(i<= saver.referals){ %>
-                  <span class="active"><%= i %></span>
-                <% }else{ %>
-                  <span><%= i %></span>
-                <% } %>
-              <% } %>
-              <span style="background: #fff;margin-top: -10px"><img src="/img/diary.svg" style="width:50px" alt=""></span>
-            </div>
-            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> distiners</b>, only <b> <%= 10 - saver.referals %> more</b> to get your <b>Onedistin swag diary</b></p>
-          <% }else if(saver.referals < 25 && saver.referals >= 10){ %>
-            <div style="margin-top: 30px" class="progress">
-              <% for(i=10; i<=25; i++){ %>
-                <% if(i<= saver.referals){ %>
-                  <span class="active"><%= i %></span>
-                <% }else{ %>
-                  <span><%= i %></span>
-                <% } %>
-              <% } %>
-              <span style="background: #fff;margin-top: -10px"><img src="/img/shirt.svg" style="width:50px" alt=""></span>
-            </div>
-            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> people</b>, only <b> <%= 25 - saver.referals %> more</b> to get your <b>swag T-shirt</b></p>
-          <% }else if(saver.referals < 50 && saver.referals >= 25){ %>
-            <div style="margin-top: 30px">
-            <div class="w3-border w3-border-blue w3-round-xlarge">
-              <div class="w3-blue w3-text-black w3-round-xlarge" style="font-weight:bold;height:24px;width:<%= (((saver.referals - 25)/25)*100)+'%' %>"><%= saver.referals+'/'+50%></div>
-            </div>
-            </div>
-            <p style="text-align: center!important">You have introduced <b><%= saver.referals %> people</b>, only <b> <%= 50 - saver.referals %> more</b> to get your <b>swag drawstring bag</b></p>
-          <% } %>
-
-
-
-
-
-
-          <div>
-            <span style="font-weight: bolder" class="w3-xxlarge">Share</span>
-            <p style="text-align: center!important">Use your personal link below to get new people to subscribe to the deal alerts.</p>
-            <span class="w3-padding w3-round-xlarge w3-border w3-border-blue"  style="font-size:15px!important">https://1distin.com/sub/<%= refId %></span>
-            <div class="container w3-margin-top">
-              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.onedistin.com%2Fsub%2F<%= refId %>&amp;src=sdkpreparse"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn facebook fa w3-circle fa-facebook"></i></a>
-              <a target="_blank" href="https://twitter.com/intent/tweet?text= Skip the middlemen. Join the %23bargainHunters https://www.onedistin.com/sub/<%= refId %>"><i style="margin-bottom:5px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn twitter fa w3-circle fa-twitter"></i></a>
-              <a href="whatsapp://send?text=Love big discounts and low prices? Who doesn’t? Join the thousands of #bargainHunters who wake up to a new deal every morning on Onedistin. https://www.onedistin.com/<%= refId %>" data-action="share/whatsapp/share"><i style="margin-bottom:50px;font-size:30px;width:50px;height:50px;text-align:center;line-height:50px" class="share_btn instagram fa w3-circle fa-whatsapp"></i></a>
-            </div>
-          </div>
-
-
-        <% }else{ %>
           <h1>theSavers</h1>
           <h2 style="margin-top: -20px;margin-bottom: 16px" class="w3-text-grey">You know you want in…</h2>
           <hr>
 
           <h2>Who are theSavers?</h2>
-  <p>theSavers are Onedistin’s brand ambassadors. They are a community committed to getting the best bargains and empowering others to do the same. theSavers connect with one another online and IRL and get unique access to Onedistin, invites to private events and exclusive content. Side note: They also get Onedistin swag.</p>
+  <p>theSavers are Onedistin’s brand ambassadors. They are a community committed to getting the best bargains and empowering others to do the same. theSavers connect with one another online and in real life (IRL) and get unique access to Onedistin, invites to private events and exclusive content. Side note: They also get Onedistin swag.</p>
           <h2>What would I do?</h2>
-  <p>Spread the word about Onedistin in your place of work, campus, network, family, those random Facebook and Twitter friends... use a unique link that gives you credit for getting people to subscribe to the daily deal alert.
+  <p>Spread the word about Onedistin in your place of work, campus, network, family, those random Facebook and Twitter friends... <br>Use a unique link that gives you credit for getting people to subscribe to the daily deal alert.
   Wear Onedistin swag around town.
   Give feedback and brainstorm with the Onedistin team.</p>
           <h2>What would I get?</h2>
-  <p>Swag on swag. Go wild. Rock your Onedistin Drawstring bag and rock your Onedistin shirt, while typing on your Onedistin-cased phone, writing in your Onedistin diary and getting free delivery on all purchases for 12 months.
-  An invite to our private Savers’ Facebook group where you can connect and network with other Savers and get free self-improvement resources.</p>
-
+  <p>Swag on swag. Go wild. Rock your Onedistin Drawstring bag and rock your Onedistin shirt, while typing on your Onedistin-cased phone, writing in your Onedistin diary.</p>
+  <p>Free delivery on all purchases for 12 months.</p>
+  <p>An invite to our private Savers’ Facebook group where you can connect and network with other Savers and get free self-improvement resources.</p>
   <p>Extra birthday love</p>
-
   <p>Partnership perks. Exclusives with our partner brands.</p>
           <h2>How do I start?</h2>
-  <p>Use your personal link below to get 10 new smart shoppers or deal hunters to subscribe to the daily deal alerts.</p>
-  <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top">
-  <a class="w3-text-white" href="/thesavers/start" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Get me started!</h3></a>
-  </button>
-        <% } %>
+  <p>Use your unique personal link to get 10 friends to subscribe to the daily deal alerts.</p>
+  <p>Click below to get started.</p>
+  <% if(isSaver){ %>
+    <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top">
+    <a class="w3-text-white" href="/thesavers" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Back to my progress</h3></a>
+    </button>
+  <% }else{ %>
+    <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top">
+    <a class="w3-text-white" href="/thesavers/start" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Get started now!</h3></a>
+    </button>
+  <% } %>
 
-          <!--<span><b>Introduce a friend</b></span><br>
-          <span class="w3-padding">https://www.onedistin.com/signup?referer=<%= refId %></span>
-          <button id="share" style="margin-bottom:10px;width:100%;" class="w3-button button-color w3-round-xxlarge w3-margin-top" onmouseout="outFunc()">
-            <a class="w3-text-white" href="whatsapp://send?text=Want to get great discount deals every day? Click the link to create an account on Onedistin and get free 100 points. http://onedistin.com/signup?referer=<%= refId %>" style="color:inherit" ><h3 style="margin:0;font-size:22px" class="muli-regular">Introduce Friends</h3></a>
-          </button>-->
+
       </div>
       <div class="w3-quarter w3-container">
 
       </div>
-
-      <script>
-      </script>

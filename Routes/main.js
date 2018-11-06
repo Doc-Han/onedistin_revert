@@ -76,7 +76,11 @@ router.get('/', (req,res,next) => {
               var ann = false;
             }else{
               if(striptags(result[6][0].meta_content).trim() != ""){
-                var ann = result[6][0].meta_content;
+                var ann_content = result[6][0].meta_content;
+                var a = /<h1>(.*?)<\/h1>/g.exec(ann_content);
+                result[6][0].title = a[0];
+                result[6][0].url = a[1].split(" ").join("-");
+                var ann = result[6][0];
               }else{
                 var ann = false;
               }
@@ -116,7 +120,11 @@ router.get('/', (req,res,next) => {
               var ann = false;
             }else{
               if(striptags(result[4][0].meta_content).trim() != ""){
-                var ann = result[4][0].meta_content;
+                var ann_content = result[4][0].meta_content;
+                var a = /<h1>(.*?)<\/h1>/g.exec(ann_content);
+                result[4][0].title = a[0];
+                result[4][0].url = a[1].split(" ").join("-");
+                var ann = result[4][0];
               }else{
                 var ann = false;
               }
@@ -337,8 +345,23 @@ router.get('/thesavers', isLoggedIn, (req,res) => {
     var isSaver = false;
     if(result[1].length > 0){
       isSaver = true;
+      res.render('theSavers',{refId: result[0][0].refId, isSaver: isSaver, saver: result[1][0]});
+    }else{
+      res.redirect('/introduce');
     }
-    res.render('introduce',{refId: result[0][0].refId, isSaver: isSaver, saver: result[1][0]});
+  });
+});
+
+router.get('/introduce', isLoggedIn, (req,res) => {
+  const user = req.user.user_id;
+  con.query("SELECT referals FROM onedistin_savers WHERE user=?",[user],function(err,result){
+    if(err)throw err;
+    var isSaver = false;
+    console.log(result);
+    if(result.length > 0){
+      var isSaver = true;
+    }
+    res.render('introduce',{isSaver: isSaver});
   });
 });
 
@@ -621,6 +644,10 @@ router.get('/sub/:refId', (req,res) =>{
     }
   });
 
+});
+
+router.get('/daily_alert', (req,res) =>{
+  res.render('daily_alert');
 });
 
 passport.serializeUser(function(user_id,done){

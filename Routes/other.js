@@ -210,14 +210,17 @@ router.post('/view_sell', (req,res) =>{
 router.post('/announcement', (req,res) =>{
   var text = req.body.text;
   var _title = 'none';
+  var a = /<h1>(.*?)<\/h1>/g.exec(text);
+  var post_title = a[1];
+  var url = post_title.split(" ").join("-");
   con.query("SELECT * FROM onedistin_meta WHERE meta_title=?",['announcement'],function(err,result){
     if(err)throw err;
     if(result.length > 0){
-      var query = "UPDATE onedistin_meta SET meta_op=?,meta_content=? WHERE meta_title=?";
-      var input = [_title,text,'announcement'];
+      var query = "UPDATE onedistin_meta SET meta_op=?,meta_content=? WHERE meta_title=?;INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?)";
+      var input = [_title,text,'announcement',null,'onedistin',post_title,text,url,0,0,currentDate.currentDate(),new Date()];
     }else{
-      var query = "INSERT INTO onedistin_meta(ID,meta_title,meta_op,meta_content)VALUES(?,?,?,?)";
-      var input = [null,'announcement',_title,text];
+      var query = "INSERT INTO onedistin_meta(ID,meta_title,meta_op,meta_content)VALUES(?,?,?,?);INSERT INTO onedistin_posts (ID,post_author,post_title,post_content,post_url,post_likes,post_comments,timestamp,time)VALUES(?,?,?,?,?,?,?,?,?)";
+      var input = [null,'announcement',_title,text,null,'onedistin',post_title,text,url,0,0,currentDate.currentDate(),new Date()];
     }
 
     con.query(query,input,function(err){
