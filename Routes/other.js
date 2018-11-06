@@ -208,6 +208,7 @@ router.post('/view_sell', (req,res) =>{
 });
 
 router.post('/announcement', (req,res) =>{
+  console.log(req.body);
   var text = req.body.text;
   var _title = 'none';
   var a = /<h1>(.*?)<\/h1>/g.exec(text);
