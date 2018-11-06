@@ -86,7 +86,7 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
   </head>
   <body style="position:relative">
 
-    <div id="id01" class="w3-modal">
+    <div id="id01" onclick="document.getElementById('id01').style.display='none'" class="w3-modal">
     <div style="background: rgba(1,1,1,0)" class="w3-modal-content">
       <div class="">
         <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-red w3-display-topright">&times;</span>
@@ -408,6 +408,11 @@ $(document).ready(function(){
   setTimeout(function(){
     document.getElementById('id01').style.display='block';
   },3000);
+
+  $(".w3-modal-content").click(function(e){
+    e.stopPropagation();
+  });
+
 });
 // This is the code to redirect checkout to another link on mobile view!
 function checkout_btn_press() {
