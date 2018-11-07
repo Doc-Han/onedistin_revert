@@ -32,6 +32,21 @@ body,p,ul,li,table {
   font-weight: bolder;
 }
 
+.notification {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #313030;
+  font-weight: bold;
+  color: #fff;
+  font-size: 22px;
+}
+.notification p {
+  color: inherit;
+  text-align: center;
+}
+
 dl.straight dd {
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
@@ -509,6 +524,10 @@ img {vertical-align: middle;}
   }
   #header .main {
     margin-left: 10px;
+  }
+
+  .notification {
+    font-size: 18px;
   }
   .left-lane {
     width: 60%;

@@ -86,14 +86,20 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
   </head>
   <body style="position:relative">
 
-    <div id="id01" onclick="document.getElementById('id01').style.display='none'" class="w3-modal">
+    <div id="id02" onclick="document.getElementById('id02').style.display='none'" class="w3-modal">
     <div style="background: rgba(1,1,1,0)" class="w3-modal-content">
       <div class="">
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-red w3-display-topright">&times;</span>
+        <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-red w3-display-topright">&times;</span>
         <img  onclick="document.location = '/thesavers'" src="/img/saver.png" style="width: 100%" alt="savers program alert">
       </div>
     </div>
   </div>
+
+  <div style="display:none" id="id03" class="notification w3-animate-bottom">
+    <div class="not_middle">
+      <p>Did you know you can create a post in our <a href="/community">community</a> or have interaction with others?
+        <span onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-red">&times;</span> </p>
+    </div>
   </div>
 
 <% include partials/header.ejs %>
@@ -406,8 +412,11 @@ $(document).ready(function(){
       $("#share_btns").stop().hide(400);
   });
   setTimeout(function(){
-    document.getElementById('id01').style.display='block';
+    document.getElementById('id02').style.display='block';
   },3000);
+  setTimeout(function(){
+    document.getElementById('id03').style.display='block';
+  },7000);
 
   $(".w3-modal-content").click(function(e){
     e.stopPropagation();
