@@ -82,6 +82,18 @@
 <!--End mc_embed_signup-->
 
 <script type="text/javascript">
+function sender(data){
+
+  $.ajax({
+    url: '/other/saver/sub',
+    method: 'POST',
+    data: data,
+    success:  function(res){
+      return true;
+    }
+  });
+}
+
   function saver() {
     var email = $("[name='EMAIL']").val();
     var user = $("[name='ref_user']").val();
@@ -91,17 +103,22 @@
     }
     if(email.includes("@") && email.includes(".") && user.trim() != 'none'){
       $.ajax({
-        url: '/other/saver/sub',
-        method: 'POST',
-        data: data,
+        url: 'https://api.trumail.io/v2/lookups/json?email='+email,
+        method: 'GET',
         success:  function(res){
-          return true;
+          console.log(res);
+          if(res.deliverable){
+            sender(data);
+          }else{
+            return false;
+          }
         }
       });
     }else{
       return true;
     }
   }
+
 </script>
 
   </body>
