@@ -256,7 +256,7 @@ router.post('/saver/sub', (req,res) =>{
     if(result.length > 0){
       res.send("Already Exists!");
     }else{
-      con.query("UPDATE onedistin_savers SET referals=(referals)+1, emails=concat(emails,?) WHERE user=?",['-***-'+email,user],function(err){
+      con.query("UPDATE onedistin_savers SET referals=(referals)+1, emails=concat(emails,?) WHERE user=?",[','+email,user],function(err){
         if(err)throw err;
         res.send("Done successfully");
       });
