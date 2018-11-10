@@ -35,6 +35,10 @@ passport.use(new localStrategy(
   }
 ));
 
+router.get('/singles', (req,res) => {
+  res.render('singles');
+});
+
 router.get('/', (req,res,next) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
