@@ -86,14 +86,16 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
   </head>
   <body style="position:relative">
 
-    <div id="id02" onclick="document.getElementById('id02').style.display='none'" class="w3-modal">
-    <div style="background: rgba(1,1,1,0)" class="w3-modal-content">
-      <div class="">
-        <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-red w3-display-topright">&times;</span>
-        <img  onclick="document.location = '/thesavers'" src="/img/saver.png" style="width: 100%" alt="savers program alert">
-      </div>
+<% if(isSaver){ %>
+  <div id="id02" onclick="document.getElementById('id02').style.display='none'" class="w3-modal">
+  <div style="background: rgba(1,1,1,0)" class="w3-modal-content">
+    <div class="">
+      <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-red w3-display-topright">&times;</span>
+      <img  onclick="document.location = '/thesavers'" src="/img/saver.png" style="width: 100%" alt="savers program alert">
     </div>
   </div>
+</div>
+<% } %>
 
   <div style="display:none" id="id03" class="notification w3-animate-bottom">
     <div class="not_middle">
@@ -411,9 +413,13 @@ $(document).ready(function(){
   $("#share_btn").mouseleave(function(){
       $("#share_btns").stop().hide(400);
   });
+<% if(isSaver){ %>
   setTimeout(function(){
     document.getElementById('id02').style.display='block';
   },3000);
+<% } %>
+
+
   setTimeout(function(){
     document.getElementById('id03').style.display='block';
   },7000);
