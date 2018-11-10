@@ -38,8 +38,8 @@ passport.use(new localStrategy(
 router.get('/', (req,res,next) => {
   if(req.isAuthenticated()){
     var user = req.user.user_id;
-    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp <> '"+currentDate.currentDate()+"000000"+"' ORDER BY ID DESC LIMIT 5;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE post_author='onedistin' AND timestamp = '"+currentDate.currentDate()+"000000"+"';SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement'";
-    con.query(query,[user,user], function(err,result){
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE timestamp <> '"+currentDate.currentDate()+"000000"+"' ORDER BY ID DESC LIMIT 5;SELECT * FROM onedistin_users WHERE ID = ?;SELECT offer_one,offer_two,offer_three FROM onedistin_points WHERE user_id=?;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE post_author='onedistin' AND timestamp = '"+currentDate.currentDate()+"000000"+"';SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement';SELECT user FROM onedistin_savers WHERE user=?";
+    con.query(query,[user,user,user], function(err,result){
       if(err)throw err;
       if(result[0].length > 0 && result[2].length > 0 && result[3].length > 0){
         var combined_img_string = result[0][0].img_id;
@@ -86,8 +86,12 @@ router.get('/', (req,res,next) => {
               }
 
             }
+            var isSaver = false;
+            if(result[7].length > 0){
+              isSaver = true;
+            }
             result[0][0].description = striptags(result[0][0].thingGet);
-            res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],topPost: result[5][0],announcement: ann,img:images, token: tokenGen.getToken(),today: currentDate.currentDate()});
+            res.render('index',{currentPost: result[0][0], forumPosts: result[1],currentUser: result[2][0],offers: result[3][0],survey: result[4][0],topPost: result[5][0],announcement: ann,img:images, token: tokenGen.getToken(),today: currentDate.currentDate(),isSaver: isSaver});
           }
         });
 
@@ -97,7 +101,7 @@ router.get('/', (req,res,next) => {
       }
     });
   }else {
-    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp <> '"+currentDate.currentDate()+"000000"+"' ORDER BY ID DESC LIMIT 5;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE post_author='onedistin' AND timestamp = '"+currentDate.currentDate()+"000000"+"';SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement'";
+    var query = "SELECT * FROM onedistin_deals WHERE timestamp='"+currentDate.currentDate()+"';SELECT * FROM onedistin_posts WHERE timestamp <> '"+currentDate.currentDate()+"000000"+"' ORDER BY ID DESC LIMIT 5;SELECT * FROM onedistin_survey WHERE dealTime='"+currentDate.currentDate()+"';SELECT post_title,post_url,post_likes,post_comments FROM onedistin_posts WHERE post_author='onedistin' AND timestamp = '"+currentDate.currentDate()+"000000"+"';SELECT meta_content FROM onedistin_meta WHERE meta_title='announcement';";
     con.query(query, function(err,result){
       if(err)throw err;
       if(result[0].length > 0){
@@ -130,7 +134,7 @@ router.get('/', (req,res,next) => {
               }
             }
             result[0][0].description = striptags(result[0][0].thingGet);
-            res.render('index',{currentPost: result[0][0], forumPosts: result[1],survey: result[2][0],topPost: result[3][0],img:images,today: currentDate.currentDate(), announcement: ann});
+            res.render('index',{currentPost: result[0][0], forumPosts: result[1],survey: result[2][0],topPost: result[3][0],img:images,today: currentDate.currentDate(), announcement: ann,isSaver: false});
           }
         });
       }else{
@@ -366,9 +370,16 @@ router.get('/introduce', isLoggedIn, (req,res) => {
 
 router.get('/thesavers/start', isLoggedIn, (req,res) => {
   const user = req.user.user_id;
-  con.query("INSERT INTO onedistin_savers (referals,redeemed,user) VALUES (?,?,?)",[0,0,user],function(err){
+  con.query("SELECT * FROM onedistin_savers WHERE user=?",[user],function(err,result){
     if(err)throw err;
-    res.redirect('/thesavers');
+    if(result.length > 0){
+      res.redirect('/thesavers');
+    }else{
+      con.query("INSERT INTO onedistin_savers (referals,redeemed,user) VALUES (?,?,?)",[0,0,user],function(err){
+        if(err)throw err;
+        res.redirect('/thesavers');
+      });
+    }
   });
 });
 
