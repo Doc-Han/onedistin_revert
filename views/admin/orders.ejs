@@ -13,7 +13,6 @@
     <table style="margin-top:30px" class="w3-table-all w3-bordered">
       <tr>
         <th>Title</th>
-        <th>Day</th>
         <th>Username</th>
         <th>Phone</th>
         <th>Categories</th>
@@ -30,11 +29,6 @@
         <tr>
           <% if(item.dealTitle){ %>
             <td><%= item.dealTitle %></td>
-          <% }else{ %>
-            <td>Empty</td>
-          <% } %>
-          <% if(item.dealTime){ %>
-            <td><%= item.dealTime %></td>
           <% }else{ %>
             <td>Empty</td>
           <% } %>
