@@ -374,7 +374,7 @@ router.get('/reports', isLoggedIn, (req,res) =>{
 });
 
 router.get('/savers', (req,res) => {
-  con.query("SELECT * FROM onedistin_savers WHERE referals", function(err,result){
+  con.query("SELECT * FROM onedistin_savers ORDER BY referals DESC", function(err,result){
     if(err)throw err;
     result.forEach(function(item,index){
       con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[item.user],function(err,u_result){
