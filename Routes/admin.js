@@ -373,6 +373,21 @@ router.get('/reports', isLoggedIn, (req,res) =>{
   });
 });
 
+router.get('/savers', (req,res) => {
+  con.query("SELECT * FROM onedistin_savers WHERE referals", function(err,result){
+    if(err)throw err;
+    result.forEach(function(item,index){
+      con.query("SELECT user_name FROM onedistin_users WHERE ID=?",[item.user],function(err,u_result){
+        if(err)throw err;
+        item.user_name = u_result[0].user_name;
+        if(index == result.length - 1){
+          res.render("admin/savers",{users:result});
+        }
+      });
+    });
+  });
+});
+
 router.get('/logout', isLoggedIn, (req,res) => {
   req.session.destroy();
   res.redirect('/han');
