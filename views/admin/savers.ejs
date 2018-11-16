@@ -1,0 +1,35 @@
+<% include partials/header.ejs %>
+
+<div class="w3-row w3-margin-top">
+  <% include partials/navs.ejs %>
+  <div style="width:80%" class="w3-padding w3-col w3-card-4 w3-mobile">
+
+    <table style="margin-top:30px" class="w3-table-all w3-bordered">
+      <tr>
+        <th>user</th>
+        <th>referals</th>
+        <th>Level</th>
+      </tr>
+        <% users.forEach(function(item){ %>
+          <tr>
+          <td><%= item.user_name %></td>
+          <td><%= item.referals %></td>
+          <% if(item.referals < 11){ %>
+            <td>Swag diary</td>
+          <% }else if(item.referals < 26){ %>
+            <td>DrawString bag</td>
+          <% }else{ %>
+            <td>Other</td>
+          <% } %>
+          </tr>
+        <% }); %>
+
+    </table>
+
+
+  </div>
+  <div style="width:20%" class="w3-col">
+    .
+  </div>
+
+</div>
