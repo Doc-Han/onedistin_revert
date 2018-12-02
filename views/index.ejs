@@ -105,7 +105,9 @@ src="https://www.facebook.com/tr?id=1482111765221792&ev=PageView
   </div>
 
 <% include partials/header.ejs %>
-
+<script type="text/javascript">
+  snowStorm.snowColor = "#fff";
+</script>
 <% if(isAuthenticated){ %>
   <input class="acpoit" type="hidden" value="<%= offers.offer_one+offers.offer_two+offers.offer_three%>-<%= currentPost.ac_price %>" />
 <% } %>
