@@ -81,13 +81,16 @@ app.use(function(req,res,next){
   }
 });
 //Including all the routes available in this app
-app.use('/', require('./Routes/main.js'));
+//app.use('/', require('./Routes/main.js'));
 app.use('/', require('./Routes/hubtel.js'));
 app.use('/other', require('./Routes/other.js'));
 app.use('/auth', require('./Routes/auth.js'))
 app.use('/community', require('./Routes/forum.js'));
 app.use('/han', require('./Routes/admin.js'));
 app.use('/ajax', require('./Routes/ajax.js'));
+
+//These are the routes to the new set of views we need!
+app.use('/', require('./Routes/new.js'));
 
 app.get('*', (req,res) => {
   res.sendFile(__dirname + '/config/'+req.url);

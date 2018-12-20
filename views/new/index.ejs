@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/w3.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <style media="screen">
+      .clear {
+        clear: both;
+      }
+      header {
+        display: flex;
+        padding: 20px 0;
+        background: #fbbe00;
+      }
+      header .logo img {
+          background-repeat: no-repeat;
+          display: inline-block;
+          margin-left: 20px;
+          margin-right: 20px;
+          height: 70px;
+          width: auto;
+      }
+      header .search {
+        margin-top: 20px;
+      }
+      header .links_top {
+        margin-left: 20px;
+      }
+      header .links_bottom {
+        margin-left: 20px;
+      }
+      header a {
+        text-decoration: none;
+      }
+      nav {
+        padding: 10px 0;
+        background: #f4f4f4;
+        box-shadow: 0px 1px 5px 0px black;
+      }
+      nav a {
+        padding: 0 10px;
+        text-decoration: none;
+        color: #807c7a;
+      }
+      nav a:hover, nav a.active {
+        border-bottom: 5px solid #fbbe00;
+      }
+
+      .local_deals, .deal_of_the_day, .more_deals {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .card {
+        margin: 20px 0.5% 0px 0.5%;
+        width: 19%;
+        border-bottom: 2px solid #f4f4f4;
+      }
+      .card .img {
+        width: 100%;
+        height: 200px;
+        background: #343434;
+      }
+      .body {
+        width: 100%;
+        height: 100vh;
+      }
+      .loader {
+        width: 100%;
+        height: 40%;
+        position: relative;
+      }
+      .loader span {
+        position: absolute;
+        bottom: 0;
+        margin: auto;
+        left: 46%;
+        font-family: monospace;
+        font-weight: bold;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="w3-quarter">
+        <a class="logo w3-right" href="/"> <img class="w3-center" src="/img/onedistin_logo.png" alt=""> </a>
+      </div>
+      <div class="w3-half">
+        <input class="search w3-input w3-border" type="search" name="" placeholder="Search" value="">
+      </div>
+      <div class="w3-quarter">
+        <div class="w3-bar links_top">
+          <a href="#">Sell</a>
+          <a href="#">Help</a>
+          <a href="#">Sign Up</a>
+        </div>
+        <div class="w3-bar links_bottom">
+          <a href="#">Sign In</a>|
+          <a href="#">My Account</a>
+        </div>
+      </div>
+    </header>
+    <nav class="w3-bar w3-center">
+      <a href="#">New</a>
+      <a class="active" href="#">Local deals</a>
+      <a href="#">Deals of the day</a>
+      <a href="#">More deals</a>
+    </nav>
+
+  <div class="body">
+    <!--<div class="loader">
+      <span>Loading</span>
+    </div>-->
+
+    <div class="new">
+      nothing to show here!
+    </div>
+
+    <div class="local_deals">
+
+      <div class="card">
+        <div class="img">
+
+        </div>
+        <div class="w3-bar">
+          <span class="w3-large">Deal's Title</span>
+          <span class="w3-right"> <span class="w3-text-grey"><s>GHS 50</s></span> <span class="w3-text-yellow">GHS 25</span> </span>
+        </div>
+        <div>
+          <span class="w3-text-grey">Town,City</span>
+          <span class="w3-right w3-border w3-margin-bottom w3-border-yellow w3-round-large w3-text-yellow w3-padding">50% off</span>
+          <div class="clear"></div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="deal_of_the_day">
+
+      <div class="card">
+        <div class="img">
+
+        </div>
+        <div class="w3-bar">
+          <span class="w3-large">Deal's Title</span>
+          <span class="w3-right"> <span class="w3-text-grey"><s>GHS 50</s></span> <span class="w3-text-yellow">GHS 25</span> </span>
+        </div>
+        <div>
+          <span class="w3-right w3-margin-bottom w3-text-red w3-padding">23hrs 15mins left</span>
+          <div class="clear"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="more_deals">
+
+      <div class="card">
+        <div class="img">
+
+        </div>
+        <div class="w3-bar">
+          <span class="w3-large">Deal's Title</span>
+          <span class="w3-right"> <span class="w3-text-grey"><s>GHS 50</s></span> <span class="w3-text-yellow">GHS 25</span> </span>
+        </div>
+        <div>
+          <div>
+            <span class="w3-right w3-border w3-margin-bottom w3-border-yellow w3-round-large w3-text-yellow w3-padding">50% off</span>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+<script type="text/javascript" src="/js/items.js"></script>
+<script type="text/javascript" src="/js/new_home.js"></script>
+  </body>
+</html>
